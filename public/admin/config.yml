@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: cozunap/rentcar
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "cars"
+    label: "Vehículos (Flota)"
+    folder: "src/content/cars"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nombre", name: "title", widget: "string"}
+      - {label: "Categoría", name: "category", widget: "select", options: ["SUV", "Deportivo Exótico", "Sedán Ejecutivo", "Convertible"]}
+      - {label: "Precio Diario ($)", name: "price", widget: "number"}
+      - {label: "Asientos", name: "seats", widget: "number", default: 4}
+      - {label: "Equipaje", name: "luggage", widget: "number", default: 2}
+      - {label: "Transmisión", name: "transmission", widget: "select", options: ["Auto", "Manual"]}
+      - {label: "Imagen", name: "image", widget: "image", required: false}
+      - {label: "Descripción Breve", name: "description", widget: "text"}
+
+  - name: "pages"
+    label: "Páginas (Contenido Estático)"
+    files:
+      - label: "Página de Inicio"
+        name: "home"
+        file: "src/content/pages/home.json"
+        fields:
+          - {label: "Título Principal", name: "hero_title", widget: "string"}
+          - {label: "Subtítulo", name: "hero_subtitle", widget: "string"}
+          - {label: "Descripción Hero", name: "hero_description", widget: "text"}
+      - label: "Membresía / Contacto VIP"
+        name: "membership"
+        file: "src/content/pages/membership.json"
+        fields:
+          - {label: "Título", name: "title", widget: "string"}
+          - {label: "Texto Descriptivo", name: "description", widget: "text"}
