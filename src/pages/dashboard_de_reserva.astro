@@ -177,3 +177,19 @@ import Layout from '../layouts/Layout.astro';
 </main>
 </div>
 </Layout>
+
+<script>
+    import { onAuthStateChanged, signOut } from "firebase/auth";
+    import { auth } from "../lib/firebase/client";
+
+    // Protect the route
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            // Not logged in, redirect to login
+            window.location.href = '/login';
+        }
+    });
+
+    // Optional: Add a logout function if there's a logout button
+    // document.getElementById('logout-btn')?.addEventListener('click', () => signOut(auth));
+</script>

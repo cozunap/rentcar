@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "result": {
+    "fileName": "firebase-js-config.json",
+    "fileContents": "{\n  \"projectId\": \"rent-car-rd\",\n  \"appId\": \"1:1094674523381:web:6f75602077c442575191bc\",\n  \"storageBucket\": \"rent-car-rd.firebasestorage.app\",\n  \"apiKey\": \"AIzaSyBgIYsiFU24Ky3iIdwjiif7HhAtP1twQYw\",\n  \"authDomain\": \"rent-car-rd.firebaseapp.com\",\n  \"messagingSenderId\": \"1094674523381\",\n  \"projectNumber\": \"1094674523381\",\n  \"version\": \"2\"\n}",
+    "sdkConfig": {
+      "projectId": "rent-car-rd",
+      "appId": "1:1094674523381:web:6f75602077c442575191bc",
+      "storageBucket": "rent-car-rd.firebasestorage.app",
+      "apiKey": "AIzaSyBgIYsiFU24Ky3iIdwjiif7HhAtP1twQYw",
+      "authDomain": "rent-car-rd.firebaseapp.com",
+      "messagingSenderId": "1094674523381",
+      "projectNumber": "1094674523381",
+      "version": "2"
+    }
+  }
+}

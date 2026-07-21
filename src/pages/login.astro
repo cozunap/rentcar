@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="VIP Login | Luxe DR">
+    <div class="min-h-screen flex items-center justify-center bg-background-dark px-4 py-20">
+        <div class="bg-surface-dark border border-white/5 rounded-lg p-8 w-full max-w-md shadow-2xl relative overflow-hidden">
+            <!-- Glow effect -->
+            <div class="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="text-center mb-8 relative z-10">
+                <div class="size-10 text-primary mx-auto mb-4">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 19h20L12 2zm0 3.8L18.4 17H5.6L12 5.8z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-white text-2xl font-light mb-2">Portal <span class="font-bold">VIP</span></h1>
+                <p class="text-gray-400 text-sm">Ingresa a tu cuenta para gestionar reservas y servicios exclusivos.</p>
+            </div>
+
+            <form id="login-form" class="space-y-4 relative z-10">
+                <div id="error-message" class="hidden bg-red-500/10 border border-red-500/50 text-red-500 text-xs p-3 rounded text-center"></div>
+                
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold mb-2">Correo Electrónico</label>
+                    <input type="email" id="email" required class="w-full bg-[#121212] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-sm" placeholder="ejemplo@vip.com" />
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold">Contraseña</label>
+                        <a href="#" class="text-[10px] uppercase tracking-wider text-primary hover:text-white transition-colors">¿Olvidaste?</a>
+                    </div>
+                    <input type="password" id="password" required class="w-full bg-[#121212] border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-sm" placeholder="••••••••" />
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-primary hover:bg-[#d4a826] text-[#181611] font-bold text-sm tracking-widest uppercase px-4 py-3 rounded shadow-lg transition-all duration-300 mt-6 flex justify-center items-center">
+                    <span id="btn-text">Iniciar Sesión</span>
+                    <span id="btn-spinner" class="hidden material-symbols-outlined animate-spin">refresh</span>
+                </button>
+            </form>
+
+            <div class="mt-8 text-center border-t border-white/10 pt-6 relative z-10">
+                <p class="text-gray-500 text-xs uppercase tracking-wider">
+                    ¿No tienes membresía? 
+                    <a href="/vip_services_concierge" class="text-white font-bold hover:text-primary transition-colors ml-1">Aplicar ahora</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    import { signInWithEmailAndPassword } from "firebase/auth";
+    import { auth } from "../lib/firebase/client";
+
+    const loginForm = document.getElementById('login-form') as HTMLFormElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    const errorMsg = document.getElementById('error-message') as HTMLDivElement;
+    const btnText = document.getElementById('btn-text') as HTMLSpanElement;
+    const btnSpinner = document.getElementById('btn-spinner') as HTMLSpanElement;
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // UI State loading
+            errorMsg.classList.add('hidden');
+            btnText.classList.add('hidden');
+            btnSpinner.classList.remove('hidden');
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                // Success! Redirect to dashboard
+                window.location.href = '/dashboard_de_reserva';
+            } catch (error: any) {
+                // Error handling
+                errorMsg.classList.remove('hidden');
+                btnText.classList.remove('hidden');
+                btnSpinner.classList.add('hidden');
+                
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                    errorMsg.textContent = 'Credenciales incorrectas. Inténtalo de nuevo.';
+                } else {
+                    errorMsg.textContent = 'Ha ocurrido un error. Inténtalo de nuevo más tarde.';
+                }
+            }
+        });
+    }
+</script>
