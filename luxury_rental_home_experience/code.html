@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luxury Rental Home Experience</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#FAC638", "background-light": "#f8f8f5", "background-dark": "#231e0f", "surface-dark": "#221d10"}, fontFamily: {display: "Manrope"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}}}};</script>
+<style>
+        /* Custom scrollbar for horizontal sections */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#181611] dark:text-white font-display overflow-x-hidden">
+<!-- Top Navigation -->
+<nav class="absolute top-0 w-full z-50 border-b border-white/10 backdrop-blur-sm bg-black/20">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L2 19h20L12 2zm0 3.8L18.4 17H5.6L12 5.8z"></path>
+<path d="M12 7l-4 7h8l-4-7z" opacity="0.5"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold tracking-[0.2em] uppercase">LUXE DR</h2>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="#">Fleet</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="#">Services</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="#">Concierge</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="#">Membership</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="flex items-center justify-center rounded bg-primary/90 hover:bg-primary text-[#181611] px-5 py-2 text-sm font-bold tracking-wide transition-colors">
+                    LOG IN
+                </button>
+<button class="lg:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="relative h-screen min-h-[700px] w-full flex flex-col items-center justify-center overflow-hidden">
+<!-- Background Image/Video Placeholder -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="Luxury black SUV parked on a sleek concrete runway next to a private jet at sunset" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBYML2s6RDGwgv22yzCtTZMrv3INoA1EvXyYjP3hSxGZIjfIdydHTr5bxUuPF1spFu_2KnNyP-kGUyqmEVZ-p3KUniQ5lIIQIrmHElBBg4aLfnEjbmTQ_sn1j4GcKhRQs93CnH0M8oljtR1v_1OYxJ5d3JE_wNFLPSDCGsK6Wrd7hgYRNHCUYDXuvb1wiVbF6bqP8eJqDFD75hfMCTgAOBGp-yDM5IkiTsh9aioEu3lQzK9aO0RVPY5otlOh2bnyx4_jrbKZVbrgQuD');">
+</div>
+<!-- Gradient Overlay for readability -->
+<div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-background-dark"></div>
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mt-[-80px]">
+<span class="text-primary tracking-[0.3em] text-xs md:text-sm font-bold uppercase mb-6 animate-fade-in-up">
+                Dominican Republic VIP Transport
+            </span>
+<h1 class="text-white text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-[-0.02em] mb-6 drop-shadow-lg">
+<span class="font-bold">UNCOMPROMISED</span> LUXURY
+            </h1>
+<p class="text-gray-200 text-base md:text-lg max-w-2xl font-light leading-relaxed mb-10 text-shadow-sm">
+                Arrive in power. Explore in style. Experience the pinnacle of automotive engineering tailored for the Caribbean landscape.
+            </p>
+</div>
+<!-- Reservation Bar (Floating) -->
+<div class="absolute bottom-10 w-full px-4 lg:px-10 z-20 flex justify-center">
+<div class="bg-[#1f1f1f]/80 backdrop-blur-md border border-white/10 p-2 rounded-lg shadow-2xl w-full max-w-5xl">
+<form class="flex flex-col lg:flex-row gap-2 lg:items-center">
+<!-- Location -->
+<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:border-r lg:border-white/10 lg:bg-transparent lg:hover:bg-transparent">
+<label class="block text-[10px] uppercase tracking-wider text-primary font-bold mb-1">Pick-up Location</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/50 text-lg">flight_land</span>
+<select class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 cursor-pointer">
+<option class="bg-[#1f1f1f]">Punta Cana Intl (PUJ)</option>
+<option class="bg-[#1f1f1f]">Santo Domingo (SDQ)</option>
+<option class="bg-[#1f1f1f]">La Romana (LRM)</option>
+<option class="bg-[#1f1f1f]">Casa de Campo</option>
+</select>
+</div>
+</div>
+<!-- Drop-off -->
+<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:border-r lg:border-white/10 lg:bg-transparent lg:hover:bg-transparent">
+<label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1 group-hover:text-primary transition-colors">Drop-off</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/50 text-lg">flight_takeoff</span>
+<select class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 cursor-pointer">
+<option class="bg-[#1f1f1f]">Same as Pick-up</option>
+<option class="bg-[#1f1f1f]">Different Location</option>
+</select>
+</div>
+</div>
+<!-- Dates -->
+<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:border-r lg:border-white/10 lg:bg-transparent lg:hover:bg-transparent">
+<label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1 group-hover:text-primary transition-colors">Dates</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/50 text-lg">calendar_month</span>
+<input class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 placeholder-white/80" onfocus="(this.type='date')" placeholder="Select Dates" type="text"/>
+</div>
+</div>
+<!-- Vehicle Class -->
+<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:bg-transparent lg:hover:bg-transparent">
+<label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1 group-hover:text-primary transition-colors">Vehicle Class</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/50 text-lg">directions_car</span>
+<select class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 cursor-pointer">
+<option class="bg-[#1f1f1f]">Any Class</option>
+<option class="bg-[#1f1f1f]">Luxury SUV</option>
+<option class="bg-[#1f1f1f]">Exotic Sport</option>
+<option class="bg-[#1f1f1f]">Executive Sedan</option>
+<option class="bg-[#1f1f1f]">Armored</option>
+</select>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="bg-primary hover:bg-[#d4a826] text-[#181611] font-bold text-sm tracking-widest uppercase px-8 py-4 rounded shadow-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-2 lg:h-full lg:w-auto w-full mt-2 lg:mt-0 whitespace-nowrap" type="button">
+<span>Reserve</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+<!-- Stats Section (Sub-hero) -->
+<div class="bg-surface-dark border-b border-white/5">
+<div class="max-w-[1440px] mx-auto px-6 py-12 flex flex-wrap justify-between items-center gap-8 text-center md:text-left">
+<div class="flex flex-col md:flex-row gap-4 md:gap-12 w-full justify-center opacity-80">
+<div class="flex flex-col items-center md:items-start">
+<span class="text-3xl font-light text-white">50+</span>
+<span class="text-xs uppercase tracking-widest text-primary/80 mt-1">Premium Vehicles</span>
+</div>
+<div class="w-px h-12 bg-white/10 hidden md:block"></div>
+<div class="flex flex-col items-center md:items-start">
+<span class="text-3xl font-light text-white">24/7</span>
+<span class="text-xs uppercase tracking-widest text-primary/80 mt-1">Concierge Service</span>
+</div>
+<div class="w-px h-12 bg-white/10 hidden md:block"></div>
+<div class="flex flex-col items-center md:items-start">
+<span class="text-3xl font-light text-white">100%</span>
+<span class="text-xs uppercase tracking-widest text-primary/80 mt-1">Discretion Guaranteed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature Section: The Elite Fleet -->
+<section class="py-20 lg:py-32 relative bg-background-dark">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<h2 class="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-4">The Collection</h2>
+<h3 class="text-white text-3xl md:text-5xl font-light">The Elite Fleet</h3>
+</div>
+<a class="group flex items-center gap-2 text-white hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest pb-1 border-b border-transparent hover:border-primary" href="#">
+                    View Full Inventory
+                    <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Vehicle Card 1 -->
+<div class="group relative bg-surface-dark rounded-lg overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-black/50">
+<div class="aspect-[16/10] overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Front angle view of a black Mercedes-Benz G63 AMG parked on dark pavement" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZPyzNlgPaxSyr4R47UOoM6N4QQEJLHdfsnM9l445OWGDEzeagSWXcozBY8lNxU_1Pn15tFaBmcXUAENmHT97-oyYzjWK-vUX3m8_wlqVqv0oXsFF7z2pv6ysAPUzM230wuZfha9ga5t3EuaJLcF2TUwmXJFU1GvDoNBJZdgCgKPNYpPfp4lRsqSJzqRoYiQ4emsR8NSqraqsrwy6Prxz7J7TLr0gEnb3LB_e-xA1xkD4V2OrxblUQQUhZY3Qi4j4dA8fV3PFKCy9w');">
+</div>
+<div class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-xs text-white font-bold tracking-widest uppercase">SUV</div>
+</div>
+<div class="p-6">
+<h4 class="text-white text-xl font-medium mb-1 group-hover:text-primary transition-colors">Mercedes-Benz G63 AMG</h4>
+<p class="text-gray-400 text-sm font-light mb-4">Iconic design meeting rugged luxury.</p>
+<div class="flex justify-between items-center border-t border-white/10 pt-4">
+<div class="flex gap-4 text-gray-500 text-xs uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> 5</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">work</span> 4</span>
+</div>
+<span class="text-white text-sm font-bold">$1,200 <span class="text-gray-500 font-normal text-xs">/ day</span></span>
+</div>
+</div>
+</div>
+<!-- Vehicle Card 2 -->
+<div class="group relative bg-surface-dark rounded-lg overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-black/50">
+<div class="aspect-[16/10] overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Side profile of a dark grey Range Rover Autobiography parked in a modern driveway" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHrrpBMCWfac48yRQGbDQ3qitQFmVRHA-DUMtWQ4D34lM_Cm9vT5JNAbFzqHk46EK4PU64iYFTSYvsXFVz5Y1jfqNsZWwv5tZflt-xSlnTPPEqX_vsQTIVj4Mdjp_sl2dqzaWfp_5j_9K8sJOAFSuvhJKV--Gtjwqc7wMXy2nwidWuqxGdGdePiNDD40VhupIjiSUH9oeLd-pUxToxuJJsYMF5A8ewbeyTy2tHQOxujHkcSBySSU-uhkcRCEYCDq6C_g3aJP-qxbAN');">
+</div>
+<div class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-xs text-white font-bold tracking-widest uppercase">SUV</div>
+</div>
+<div class="p-6">
+<h4 class="text-white text-xl font-medium mb-1 group-hover:text-primary transition-colors">Range Rover Autobiography</h4>
+<p class="text-gray-400 text-sm font-light mb-4">Unmatched comfort and sophistication.</p>
+<div class="flex justify-between items-center border-t border-white/10 pt-4">
+<div class="flex gap-4 text-gray-500 text-xs uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> 5</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">work</span> 4</span>
+</div>
+<span class="text-white text-sm font-bold">$950 <span class="text-gray-500 font-normal text-xs">/ day</span></span>
+</div>
+</div>
+</div>
+<!-- Vehicle Card 3 -->
+<div class="group relative bg-surface-dark rounded-lg overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-black/50">
+<div class="aspect-[16/10] overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Black Cadillac Escalade ESV front view with LED headlights on" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLJcoayuIrHVyz4UxmuHU2iDLVVt3ihTWn2PSH9rGr5nhTUHpZgKchtv1qQ51NCc5hkW1NulwY1sXevaWfJOVs5Ykbb4E0EsNbfUUwIm18ltT8irK67edqcO6apMAtvZEaEaS_9g0TCWI-T3F6UsznmlettGTkQvPhqnJMVyGSzeA6ymKVMsAH8qBug5JBL19_MVfiLAEHfI6Q7y4G7zL3UYa6i98xZJY-0jF9I9M8wYG5xz9nP2OvEyw8KTL7SYTZm1cg78QhzXgI');">
+</div>
+<div class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-xs text-white font-bold tracking-widest uppercase">XL SUV</div>
+</div>
+<div class="p-6">
+<h4 class="text-white text-xl font-medium mb-1 group-hover:text-primary transition-colors">Cadillac Escalade ESV</h4>
+<p class="text-gray-400 text-sm font-light mb-4">Spacious executive travel.</p>
+<div class="flex justify-between items-center border-t border-white/10 pt-4">
+<div class="flex gap-4 text-gray-500 text-xs uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> 7</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">work</span> 6</span>
+</div>
+<span class="text-white text-sm font-bold">$1,100 <span class="text-gray-500 font-normal text-xs">/ day</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services / Value Prop -->
+<section class="py-20 bg-[#121212] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
+<svg class="w-full h-full text-primary fill-current" viewbox="0 0 100 100">
+<circle cx="100" cy="50" r="40"></circle>
+</svg>
+</div>
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10 flex flex-col lg:flex-row gap-16 items-center">
+<div class="flex-1 order-2 lg:order-1">
+<div class="rounded-lg overflow-hidden relative h-[500px] w-full shadow-2xl shadow-primary/5">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Chauffeur opening the door of a luxury car for a VIP client" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPZ9loj4CDLxR2e84nyr2-YlZm6fs5astlDs49ZKPbyNuX8x59EnA3aasTMQvUAhYJoljs8lRhPE3oN-ilORBXVs4GYeUO2j376irO9osO5HXkUC2U16OLG1710d5cXVzsZOZ6gBph4fpNhryTx4f1bz6QnSm99Sp_Yd39kQjr3tLj4THrwqfN_y2ExXGPpwrWc5nEWvw15lxe8EmFUw-mDgjGvi_eXODIZK2kzuSV1RwYzeTYn2phS0c7Iti69b-_EWMjm-lyczRc');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-8 left-8 text-white max-w-sm">
+<p class="text-lg font-light italic">"The service was impeccable. The vehicle was pristine. Luxe DR defines Caribbean luxury."</p>
+<p class="text-primary text-sm font-bold mt-4 uppercase tracking-widest">— James Sterling, CEO</p>
+</div>
+</div>
+</div>
+<div class="flex-1 order-1 lg:order-2">
+<h2 class="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-4">Our Promise</h2>
+<h3 class="text-white text-3xl md:text-5xl font-light mb-8 leading-tight">Beyond Transportation. <br/><span class="font-bold">A Lifestyle.</span></h3>
+<p class="text-gray-400 leading-relaxed mb-8 text-lg font-light">
+                    We understand that for our clients, time is the ultimate luxury. Our fleet is meticulously maintained to factory standards, and our chauffeurs are trained in executive protection and protocol. Whether you require an airport transfer in Punta Cana or a week-long rental in Casa de Campo, we deliver excellence.
+                </p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center gap-4 text-white">
+<span class="size-8 rounded-full bg-white/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">star</span>
+</span>
+<span class="font-light">Premium Chauffeur Services</span>
+</li>
+<li class="flex items-center gap-4 text-white">
+<span class="size-8 rounded-full bg-white/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">shield</span>
+</span>
+<span class="font-light">Armored Vehicle Options</span>
+</li>
+<li class="flex items-center gap-4 text-white">
+<span class="size-8 rounded-full bg-white/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">flight</span>
+</span>
+<span class="font-light">Private Aviation Tarmac Access</span>
+</li>
+</ul>
+<button class="text-white border border-white/20 hover:border-primary hover:text-primary px-8 py-3 text-sm font-bold uppercase tracking-widest transition-all">
+                    Explore Services
+                </button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-dark border-t border-white/5 pt-20 pb-10">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+<!-- Brand -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-2 text-white">
+<div class="size-5 text-primary">
+<svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L2 19h20L12 2zm0 3.8L18.4 17H5.6L12 5.8z"></path>
+</svg>
+</div>
+<span class="font-bold tracking-[0.2em] uppercase text-lg">LUXE DR</span>
+</div>
+<p class="text-gray-500 text-sm leading-relaxed">
+                        The Dominican Republic's premier luxury car rental and chauffeur service. Serving Punta Cana, Casa de Campo, and Santo Domingo.
+                    </p>
+</div>
+<!-- Links -->
+<div>
+<h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Company</h4>
+<div class="flex flex-col gap-3">
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">About Us</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Our Fleet</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Services</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Contact</a>
+</div>
+</div>
+<!-- Links -->
+<div>
+<h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Support</h4>
+<div class="flex flex-col gap-3">
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">FAQ</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Terms &amp; Conditions</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Privacy Policy</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Rental Agreement</a>
+</div>
+</div>
+<!-- Newsletter -->
+<div>
+<h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Stay Updated</h4>
+<p class="text-gray-500 text-sm mb-4">Subscribe for exclusive offers and new fleet arrivals.</p>
+<div class="flex border-b border-white/20 pb-2">
+<input class="bg-transparent border-none p-0 text-white placeholder-gray-600 w-full focus:ring-0 text-sm" placeholder="Email Address" type="email"/>
+<button class="text-primary hover:text-white uppercase text-xs font-bold tracking-widest">Join</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4">
+<p class="text-gray-600 text-xs">© 2023 LUXE DR. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="sr-only">Instagram</span>IG</a>
+<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="sr-only">Twitter</span>TW</a>
+<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="sr-only">LinkedIn</span>LI</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

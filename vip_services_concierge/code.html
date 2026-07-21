@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIP Services &amp; Concierge - Luxe DR Rentals</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#eebd2b",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#221d10",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #221d10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #393528;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #eebd2b;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#181611] dark:text-white font-display overflow-x-hidden antialiased">
+<div class="relative min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-solid border-[#393528] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm px-4 lg:px-40 py-3">
+<div class="flex items-center justify-between whitespace-nowrap max-w-[1200px] mx-auto">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_543)">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M7.24189 26.4066C7.31369 26.4411 7.64204 26.5637 8.52504 26.3738C9.59462 26.1438 11.0343 25.5311 12.7183 24.4963C14.7583 23.2426 17.0256 21.4503 19.238 19.238C21.4503 17.0256 23.2426 14.7583 24.4963 12.7183C25.5311 11.0343 26.1438 9.59463 26.3738 8.52504C26.5637 7.64204 26.4411 7.31369 26.4066 7.24189C26.345 7.21246 26.143 7.14535 25.6664 7.1918C24.9745 7.25925 23.9954 7.5498 22.7699 8.14278C20.3369 9.32007 17.3369 11.4915 14.4142 14.4142C11.4915 17.3369 9.32007 20.3369 8.14278 22.7699C7.5498 23.9954 7.25925 24.9745 7.1918 25.6664C7.14534 26.143 7.21246 26.345 7.24189 26.4066ZM29.9001 10.7285C29.4519 12.0322 28.7617 13.4172 27.9042 14.8126C26.465 17.1544 24.4686 19.6641 22.0664 22.0664C19.6641 24.4686 17.1544 26.465 14.8126 27.9042C13.4172 28.7617 12.0322 29.4519 10.7285 29.9001L21.5754 40.747C21.6001 40.7606 21.8995 40.931 22.8729 40.7217C23.9424 40.4916 25.3821 39.879 27.0661 38.8441C29.1062 37.5904 31.3734 35.7982 33.5858 33.5858C35.7982 31.3734 37.5904 29.1062 38.8441 27.0661C39.879 25.3821 40.4916 23.9425 40.7216 22.8729C40.931 21.8995 40.7606 21.6001 40.747 21.5754L29.9001 10.7285ZM29.2403 4.41187L43.5881 18.7597C44.9757 20.1473 44.9743 22.1235 44.6322 23.7139C44.2714 25.3919 43.4158 27.2666 42.252 29.1604C40.8128 31.5022 38.8165 34.012 36.4142 36.4142C34.012 38.8165 31.5022 40.8128 29.1604 42.252C27.2666 43.4158 25.3919 44.2714 23.7139 44.6322C22.1235 44.9743 20.1473 44.9757 18.7597 43.5881L4.41187 29.2403C3.29027 28.1187 3.08209 26.5973 3.21067 25.2783C3.34099 23.9415 3.8369 22.4852 4.54214 21.0277C5.96129 18.0948 8.43335 14.7382 11.5858 11.5858C14.7382 8.43335 18.0948 5.9613 21.0277 4.54214C22.4852 3.8369 23.9415 3.34099 25.2783 3.21067C26.5973 3.08209 28.1187 3.29028 29.2403 4.41187Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_543"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-[#181611] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Luxe DR Rentals</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-9">
+<a class="text-[#181611] dark:text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Fleet</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Services</a>
+<a class="text-[#181611] dark:text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Concierge</a>
+<a class="text-[#181611] dark:text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Contact</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-primary text-[#181611] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-yellow-400 transition-colors">
+<span class="truncate">Members Login</span>
+</button>
+</nav>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative flex min-h-[600px] flex-col justify-center items-center p-4">
+<div class="absolute inset-0 bg-cover bg-center bg-no-repeat" data-alt="Black luxury SUV driving on a coastal road at sunset with palm trees" style='background-image: linear-gradient(rgba(34, 29, 16, 0.4) 0%, rgba(34, 29, 16, 0.8) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3G2gUUbzC1Ir7OwWAukIZ5kEcw7fxdyVnD37P7WQtSML3vemySWnEre772lTf_2v4HV7AtHqVuhFxI3ROtbOXpGAgqNmvqzuRS3QVjC-Ww2HyIRuNapUExGzDZ0ubdm4Ym4U2dc5P0960btuZawWUZg6D3ozFyROrXZz3rfEK7rXFb38-MzoEJx_q7w5OUa6MrUudnXL8gZNBB9e4pl17hMOHAUaX4Y3x3zb1ubapAwbGZWNDRYj402hEqM3dYVzYW9djdMSghRpn");'></div>
+<div class="relative z-10 flex flex-col gap-6 text-center max-w-[800px] animate-fade-in-up">
+<div class="inline-flex items-center justify-center gap-2 mb-2">
+<div class="h-[1px] w-12 bg-primary"></div>
+<span class="text-primary text-xs font-bold uppercase tracking-widest">VIP Concierge Services</span>
+<div class="h-[1px] w-12 bg-primary"></div>
+</div>
+<h1 class="text-white text-5xl md:text-7xl font-black leading-tight tracking-[-0.033em]">
+                        Experience the Dominican Republic <span class="text-primary">Without Limits</span>
+</h1>
+<h2 class="text-gray-200 text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
+                        Unlock a world of unparalleled luxury with our bespoke concierge services tailored for the elite traveler.
+                    </h2>
+<div class="pt-4 flex justify-center">
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded h-12 px-8 bg-primary text-[#181611] text-base font-bold leading-normal tracking-[0.015em] hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(238,189,43,0.3)]">
+<span class="truncate">Request Personal Consultation</span>
+</button>
+</div>
+</div>
+</section>
+<div class="layout-container flex justify-center py-10 px-4 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<!-- Section Header -->
+<div class="flex flex-col items-center py-12">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">diamond</span>
+<h2 class="text-[#181611] dark:text-white text-3xl md:text-4xl font-bold leading-tight tracking-[-0.015em] text-center">Our Exclusive Services</h2>
+<div class="w-24 h-1 bg-primary mt-6 rounded-full"></div>
+</div>
+<!-- Service 1: Chauffeur -->
+<div class="@container py-10 border-b border-[#393528]/50 last:border-0">
+<div class="flex flex-col gap-10 md:gap-16 md:flex-row items-center">
+<div class="w-full md:w-1/2 aspect-[4/3] rounded-lg overflow-hidden relative group">
+<div class="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110" data-alt="Chauffeur in black suit opening the door of a black luxury sedan" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDk6e95bHZO9PrSHapc8Ht8eX1gRT__jjl5shMsrG83z9m5Tw490N8xwQ7fJCuf7vjbt2PebzqIiIkk0RtIEH38w0FKzS5aYpfAtQV60vCypnYb2Z_cim8gpVQlsiU2TJHEUM0fdmiQI3kcFk_Lzmh0-bVeNsNGhiv6y2hoCH6pJeK-JGiDyj9ZPoJ15DgSS_ySQLjlVTX2VZcIBBJwO-W5P1R6tsVzBhKfbqsJtmOWTsJuK2PeGingxqfK1nG1QUpVkoabU_8Jpwno");'>
+</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+</div>
+<div class="flex flex-col gap-6 md:w-1/2 justify-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">directions_car</span>
+<h3 class="text-primary text-sm font-bold uppercase tracking-wider">Executive Transport</h3>
+</div>
+<h2 class="text-[#181611] dark:text-white text-3xl md:text-4xl font-bold leading-tight">
+                                    Private Chauffeur Service
+                                </h2>
+<p class="text-[#181611]/80 dark:text-white/70 text-base md:text-lg leading-relaxed">
+                                    Bilingual, security-trained chauffeurs available 24/7. Whether you require executive transport for business meetings in Santo Domingo or discreet travel to private estates in La Romana, arrive in style and depart with absolute discretion.
+                                </p>
+<ul class="flex flex-col gap-2 mt-2">
+<li class="flex items-center gap-2 text-[#181611]/80 dark:text-white/80"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Armored vehicle options available</li>
+<li class="flex items-center gap-2 text-[#181611]/80 dark:text-white/80"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 24/7 Availability</li>
+</ul>
+<div class="pt-4">
+<button class="text-primary font-bold flex items-center gap-2 group/btn hover:text-white transition-colors">
+                                        Book Chauffeur 
+                                        <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Service 2: Airport (Reverse Layout) -->
+<div class="@container py-10 border-b border-[#393528]/50 last:border-0">
+<div class="flex flex-col gap-10 md:gap-16 md:flex-row-reverse items-center">
+<div class="w-full md:w-1/2 aspect-[4/3] rounded-lg overflow-hidden relative group">
+<div class="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110" data-alt="Private jet on tarmac with a luxury black SUV waiting nearby" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFlCa4gPa2JnU2ZgadabX_b14VV2S83SYg559NshVd4bXHlk6ljAOAJwJmdl4hbezeRYLA-7W64XCHX6apSP2QIiruZCCDFc4mZQKyQrJvHQo03SNV4_y_i_cq-jqII57W4a3aO8icsLYKrJyKYCM-qe8j2DZL0tlKvciYpMQwwxbF02BH39R-Z0xzyFAYG1r8L7P-Sr2niCz3zXJ9EyZZgyDWgOuISGhkZN2IjwZHmc4zcP93SqU-W-saoWWVgun8xzY4JsYRw6Xr");'>
+</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+</div>
+<div class="flex flex-col gap-6 md:w-1/2 justify-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">flight_land</span>
+<h3 class="text-primary text-sm font-bold uppercase tracking-wider">Arrivals &amp; Departures</h3>
+</div>
+<h2 class="text-[#181611] dark:text-white text-3xl md:text-4xl font-bold leading-tight">
+                                    Airport VIP Concierge
+                                </h2>
+<p class="text-[#181611]/80 dark:text-white/70 text-base md:text-lg leading-relaxed">
+                                    Bypass the chaos. From tarmac greeting to expedited customs clearance, our team ensures your entry into the Dominican Republic is seamless. Your luggage is handled directly to your waiting vehicle while you relax in the VIP lounge.
+                                </p>
+<ul class="flex flex-col gap-2 mt-2">
+<li class="flex items-center gap-2 text-[#181611]/80 dark:text-white/80"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Fast-track customs &amp; immigration</li>
+<li class="flex items-center gap-2 text-[#181611]/80 dark:text-white/80"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Tarmac vehicle access</li>
+</ul>
+<div class="pt-4">
+<button class="text-primary font-bold flex items-center gap-2 group/btn hover:text-white transition-colors">
+                                        Book Airport VIP 
+                                        <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Service 3: Villa Delivery -->
+<div class="@container py-10">
+<div class="flex flex-col gap-10 md:gap-16 md:flex-row items-center">
+<div class="w-full md:w-1/2 aspect-[4/3] rounded-lg overflow-hidden relative group">
+<div class="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110" data-alt="Modern luxury villa entrance with a white convertible sports car in driveway" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7Medq_2nwr7fKzg1ExfNRyjilrcn1mW9yXNELKV8ehxV9UFEqZQ-A8gIDrsxZP4UkWrKE0csxwnLy_01d4siz_5iBrMrIynffo30iH3MMumtLrMmmpu7mm_ildylboGhY7ALbGRlTm2sLQn0lBB1WsyjjLV_XKoDNjcpmnRLxYOmZExOkNDK6_efDEW1Efao0PXvn-2AxnjyvWSwrt-1wF6DoCCFbAJnTnSqi57m_m7jjmg365AynNyKArHK6sejOm92oV-51dgIv");'>
+</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+</div>
+<div class="flex flex-col gap-6 md:w-1/2 justify-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">villa</span>
+<h3 class="text-primary text-sm font-bold uppercase tracking-wider">Door-to-Door</h3>
+</div>
+<h2 class="text-[#181611] dark:text-white text-3xl md:text-4xl font-bold leading-tight">
+                                    Luxury Villa Delivery
+                                </h2>
+<p class="text-[#181611]/80 dark:text-white/70 text-base md:text-lg leading-relaxed">
+                                    Your vehicle awaits at your doorstep. Whether you are staying at Casa de Campo, Cap Cana, or a private estate in Samaná, we bring the keys to you. Complete the handover in the comfort of your villa with a personalized vehicle walkthrough.
+                                </p>
+<ul class="flex flex-col gap-2 mt-2">
+<li class="flex items-center gap-2 text-[#181611]/80 dark:text-white/80"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Service to all major luxury resorts</li>
+<li class="flex items-center gap-2 text-[#181611]/80 dark:text-white/80"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> On-site contract signing</li>
+</ul>
+<div class="pt-4">
+<button class="text-primary font-bold flex items-center gap-2 group/btn hover:text-white transition-colors">
+                                        Arrange Delivery 
+                                        <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Testimonials -->
+<div class="py-20 mt-10 border-t border-[#393528]">
+<div class="flex flex-col gap-2 text-center mb-12">
+<h2 class="text-[#181611] dark:text-white text-3xl font-bold">Trusted by the Elite</h2>
+<p class="text-[#181611]/60 dark:text-white/60">Experiences from our verified VIP clients</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-background-light dark:bg-[#2A2416] p-8 rounded-lg border border-[#393528]/30 flex flex-col gap-4">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<p class="text-[#181611] dark:text-white/90 italic">"The airport concierge service was flawless. From the jet to the villa in under 45 minutes. Simply outstanding."</p>
+<div class="mt-auto pt-4 border-t border-[#393528]/20">
+<p class="text-sm font-bold text-[#181611] dark:text-white">James Sterling</p>
+<p class="text-xs text-[#181611]/60 dark:text-white/60">CEO, Sterling Ventures</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-background-light dark:bg-[#2A2416] p-8 rounded-lg border border-[#393528]/30 flex flex-col gap-4">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<p class="text-[#181611] dark:text-white/90 italic">"Security was my top priority. The chauffeur was professional, knowledgeable, and the armored SUV was impeccable."</p>
+<div class="mt-auto pt-4 border-t border-[#393528]/20">
+<p class="text-sm font-bold text-[#181611] dark:text-white">Elena R.</p>
+<p class="text-xs text-[#181611]/60 dark:text-white/60">International Artist</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-background-light dark:bg-[#2A2416] p-8 rounded-lg border border-[#393528]/30 flex flex-col gap-4">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<p class="text-[#181611] dark:text-white/90 italic">"Luxe DR Rentals made our stay in Cap Cana effortless. The car was waiting at the villa when we arrived. Pure luxury."</p>
+<div class="mt-auto pt-4 border-t border-[#393528]/20">
+<p class="text-sm font-bold text-[#181611] dark:text-white">Michael Chang</p>
+<p class="text-xs text-[#181611]/60 dark:text-white/60">Private Investor</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#181611] border-t border-[#393528] pt-16 pb-8 px-4 lg:px-40">
+<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-10">
+<div class="flex flex-col gap-4 max-w-sm">
+<div class="flex items-center gap-2 text-white">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill-rule="evenodd"></path></svg>
+</div>
+<span class="font-bold text-lg tracking-tight">Luxe DR Rentals</span>
+</div>
+<p class="text-white/60 text-sm">Defining luxury mobility in the Dominican Republic. Exclusive fleet, security services, and bespoke concierge for the discerning traveler.</p>
+</div>
+<div class="flex gap-12 flex-wrap">
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold text-sm uppercase tracking-wider">Services</h4>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">Fleet Rental</a>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">Chauffeur</a>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">Yacht Charter</a>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">Villa Delivery</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold text-sm uppercase tracking-wider">Company</h4>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">About Us</a>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">Membership</a>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">Contact</a>
+<a class="text-white/60 hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
+</div>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto mt-12 pt-8 border-t border-[#393528] flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-white/40 text-xs">© 2024 Luxe DR Rentals. All rights reserved.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-white/40 text-xl cursor-pointer hover:text-primary transition-colors">language</span>
+<span class="material-symbols-outlined text-white/40 text-xl cursor-pointer hover:text-primary transition-colors">payments</span>
+<span class="material-symbols-outlined text-white/40 text-xl cursor-pointer hover:text-primary transition-colors">security</span>
+</div>
+</div>
+</footer>
+<!-- Floating WhatsApp Button -->
+<a class="fixed bottom-8 right-8 z-50 flex items-center justify-center gap-2 bg-primary hover:bg-[#d9ab25] text-[#181611] font-bold py-3 px-6 rounded-full shadow-lg hover:shadow-[0_0_20px_rgba(238,189,43,0.4)] transition-all duration-300 transform hover:-translate-y-1" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span>VIP Concierge</span>
+</a>
+</div>
+</body></html>

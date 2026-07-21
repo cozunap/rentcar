@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium Vehicle Details &amp; Booking - LUX DR</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#eebd2b",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#181611", 
+                        "surface-dark": "#221d10",
+                        "surface-dark-lighter": "#2a2415",
+                        "border-dark": "#393528",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #181611;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #393528;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #eebd2b;
+        }
+        .text-gradient-gold {
+            background: linear-gradient(to right, #eebd2b, #fceda8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased selection:bg-primary/30">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-border-dark bg-[#181611]/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 lg:px-12">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">LUX DR</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Fleet</a>
+<a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Services</a>
+<a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Experience</a>
+<a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Concierge</a>
+</nav>
+<div class="flex items-center gap-4">
+<a class="hidden sm:block text-gray-300 hover:text-white text-sm font-medium" href="#">Sign In</a>
+<button class="flex h-10 items-center justify-center rounded bg-primary px-5 text-[#181611] text-sm font-bold transition-all hover:bg-[#d4a825]">
+                    My Account
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Wrapper -->
+<main class="min-h-screen pb-20">
+<!-- Hero Section -->
+<section class="relative h-[65vh] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Black Lamborghini Urus driving on a coastal road in Dominican Republic at sunset" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyZT7MfcxV7GaWPuzpNpfT09NHfnMjOg3pZPxMOaWagPsrZ5NC6QZYMZHHzF28wcIBpvrAVcrXfz2_qDJUDVijXWKhoKrkEfYQwPNIynJ99W5W6CwGa1bkdFoBr1Mi1RiyJAIFqJDsjQFg5MBN4teqpFSnykyEXUs3d1Va3LUb2a2J5lvCZcoXWTB3yX5ReA8MEDcB43CtzcA-r5Y4i2P_U9VrhfLBP4QvuYGYGtFrdXib18ucEyp94iu4qDjp1047YaOGOvPANSFj");'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#181611] via-[#181611]/40 to-transparent"></div>
+<div class="relative mx-auto flex h-full max-w-[1400px] flex-col justify-end px-6 pb-12 lg:px-12">
+<span class="mb-3 inline-block rounded border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary w-fit">
+                    Super SUV Collection
+                </span>
+<h1 class="font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                    Lamborghini Urus S
+                </h1>
+<p class="mt-4 max-w-xl text-lg text-gray-300">
+                    The ultimate fusion of super sports car soul and SUV functionality, ready to dominate the Dominican coastline.
+                </p>
+</div>
+</section>
+<!-- Content Grid -->
+<div class="mx-auto mt-12 grid max-w-[1400px] grid-cols-1 gap-12 px-6 lg:grid-cols-12 lg:px-12">
+<!-- Left Column: Details (8 cols) -->
+<div class="flex flex-col gap-12 lg:col-span-8">
+<!-- Description -->
+<div>
+<h2 class="mb-6 text-2xl font-bold text-white">Vehicle Overview</h2>
+<p class="text-lg leading-relaxed text-gray-300">
+                        Experience uncompromised luxury and performance. The Lamborghini Urus S delivers pure power with its V8 Bi-Turbo engine while ensuring maximum comfort for up to 5 passengers. Whether you are navigating the streets of Santo Domingo or cruising to Punta Cana, this vehicle makes a statement of absolute prestige.
+                    </p>
+<div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+<div class="flex flex-col gap-1 rounded-lg border border-border-dark bg-surface-dark p-4">
+<span class="text-xs font-medium uppercase text-gray-400">Engine</span>
+<span class="font-display text-xl font-bold text-white">V8 Bi-Turbo</span>
+</div>
+<div class="flex flex-col gap-1 rounded-lg border border-border-dark bg-surface-dark p-4">
+<span class="text-xs font-medium uppercase text-gray-400">Power</span>
+<span class="font-display text-xl font-bold text-white">657 HP</span>
+</div>
+<div class="flex flex-col gap-1 rounded-lg border border-border-dark bg-surface-dark p-4">
+<span class="text-xs font-medium uppercase text-gray-400">0-60 mph</span>
+<span class="font-display text-xl font-bold text-white text-primary">3.5s</span>
+</div>
+<div class="flex flex-col gap-1 rounded-lg border border-border-dark bg-surface-dark p-4">
+<span class="text-xs font-medium uppercase text-gray-400">Top Speed</span>
+<span class="font-display text-xl font-bold text-white">190 mph</span>
+</div>
+</div>
+</div>
+<!-- Gallery Grid -->
+<div>
+<h2 class="mb-6 text-2xl font-bold text-white">Gallery</h2>
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+<div class="group relative aspect-[4/3] overflow-hidden rounded-lg">
+<img alt="Lamborghini Urus luxurious leather interior dashboard" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Lamborghini Urus luxurious leather interior dashboard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-Zu6lIKGT74XmJKiq5Y6RguNCgVumfLQS4a7g6MNXzYQU2V1d2InDnMpnByYYq82YupWiw-WDsZ5laQsmhSzwXRDPr1T2tptAndwgExaRgdLfeP4O-urd8CaHuCZm2U3nBPBbTVSLblBJD2UOwgi8kvSIg4dUKwtl3U9Xes3g6EeBgBj_Gw4tEkSfa-Vd5Q1zIerCq2d-uzrvFfZr20Rlqqti_pXWJ-ccrUAZsV9tQFiV5DOgx6ujKp4hAq-HLw37651MVEQ8eW0R"/>
+</div>
+<div class="group relative aspect-[4/3] overflow-hidden rounded-lg">
+<img alt="Close up of Lamborghini Urus wheel rim and yellow caliper" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close up of Lamborghini Urus wheel rim and yellow caliper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7XmizRNx2hZIttKriSWN_SUgrgHt-j5sB3zlEYmlQx-DUrYKq7TuN0YOMVaWY0HiZWq_NVh6MkViyc5vc2rpQriYcXcNFy0Bk6XGa3hgLwkto0d-XUxDtaz-ROEef9vg_wL4ZTtuZOp51aa32Nj3wZyAuioRr9co5vsf7Dbp8HMPpBUqGFzUgdJsbliGp-wqqnKP3w5Nc9hdVwWPS2ND-aXKEiaXn3k73MNwhx37makCQZf9kT5l7g79jwGiQFQrz8b4ABd-24eXD"/>
+</div>
+<div class="group relative aspect-[16/9] overflow-hidden rounded-lg sm:col-span-2">
+<img alt="Lamborghini Urus rear view showing exhaust pipes and angular design" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Lamborghini Urus rear view showing exhaust pipes and angular design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMWFSvMwlKm4U5q-sU9jGzGbu7GR1H0q1oy3tcjevUAPNk0c-p_wLQrPT4RYS5KSzbkGSjilroZhXY2d32ED7lOdSW5EiDpP8Ik8NMtA_YybBO9HCKO13elFmUzwTdyLbgdeVYbv2-08Hh3HtRu1VkWS6wQmfwarRrxn1x0fVp8bW-_WDWuVeM7Bi2ykSDSHWsO8Pu3R-RQ-NfqVbGFN9aECR5aJove2_7fWmH0Rz2b6sxqQnUy2H_u3qOnP1rB1p2TUFWq0ZDjmAB"/>
+</div>
+</div>
+</div>
+<!-- Premium Inclusions -->
+<div>
+<h2 class="mb-6 text-2xl font-bold text-white">Premium Inclusions</h2>
+<div class="grid gap-6 sm:grid-cols-2">
+<div class="flex items-start gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-dark text-primary border border-border-dark">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<h3 class="font-bold text-white">Full Comprehensive Insurance</h3>
+<p class="text-sm text-gray-400">Zero deductible options available for complete peace of mind.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-dark text-primary border border-border-dark">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<h3 class="font-bold text-white">24/7 VIP Concierge</h3>
+<p class="text-sm text-gray-400">Direct line to your personal rental manager at any time.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-dark text-primary border border-border-dark">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<h3 class="font-bold text-white">Door-to-Door Delivery</h3>
+<p class="text-sm text-gray-400">Complimentary delivery to your hotel, villa, or private jet terminal.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-dark text-primary border border-border-dark">
+<span class="material-symbols-outlined">wifi</span>
+</div>
+<div>
+<h3 class="font-bold text-white">In-Car Wi-Fi &amp; GPS</h3>
+<p class="text-sm text-gray-400">Stay connected with high-speed 5G hotspot included.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- VIP Services Add-ons -->
+<div class="rounded-xl bg-surface-dark p-6 sm:p-8 border border-border-dark">
+<div class="mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">diamond</span>
+<h2 class="text-2xl font-bold text-white">VIP Services</h2>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Add-on 1 -->
+<div class="group flex flex-col gap-4 rounded-lg border border-border-dark bg-[#181611] p-4 transition-colors hover:border-primary/50 sm:flex-row sm:items-center">
+<div class="h-24 w-full shrink-0 overflow-hidden rounded bg-gray-800 sm:w-32">
+<img alt="Chauffeur opening car door" class="h-full w-full object-cover" data-alt="Chauffeur opening car door" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5ee7zpn2yOj2079AK88AqKsk0OftyPA9bKR5BEzdr9HtBnRP6iwerxyZ3v25el7Wn5L1CBhIBPDESGejK1yXty4lT92P_4WsmQdmBymDh4MUz8DfXzKZ9y2qYGto3MJ83B6pyF7OZTN91qmeqYvsYuhBJR1ODeMyBFcRUAbNY8rgtCT9KsVPrifqqgLh6af6En1eZYQp4ZS1I2QQe7GRriwTQ3AQMsZK0A8AxzEtQaydQmNXRTdfXYu1cxtfn55smhuG5W6gISoM4"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-white">Private Chauffeur</h3>
+<span class="text-sm font-bold text-primary">+$500 / day</span>
+</div>
+<p class="mt-1 text-sm text-gray-400">Professional, armed security driver familiar with local routes.</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-6 w-11 rounded-full bg-gray-700 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none"></div>
+</label>
+</div>
+<!-- Add-on 2 -->
+<div class="group flex flex-col gap-4 rounded-lg border border-border-dark bg-[#181611] p-4 transition-colors hover:border-primary/50 sm:flex-row sm:items-center">
+<div class="h-24 w-full shrink-0 overflow-hidden rounded bg-gray-800 sm:w-32">
+<img alt="Airport terminal VIP lounge" class="h-full w-full object-cover" data-alt="Airport terminal VIP lounge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmuBi-PAGVRD3x8m5xLVtEM-6BPga34omMayfc0XbSmZXBR-OQFNlUnRMj6P-MYUFDoyFj3zFwg2RHfw_yApu9m2XPgljilb8jsZffhLCM9z7J4lkkX7CZYNP-NfQ53f5GDalpgaF6zkjXnuctybvynzgkWyYMmQHDfP-0z3G9V745Wdgt771pHwZ2AkVTOreBdU8zHw1-QKmxBnYOkwaUDkQ1j1ev5cZKbjJrPvRP_YeT72jwiTmB2vCDJlPrE5GWKCrPaO35B7Q_"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-white">Airport Meet &amp; Greet</h3>
+<span class="text-sm font-bold text-primary">+$250</span>
+</div>
+<p class="mt-1 text-sm text-gray-400">Skip customs lines. Vehicle waiting tarmac-side upon arrival.</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-6 w-11 rounded-full bg-gray-700 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sticky Sidebar (4 cols) -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 rounded-xl border border-border-dark bg-surface-dark p-6 shadow-2xl">
+<div class="mb-6 flex items-end justify-between border-b border-border-dark pb-6">
+<div>
+<p class="text-sm text-gray-400">Daily Rate</p>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-bold text-white">$1,800</span>
+<span class="text-gray-400">/ day</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<span class="text-xs text-gray-400 mt-1">12 trips</span>
+</div>
+</div>
+<form class="flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase text-gray-400">Pick-up</label>
+<div class="relative">
+<input class="w-full rounded bg-[#181611] border border-border-dark px-3 py-2 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary text-sm" placeholder="Select date" type="date"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase text-gray-400">Drop-off</label>
+<div class="relative">
+<input class="w-full rounded bg-[#181611] border border-border-dark px-3 py-2 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary text-sm" placeholder="Select date" type="date"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase text-gray-400">Pick-up Location</label>
+<select class="w-full rounded bg-[#181611] border border-border-dark px-3 py-2 text-white focus:border-primary focus:ring-1 focus:ring-primary text-sm">
+<option>Punta Cana International Airport (PUJ)</option>
+<option>Santo Domingo (SDQ)</option>
+<option>La Romana (LRM)</option>
+<option>Hotel / Villa Delivery</option>
+</select>
+</div>
+<div class="my-4 flex flex-col gap-2 border-t border-border-dark pt-4 text-sm">
+<div class="flex justify-between text-gray-300">
+<span>$1,800 x 3 days</span>
+<span>$5,400</span>
+</div>
+<div class="flex justify-between text-gray-300">
+<span>Service Fee</span>
+<span>$150</span>
+</div>
+<div class="flex justify-between text-gray-300">
+<span>Taxes</span>
+<span>$999</span>
+</div>
+<div class="mt-2 flex justify-between border-t border-border-dark pt-2 text-base font-bold text-white">
+<span>Total</span>
+<span class="text-primary">$6,549</span>
+</div>
+</div>
+<button class="w-full rounded bg-primary py-3 text-center text-sm font-bold uppercase tracking-wider text-[#181611] transition-all hover:bg-[#d4a825] hover:shadow-[0_0_15px_rgba(238,189,43,0.3)]" type="button">
+                            Book Now
+                        </button>
+<p class="text-center text-xs text-gray-500 mt-2">
+                            You won't be charged yet. <br/>
+                            Includes $5,000 security deposit hold.
+                        </p>
+</form>
+<div class="mt-6 border-t border-border-dark pt-4 text-center">
+<a class="inline-flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">chat</span>
+                            Contact Concierge
+                         </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="border-t border-border-dark bg-[#181611] py-12 text-white">
+<div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+<div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+<div class="flex items-center gap-2">
+<div class="size-5 text-gray-500">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-sm text-gray-500">© 2024 LUX DR. All rights reserved.</span>
+</div>
+<div class="flex gap-6">
+<a class="text-sm text-gray-500 hover:text-white" href="#">Privacy Policy</a>
+<a class="text-sm text-gray-500 hover:text-white" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

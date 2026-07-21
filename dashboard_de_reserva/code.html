@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luxury Drive - Panel de Control VIP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FAC638",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0F0F0F",
+                        "card-dark": "#1A1A1A",
+                        "accent-dark": "#2A2A2A",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(250, 198, 56, 0.1);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 overflow-x-hidden">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex flex-col bg-background-light dark:bg-background-dark border-r border-primary/10 transition-all">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark font-bold">diamond</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight uppercase">Luxury Drive</h1>
+</div>
+<nav class="flex-1 px-4 py-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold tracking-wide">Inicio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-sm font-semibold tracking-wide">Mis Reservas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-sm font-semibold tracking-wide">Flota Elite</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">credit_card</span>
+<span class="text-sm font-semibold tracking-wide">Pagos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-semibold tracking-wide">Configuración</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-3 px-4 rounded transition-all uppercase text-xs tracking-widest flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                    Solicitar Vehículo
+                </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-light dark:bg-background-dark scrollbar-hide">
+<!-- Header -->
+<header class="h-20 px-8 flex items-center justify-between border-b border-primary/5 sticky top-0 bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-4">
+<h2 class="text-lg font-light tracking-widest uppercase">Panel de Control VIP</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="text-sm font-bold">Alejandro Villalobos</span>
+<span class="text-[10px] text-primary uppercase tracking-widest">Socio Platino #8829-DX</span>
+</div>
+<div class="relative group">
+<img alt="Avatar" class="size-10 rounded-full object-cover border-2 border-primary/20" data-alt="Close-up portrait of a professional man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-m54gWw-BCx25u-O_vJnSAIJH0xkKiVf3rZzcR-gXHY4r5Tcwb8gaP5Aa5BEuFEUJHiod5BeddPrzkXOmttksn43MXZ8AnD7NNt8KUmsdWQAo4UFJOXB6dif5BhXQOxiCRvDzSTA3nWSdsDoPNJhdaeiNB-TuzL9BPRfdHs6WjwPNciZDrf6esYeylFgt2pH1jvXyO6ufeCEN3h6tHstY930F8Wkl0NPF7ABKiHKp5rd0XS8s0OPrRR2fV7EVYFIpYQPMlm0P2vVm"/>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-background-dark rounded-full"></div>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto w-full flex flex-col gap-8">
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-card-dark p-6 rounded-lg border border-primary/5 flex flex-col gap-1">
+<span class="text-slate-500 text-xs uppercase tracking-widest">Reservas Totales</span>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold">24</span>
+<span class="text-green-500 text-xs mb-1 flex items-center"><span class="material-symbols-outlined text-xs">trending_up</span> +2</span>
+</div>
+</div>
+<div class="bg-card-dark p-6 rounded-lg border border-primary/5 flex flex-col gap-1">
+<span class="text-slate-500 text-xs uppercase tracking-widest">Vehículos Favoritos</span>
+<span class="text-3xl font-bold">06</span>
+</div>
+<div class="bg-card-dark p-6 rounded-lg border border-primary/10 flex flex-col gap-1 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 text-primary/10 opacity-20">
+<span class="material-symbols-outlined text-8xl">military_tech</span>
+</div>
+<span class="text-slate-500 text-xs uppercase tracking-widest">Puntos Elite</span>
+<span class="text-3xl font-bold text-primary">12,450</span>
+</div>
+</div>
+<!-- Active Reservation Section -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Reserva Activa</h3>
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded uppercase tracking-widest border border-green-500/20">En Uso</span>
+</div>
+<div class="relative h-[320px] rounded-lg overflow-hidden group">
+<img alt="Porsche 911" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Dark gray luxury sports car on a scenic road" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJjSrOqPCh2RLGwkDzqVKsb2bY86PkF08iFofTool8y2NUlJwZ2F0jKYn64anhzcVRKyEg-1yxafTNjvaMgcEmPwlXQ8tM_skAvKe8mDHbpyYerm6xDxi7thBsHXTMXKPBrIixs8o5PteQUufZ1pKgmSY4OYwPl4kcJSuuZU4szIMPxUQdavCcggRZ_GHbfxkpqu23-sAZ7Ds26u_Ui97S4O9Wr1DUu53fveJbGGSVwJmqFY4IGP8d6v2mSskKPZve1C-LOBoJ68xr"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 flex flex-col gap-2">
+<h4 class="text-3xl font-extrabold tracking-tighter">Porsche 911 Carrera S</h4>
+<div class="flex items-center gap-4 text-slate-300">
+<span class="flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">location_on</span> Madrid, España</span>
+<span class="flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-sm">timer</span> 2 días restantes</span>
+</div>
+</div>
+<div class="absolute bottom-8 right-8 flex gap-3">
+<button class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white py-2 px-6 rounded font-bold text-xs uppercase tracking-widest transition-all">Ver Detalles</button>
+<button class="bg-primary text-background-dark py-2 px-6 rounded font-bold text-xs uppercase tracking-widest transition-all">Prolongar</button>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Booking History -->
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Historial Reciente</h3>
+<button class="text-primary text-[10px] font-bold uppercase tracking-widest border-b border-primary/30">Ver todo</button>
+</div>
+<div class="bg-card-dark rounded-lg border border-primary/5 divide-y divide-primary/5">
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded bg-accent-dark overflow-hidden">
+<img alt="BMW M5" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Modern luxury sedan front view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlgVHuzK3X4RSmODy1alXg3IH_Vk9QVMng0xgaq9hki9vqN3YIOEILW3_RI_rvCoPvKYvYjlCXxZNA3AuUnKNM3ybH3OIqhKp9u42j3Q37qrocHsK7RjsZK4zmqrdnxpDZ0xlXokXWeoLS93BKIycXqN4XjgJ6LlwUeTsEJCl4qmRjUgwVzj7pwvqol_RQQZp4-gl7J-JPJyt6JwF6zu3tdwmvmBLasvzBMrLL_npsmArcdxwMXqia9HB0k5ZS0JSMJAmeElj2JNUy"/>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-sm uppercase tracking-tight">BMW M5 Competition</span>
+<span class="text-xs text-slate-500">14 Oct - 17 Oct, 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-sm font-mono tracking-tight">$2,450.00</span>
+<button class="material-symbols-outlined text-slate-500 hover:text-primary transition-colors">download</button>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded bg-accent-dark overflow-hidden">
+<img alt="Range Rover" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Black luxury SUV profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMBUOHm_jO9pkxhNrT2Dejnnos4h704SRcQFmwwjqP6aQXBg142gSkGTWPvYA--jWOctNjVpYVDjVM-KGBO0oJ758uaYruKNrfp7cQyPHOLLCUr7BtVziHNUd8E9pvWa0cBi85OmavYwJvyM3BuUDYd9CaoA2oMkhFZaxXGQQa2U3ikIRhwC9r6Y5-Ii6o06z6qF0muhBhgI_F3WkYFUQIb-Cpqx6sXoB0cAW-SXrkyUHGQbP1GNyUgLWP91UmziiHcClnSbKjWEYs"/>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-sm uppercase tracking-tight">Range Rover Autobiography</span>
+<span class="text-xs text-slate-500">02 Sep - 08 Sep, 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-sm font-mono tracking-tight">$3,120.00</span>
+<button class="material-symbols-outlined text-slate-500 hover:text-primary transition-colors">download</button>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded bg-accent-dark overflow-hidden">
+<img alt="Ferrari F8" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Red italian supercar in studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlCrtgKjVILE8Nx4M_3uVuYwfsUgB5Y2BzvPRne8XS_yvLjlV4gSNogusnxOMBPXgWwaqv5gs6uCYpGYv9mMcquQWOCff4OIM1ipJ-DAymHwsHHcMYUGhnNcN1RJDW2TpSCuxOYx2Ytz15RSlOqg5nfAsOjSPKqkHaTXK8UcNriESVl43_dyGm9xWV2LIjD9BHqUeS4CqKzXxZunIpz5gKsTaa62gKUu0-gYQ1-P30GV97KAangpTkJjLDNezSxIw43lOvjStMhRkc"/>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-sm uppercase tracking-tight">Ferrari F8 Tributo</span>
+<span class="text-xs text-slate-500">15 Ago - 16 Ago, 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-sm font-mono tracking-tight">$4,800.00</span>
+<button class="material-symbols-outlined text-slate-500 hover:text-primary transition-colors">download</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Concierge Sidebar -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Concierge VIP</h3>
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+</div>
+<div class="bg-card-dark rounded-lg border border-primary/20 flex flex-col h-[400px]">
+<div class="p-4 border-b border-primary/5 flex items-center gap-3">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">support_agent</span>
+</div>
+<div>
+<p class="text-xs font-bold uppercase">Elena R.</p>
+<p class="text-[9px] text-primary tracking-widest">Asistente Ejecutivo</p>
+</div>
+</div>
+<div class="flex-1 p-4 flex flex-col gap-4 overflow-y-auto scrollbar-hide">
+<div class="self-start bg-accent-dark p-3 rounded-lg rounded-tl-none max-w-[85%]">
+<p class="text-xs leading-relaxed">Hola, Sr. Villalobos. ¿Cómo podemos asistirle hoy? Su Porsche ya está listo en el punto acordado.</p>
+<span class="text-[9px] text-slate-500 mt-1 block">10:42 AM</span>
+</div>
+<div class="self-end bg-primary/20 p-3 rounded-lg rounded-tr-none max-w-[85%] border border-primary/10">
+<p class="text-xs leading-relaxed">Excelente. ¿Podrían coordinar el servicio de maletero para mi llegada a las 14:00?</p>
+<span class="text-[9px] text-primary/60 mt-1 block">10:45 AM</span>
+</div>
+<div class="self-start bg-accent-dark p-3 rounded-lg rounded-tl-none max-w-[85%]">
+<p class="text-xs leading-relaxed">Por supuesto, ya está gestionado. ¿Desea que el vehículo esté pre-climatizado a 21°C?</p>
+<span class="text-[9px] text-slate-500 mt-1 block">10:46 AM</span>
+</div>
+</div>
+<div class="p-3 bg-accent-dark/50 border-t border-primary/5">
+<div class="flex items-center gap-2 bg-background-dark p-2 rounded-lg border border-primary/10">
+<input class="bg-transparent border-none focus:ring-0 text-xs flex-1 placeholder:text-slate-600" placeholder="Escriba aquí..." type="text"/>
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">send</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Section -->
+<footer class="mt-auto p-8 border-t border-primary/5 bg-card-dark/30">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto w-full">
+<div class="flex gap-8">
+<a class="text-[10px] uppercase tracking-widest text-slate-500 hover:text-primary transition-colors" href="#">Términos y Condiciones</a>
+<a class="text-[10px] uppercase tracking-widest text-slate-500 hover:text-primary transition-colors" href="#">Seguros Elite</a>
+<a class="text-[10px] uppercase tracking-widest text-slate-500 hover:text-primary transition-colors" href="#">Soporte 24/7</a>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-slate-600">© 2024 Luxury Drive International. Todos los derechos reservados.</p>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
