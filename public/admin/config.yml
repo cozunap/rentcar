@@ -23,18 +23,51 @@ collections:
       - {label: "Descripción Breve", name: "description", widget: "text"}
 
   - name: "pages"
-    label: "Páginas (Contenido Estático)"
+    label: "Páginas (Textos del Sitio)"
     files:
-      - label: "Página de Inicio"
+      - label: "Página de Inicio (Home)"
         name: "home"
         file: "src/content/pages/home.json"
         fields:
-          - {label: "Título Principal", name: "hero_title", widget: "string"}
-          - {label: "Subtítulo", name: "hero_subtitle", widget: "string"}
+          - {label: "Título Principal Hero", name: "hero_title", widget: "string"}
+          - {label: "Subtítulo Hero", name: "hero_subtitle", widget: "string"}
           - {label: "Descripción Hero", name: "hero_description", widget: "text"}
-      - label: "Membresía / Contacto VIP"
+          - {label: "Título Nosotros", name: "about_title", widget: "string"}
+          - {label: "Texto Nosotros", name: "about_text", widget: "text"}
+          
+      - label: "Nuestra Flota (Fleet)"
+        name: "fleet"
+        file: "src/content/pages/fleet.json"
+        fields:
+          - {label: "Título Principal", name: "page_title", widget: "string"}
+          - {label: "Descripción", name: "page_description", widget: "text"}
+          
+      - label: "Servicios VIP (Services)"
+        name: "services"
+        file: "src/content/pages/services.json"
+        fields:
+          - {label: "Título Principal", name: "page_title", widget: "string"}
+          - {label: "Descripción", name: "page_description", widget: "text"}
+          
+      - label: "Contacto VIP (Contact)"
+        name: "contact"
+        file: "src/content/pages/contact.json"
+        fields:
+          - {label: "Título Principal", name: "page_title", widget: "string"}
+          - {label: "Descripción", name: "page_description", widget: "text"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Teléfono", name: "phone", widget: "string"}
+          
+      - label: "Panel de Reserva (Dashboard)"
+        name: "dashboard"
+        file: "src/content/pages/dashboard.json"
+        fields:
+          - {label: "Título Principal", name: "page_title", widget: "string"}
+          - {label: "Descripción", name: "page_description", widget: "text"}
+          
+      - label: "Membresía VIP (Membership)"
         name: "membership"
         file: "src/content/pages/membership.json"
         fields:
-          - {label: "Título", name: "title", widget: "string"}
-          - {label: "Texto Descriptivo", name: "description", widget: "text"}
+          - {label: "Título Principal", name: "title", widget: "string"}
+          - {label: "Descripción", name: "description", widget: "text"}
