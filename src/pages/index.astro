@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Luxury Rental Home Experience">
 <!-- Top Navigation -->
-<nav class="absolute top-0 w-full z-50 border-b border-white/10 backdrop-blur-sm bg-black/20">
+<nav id="main-header" class="fixed top-0 w-full z-50 border-b border-white/10 backdrop-blur-sm bg-black/20 transition-colors duration-300">
 <div class="max-w-[1440px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
 <div class="flex items-center gap-4 text-white">
 <div class="size-6 text-primary">
@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
 </div>
 <h2 class="text-white text-xl font-bold tracking-[0.2em] uppercase">LUXE DR</h2>
 </div>
-<div class="hidden lg:flex items-center gap-8">
+<div class="hidden lg:flex items-center gap-8 ml-auto mr-8">
 <a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/elite_vehicle_fleet_gallery" >Fleet</a>
 <a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/vip_services_concierge" >Services</a>
 <a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/contacto_vip" >Concierge</a>
@@ -319,4 +319,19 @@ import Layout from '../layouts/Layout.astro';
 </div>
 </div>
 </footer>
+
+<script>
+    // JS block header logic
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.remove('bg-black/20', 'backdrop-blur-sm', 'border-white/10');
+            header.classList.add('bg-background-dark', 'border-border-dark', 'shadow-md');
+        } else {
+            header.classList.add('bg-black/20', 'backdrop-blur-sm', 'border-white/10');
+            header.classList.remove('bg-background-dark', 'border-border-dark', 'shadow-md');
+        }
+    });
+</script>
 </Layout>
+
