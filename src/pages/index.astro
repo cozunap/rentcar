@@ -1,28 +1,8 @@
-<!DOCTYPE html>
+---
+import Layout from '../layouts/Layout.astro';
+---
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Luxury Rental Home Experience</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#FAC638", "background-light": "#f8f8f5", "background-dark": "#231e0f", "surface-dark": "#221d10"}, fontFamily: {display: "Manrope"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}}}};</script>
-<style>
-        /* Custom scrollbar for horizontal sections */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-[#181611] dark:text-white font-display overflow-x-hidden">
+<Layout title="Luxury Rental Home Experience">
 <!-- Top Navigation -->
 <nav class="absolute top-0 w-full z-50 border-b border-white/10 backdrop-blur-sm bg-black/20">
 <div class="max-w-[1440px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
@@ -36,10 +16,10 @@
 <h2 class="text-white text-xl font-bold tracking-[0.2em] uppercase">LUXE DR</h2>
 </div>
 <div class="hidden lg:flex items-center gap-8">
-<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/elite_vehicle_fleet_gallery/code.html" >Fleet</a>
-<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/vip_services_concierge/code.html" >Services</a>
-<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/contacto_vip/code.html" >Concierge</a>
-<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/contacto_vip/code.html" >Membership</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/elite_vehicle_fleet_gallery" >Fleet</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/vip_services_concierge" >Services</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/contacto_vip" >Concierge</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-medium tracking-widest uppercase" href="/contacto_vip" >Membership</a>
 </div>
 <div class="flex items-center gap-4">
 <button class="hidden md:flex text-white hover:text-primary transition-colors">
@@ -305,7 +285,7 @@
 <div class="flex flex-col gap-3">
 <a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">About Us</a>
 <a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Our Fleet</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="/vip_services_concierge/code.html" >Services</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="/vip_services_concierge" >Services</a>
 <a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Contact</a>
 </div>
 </div>
@@ -339,4 +319,4 @@
 </div>
 </div>
 </footer>
-</body></html>
+</Layout>

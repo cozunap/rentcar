@@ -1,53 +1,8 @@
-<!DOCTYPE html>
+---
+import Layout from '../layouts/Layout.astro';
+---
 
-<html class="dark" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Luxury Drive - Panel de Control VIP</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#FAC638",
-                        "background-light": "#f8f8f5",
-                        "background-dark": "#0F0F0F",
-                        "card-dark": "#1A1A1A",
-                        "accent-dark": "#2A2A2A",
-                    },
-                    fontFamily: {
-                        "display": ["Manrope", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                },
-            },
-        }
-    </script>
-<style>
-        body {
-            font-family: 'Manrope', sans-serif;
-        }
-        .glass {
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(250, 198, 56, 0.1);
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 overflow-x-hidden">
+<Layout title="Luxury Drive - Panel de Control VIP">
 <div class="flex h-screen overflow-hidden">
 <!-- Sidebar Navigation -->
 <aside class="w-64 flex flex-col bg-background-light dark:bg-background-dark border-r border-primary/10 transition-all">
@@ -256,4 +211,4 @@
 </footer>
 </main>
 </div>
-</body></html>
+</Layout>

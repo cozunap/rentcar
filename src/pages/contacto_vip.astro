@@ -1,50 +1,8 @@
-<!DOCTYPE html>
+---
+import Layout from '../layouts/Layout.astro';
+---
 
-<html class="dark" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Contacto VIP | LUXO DR Luxury Rentals</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=コア" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#FAC638",
-                        "background-light": "#f8f8f5",
-                        "background-dark": "#121212",
-                    },
-                    fontFamily: {
-                        "display": ["Manrope", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                },
-            },
-        }
-    </script>
-<style>
-        body {
-            font-family: 'Manrope', sans-serif;
-        }
-        .luxury-gradient {
-            background: linear-gradient(180deg, rgba(18, 18, 18, 0.7) 0%, rgba(18, 18, 18, 0.95) 100%);
-        }
-        .map-placeholder {
-            background-image: radial-gradient(circle at 2px 2px, rgba(250, 198, 56, 0.1) 1px, transparent 0);
-            background-size: 24px 24px;
-        }
-    </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased selection:bg-primary selection:text-background-dark">
+<Layout title="Contacto VIP | LUXO DR Luxury Rentals">
 <!-- Top Navigation -->
 <header class="fixed top-0 w-full z-50 border-b border-white/10 bg-background-dark/80 backdrop-blur-md">
 <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -256,4 +214,4 @@
 </div>
 </div>
 </footer>
-</body></html>
+</Layout>
