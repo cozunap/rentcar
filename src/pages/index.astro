@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import homeData from '../content/pages/home.json';
 ---
 
 <Layout title="Luxury Rental Home Experience">
@@ -18,13 +19,12 @@ import Layout from '../layouts/Layout.astro';
 <!-- Hero Content -->
 <div class="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mt-[-80px]">
 <span class="text-primary tracking-[0.3em] text-xs md:text-sm font-bold uppercase mb-6 animate-fade-in-up">
-                Transporte VIP en República Dominicana
+                {homeData.hero_subtitle}
             </span>
-<h1 class="text-white text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-[-0.02em] mb-6 drop-shadow-lg">
-<span class="font-bold">LUJO</span> SIN COMPROMISOS
+<h1 class="text-white text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-[-0.02em] mb-6 drop-shadow-lg" set:html={homeData.hero_title}>
             </h1>
 <p class="text-gray-200 text-base md:text-lg max-w-2xl font-light leading-relaxed mb-10 text-shadow-sm">
-                Llega con poder. Explora con estilo. Experimenta la cumbre de la ingeniería automotriz diseñada para el paisaje del Caribe.
+                {homeData.hero_description}
             </p>
 </div>
 <!-- Reservation Bar (Floating) -->
