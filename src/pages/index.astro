@@ -5,9 +5,9 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
 
 <Layout title="Tu Carro y Más Rent A Car | Alquiler de Autos en Santo Domingo">
 
-    <!-- HERO CAROUSEL SECTION (Identical visual structure and timing to tucarroymas.com) -->
+    <!-- HERO CAROUSEL SECTION (100vh with carousel slide like original) -->
     <section class="relative p-0 overflow-hidden bg-black">
-        <div class="relative w-full h-[85vh] min-h-[500px]">
+        <div class="relative w-full h-[100vh] min-h-[500px]">
             
             <!-- Slides Container -->
             <div id="hero-slider" class="relative w-full h-full">
@@ -22,11 +22,11 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
                         <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 drop-shadow-md leading-tight max-w-4xl">
                             Conduce lo Extraordinario
                         </h1>
-                        <p class="text-base sm:text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed drop-shadow font-normal text-gray-100">
+                        <p class="text-base sm:text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed drop-shadow font-normal text-gray-100">
                             Experimenta la emoción de la carretera con nuestros vehículos premium.
                         </p>
                         <div class="flex flex-wrap justify-center gap-3">
-                            <a href="/flota" class="px-6 py-3 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-medium text-base transition-colors shadow">
+                            <a href="#fleet" class="px-6 py-3 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-medium text-base transition-colors shadow">
                                 Ver Autos
                             </a>
                             <a href="/nosotros" class="px-6 py-3 rounded-full bg-transparent hover:bg-white/20 border border-white text-white font-medium text-base transition-colors">
@@ -47,11 +47,11 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
                         <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 drop-shadow-md leading-tight max-w-4xl">
                             Tu Viaje Comienza Aquí
                         </h1>
-                        <p class="text-base sm:text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed drop-shadow font-normal text-gray-100">
+                        <p class="text-base sm:text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed drop-shadow font-normal text-gray-100">
                             Libertad para moverte por República Dominicana con comodidad y seguridad.
                         </p>
                         <div>
-                            <a href="/flota" class="px-6 py-3 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-medium text-base transition-colors shadow">
+                            <a href="#fleet" class="px-6 py-3 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-medium text-base transition-colors shadow">
                                 Reservar Ahora
                             </a>
                         </div>
@@ -69,11 +69,11 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
                         <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 drop-shadow-md leading-tight max-w-4xl">
                             Elegancia en Cada Kilómetro
                         </h1>
-                        <p class="text-base sm:text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed drop-shadow font-normal text-gray-100">
+                        <p class="text-base sm:text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed drop-shadow font-normal text-gray-100">
                             Vehículos seleccionados para quienes exigen lo mejor.
                         </p>
                         <div>
-                            <a href="/flota" class="px-6 py-3 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-medium text-base transition-colors shadow">
+                            <a href="#fleet" class="px-6 py-3 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-medium text-base transition-colors shadow">
                                 Ver Flota
                             </a>
                         </div>
@@ -99,9 +99,9 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
         </div>
     </section>
 
-    <!-- SECTION: ¿POR QUÉ ELEGIRNOS? (Identical to reference screenshot) -->
+    <!-- SECTION: ¿POR QUÉ ELEGIRNOS? -->
     <section class="py-16 bg-[#f8f9fa]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold text-[#212529] mb-12">¿Por Qué Elegirnos?</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -129,16 +129,16 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
         </div>
     </section>
 
-    <!-- SECTION: NUESTRA FLOTA PREMIUM (Identical design to user screenshot) -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- SECTION: NUESTRA FLOTA PREMIUM (Full wide width matching Bootstrap container max-w-[1320px]) -->
+    <section id="fleet" class="py-16 bg-white">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-[#212529] mb-2">Nuestra Flota Premium</h2>
                 <p class="text-gray-500 text-base">Las mejores SUVs y Jeepetas en Santo Domingo.</p>
             </div>
 
-            <!-- Vehicles Dynamic Grid (Realtime from Firestore) -->
-            <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <!-- Vehicles Dynamic Grid (Wide width: 2 columns in desktop) -->
+            <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 <!-- Loading Skeletons -->
                 <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-4 animate-pulse">
                     <div class="h-64 bg-gray-100 rounded mb-4"></div>
@@ -154,7 +154,7 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
                 </div>
             </div>
 
-            <!-- Botón Ver Toda la Flota y Publicar -->
+            <!-- Botones Ver Flota y Publicar -->
             <div class="text-center mt-12 flex flex-wrap justify-center gap-4">
                 <a href="/flota" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-semibold text-sm transition-colors shadow">
                     <i class="fas fa-car"></i> Ver Toda la Flota
@@ -176,7 +176,7 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
     import { collection, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
     import { db } from "../lib/firebase/client";
 
-    // CAROUSEL LOGIC (3500ms like original bootstrap config)
+    // CAROUSEL LOGIC
     const slides = document.querySelectorAll<HTMLElement>('.hero-item');
     const dots = document.querySelectorAll<HTMLElement>('.slide-dot');
     const prevBtn = document.getElementById('slider-prev');
@@ -341,7 +341,7 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
             card.className = "card-clean bg-white flex flex-col justify-between overflow-hidden cursor-pointer";
             card.innerHTML = `
                 <div>
-                    <!-- Car Image Container (Exact style) -->
+                    <!-- Car Image Container (Exact 300px white clean background) -->
                     <div class="car-image-container">
                         <img src="${v.mainImage}" alt="${v.title}" />
                     </div>
