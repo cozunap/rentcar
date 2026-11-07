@@ -44,6 +44,25 @@ service cloud.firestore {
     //   - createdAt: timestamp (required, immutable, set to request.time on creation)
     //   - updatedAt: timestamp (optional, updated timestamp)
     //
+    // Collection: businesses
+    // Document ID: {businessId} (auto-generated or unique slug)
+    // Fields:
+    //   - id: string (optional, matches document id or internal id max 128 chars)
+    //   - ownerId: string (required, 1-128 chars, immutable, matches request.auth.uid on create)
+    //   - name: string (required, 2-120 chars)
+    //   - category: string (required, 2-80 chars)
+    //   - categorySlug: string (required, 2-80 chars)
+    //   - description: string (optional, max 5000 chars)
+    //   - address: string (optional, max 300 chars)
+    //   - city: string (optional, max 80 chars)
+    //   - whatsapp: string (required, 7-25 chars, valid phone number)
+    //   - phone: string (optional, 7-25 chars, valid phone number)
+    //   - logoUrl: string (optional, valid URL starting with http:// or https://, max 1000 chars)
+    //   - images: list (optional, list of image URLs, max 20 items, each item valid URL string max 1000 chars)
+    //   - isApproved: bool (optional, boolean)
+    //   - createdAt: timestamp (required, immutable, set to request.time on creation)
+    //   - updatedAt: timestamp (optional, updated timestamp)
+    //
     // ===============================================================
 
     // ===============================================================
@@ -163,6 +182,40 @@ service cloud.firestore {
     }
 
     // ===============================================================
+    // Domain Validator: Businesses Collection
+    // ===============================================================
+
+    function isValidBusiness(data) {
+      let allowedFields = [
+        'id', 'ownerId', 'name', 'category', 'categorySlug',
+        'description', 'address', 'city', 'whatsapp', 'phone',
+        'logoUrl', 'images', 'isApproved', 'createdAt', 'updatedAt'
+      ];
+      let requiredFields = [
+        'ownerId', 'name', 'category', 'categorySlug',
+        'whatsapp', 'createdAt'
+      ];
+
+      return data.keys().hasAll(requiredFields) &&
+        data.keys().hasOnly(allowedFields) &&
+        (!('id' in data) || (data.id is string && data.id.size() >= 1 && data.id.size() <= 128)) &&
+        data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128 &&
+        data.name is string && data.name.size() >= 2 && data.name.size() <= 120 &&
+        data.category is string && data.category.size() >= 2 && data.category.size() <= 80 &&
+        data.categorySlug is string && data.categorySlug.size() >= 2 && data.categorySlug.size() <= 80 &&
+        (!('description' in data) || (data.description is string && data.description.size() <= 5000)) &&
+        (!('address' in data) || (data.address is string && data.address.size() <= 300)) &&
+        (!('city' in data) || (data.city is string && data.city.size() <= 80)) &&
+        isValidPhone(data.whatsapp) &&
+        (!('phone' in data) || isValidPhone(data.phone)) &&
+        (!('logoUrl' in data) || isValidUrl(data.logoUrl)) &&
+        (!('images' in data) || isValidImageList(data.images)) &&
+        (!('isApproved' in data) || data.isApproved is bool) &&
+        data.createdAt is timestamp &&
+        (!('updatedAt' in data) || data.updatedAt is timestamp);
+    }
+
+    // ===============================================================
     // Rules Definition
     // ===============================================================
 
@@ -218,6 +271,31 @@ service cloud.firestore {
         isValidVehicle(request.resource.data);
 
       // Only the vehicle owner or an admin can delete
+      allow delete: if isAuthenticated() &&
+        (resource.data.ownerId == request.auth.uid || isAdmin());
+    }
+
+    // -------------------------------------------------------------
+    // BUSINESSES COLLECTION
+    // -------------------------------------------------------------
+    match /businesses/{businessId} {
+      // Anyone (public visitors and users) can view businesses and their contact WhatsApp
+      allow read: if true;
+
+      // Only authenticated users can register a business, ownerId must strictly match request.auth.uid
+      allow create: if isAuthenticated() &&
+        request.resource.data.ownerId == request.auth.uid &&
+        request.resource.data.createdAt == request.time &&
+        isValidBusiness(request.resource.data);
+
+      // Only the business owner or an admin can update
+      // ownerId and createdAt are strictly immutable
+      allow update: if isAuthenticated() &&
+        (resource.data.ownerId == request.auth.uid || isAdmin()) &&
+        areImmutableFieldsUnchanged(['ownerId', 'createdAt']) &&
+        isValidBusiness(request.resource.data);
+
+      // Only the business owner or an admin can delete
       allow delete: if isAuthenticated() &&
         (resource.data.ownerId == request.auth.uid || isAdmin());
     }

@@ -3,79 +3,158 @@ const pathname = Astro.url.pathname;
 const isCurrent = (path: string) => pathname === path || (path !== '/' && pathname.startsWith(path));
 ---
 
-<header class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        <!-- Logo identical to original -->
-        <a href="/" class="flex items-center gap-2 text-xl sm:text-2xl font-bold text-[#0d6efd] tracking-tight">
-            <i class="fas fa-car-side"></i>
-            <span>Rent A Car</span>
+        <!-- Brand Logo (High End Minimalist) -->
+        <a href="/" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-[#0f172a] text-white flex items-center justify-center border border-slate-800 shadow-sm transition-colors group-hover:bg-[#1d4ed8]">
+                <i class="fas fa-car-side text-base"></i>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-bold text-lg tracking-tight text-[#0f172a] uppercase font-['Outfit',sans-serif] leading-tight">
+                    Tu Carro <span class="text-[#1d4ed8] font-black">y Más</span>
+                </span>
+                <span class="text-[9px] uppercase tracking-[0.2em] text-slate-400 font-semibold">Automotive Marketplace • RD</span>
+            </div>
         </a>
 
-        <!-- Desktop Navigation Links (Multi-page) -->
-        <nav class="hidden md:flex items-center gap-7">
-            <a href="/" class={`text-base transition-colors ${isCurrent('/') ? 'text-[#0d6efd] font-semibold' : 'text-gray-700 hover:text-[#0d6efd]'}`}>
+        <!-- Desktop Navigation Bar -->
+        <nav class="hidden lg:flex items-center gap-7">
+            <a href="/" class={`text-xs font-semibold uppercase tracking-wider transition-colors ${isCurrent('/') ? 'text-[#1d4ed8] border-b-2 border-[#1d4ed8] pb-1' : 'text-slate-600 hover:text-[#1d4ed8]'}`}>
                 Inicio
             </a>
-            <a href="/nosotros" class={`text-base transition-colors ${isCurrent('/nosotros') ? 'text-[#0d6efd] font-semibold' : 'text-gray-700 hover:text-[#0d6efd]'}`}>
+
+            <a href="/flota" class={`text-xs font-semibold uppercase tracking-wider transition-colors ${isCurrent('/flota') ? 'text-[#1d4ed8] border-b-2 border-[#1d4ed8] pb-1' : 'text-slate-600 hover:text-[#1d4ed8]'}`}>
+                Renta de Autos
+            </a>
+
+            <!-- DYNAMIC MEGA MENU TRIGGER FOR DIRECTORY & CATEGORIES -->
+            <div class="relative megamenu-parent py-6">
+                <button type="button" class={`inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-700 hover:text-[#1d4ed8] transition-colors focus:outline-none ${isCurrent('/directorio') ? 'text-[#1d4ed8]' : ''}`}>
+                    <span>Directorio Automotriz</span>
+                    <i class="fas fa-chevron-down text-[10px] text-slate-400"></i>
+                </button>
+
+                <!-- DYNAMIC MEGA MENU PANEL -->
+                <div class="megamenu-panel absolute left-1/2 -translate-x-1/2 top-full w-[640px] bg-white border border-slate-200 shadow-2xl p-6 z-50">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-[#0f172a]">Directorio de Negocios y Servicios</h4>
+                            <p class="text-[11px] text-slate-400">Talleres, repuestos, autolavados y servicios automotrices en RD</p>
+                        </div>
+                        <a href="/directorio" class="text-[11px] text-[#1d4ed8] hover:underline font-bold uppercase tracking-wider">
+                            Ver Todo &rarr;
+                        </a>
+                    </div>
+
+                    <!-- Categories list generated dynamically from Firestore -->
+                    <div id="megamenu-categories" class="grid grid-cols-2 gap-3">
+                        <a href="/directorio?cat=talleres-mecanicos" class="flex items-center gap-3 p-3 bg-slate-50 hover:bg-blue-50/50 border border-slate-100 transition-colors group">
+                            <div class="w-8 h-8 bg-white text-[#1d4ed8] border border-slate-200 flex items-center justify-center text-xs shrink-0 group-hover:bg-[#1d4ed8] group-hover:text-white transition-colors">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-bold text-slate-800 truncate">Talleres de Mecánica</span>
+                                <span class="text-[10px] text-slate-400">Mantenimiento y diagnóstico</span>
+                            </div>
+                        </a>
+
+                        <a href="/directorio?cat=repuestos-y-accesorios" class="flex items-center gap-3 p-3 bg-slate-50 hover:bg-blue-50/50 border border-slate-100 transition-colors group">
+                            <div class="w-8 h-8 bg-white text-[#1d4ed8] border border-slate-200 flex items-center justify-center text-xs shrink-0 group-hover:bg-[#1d4ed8] group-hover:text-white transition-colors">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-bold text-slate-800 truncate">Venta de Repuestos</span>
+                                <span class="text-[10px] text-slate-400">Piezas nuevas y usadas</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Bottom Free Promo Alert Banner -->
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 bg-amber-50/60 p-3 border border-amber-200/50">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-amber-600 text-white text-[9px] font-black uppercase tracking-wider">1er Año Gratis</span>
+                            <span class="text-[11px] text-amber-900 font-medium">¿Tienes un negocio automotriz? Regístralo gratis.</span>
+                        </div>
+                        <a href="/anunciar" class="text-[11px] font-bold text-[#1d4ed8] hover:underline uppercase tracking-wider">
+                            Anunciar Negocio
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/nosotros" class={`text-xs font-semibold uppercase tracking-wider transition-colors ${isCurrent('/nosotros') ? 'text-[#1d4ed8] border-b-2 border-[#1d4ed8] pb-1' : 'text-slate-600 hover:text-[#1d4ed8]'}`}>
                 Nosotros
             </a>
-            <a href="/flota" class={`text-base transition-colors ${isCurrent('/flota') ? 'text-[#0d6efd] font-semibold' : 'text-gray-700 hover:text-[#0d6efd]'}`}>
-                Flota
-            </a>
-            <a href="/contacto" class={`text-base transition-colors ${isCurrent('/contacto') ? 'text-[#0d6efd] font-semibold' : 'text-gray-700 hover:text-[#0d6efd]'}`}>
+
+            <a href="/contacto" class={`text-xs font-semibold uppercase tracking-wider transition-colors ${isCurrent('/contacto') ? 'text-[#1d4ed8] border-b-2 border-[#1d4ed8] pb-1' : 'text-slate-600 hover:text-[#1d4ed8]'}`}>
                 Contacto
-            </a>
-            <a href="/publicar" class={`text-base transition-colors ${isCurrent('/publicar') ? 'text-[#0d6efd] font-semibold' : 'text-gray-700 hover:text-[#0d6efd]'}`}>
-                Publicar Auto
             </a>
         </nav>
 
-        <!-- Right CTA Button identical to original -->
+        <!-- Right Side Corporate Actions (Sharp Premium Buttons) -->
         <div class="hidden sm:flex items-center gap-3">
+            <!-- Anunciar Negocio (Free Promotion) -->
+            <a href="/anunciar" class="px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#1d4ed8] border border-slate-200 hover:border-[#1d4ed8] transition-colors luxury-btn">
+                <i class="fas fa-bullhorn text-amber-600 me-1"></i> Anunciar Negocio
+            </a>
+
+            <!-- Publicar Auto -->
+            <a href="/publicar" class="px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#1d4ed8] border border-slate-200 hover:border-[#1d4ed8] transition-colors luxury-btn">
+                <i class="fas fa-plus text-[#1d4ed8] me-1"></i> Publicar Auto
+            </a>
+
+            <!-- Auth Slot -->
             <div id="auth-header-btn">
-                <a href="/auth" class="text-sm font-semibold text-gray-600 hover:text-[#0d6efd] px-2 py-1 transition-colors">
-                    <i class="fas fa-user-circle me-1"></i> Ingresar
+                <a href="/auth" class="px-4 py-2.5 bg-[#0f172a] hover:bg-[#1d4ed8] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-sm">
+                    Ingresar
                 </a>
             </div>
-            <a href="/flota" class="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-semibold text-sm transition-colors shadow-sm">
-                Reservar Ahora
-            </a>
         </div>
 
         <!-- Mobile Menu Toggle Button -->
-        <div class="flex items-center gap-2 md:hidden">
-            <button id="mobile-menu-btn" type="button" aria-label="Abrir menú" class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-[#0d6efd] border border-gray-200 rounded-lg">
-                <i class="fas fa-bars text-lg" id="menu-icon"></i>
+        <div class="flex items-center gap-2 lg:hidden">
+            <a href="/anunciar" class="px-2.5 py-1.5 text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200">
+                <i class="fas fa-bullhorn"></i>
+            </a>
+            <button id="mobile-menu-btn" type="button" aria-label="Abrir menú" class="w-10 h-10 flex items-center justify-center text-slate-800 border border-slate-200 hover:bg-slate-50 transition-colors">
+                <i class="fas fa-bars" id="menu-icon"></i>
             </button>
         </div>
 
     </div>
 
     <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 pt-3 pb-5 space-y-2 text-center">
-        <a href="/" class="block py-2 text-gray-700 hover:text-[#0d6efd] font-medium">Inicio</a>
-        <a href="/nosotros" class="block py-2 text-gray-700 hover:text-[#0d6efd] font-medium">Nosotros</a>
-        <a href="/flota" class="block py-2 text-gray-700 hover:text-[#0d6efd] font-medium">Flota</a>
-        <a href="/contacto" class="block py-2 text-gray-700 hover:text-[#0d6efd] font-medium">Contacto</a>
-        <a href="/publicar" class="block py-2 text-[#0d6efd] font-semibold">Publicar Auto</a>
-        <div class="pt-3 border-t border-gray-100 flex flex-col gap-2">
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 py-6 space-y-3 shadow-lg">
+        <a href="/" class="block py-2 text-sm font-semibold text-slate-800 hover:text-[#1d4ed8]">Inicio</a>
+        <a href="/flota" class="block py-2 text-sm font-semibold text-slate-800 hover:text-[#1d4ed8]">Flota de Vehículos</a>
+        <a href="/directorio" class="block py-2 text-sm font-semibold text-slate-800 hover:text-[#1d4ed8]">Directorio Automotriz (Negocios)</a>
+        <a href="/anunciar" class="block py-2 text-sm font-bold text-amber-700 bg-amber-50/70 px-3 border border-amber-200">
+            <i class="fas fa-bullhorn me-1"></i> Anunciar Mi Negocio (Gratis)
+        </a>
+        <a href="/publicar" class="block py-2 text-sm font-semibold text-[#1d4ed8]">
+            <i class="fas fa-car me-1"></i> Publicar Vehículo
+        </a>
+        <a href="/nosotros" class="block py-2 text-sm font-semibold text-slate-800 hover:text-[#1d4ed8]">Nosotros</a>
+        <a href="/contacto" class="block py-2 text-sm font-semibold text-slate-800 hover:text-[#1d4ed8]">Contacto</a>
+        
+        <div class="pt-4 border-t border-slate-100 flex flex-col gap-2">
             <div id="mobile-auth-slot">
-                <a href="/auth" class="w-full block py-2 text-gray-700 font-semibold border border-gray-200 rounded-full">
+                <a href="/auth" class="w-full block py-2.5 text-center text-xs font-bold uppercase tracking-wider bg-[#0f172a] text-white">
                     Iniciar Sesión / Registro
                 </a>
             </div>
-            <a href="/flota" class="w-full block py-2.5 rounded-full bg-[#0d6efd] text-white font-semibold text-sm">
-                Reservar Ahora
-            </a>
         </div>
     </div>
 </header>
 
 <script>
     import { onAuthStateChanged, signOut } from "firebase/auth";
-    import { auth } from "../lib/firebase/client";
+    import { collection, onSnapshot, query, limit } from "firebase/firestore";
+    import { auth, db } from "../lib/firebase/client";
 
+    // Mobile menu toggle
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menu-icon');
@@ -91,6 +170,7 @@ const isCurrent = (path: string) => pathname === path || (path !== '/' && pathna
         }
     });
 
+    // Auth status
     const authSlot = document.getElementById('auth-header-btn');
     const mobileAuthSlot = document.getElementById('mobile-auth-slot');
 
@@ -99,22 +179,88 @@ const isCurrent = (path: string) => pathname === path || (path !== '/' && pathna
             const name = user.displayName || user.email?.split('@')[0] || 'Mi Panel';
             const desktopContent = `
                 <div class="flex items-center gap-2">
-                    <a href="/panel" class="text-sm font-semibold text-gray-700 hover:text-[#0d6efd] px-2 py-1">
-                        <i class="fas fa-gauge text-[#0d6efd] me-1"></i> ${name}
+                    <a href="/panel" class="px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 luxury-btn">
+                        <i class="fas fa-gauge text-[#1d4ed8] me-1"></i> ${name}
                     </a>
-                    <button id="logout-btn" title="Salir" class="text-gray-400 hover:text-red-500 text-sm p-1">
+                    <button id="logout-btn" title="Salir" class="text-slate-400 hover:text-red-600 p-2 text-xs">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </div>
             `;
             const mobileContent = `
-                <a href="/panel" class="w-full block py-2 text-[#0d6efd] font-semibold border border-[#0d6efd] rounded-full">
-                    Mi Panel (${name})
-                </a>
+                <div class="flex gap-2">
+                    <a href="/panel" class="flex-1 py-2.5 text-center text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-200">
+                        Mi Panel (${name})
+                    </a>
+                    <button id="mobile-logout" class="px-3 py-2.5 text-red-600 bg-red-50 text-xs">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
             `;
             if (authSlot) authSlot.innerHTML = desktopContent;
             if (mobileAuthSlot) mobileAuthSlot.innerHTML = mobileContent;
             document.getElementById('logout-btn')?.addEventListener('click', () => signOut(auth));
+            document.getElementById('mobile-logout')?.addEventListener('click', () => signOut(auth));
         }
+    });
+
+    // Dynamic Mega Menu Categories Listener
+    const megamenuCategories = document.getElementById('megamenu-categories');
+    const bQuery = query(collection(db, "businesses"), limit(20));
+
+    onSnapshot(bQuery, (snapshot) => {
+        if (!megamenuCategories) return;
+        const seenCategories = new Map();
+
+        // Default categories
+        seenCategories.set("talleres-mecanicos", {
+            name: "Talleres Mecánicos",
+            desc: "Diagnóstico y mecánica general",
+            icon: "fa-wrench"
+        });
+        seenCategories.set("repuestos-y-accesorios", {
+            name: "Venta de Repuestos",
+            desc: "Piezas originales y repuestos",
+            icon: "fa-cogs"
+        });
+        seenCategories.set("detailing-car-wash", {
+            name: "Detailing & Car Wash",
+            desc: "Lavado profesional y pulido",
+            icon: "fa-spray-can-sparkles"
+        });
+        seenCategories.set("gruas-y-remolques", {
+            name: "Grúas y Remolque",
+            desc: "Asistencia vial 24 Horas",
+            icon: "fa-truck-pickup"
+        });
+
+        // Add dynamic categories from newly added businesses
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.category && data.categorySlug && !seenCategories.has(data.categorySlug)) {
+                seenCategories.set(data.categorySlug, {
+                    name: data.category,
+                    desc: "Servicios especializados",
+                    icon: "fa-store"
+                });
+            }
+        });
+
+        megamenuCategories.innerHTML = '';
+        seenCategories.forEach((cat, slug) => {
+            const item = document.createElement('a');
+            item.href = `/directorio?cat=${slug}`;
+            item.className = "flex items-center gap-3 p-3 bg-slate-50 hover:bg-blue-50/50 border border-slate-100 transition-colors group";
+            item.innerHTML = `
+                <div class="w-8 h-8 bg-white text-[#1d4ed8] border border-slate-200 flex items-center justify-center text-xs shrink-0 group-hover:bg-[#1d4ed8] group-hover:text-white transition-colors">
+                    <i class="fas ${cat.icon}"></i>
+                </div>
+                <div class="min-w-0">
+                    <span class="block text-xs font-bold text-slate-800 truncate">${cat.name}</span>
+                    <span class="text-[10px] text-slate-400 truncate">${cat.desc}</span>
+                </div>
+            `;
+            megamenuCategories.appendChild(item);
+        });
     });
 </script>
