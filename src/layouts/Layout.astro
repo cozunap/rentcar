@@ -49,5 +49,74 @@ const {
         <slot />
     </main>
     <Footer />
+
+    <!-- ESCUDO DE SEGURIDAD FRONT-END GLOBAL -->
+    <script is:inline>
+        (function() {
+            // 1. Bloqueo de Clic Derecho (Context Menu)
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            }, { capture: true });
+
+            // 2. Bloqueo de Teclado (Inspección y Código Fuente)
+            document.addEventListener('keydown', function(e) {
+                // F12 (DevTools)
+                if (e.key === 'F12' || e.keyCode === 123) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                const isCtrlOrCmd = e.ctrlKey || e.metaKey;
+
+                // Ctrl + U / Cmd + U (Ver código fuente)
+                if (isCtrlOrCmd && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Ctrl + S / Cmd + S (Guardar página)
+                if (isCtrlOrCmd && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Ctrl + Shift + I / Cmd + Option + I (Inspeccionar elemento)
+                if ((isCtrlOrCmd && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73)) ||
+                    (e.metaKey && e.altKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73))) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Ctrl + Shift + J / Cmd + Option + J (Consola de comandos)
+                if ((isCtrlOrCmd && e.shiftKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74)) ||
+                    (e.metaKey && e.altKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74))) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Ctrl + Shift + C / Cmd + Option + C (Selector de elementos)
+                if ((isCtrlOrCmd && e.shiftKey && (e.key === 'c' || e.key === 'C' || e.keyCode === 67)) ||
+                    (e.metaKey && e.altKey && (e.key === 'c' || e.key === 'C' || e.keyCode === 67))) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }, { capture: true });
+
+            // 3. Bloqueo adicional de arrastre de imágenes nativo
+            document.addEventListener('dragstart', function(e) {
+                if (e.target && e.target.nodeName === 'IMG') {
+                    e.preventDefault();
+                    return false;
+                }
+            }, { capture: true });
+        })();
+    </script>
 </body>
 </html>

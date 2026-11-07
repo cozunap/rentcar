@@ -98,3 +98,32 @@ body {
   visibility: visible;
   transform: translateY(0);
 }
+
+/* ==========================================================================
+   ESCUDO DE SEGURIDAD FRONT-END (Global Protection)
+   ========================================================================== */
+/* Bloqueo de selección de texto a nivel global */
+*, *::before, *::after {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Permitir selección y edición exclusivamente en inputs, textareas y editables */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Protección anti-arrastre de imágenes (evita arrastrar a escritorio) */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
+}
