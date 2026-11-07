@@ -3,36 +3,65 @@
 @theme {
   --color-primary: #0d6efd;
   --color-primary-hover: #0b5ed7;
-  --color-primary-dark: #0a4ebd;
-  --color-accent: #2563eb;
-  --color-accent-gold: #b89a5a;
-  
-  --color-brand-dark: #0d1f3c;
-  --color-brand-card: #13274c;
-  --color-brand-border: #1e3a6c;
-  
-  --color-background-light: #f8fafc;
-  --color-surface-light: #ffffff;
-  --color-surface-muted: #f1f5f9;
-
-  --font-display: "Outfit", "Inter", sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
+  --color-success: #198754;
+  --color-success-hover: #157347;
+  --color-dark: #212529;
+  --color-gray-bg: #f8f9fa;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif;
 }
 
-/* Custom scrollbar */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+html {
+  scroll-behavior: smooth;
 }
 
-/* Smooth transition defaults */
-.premium-card {
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+/* Navbar shadow exactly like Bootstrap shadow-sm */
+.navbar-clean {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Card hover lift effect */
+.card-clean {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.05);
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.premium-card:hover {
+.card-clean:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 30px -10px rgba(13, 31, 60, 0.12);
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.12);
+}
+
+/* Image container with 300px white clean background */
+.car-image-container {
+  height: 280px;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.car-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+.card-clean:hover .car-image-container img {
+  transform: scale(1.06);
+}
+
+/* Feature Icon style */
+.feature-icon-box {
+  font-size: 3.25rem;
+  color: #0d6efd;
+  margin-bottom: 1.25rem;
 }

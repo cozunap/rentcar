@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contacto | Tu Carro y Más Rent A Car">
+    <!-- Header Banner -->
+    <div class="bg-[#212529] text-white py-16 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-3">Contacto Directo</h1>
+            <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                Estamos en Santo Domingo Este. Escríbenos o llámanos para cualquier consulta sobre reservas.
+            </p>
+        </div>
+    </div>
+
+    <!-- Contact Info and Map Area -->
+    <section class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                
+                <!-- Info cards -->
+                <div class="space-y-6">
+                    <h2 class="text-2xl font-bold text-[#212529] mb-4">Información de Contacto</h2>
+                    
+                    <div class="flex items-start gap-4 p-5 rounded-lg bg-[#f8f9fa] border border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 text-[#0d6efd] flex items-center justify-center text-xl shrink-0">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#212529] text-base mb-1">Ubicación Principal</h3>
+                            <p class="text-gray-600 text-sm">Santo Domingo Este, República Dominicana</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-5 rounded-lg bg-[#f8f9fa] border border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-emerald-50 text-[#198754] flex items-center justify-center text-xl shrink-0">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#212529] text-base mb-1">WhatsApp Directo 24/7</h3>
+                            <p class="text-gray-600 text-sm mb-2">Respuesta en minutos para cotizaciones y disponibilidad.</p>
+                            <a href="https://wa.me/18499154010" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-bold text-[#198754] hover:underline">
+                                Enviar mensaje al (849) 915-4010 <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-5 rounded-lg bg-[#f8f9fa] border border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 text-[#0d6efd] flex items-center justify-center text-xl shrink-0">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#212529] text-base mb-1">Teléfono</h3>
+                            <a href="tel:+18499154010" class="text-gray-700 text-sm hover:text-[#0d6efd] font-semibold">(849) 915-4010</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fast message box -->
+                <div class="bg-[#f8f9fa] p-8 rounded-xl border border-gray-100">
+                    <h3 class="text-xl font-bold text-[#212529] mb-4">¿Tienes alguna pregunta?</h3>
+                    <p class="text-gray-500 text-sm mb-6">
+                        Para mayor rapidez, todos nuestros alquileres se coordinan directamente a través de WhatsApp.
+                    </p>
+                    <div class="space-y-4">
+                        <a href="https://wa.me/18499154010?text=Hola,%20quisiera%20información%20sobre%20el%20alquiler%20de%20vehículos" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-6 rounded-lg bg-[#198754] hover:bg-[#157347] text-white font-bold text-center flex items-center justify-center gap-2 transition-colors shadow">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            <span>Abrir Chat de WhatsApp</span>
+                        </a>
+                        <a href="/flota" class="w-full py-3.5 px-6 rounded-lg bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-bold text-center block transition-colors shadow">
+                            Ver Vehículos Disponibles
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</Layout>
