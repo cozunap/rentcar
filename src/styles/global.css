@@ -48,7 +48,7 @@ body {
   box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.14);
 }
 
-/* Vehicle Showcase Image Container: Generous 380px height */
+/* Vehicle Showcase Image Container: padding 0 to show 100% size */
 .car-image-container {
   height: 380px;
   width: 100%;
@@ -60,29 +60,31 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 @media (max-width: 640px) {
   .car-image-container {
     height: 280px;
-    padding: 0.5rem;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }
 
-/* Force image to render large and fill the card prominently while fully complete */
+/* Force image to occupy 100% without any padding restrictions */
 .car-image-container img {
   width: 100%;
   height: 100%;
-  max-height: 360px;
   object-fit: contain;
   object-position: center;
-  transform: scale(1.15);
+  margin: 0;
+  padding: 0;
   transition: transform 0.4s ease;
 }
 
 .card-clean:hover .car-image-container img {
-  transform: scale(1.22);
+  transform: scale(1.08);
 }
 
 /* Feature Icon style */
