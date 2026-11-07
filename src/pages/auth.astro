@@ -1,0 +1,305 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Iniciar Sesión y Registro | Tu Carro y Más Rent A Car">
+    <div class="min-h-[calc(100vh-160px)] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <div class="max-w-md w-full bg-white rounded-3xl shadow-xl border border-slate-200/80 p-8 sm:p-10 relative overflow-hidden">
+            
+            <!-- Brand Badge -->
+            <div class="text-center mb-8">
+                <a href="/" class="inline-flex items-center gap-2 mb-3">
+                    <div class="w-10 h-10 rounded-xl bg-[#0d6efd] text-white flex items-center justify-center shadow-md">
+                        <i class="fas fa-car-side text-lg"></i>
+                    </div>
+                    <span class="font-extrabold text-2xl text-[#0d1f3c] tracking-tight">Tu Carro <span class="text-[#0d6efd]">y Más</span></span>
+                </a>
+                <p class="text-xs text-slate-500 font-medium">Plataforma de Alquiler de Autos • República Dominicana</p>
+            </div>
+
+            <!-- Tab Switcher (Login / Sign Up) -->
+            <div class="flex rounded-xl bg-slate-100 p-1 mb-8">
+                <button id="tab-login" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-sm bg-white text-[#0d1f3c]">
+                    Iniciar Sesión
+                </button>
+                <button id="tab-register" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-slate-500 hover:text-[#0d1f3c]">
+                    Crear Cuenta
+                </button>
+            </div>
+
+            <!-- Alert Box -->
+            <div id="auth-alert" class="hidden mb-6 p-4 rounded-xl text-xs font-medium border text-center"></div>
+
+            <!-- FORM 1: LOGIN -->
+            <form id="form-login" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="login-email">
+                        Correo Electrónico
+                    </label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input 
+                            type="email" 
+                            id="login-email" 
+                            required 
+                            placeholder="tu@correo.com" 
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700" for="login-password">
+                            Contraseña
+                        </label>
+                        <a href="#" id="forgot-password" class="text-xs text-[#0d6efd] hover:underline font-medium">
+                            ¿Olvidaste?
+                        </a>
+                    </div>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input 
+                            type="password" 
+                            id="login-password" 
+                            required 
+                            placeholder="••••••••" 
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                        />
+                    </div>
+                </div>
+
+                <button 
+                    type="submit" 
+                    id="btn-login-submit" 
+                    class="w-full py-3.5 px-4 rounded-xl bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
+                >
+                    <span id="btn-login-text">Entrar a Mi Cuenta</span>
+                    <i id="btn-login-spinner" class="fas fa-circle-notch fa-spin hidden"></i>
+                </button>
+            </form>
+
+            <!-- FORM 2: REGISTER -->
+            <form id="form-register" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-name">
+                        Nombre Completo o Empresa
+                    </label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input 
+                            type="text" 
+                            id="reg-name" 
+                            required 
+                            placeholder="Ej: Carlos Ozuna / Tu Carro Rent" 
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-whatsapp">
+                        Número de WhatsApp (Contacto Directo)
+                    </label>
+                    <div class="relative">
+                        <i class="fab fa-whatsapp absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500 text-base"></i>
+                        <input 
+                            type="tel" 
+                            id="reg-whatsapp" 
+                            required 
+                            placeholder="8499154010" 
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                        />
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-1">Este número será el botón de WhatsApp independiente que verán los clientes en tus autos.</p>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-email">
+                        Correo Electrónico
+                    </label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input 
+                            type="email" 
+                            id="reg-email" 
+                            required 
+                            placeholder="tu@correo.com" 
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-password">
+                        Contraseña (mínimo 6 caracteres)
+                    </label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input 
+                            type="password" 
+                            id="reg-password" 
+                            required 
+                            minlength="6" 
+                            placeholder="••••••••" 
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                        />
+                    </div>
+                </div>
+
+                <button 
+                    type="submit" 
+                    id="btn-reg-submit" 
+                    class="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
+                >
+                    <span id="btn-reg-text">Crear Mi Cuenta Gratis</span>
+                    <i id="btn-reg-spinner" class="fas fa-circle-notch fa-spin hidden"></i>
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-slate-100 text-center text-xs text-slate-500">
+                <p>Al registrarte aceptas las condiciones de servicio de <br /><strong class="text-slate-700">Tu Carro y Más Rent A Car Santo Domingo Este</strong>.</p>
+            </div>
+
+        </div>
+    </div>
+</Layout>
+
+<script>
+    import { 
+        signInWithEmailAndPassword, 
+        createUserWithEmailAndPassword, 
+        updateProfile,
+        onAuthStateChanged 
+    } from "firebase/auth";
+    import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+    import { auth, db } from "../lib/firebase/client";
+
+    // Redirect if already logged in
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            window.location.href = '/panel';
+        }
+    });
+
+    // Tab switcher logic
+    const tabLogin = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
+    const formLogin = document.getElementById('form-login');
+    const formRegister = document.getElementById('form-register');
+    const authAlert = document.getElementById('auth-alert');
+
+    function showAlert(message: string, isError = true) {
+        if (!authAlert) return;
+        authAlert.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'border-red-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
+        if (isError) {
+            authAlert.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
+        } else {
+            authAlert.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
+        }
+        authAlert.innerHTML = message;
+    }
+
+    tabLogin?.addEventListener('click', () => {
+        tabLogin.classList.add('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabLogin.classList.remove('text-slate-500');
+        tabRegister?.classList.remove('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabRegister?.classList.add('text-slate-500');
+        formLogin?.classList.remove('hidden');
+        formRegister?.classList.add('hidden');
+        if (authAlert) authAlert.classList.add('hidden');
+    });
+
+    tabRegister?.addEventListener('click', () => {
+        tabRegister.classList.add('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabRegister.classList.remove('text-slate-500');
+        tabLogin?.classList.remove('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabLogin?.classList.add('text-slate-500');
+        formRegister?.classList.remove('hidden');
+        formLogin?.classList.add('hidden');
+        if (authAlert) authAlert.classList.add('hidden');
+    });
+
+    // LOGIN ACTION
+    formLogin?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = (document.getElementById('login-email') as HTMLInputElement).value.trim();
+        const password = (document.getElementById('login-password') as HTMLInputElement).value;
+        const btnText = document.getElementById('btn-login-text');
+        const spinner = document.getElementById('btn-login-spinner');
+
+        btnText?.classList.add('hidden');
+        spinner?.classList.remove('hidden');
+        if (authAlert) authAlert.classList.add('hidden');
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            showAlert('¡Ingreso exitoso! Redirigiendo...', false);
+            setTimeout(() => { window.location.href = '/panel'; }, 500);
+        } catch (err: any) {
+            btnText?.classList.remove('hidden');
+            spinner?.classList.add('hidden');
+            let msg = 'Error al iniciar sesión. Revisa tus credenciales.';
+            if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+                msg = 'El correo o la contraseña no coinciden.';
+            } else if (err.code === 'auth/too-many-requests') {
+                msg = 'Demasiados intentos fallidos. Espera unos minutos.';
+            }
+            showAlert(msg, true);
+        }
+    });
+
+    // REGISTER ACTION
+    formRegister?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = (document.getElementById('reg-name') as HTMLInputElement).value.trim();
+        let whatsapp = (document.getElementById('reg-whatsapp') as HTMLInputElement).value.trim();
+        const email = (document.getElementById('reg-email') as HTMLInputElement).value.trim();
+        const password = (document.getElementById('reg-password') as HTMLInputElement).value;
+
+        // Clean whatsapp number (ensure digits only or + prefix)
+        const digits = whatsapp.replace(/\D/g, '');
+        const cleanWhatsapp = digits.startsWith('1') ? `+${digits}` : `+1${digits}`;
+
+        const btnText = document.getElementById('btn-reg-text');
+        const spinner = document.getElementById('btn-reg-spinner');
+
+        btnText?.classList.add('hidden');
+        spinner?.classList.remove('hidden');
+        if (authAlert) authAlert.classList.add('hidden');
+
+        try {
+            const cred = await createUserWithEmailAndPassword(auth, email, password);
+            const user = cred.user;
+
+            // Set displayName in Auth
+            await updateProfile(user, { displayName: name });
+
+            // Create User Document in Firestore
+            const userDoc = {
+                uid: user.uid,
+                fullName: name,
+                phone: cleanWhatsapp,
+                whatsapp: cleanWhatsapp,
+                email: email,
+                role: "owner",
+                createdAt: serverTimestamp()
+            };
+
+            await setDoc(doc(db, "users", user.uid), userDoc);
+
+            showAlert('¡Cuenta creada con éxito! Bienvenido.', false);
+            setTimeout(() => { window.location.href = '/panel'; }, 600);
+        } catch (err: any) {
+            btnText?.classList.remove('hidden');
+            spinner?.classList.add('hidden');
+            let msg = 'Error al crear la cuenta.';
+            if (err.code === 'auth/email-already-in-use') {
+                msg = 'Este correo electrónico ya está registrado.';
+            } else if (err.code === 'auth/weak-password') {
+                msg = 'La contraseña debe tener al menos 6 caracteres.';
+            }
+            showAlert(msg, true);
+        }
+    });
+</script>

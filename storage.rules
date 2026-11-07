@@ -1,0 +1,40 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Default deny all files
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isImageFile() {
+      return request.resource.contentType.matches('image/(jpeg|jpg|png|webp)');
+    }
+
+    function isMaxImageSize(maxMb) {
+      return request.resource.size < maxMb * 1024 * 1024;
+    }
+
+    // Vehicle images: anyone can read; authenticated users can upload under vehicles/{vehicleId}/{fileName}
+    match /vehicles/{vehicleId}/{fileName} {
+      allow read: if true;
+      allow write: if isAuthenticated() &&
+        isImageFile() &&
+        isMaxImageSize(10); // Max 10MB per image
+    }
+
+    // User profile pictures: anyone can view profile images; only owner can upload
+    match /users/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isAuthenticated() &&
+        request.auth.uid == userId &&
+        isImageFile() &&
+        isMaxImageSize(5); // Max 5MB per avatar
+    }
+  }
+}

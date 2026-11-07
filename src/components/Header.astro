@@ -1,60 +1,155 @@
 ---
 const pathname = Astro.url.pathname;
-const currentPath = pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
-
-const links = [
-  { name: 'Flota', href: '/elite_vehicle_fleet_gallery' },
-  { name: 'Servicios', href: '/vip_services_concierge' },
-  { name: 'Concierge', href: '/contacto_vip' },
-  { name: 'Membresía', href: '/contacto_vip' }
-];
+const isCurrent = (path: string) => (pathname === path || (path !== '/' && pathname.startsWith(path)));
 ---
-<nav id="main-header" class="fixed top-0 w-full z-50 border-b border-white/10 backdrop-blur-sm bg-black/20 transition-colors duration-300">
-    <div class="max-w-[1440px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-4 text-white">
-            <div class="size-6 text-primary">
-                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 19h20L12 2zm0 3.8L18.4 17H5.6L12 5.8z"></path>
-                    <path d="M12 7l-4 7h8l-4-7z" opacity="0.5"></path>
-                </svg>
+
+<header id="main-header" class="fixed top-0 left-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all duration-300 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-xl bg-[#0d6efd] text-white flex items-center justify-center shadow-md group-hover:bg-[#0b5ed7] transition-colors">
+                <i class="fas fa-car-side text-lg"></i>
             </div>
-            <a href="/" class="text-white text-xl font-bold tracking-[0.2em] uppercase">LUXE DR</a>
-        </div>
-        <div class="hidden lg:flex items-center gap-8 ml-auto mr-8">
-            {links.map(link => (
-                <a 
-                    href={link.href}
-                    class={`transition-colors text-sm font-medium tracking-widest uppercase ${
-                        currentPath === link.href ? 'text-primary' : 'text-white/80 hover:text-primary'
-                    }`}
-                >
-                    {link.name}
+            <div class="flex flex-col">
+                <span class="font-extrabold text-lg sm:text-xl text-[#0d1f3c] tracking-tight leading-tight group-hover:text-[#0d6efd] transition-colors">
+                    Tu Carro <span class="text-[#0d6efd] font-black">y Más</span>
+                </span>
+                <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Rent A Car • RD</span>
+            </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="/" class={`text-sm font-semibold transition-colors ${isCurrent('/') ? 'text-[#0d6efd]' : 'text-slate-600 hover:text-[#0d6efd]'}`}>
+                Inicio
+            </a>
+            <a href="/#fleet" class="text-sm font-semibold text-slate-600 hover:text-[#0d6efd] transition-colors">
+                Flota de Autos
+            </a>
+            <a href="/#features" class="text-sm font-semibold text-slate-600 hover:text-[#0d6efd] transition-colors">
+                Por Qué Elegirnos
+            </a>
+            <a href="/#contact" class="text-sm font-semibold text-slate-600 hover:text-[#0d6efd] transition-colors">
+                Contacto
+            </a>
+        </nav>
+
+        <!-- Right Action Buttons -->
+        <div class="hidden sm:flex items-center gap-3">
+            <a href="/publicar" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#0d6efd] text-[#0d6efd] hover:bg-[#0d6efd] hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm">
+                <i class="fas fa-plus-circle"></i>
+                <span>Publicar Auto</span>
+            </a>
+
+            <!-- Auth Button (Client-side reactive) -->
+            <div id="auth-header-slot">
+                <a href="/auth" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg">
+                    <i class="fas fa-user-circle text-sm"></i>
+                    <span>Ingresar</span>
                 </a>
-            ))}
+            </div>
         </div>
-        <div class="flex items-center gap-4">
-            <button class="hidden md:flex text-white hover:text-primary transition-colors">
-                <span class="material-symbols-outlined">search</span>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="flex items-center gap-2 md:hidden">
+            <a href="/publicar" class="p-2 text-[#0d6efd] hover:bg-slate-100 rounded-lg text-sm" title="Publicar Auto">
+                <i class="fas fa-plus-circle text-lg"></i>
+            </a>
+            <button id="mobile-menu-btn" type="button" aria-label="Abrir menú" class="w-10 h-10 flex items-center justify-center text-slate-700 hover:text-[#0d6efd] hover:bg-slate-100 rounded-lg transition-colors">
+                <i class="fas fa-bars text-xl" id="menu-icon"></i>
             </button>
-            <button class="flex items-center justify-center rounded bg-primary/90 hover:bg-primary text-[#181611] px-5 py-2 text-sm font-bold tracking-wide transition-colors">
-                INICIAR SESIÓN
-            </button>
-            <button class="lg:hidden text-white">
-                <span class="material-symbols-outlined">menu</span>
-            </button>
+        </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
+        <a href="/" class="block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0d6efd]">
+            <i class="fas fa-home w-6 text-slate-400"></i> Inicio
+        </a>
+        <a href="/#fleet" class="block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0d6efd]">
+            <i class="fas fa-car w-6 text-slate-400"></i> Ver Flota
+        </a>
+        <a href="/#features" class="block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0d6efd]">
+            <i class="fas fa-shield-alt w-6 text-slate-400"></i> Por Qué Elegirnos
+        </a>
+        <a href="/#contact" class="block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0d6efd]">
+            <i class="fas fa-phone-alt w-6 text-slate-400"></i> Contacto Directo
+        </a>
+        <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+            <a href="/publicar" class="w-full text-center py-2.5 rounded-lg border border-[#0d6efd] text-[#0d6efd] font-bold text-xs uppercase tracking-wider">
+                <i class="fas fa-plus-circle me-1"></i> Publicar Mi Auto
+            </a>
+            <div id="mobile-auth-slot">
+                <a href="/auth" class="w-full block text-center py-2.5 rounded-lg bg-[#0d6efd] text-white font-bold text-xs uppercase tracking-wider">
+                    <i class="fas fa-user-circle me-1"></i> Iniciar Sesión / Registro
+                </a>
+            </div>
         </div>
     </div>
-</nav>
+</header>
+
+<div class="h-20"></div>
 
 <script>
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.remove('bg-black/20', 'backdrop-blur-sm', 'border-white/10');
-            header.classList.add('bg-background-dark', 'border-border-dark', 'shadow-md');
-        } else {
-            header.classList.add('bg-black/20', 'backdrop-blur-sm', 'border-white/10');
-            header.classList.remove('bg-background-dark', 'border-border-dark', 'shadow-md');
+    import { onAuthStateChanged, signOut } from "firebase/auth";
+    import { auth } from "../lib/firebase/client";
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    if (menuBtn && mobileMenu && menuIcon) {
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+    }
+
+    // Reactive Auth status
+    const desktopSlot = document.getElementById('auth-header-slot');
+    const mobileSlot = document.getElementById('mobile-auth-slot');
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const displayName = user.displayName || user.email?.split('@')[0] || 'Mi Perfil';
+            const htmlDesktop = `
+                <div class="flex items-center gap-2">
+                    <a href="/panel" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs uppercase tracking-wider transition-colors">
+                        <i class="fas fa-gauge text-[#0d6efd]"></i>
+                        <span class="max-w-[120px] truncate">${displayName}</span>
+                    </a>
+                    <button id="logout-btn-header" title="Cerrar sesión" class="p-2 text-slate-400 hover:text-red-600 transition-colors">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            `;
+            const htmlMobile = `
+                <div class="flex gap-2">
+                    <a href="/panel" class="flex-1 text-center py-2.5 rounded-lg bg-slate-100 text-slate-800 font-bold text-xs uppercase tracking-wider">
+                        <i class="fas fa-gauge text-[#0d6efd] me-1"></i> Mi Panel (${displayName})
+                    </a>
+                    <button id="mobile-logout-btn" class="px-4 py-2.5 rounded-lg bg-red-50 text-red-600 font-bold text-xs">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            `;
+
+            if (desktopSlot) desktopSlot.innerHTML = htmlDesktop;
+            if (mobileSlot) mobileSlot.innerHTML = htmlMobile;
+
+            document.getElementById('logout-btn-header')?.addEventListener('click', () => signOut(auth));
+            document.getElementById('mobile-logout-btn')?.addEventListener('click', () => signOut(auth));
         }
     });
 </script>

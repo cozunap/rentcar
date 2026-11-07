@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mi Panel de Propietario | Tu Carro y Más Rent A Car">
+    <div class="py-12 bg-slate-50 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Welcome Header -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-100 text-[#0d6efd] flex items-center justify-center text-2xl font-bold border-2 border-white shadow-sm overflow-hidden shrink-0">
+                        <img id="panel-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Avatar" class="w-full h-full object-cover hidden" />
+                        <span id="panel-avatar-initials">U</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 id="panel-user-name" class="text-xl sm:text-2xl font-extrabold text-[#0d1f3c]">Mi Cuenta</h1>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700 flex items-center gap-1">
+                                <i class="fas fa-check-circle"></i> Activo
+                            </span>
+                        </div>
+                        <p id="panel-user-phone" class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                            <i class="fab fa-whatsapp text-emerald-500"></i> Cargando WhatsApp...
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="/publicar" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all">
+                        <i class="fas fa-plus"></i> Publicar Otro Vehículo
+                    </a>
+                    <button id="panel-logout-btn" class="px-4 py-3 rounded-xl border border-slate-200 text-slate-600 hover:text-red-600 hover:bg-red-50 text-xs font-bold transition-colors">
+                        <i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-[#0d6efd] flex items-center justify-center text-xl">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-slate-400 block tracking-wider">Mis Vehículos</span>
+                        <span id="count-my-vehicles" class="text-2xl font-black text-[#0d1f3c]">0</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-slate-400 block tracking-wider">Canal de Contacto</span>
+                        <span class="text-sm font-bold text-slate-700">WhatsApp Directo</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+                        <i class="fas fa-file-image"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-slate-400 block tracking-wider">Formato Imágenes</span>
+                        <span class="text-sm font-bold text-slate-700">WebP 1500px HD</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle Listing Section -->
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-[#0d1f3c]">Vehículos que Tengo en Renta</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Estos vehículos aparecen en el catálogo principal con tu botón directo de WhatsApp.</p>
+                    </div>
+                    <a href="/#fleet" class="text-xs text-[#0d6efd] hover:underline font-bold">
+                        Ver Catálogo en Vivo <i class="fas fa-external-link-alt ms-1"></i>
+                    </a>
+                </div>
+
+                <!-- Vehicles Grid -->
+                <div id="panel-vehicles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center py-12 col-span-full">
+                        <i class="fas fa-spinner fa-spin text-2xl text-[#0d6efd] mb-2"></i>
+                        <p class="text-sm text-slate-500">Cargando tus vehículos...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</Layout>
+
+<script>
+    import { onAuthStateChanged, signOut } from "firebase/auth";
+    import { doc, getDoc, collection, query, where, onSnapshot, deleteDoc } from "firebase/firestore";
+    import { auth, db } from "../lib/firebase/client";
+
+    const userNameEl = document.getElementById('panel-user-name');
+    const userPhoneEl = document.getElementById('panel-user-phone');
+    const avatarEl = document.getElementById('panel-avatar') as HTMLImageElement;
+    const initialsEl = document.getElementById('panel-avatar-initials');
+    const countVehiclesEl = document.getElementById('count-my-vehicles');
+    const gridEl = document.getElementById('panel-vehicles-grid');
+    const logoutBtn = document.getElementById('panel-logout-btn');
+
+    logoutBtn?.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            window.location.href = '/';
+        });
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            window.location.href = '/auth';
+            return;
+        }
+
+        // 1. Load User Profile
+        try {
+            const uSnap = await getDoc(doc(db, "users", user.uid));
+            if (uSnap.exists()) {
+                const u = uSnap.data();
+                if (userNameEl) userNameEl.textContent = u.fullName || user.displayName || 'Propietario';
+                if (userPhoneEl) userPhoneEl.innerHTML = `<i class="fab fa-whatsapp text-emerald-500"></i> WhatsApp de contacto: <strong>${u.whatsapp || u.phone}</strong>`;
+                if (u.photoUrl && avatarEl && initialsEl) {
+                    avatarEl.src = u.photoUrl;
+                    avatarEl.classList.remove('hidden');
+                    initialsEl.classList.add('hidden');
+                } else if (initialsEl) {
+                    initialsEl.textContent = (u.fullName?.[0] || 'U').toUpperCase();
+                }
+            } else {
+                if (userNameEl) userNameEl.textContent = user.displayName || user.email?.split('@')[0] || 'Propietario';
+                if (userPhoneEl) userPhoneEl.textContent = user.email || '';
+            }
+        } catch (e) {
+            console.error(e);
+        }
+
+        // 2. Load User's Vehicles
+        const q = query(collection(db, "vehicles"), where("ownerId", "==", user.uid));
+        onSnapshot(q, (snapshot) => {
+            if (!gridEl) return;
+            if (countVehiclesEl) countVehiclesEl.textContent = `${snapshot.size}`;
+
+            if (snapshot.empty) {
+                gridEl.innerHTML = `
+                    <div class="bg-white rounded-2xl border border-dashed border-slate-300 p-8 text-center col-span-full py-16">
+                        <div class="w-16 h-16 rounded-full bg-blue-50 text-[#0d6efd] flex items-center justify-center mx-auto text-2xl mb-4">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-800">Aún no has publicado ningún vehículo</h3>
+                        <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-6">
+                            Comienza a publicar tus vehículos hoy mismo. La conversión a WebP 1500px y la ficha técnica se generarán automáticamente.
+                        </p>
+                        <a href="/publicar" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0d6efd] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:bg-[#0b5ed7] transition-all">
+                            <i class="fas fa-plus"></i> Publicar Mi Primer Auto
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            gridEl.innerHTML = '';
+            snapshot.forEach((docSnap) => {
+                const v = docSnap.data();
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-44 bg-slate-100">
+                            <img src="${v.mainImage}" alt="${v.title}" class="w-full h-full object-cover" />
+                            <span class="absolute top-2 left-2 px-2 py-0.5 bg-black/60 text-white rounded text-[10px] font-bold uppercase backdrop-blur-sm">
+                                ${v.category || 'SUV'}
+                            </span>
+                            <span class="absolute bottom-2 right-2 px-2.5 py-1 bg-[#0d6efd] text-white rounded-lg text-xs font-black shadow">
+                                $${v.pricePerDay || v.price}/día
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-slate-900 text-base leading-snug">${v.title}</h3>
+                            <p class="text-xs text-slate-400 mt-1">${v.city || 'Santo Domingo'} • ${v.transmission || 'Automática'}</p>
+                            <p class="text-xs text-slate-500 mt-2 line-clamp-2">${v.description || ''}</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
+                        <span class="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
+                            <i class="fas fa-circle text-[8px]"></i> En Catálogo
+                        </span>
+                        <button class="delete-btn text-xs text-red-500 hover:text-red-700 font-semibold px-2 py-1 rounded hover:bg-red-50 transition-colors" data-id="${docSnap.id}">
+                            <i class="fas fa-trash-alt me-1"></i> Eliminar
+                        </button>
+                    </div>
+                `;
+
+                // Delete action
+                card.querySelector('.delete-btn')?.addEventListener('click', async (e) => {
+                    const btn = e.currentTarget as HTMLButtonElement;
+                    const id = btn.getAttribute('data-id');
+                    if (id && confirm(`¿Estás seguro de que deseas eliminar "${v.title}"?`)) {
+                        try {
+                            await deleteDoc(doc(db, "vehicles", id));
+                        } catch (err: any) {
+                            alert("Error al eliminar: " + err.message);
+                        }
+                    }
+                });
+
+                gridEl.appendChild(card);
+            });
+        });
+    });
+</script>

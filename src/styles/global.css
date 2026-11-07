@@ -1,24 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #FAC638;
-  --color-background-light: #f8f8f5;
-  --color-background-dark: #231e0f;
-  --color-surface-dark: #221d10;
+  --color-primary: #0d6efd;
+  --color-primary-hover: #0b5ed7;
+  --color-primary-dark: #0a4ebd;
+  --color-accent: #2563eb;
+  --color-accent-gold: #b89a5a;
   
-  --font-display: "Manrope", sans-serif;
+  --color-brand-dark: #0d1f3c;
+  --color-brand-card: #13274c;
+  --color-brand-border: #1e3a6c;
   
-  --radius-DEFAULT: 0.125rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.5rem;
-  --radius-full: 0.75rem;
+  --color-background-light: #f8fafc;
+  --color-surface-light: #ffffff;
+  --color-surface-muted: #f1f5f9;
+
+  --font-display: "Outfit", "Inter", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
 }
 
-/* Custom scrollbar for horizontal sections */
+/* Custom scrollbar */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Smooth transition defaults */
+.premium-card {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -10px rgba(13, 31, 60, 0.12);
 }

@@ -1,296 +1,484 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import homeData from '../content/pages/home.json';
+import VehicleSidebar from '../components/VehicleSidebar.astro';
 ---
 
-<Layout title="Luxury Rental Home Experience">
-<!-- Top Navigation -->
+<Layout title="Tu Carro y Más Rent A Car | Alquiler de Autos en Santo Domingo">
+    
+    <!-- HERO SECTION (High Quality Visual Carousel Slider) -->
+    <section class="relative bg-[#0d1f3c] text-white overflow-hidden">
+        <!-- Hero Slider Container -->
+        <div class="relative w-full min-h-[580px] lg:min-h-[660px] flex items-center">
+            
+            <!-- Slide Backgrounds -->
+            <div id="hero-slider-container" class="absolute inset-0 w-full h-full">
+                <!-- Slide 1 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100">
+                    <img 
+                        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80" 
+                        alt="Carretera libre para viajar en República Dominicana" 
+                        class="w-full h-full object-cover object-center filter brightness-[0.42]"
+                    />
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 pointer-events-none">
+                    <img 
+                        src="https://images.unsplash.com/photo-1570737543098-0983d88f796d?q=80&w=1920&auto=format&fit=crop" 
+                        alt="Carretera tropical y palmeras en República Dominicana" 
+                        class="w-full h-full object-cover object-center filter brightness-[0.42]"
+                    />
+                </div>
+                <!-- Slide 3 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 pointer-events-none">
+                    <img 
+                        src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=1920&q=80" 
+                        alt="Vehículo de lujo interior y carretera" 
+                        class="w-full h-full object-cover object-center filter brightness-[0.42]"
+                    />
+                </div>
+            </div>
 
-<!-- Hero Section -->
-<div class="relative h-screen min-h-[700px] w-full flex flex-col items-center justify-center overflow-hidden">
-<!-- Background Image/Video Placeholder -->
-<div class="absolute inset-0 z-0">
-<div class="w-full h-full bg-cover bg-center" data-alt="Luxury black SUV parked on a sleek concrete runway next to a private jet at sunset" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBYML2s6RDGwgv22yzCtTZMrv3INoA1EvXyYjP3hSxGZIjfIdydHTr5bxUuPF1spFu_2KnNyP-kGUyqmEVZ-p3KUniQ5lIIQIrmHElBBg4aLfnEjbmTQ_sn1j4GcKhRQs93CnH0M8oljtR1v_1OYxJ5d3JE_wNFLPSDCGsK6Wrd7hgYRNHCUYDXuvb1wiVbF6bqP8eJqDFD75hfMCTgAOBGp-yDM5IkiTsh9aioEu3lQzK9aO0RVPY5otlOh2bnyx4_jrbKZVbrgQuD');">
-</div>
-<!-- Gradient Overlay for readability -->
-<div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-background-dark"></div>
-<div class="absolute inset-0 bg-black/40"></div>
-</div>
-<!-- Hero Content -->
-<div class="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mt-[-80px]">
-<span class="text-primary tracking-[0.3em] text-xs md:text-sm font-bold uppercase mb-6 animate-fade-in-up">
-                {homeData.hero_subtitle}
-            </span>
-<h1 class="text-white text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-[-0.02em] mb-6 drop-shadow-lg" set:html={homeData.hero_title}>
-            </h1>
-<p class="text-gray-200 text-base md:text-lg max-w-2xl font-light leading-relaxed mb-10 text-shadow-sm">
-                {homeData.hero_description}
-            </p>
-</div>
-<!-- Reservation Bar (Floating) -->
-<div class="absolute bottom-10 w-full px-4 lg:px-10 z-20 flex justify-center">
-<div class="bg-[#1f1f1f]/80 backdrop-blur-md border border-white/10 p-2 rounded-lg shadow-2xl w-full max-w-5xl">
-<form class="flex flex-col lg:flex-row gap-2 lg:items-center">
-<!-- Location -->
-<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:border-r lg:border-white/10 lg:bg-transparent lg:hover:bg-transparent">
-<label class="block text-[10px] uppercase tracking-wider text-primary font-bold mb-1">Lugar de Recogida</label>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-white/50 text-lg">flight_land</span>
-<select class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 cursor-pointer">
-<option class="bg-[#1f1f1f]">Punta Cana Intl (PUJ)</option>
-<option class="bg-[#1f1f1f]">Santo Domingo (SDQ)</option>
-<option class="bg-[#1f1f1f]">La Romana (LRM)</option>
-<option class="bg-[#1f1f1f]">Casa de Campo</option>
-</select>
-</div>
-</div>
-<!-- Drop-off -->
-<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:border-r lg:border-white/10 lg:bg-transparent lg:hover:bg-transparent">
-<label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1 group-hover:text-primary transition-colors">Entrega</label>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-white/50 text-lg">flight_takeoff</span>
-<select class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 cursor-pointer">
-<option class="bg-[#1f1f1f]">Mismo lugar de recogida</option>
-<option class="bg-[#1f1f1f]">Lugar Diferente</option>
-</select>
-</div>
-</div>
-<!-- Dates -->
-<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:border-r lg:border-white/10 lg:bg-transparent lg:hover:bg-transparent">
-<label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1 group-hover:text-primary transition-colors">Fechas</label>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-white/50 text-lg">calendar_month</span>
-<input class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 placeholder-white/80" onfocus="(this.type='date')" placeholder="Seleccionar Fechas" type="text"/>
-</div>
-</div>
-<!-- Vehicle Class -->
-<div class="flex-1 relative group bg-white/5 hover:bg-white/10 rounded transition-colors p-3 lg:bg-transparent lg:hover:bg-transparent">
-<label class="block text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1 group-hover:text-primary transition-colors">Clase de Vehículo</label>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-white/50 text-lg">directions_car</span>
-<select class="w-full bg-transparent border-none p-0 text-white text-sm focus:ring-0 cursor-pointer">
-<option class="bg-[#1f1f1f]">Cualquier Clase</option>
-<option class="bg-[#1f1f1f]">SUV de Lujo</option>
-<option class="bg-[#1f1f1f]">Deportivo Exótico</option>
-<option class="bg-[#1f1f1f]">Sedán Ejecutivo</option>
-<option class="bg-[#1f1f1f]">Blindado</option>
-</select>
-</div>
-</div>
-<!-- CTA Button -->
-<button class="bg-primary hover:bg-[#d4a826] text-[#181611] font-bold text-sm tracking-widest uppercase px-8 py-4 rounded shadow-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-2 lg:h-full lg:w-auto w-full mt-2 lg:mt-0 whitespace-nowrap" type="button">
-<span>Reservar</span>
-<span class="material-symbols-outlined text-lg">arrow_forward</span>
-</button>
-</form>
-</div>
-</div>
-</div>
-<!-- Stats Section (Sub-hero) -->
-<div class="bg-surface-dark border-b border-white/5">
-<div class="max-w-[1440px] mx-auto px-6 py-12 flex flex-wrap justify-between items-center gap-8 text-center md:text-left">
-<div class="flex flex-col md:flex-row gap-4 md:gap-12 w-full justify-center opacity-80">
-<div class="flex flex-col items-center md:items-start">
-<span class="text-3xl font-light text-white">50+</span>
-<span class="text-xs uppercase tracking-widest text-primary/80 mt-1">Premium Vehicles</span>
-</div>
-<div class="w-px h-12 bg-white/10 hidden md:block"></div>
-<div class="flex flex-col items-center md:items-start">
-<span class="text-3xl font-light text-white">24/7</span>
-<span class="text-xs uppercase tracking-widest text-primary/80 mt-1">Concierge Service</span>
-</div>
-<div class="w-px h-12 bg-white/10 hidden md:block"></div>
-<div class="flex flex-col items-center md:items-start">
-<span class="text-3xl font-light text-white">100%</span>
-<span class="text-xs uppercase tracking-widest text-primary/80 mt-1">Discretion Guaranteed</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Feature Section: La Flota Élite -->
-<section class="py-20 lg:py-32 relative bg-background-dark">
-<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-<div>
-<h2 class="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-4">La Colección</h2>
-<h3 class="text-white text-3xl md:text-5xl font-light">La Flota Élite</h3>
-</div>
-<a class="group flex items-center gap-2 text-white hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest pb-1 border-b border-transparent hover:border-primary" href="#">
-                    Ver Inventario Completo
-                    <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
-</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Vehicle Card 1 -->
-<div class="group relative bg-surface-dark rounded-lg overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-black/50">
-<div class="aspect-[16/10] overflow-hidden relative">
-<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Front angle view of a black Mercedes-Benz G63 AMG parked on dark pavement" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZPyzNlgPaxSyr4R47UOoM6N4QQEJLHdfsnM9l445OWGDEzeagSWXcozBY8lNxU_1Pn15tFaBmcXUAENmHT97-oyYzjWK-vUX3m8_wlqVqv0oXsFF7z2pv6ysAPUzM230wuZfha9ga5t3EuaJLcF2TUwmXJFU1GvDoNBJZdgCgKPNYpPfp4lRsqSJzqRoYiQ4emsR8NSqraqsrwy6Prxz7J7TLr0gEnb3LB_e-xA1xkD4V2OrxblUQQUhZY3Qi4j4dA8fV3PFKCy9w');">
-</div>
-<div class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-xs text-white font-bold tracking-widest uppercase">SUV</div>
-</div>
-<div class="p-6">
-<h4 class="text-white text-xl font-medium mb-1 group-hover:text-primary transition-colors">Mercedes-Benz G63 AMG</h4>
-<p class="text-gray-400 text-sm font-light mb-4">Diseño icónico combinado con lujo resistente.</p>
-<div class="flex justify-between items-center border-t border-white/10 pt-4">
-<div class="flex gap-4 text-gray-500 text-xs uppercase tracking-wider">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> 5</span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">work</span> 4</span>
-</div>
-<span class="text-white text-sm font-bold">$1,200 <span class="text-gray-500 font-normal text-xs">/ day</span></span>
-</div>
-</div>
-</div>
-<!-- Vehicle Card 2 -->
-<div class="group relative bg-surface-dark rounded-lg overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-black/50">
-<div class="aspect-[16/10] overflow-hidden relative">
-<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Side profile of a dark grey Range Rover Autobiography parked in a modern driveway" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHrrpBMCWfac48yRQGbDQ3qitQFmVRHA-DUMtWQ4D34lM_Cm9vT5JNAbFzqHk46EK4PU64iYFTSYvsXFVz5Y1jfqNsZWwv5tZflt-xSlnTPPEqX_vsQTIVj4Mdjp_sl2dqzaWfp_5j_9K8sJOAFSuvhJKV--Gtjwqc7wMXy2nwidWuqxGdGdePiNDD40VhupIjiSUH9oeLd-pUxToxuJJsYMF5A8ewbeyTy2tHQOxujHkcSBySSU-uhkcRCEYCDq6C_g3aJP-qxbAN');">
-</div>
-<div class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-xs text-white font-bold tracking-widest uppercase">SUV</div>
-</div>
-<div class="p-6">
-<h4 class="text-white text-xl font-medium mb-1 group-hover:text-primary transition-colors">Range Rover Autobiography</h4>
-<p class="text-gray-400 text-sm font-light mb-4">Confort y sofisticación inigualables.</p>
-<div class="flex justify-between items-center border-t border-white/10 pt-4">
-<div class="flex gap-4 text-gray-500 text-xs uppercase tracking-wider">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> 5</span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">work</span> 4</span>
-</div>
-<span class="text-white text-sm font-bold">$950 <span class="text-gray-500 font-normal text-xs">/ day</span></span>
-</div>
-</div>
-</div>
-<!-- Vehicle Card 3 -->
-<div class="group relative bg-surface-dark rounded-lg overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-black/50">
-<div class="aspect-[16/10] overflow-hidden relative">
-<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Black Cadillac Escalade ESV front view with LED headlights on" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLJcoayuIrHVyz4UxmuHU2iDLVVt3ihTWn2PSH9rGr5nhTUHpZgKchtv1qQ51NCc5hkW1NulwY1sXevaWfJOVs5Ykbb4E0EsNbfUUwIm18ltT8irK67edqcO6apMAtvZEaEaS_9g0TCWI-T3F6UsznmlettGTkQvPhqnJMVyGSzeA6ymKVMsAH8qBug5JBL19_MVfiLAEHfI6Q7y4G7zL3UYa6i98xZJY-0jF9I9M8wYG5xz9nP2OvEyw8KTL7SYTZm1cg78QhzXgI');">
-</div>
-<div class="absolute top-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-xs text-white font-bold tracking-widest uppercase">XL SUV</div>
-</div>
-<div class="p-6">
-<h4 class="text-white text-xl font-medium mb-1 group-hover:text-primary transition-colors">Cadillac Escalade ESV</h4>
-<p class="text-gray-400 text-sm font-light mb-4">Viaje ejecutivo espacioso.</p>
-<div class="flex justify-between items-center border-t border-white/10 pt-4">
-<div class="flex gap-4 text-gray-500 text-xs uppercase tracking-wider">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> 7</span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">work</span> 6</span>
-</div>
-<span class="text-white text-sm font-bold">$1,100 <span class="text-gray-500 font-normal text-xs">/ day</span></span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Services / Value Prop -->
-<section class="py-20 bg-[#121212] relative overflow-hidden">
-<div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
-<svg class="w-full h-full text-primary fill-current" viewbox="0 0 100 100">
-<circle cx="100" cy="50" r="40"></circle>
-</svg>
-</div>
-<div class="max-w-[1440px] mx-auto px-6 lg:px-10 flex flex-col lg:flex-row gap-16 items-center">
-<div class="flex-1 order-2 lg:order-1">
-<div class="rounded-lg overflow-hidden relative h-[500px] w-full shadow-2xl shadow-primary/5">
-<div class="absolute inset-0 bg-cover bg-center" data-alt="Chauffeur opening the door of a luxury car for a VIP client" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPZ9loj4CDLxR2e84nyr2-YlZm6fs5astlDs49ZKPbyNuX8x59EnA3aasTMQvUAhYJoljs8lRhPE3oN-ilORBXVs4GYeUO2j376irO9osO5HXkUC2U16OLG1710d5cXVzsZOZ6gBph4fpNhryTx4f1bz6QnSm99Sp_Yd39kQjr3tLj4THrwqfN_y2ExXGPpwrWc5nEWvw15lxe8EmFUw-mDgjGvi_eXODIZK2kzuSV1RwYzeTYn2phS0c7Iti69b-_EWMjm-lyczRc');">
-</div>
-<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-<div class="absolute bottom-8 left-8 text-white max-w-sm">
-<p class="text-lg font-light italic">"El servicio fue impecable. El vehículo estaba prístino. Luxe DR define el lujo caribeño."</p>
-<p class="text-primary text-sm font-bold mt-4 uppercase tracking-widest">— James Sterling, CEO</p>
-</div>
-</div>
-</div>
-<div class="flex-1 order-1 lg:order-2">
-<h2 class="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-4">Our Promise</h2>
-<h3 class="text-white text-3xl md:text-5xl font-light mb-8 leading-tight">Beyond Transportation. <br/><span class="font-bold">A Lifestyle.</span></h3>
-<p class="text-gray-400 leading-relaxed mb-8 text-lg font-light">
-                    We understand that for our clients, time is the ultimate luxury. Our fleet is meticulously maintained to factory standards, and our chauffeurs are trained in executive protection and protocol. Whether you require an airport transfer in Punta Cana or a week-long rental in Casa de Campo, we deliver excellence.
+            <!-- Gradient Accent Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0d1f3c] via-transparent to-black/30 pointer-events-none"></div>
+
+            <!-- Content Overlay -->
+            <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-md">
+                    <i class="fas fa-certificate text-emerald-400"></i> Tu Carro y Más • Santo Domingo Este
+                </div>
+
+                <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight drop-shadow-md transition-all duration-700">
+                    Conduce lo <span class="text-[#0d6efd] underline decoration-blue-400/40">Extraordinario</span>
+                </h1>
+
+                <p id="hero-subtitle" class="text-lg sm:text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-10 leading-relaxed font-light drop-shadow transition-all duration-700">
+                    Renta SUVs premium y autos verificados directamente con sus propietarios en República Dominicana. Trato directo e independiente por WhatsApp.
                 </p>
-<ul class="space-y-4 mb-10">
-<li class="flex items-center gap-4 text-white">
-<span class="size-8 rounded-full bg-white/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-sm">star</span>
-</span>
-<span class="font-light">Premium Servicio de Chofers</span>
-</li>
-<li class="flex items-center gap-4 text-white">
-<span class="size-8 rounded-full bg-white/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-sm">shield</span>
-</span>
-<span class="font-light">Armored Vehicle Options</span>
-</li>
-<li class="flex items-center gap-4 text-white">
-<span class="size-8 rounded-full bg-white/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-sm">flight</span>
-</span>
-<span class="font-light">Private Aviation Tarmac Access</span>
-</li>
-</ul>
-<button class="text-white border border-white/20 hover:border-primary hover:text-primary px-8 py-3 text-sm font-bold uppercase tracking-widest transition-all">
-                    Explore Services
-                </button>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="bg-surface-dark border-t border-white/5 pt-20 pb-10">
-<div class="max-w-[1440px] mx-auto px-6 lg:px-10">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-<!-- Brand -->
-<div class="flex flex-col gap-6">
-<div class="flex items-center gap-2 text-white">
-<div class="size-5 text-primary">
-<svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L2 19h20L12 2zm0 3.8L18.4 17H5.6L12 5.8z"></path>
-</svg>
-</div>
-<span class="font-bold tracking-[0.2em] uppercase text-lg">LUXE DR</span>
-</div>
-<p class="text-gray-500 text-sm leading-relaxed">
-                        The Dominican Republic's premier luxury car rental and chauffeur service. Serving Punta Cana, Casa de Campo, and Santo Domingo.
-                    </p>
-</div>
-<!-- Links -->
-<div>
-<h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Company</h4>
-<div class="flex flex-col gap-3">
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">About Us</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Our Fleet</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="/vip_services_concierge" >Services</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Contact</a>
-</div>
-</div>
-<!-- Links -->
-<div>
-<h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Support</h4>
-<div class="flex flex-col gap-3">
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">FAQ</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Terms &amp; Conditions</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Privacy Policy</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm" href="#">Rental Agreement</a>
-</div>
-</div>
-<!-- Newsletter -->
-<div>
-<h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Stay Updated</h4>
-<p class="text-gray-500 text-sm mb-4">Subscribe for exclusive offers and new fleet arrivals.</p>
-<div class="flex border-b border-white/20 pb-2">
-<input class="bg-transparent border-none p-0 text-white placeholder-gray-600 w-full focus:ring-0 text-sm" placeholder="Email Address" type="email"/>
-<button class="text-primary hover:text-white uppercase text-xs font-bold tracking-widest">Join</button>
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4">
-<p class="text-gray-600 text-xs">© 2023 LUXE DR. All rights reserved.</p>
-<div class="flex gap-4">
-<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="sr-only">Instagram</span>IG</a>
-<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="sr-only">Twitter</span>TW</a>
-<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="sr-only">LinkedIn</span>LI</a>
-</div>
-</div>
-</div>
-</footer>
 
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#fleet" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-sm uppercase tracking-wider shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-200">
+                        <i class="fas fa-car-side"></i>
+                        <span>Explorar Flota en Vivo</span>
+                    </a>
+                    <a href="/publicar" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold text-sm uppercase tracking-wider backdrop-blur-md hover:-translate-y-0.5 transition-all duration-200">
+                        <i class="fas fa-plus-circle text-emerald-400"></i>
+                        <span>Publicar Mi Vehículo</span>
+                    </a>
+                </div>
+
+                <!-- Slide Dots Indicators -->
+                <div class="flex items-center justify-center gap-2 mt-12">
+                    <button class="hero-dot w-8 h-2 rounded-full bg-[#0d6efd] transition-all duration-300" data-index="0" aria-label="Slide 1"></button>
+                    <button class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white transition-all duration-300" data-index="1" aria-label="Slide 2"></button>
+                    <button class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white transition-all duration-300" data-index="2" aria-label="Slide 3"></button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: POR QUÉ ELEGIRNOS -->
+    <section id="features" class="py-20 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#0d6efd] mb-2 block">Ventajas Exclusivas</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#0d1f3c] tracking-tight">¿Por Qué Elegir Tu Carro y Más?</h2>
+                <p class="mt-3 text-slate-600 text-base leading-relaxed">
+                    Diseñado para ofrecer seguridad, confianza y agilidad en cada alquiler por todo el territorio dominicano.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-50 text-[#0d6efd] flex items-center justify-center text-3xl mb-6 shadow-inner">
+                        <i class="fab fa-whatsapp text-emerald-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0d1f3c] mb-3">Reserva Fácil & Directa</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Habla directamente con el propietario del auto por WhatsApp. Sin intermediarios molestos, sin cargos ocultos y con respuesta en segundos.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-50 text-[#0d6efd] flex items-center justify-center text-3xl mb-6 shadow-inner">
+                        <i class="fas fa-shield-alt text-[#0d6efd]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0d1f3c] mb-3">Vehículos Verificados</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Todos los autos listados en nuestra plataforma cuentan con inspección de mantenimiento al día y seguro con cobertura para viajar con total tranquilidad.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-50 text-[#0d6efd] flex items-center justify-center text-3xl mb-6 shadow-inner">
+                        <i class="fas fa-headset text-indigo-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0d1f3c] mb-3">Soporte Local 24/7</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Estamos ubicados en Santo Domingo Este con asistencia técnica y apoyo ante cualquier eventualidad durante tu recorrido en República Dominicana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: NUESTRA FLOTA (REALTIME FROM FIRESTORE) -->
+    <section id="fleet" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-[#0d6efd] mb-2 block">Catálogo Oficial</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#0d1f3c] tracking-tight">Nuestra Flota Premium</h2>
+                    <p class="text-slate-600 mt-2 text-base">
+                        Las mejores SUVs y vehículos disponibles para rentar. Haz clic en cualquier auto para abrir su ficha y contactar al dueño por WhatsApp.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span id="fleet-count" class="px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">
+                        Cargando vehículos...
+                    </span>
+                    <a href="/publicar" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0d6efd] hover:bg-[#0b5ed7] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-sm">
+                        <i class="fas fa-plus"></i> Publicar Auto
+                    </a>
+                </div>
+            </div>
+
+            <!-- Vehicles Dynamic Grid (Populated from Firestore) -->
+            <div id="vehicles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skeleton Loader Placeholders -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm animate-pulse space-y-4">
+                    <div class="w-full h-56 bg-slate-200 rounded-xl"></div>
+                    <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+                    <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm animate-pulse space-y-4">
+                    <div class="w-full h-56 bg-slate-200 rounded-xl"></div>
+                    <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+                    <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+                </div>
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div id="empty-state" class="hidden text-center py-16 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                <i class="fas fa-car-side text-5xl text-slate-300 mb-4"></i>
+                <h3 class="text-lg font-bold text-slate-700">No hay vehículos registrados en este momento</h3>
+                <p class="text-sm text-slate-500 mt-1 mb-6">¡Sé el primero en publicar tu vehículo para renta en Santo Domingo!</p>
+                <a href="/publicar" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0d6efd] text-white font-bold text-xs uppercase tracking-wider">
+                    <i class="fas fa-plus-circle"></i> Publicar Vehículo
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: CTA BANNER PUBLICAR VEHÍCULO -->
+    <section class="py-16 bg-[#0d1f3c] text-white relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-96 h-96 bg-[#0d6efd]/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-900/60 to-slate-900/80 p-8 sm:p-12 rounded-3xl border border-blue-500/20 shadow-2xl">
+                <div class="space-y-3 text-center lg:text-left">
+                    <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold uppercase tracking-wider">
+                        ¿Tienes un vehículo disponible?
+                    </span>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Genera Ingresos Rentando Tu Vehículo
+                    </h3>
+                    <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                        Sube las fotos en WebP HD optimizadas, define el precio por día y tus clientes te escribirán directamente a tu número de WhatsApp para rentar.
+                    </p>
+                </div>
+                <div class="shrink-0 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="/publicar" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-sm uppercase tracking-wider shadow-lg hover:shadow-blue-500/40 transition-all">
+                        <i class="fas fa-plus-circle"></i> Publicar Mi Auto Gratis
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIDEBAR DRAWER OVERLAY -->
+    <VehicleSidebar />
 
 </Layout>
 
+<script>
+    import { collection, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
+    import { db } from "../lib/firebase/client";
+
+    // HERO SLIDER LOGIC
+    const slides = document.querySelectorAll<HTMLElement>('.hero-slide');
+    const dots = document.querySelectorAll<HTMLElement>('.hero-dot');
+    const titles = [
+        "Conduce lo <span class='text-[#0d6efd] underline decoration-blue-400/40'>Extraordinario</span>",
+        "Tu Viaje Comienza <span class='text-[#0d6efd] underline decoration-blue-400/40'>Aquí</span>",
+        "Elegancia en Cada <span class='text-[#0d6efd] underline decoration-blue-400/40'>Kilómetro</span>"
+    ];
+    const subtitles = [
+        "Renta SUVs premium y autos verificados directamente con sus propietarios en República Dominicana. Trato directo e independiente por WhatsApp.",
+        "Libertad absoluta para moverte por República Dominicana con comodidad, aire acondicionado y la mejor asistencia local.",
+        "Vehículos seleccionados para quienes exigen lo mejor: desde SUVs familiares hasta camionetas y todoterrenos de alto nivel."
+    ];
+    let currentSlide = 0;
+    const titleEl = document.getElementById('hero-title');
+    const subTitleEl = document.getElementById('hero-subtitle');
+
+    function showSlide(index: number) {
+        slides.forEach((s, i) => {
+            if (i === index) {
+                s.classList.remove('opacity-0', 'pointer-events-none');
+                s.classList.add('opacity-100');
+            } else {
+                s.classList.remove('opacity-100');
+                s.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+        dots.forEach((d, i) => {
+            if (i === index) {
+                d.classList.remove('w-2', 'bg-white/40');
+                d.classList.add('w-8', 'bg-[#0d6efd]');
+            } else {
+                d.classList.remove('w-8', 'bg-[#0d6efd]');
+                d.classList.add('w-2', 'bg-white/40');
+            }
+        });
+        if (titleEl) titleEl.innerHTML = titles[index];
+        if (subTitleEl) subTitleEl.textContent = subtitles[index];
+        currentSlide = index;
+    }
+
+    dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+            const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
+            showSlide(idx);
+        });
+    });
+
+    setInterval(() => {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }, 4500);
+
+    // FIRESTORE REALTIME VEHICLES STREAM
+    const vehiclesGrid = document.getElementById('vehicles-grid');
+    const fleetCount = document.getElementById('fleet-count');
+    const emptyState = document.getElementById('empty-state');
+
+    // Sidebar DOM elements
+    const offcanvas = document.getElementById('vehicle-offcanvas');
+    const backdrop = document.getElementById('offcanvas-backdrop');
+    const panel = document.getElementById('offcanvas-panel');
+    const closeBtn = document.getElementById('close-offcanvas-btn');
+
+    const sCategory = document.getElementById('sidebar-category');
+    const sMainImg = document.getElementById('sidebar-main-img') as HTMLImageElement;
+    const sGalleryThumbs = document.getElementById('sidebar-gallery-thumbs');
+    const sTitle = document.getElementById('sidebar-title');
+    const sLocation = document.getElementById('sidebar-location');
+    const sPrice = document.getElementById('sidebar-price');
+    const sSeats = document.getElementById('sidebar-seats');
+    const sLuggage = document.getElementById('sidebar-luggage');
+    const sTransmission = document.getElementById('sidebar-transmission');
+    const sFuel = document.getElementById('sidebar-fuel');
+    const sDescription = document.getElementById('sidebar-description');
+    const sOwnerPhoto = document.getElementById('sidebar-owner-photo') as HTMLImageElement;
+    const sOwnerName = document.getElementById('sidebar-owner-name');
+    const sOwnerPhone = document.getElementById('sidebar-owner-phone');
+    const sWhatsappBtn = document.getElementById('sidebar-whatsapp-btn') as HTMLAnchorElement;
+
+    function openSidebar(vehicle: any, owner: any) {
+        if (!offcanvas || !panel || !backdrop) return;
+
+        // Populate fields
+        if (sCategory) sCategory.textContent = vehicle.category || 'SUV';
+        if (sMainImg) sMainImg.src = vehicle.mainImage || '/Honda.webp';
+        if (sTitle) sTitle.textContent = vehicle.title || 'Vehículo en Renta';
+        if (sPrice) sPrice.textContent = `$${vehicle.pricePerDay || vehicle.price || 0}`;
+        if (sSeats) sSeats.textContent = `${vehicle.seats || 5} Pasajeros`;
+        if (sLuggage) sLuggage.textContent = vehicle.luggage || '3-4 Maletas';
+        if (sTransmission) sTransmission.textContent = vehicle.transmission === 'manual' ? 'Manual' : 'Automática';
+        if (sFuel) sFuel.textContent = vehicle.fuelType || 'Gasolina';
+        if (sDescription) sDescription.textContent = vehicle.description || 'Vehículo en excelente estado y listo para entrega.';
+        
+        // Owner Profile & WhatsApp
+        const ownerName = owner?.fullName || vehicle.ownerName || 'Tu Carro y Más Rent A Car';
+        const rawPhone = owner?.whatsapp || owner?.phone || vehicle.ownerWhatsapp || '18499154010';
+        const cleanPhone = rawPhone.replace(/\D/g, '');
+        const ownerPhoto = owner?.photoUrl || vehicle.ownerPhoto || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80';
+
+        if (sOwnerName) sOwnerName.textContent = ownerName;
+        if (sOwnerPhone) sOwnerPhone.textContent = `+${cleanPhone}`;
+        if (sOwnerPhoto) sOwnerPhoto.src = ownerPhoto;
+
+        // WhatsApp Custom Message
+        const msg = encodeURIComponent(`Hola, vi tu ${vehicle.title} en Tu Carro y Más y me interesa rentarlo. ¿Está disponible?`);
+        if (sWhatsappBtn) {
+            sWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
+        }
+
+        // Gallery Thumbnails
+        if (sGalleryThumbs) {
+            sGalleryThumbs.innerHTML = '';
+            const allImages = vehicle.images && vehicle.images.length > 0 ? vehicle.images : [vehicle.mainImage];
+            allImages.forEach((imgUrl: string) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgUrl;
+                thumb.className = 'w-16 h-12 object-cover rounded-lg border-2 border-transparent hover:border-[#0d6efd] cursor-pointer transition-all shrink-0';
+                thumb.addEventListener('click', () => {
+                    if (sMainImg) sMainImg.src = imgUrl;
+                });
+                sGalleryThumbs.appendChild(thumb);
+            });
+        }
+
+        // Open animation
+        offcanvas.classList.remove('pointer-events-none', 'opacity-0');
+        offcanvas.classList.add('pointer-events-auto', 'opacity-100');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeSidebar() {
+        if (!offcanvas || !panel || !backdrop) return;
+        panel.classList.add('translate-x-full');
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        setTimeout(() => {
+            offcanvas.classList.remove('pointer-events-auto', 'opacity-100');
+            offcanvas.classList.add('pointer-events-none', 'opacity-0');
+            document.body.classList.remove('overflow-hidden');
+        }, 300);
+    }
+
+    closeBtn?.addEventListener('click', closeSidebar);
+    backdrop?.addEventListener('click', closeSidebar);
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSidebar();
+    });
+
+    // Listen to Vehicles in Firestore
+    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
+    onSnapshot(q, async (snapshot) => {
+        if (!vehiclesGrid) return;
+
+        if (snapshot.empty) {
+            vehiclesGrid.innerHTML = '';
+            emptyState?.classList.remove('hidden');
+            if (fleetCount) fleetCount.textContent = '0 Vehículos';
+            return;
+        }
+
+        emptyState?.classList.add('hidden');
+        if (fleetCount) fleetCount.textContent = `${snapshot.size} Vehículos Disponibles`;
+        vehiclesGrid.innerHTML = '';
+
+        for (const docSnap of snapshot.docs) {
+            const v = docSnap.data();
+            v.id = docSnap.id;
+
+            // Fetch owner details in parallel or on click
+            let ownerData: any = null;
+            if (v.ownerId) {
+                try {
+                    const uSnap = await getDoc(doc(db, "users", v.ownerId));
+                    if (uSnap.exists()) ownerData = uSnap.data();
+                } catch (e) {
+                    console.warn("Could not fetch owner", e);
+                }
+            }
+
+            const cleanPhone = (ownerData?.whatsapp || v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
+            const defaultMsg = encodeURIComponent(`Hola, vi tu ${v.title} en Tu Carro y Más y deseo rentarlo.`);
+
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col premium-card group cursor-pointer";
+            card.innerHTML = `
+                <!-- Image Container with Zoom -->
+                <div class="relative h-60 w-full overflow-hidden bg-slate-100">
+                    <img 
+                        src="${v.mainImage || '/Honda.webp'}" 
+                        alt="${v.title}" 
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    />
+                    <div class="absolute top-3 left-3 flex gap-2">
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-white/95 text-[#0d1f3c] shadow-sm">
+                            ${v.category || 'SUV'}
+                        </span>
+                        <span class="px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-black/60 text-white backdrop-blur-sm">
+                            WebP 1500px
+                        </span>
+                    </div>
+                    <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-[#0d6efd] text-white font-black text-sm shadow-md">
+                        $${v.pricePerDay || v.price || 0}<span class="text-[10px] font-normal"> /día</span>
+                    </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <h3 class="text-xl font-bold text-[#0d1f3c] tracking-tight group-hover:text-[#0d6efd] transition-colors">
+                                ${v.title}
+                            </h3>
+                            <span class="text-xs font-semibold text-slate-400">${v.year || ''}</span>
+                        </div>
+                        <p class="text-xs text-slate-500 line-clamp-2 mb-4 leading-relaxed">
+                            ${v.description || 'Color ' + (v.color || 'Elegante') + '. Confort para familia o negocios.'}
+                        </p>
+
+                        <!-- Specs Pills -->
+                        <div class="grid grid-cols-2 gap-2 py-3 border-y border-slate-100 text-xs text-slate-600 mb-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-user text-[#0d6efd]"></i>
+                                <span>${v.seats || 5} Asientos</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-suitcase text-[#0d6efd]"></i>
+                                <span>${v.luggage || '3-4 Maletas'}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-gear text-[#0d6efd]"></i>
+                                <span>${v.transmission === 'manual' ? 'Manual' : 'Automática'}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-map-marker-alt text-[#0d6efd]"></i>
+                                <span>${v.city || 'Santo Domingo'}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center gap-2 pt-2">
+                        <button class="details-trigger flex-1 py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#0d6efd] hover:text-white text-slate-800 font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2">
+                            <i class="fas fa-eye"></i>
+                            <span>Ver Ficha & Dueño</span>
+                        </button>
+                        <a href="https://wa.me/${cleanPhone}?text=${defaultMsg}" target="_blank" rel="noopener noreferrer" class="whatsapp-trigger px-4 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-1 shadow-sm transition-colors" title="Chatear en WhatsApp">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            // Clicking on card or "Ver Ficha" opens sidebar
+            card.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+                if (target.closest('.whatsapp-trigger')) {
+                    // let whatsapp link open directly
+                    return;
+                }
+                openSidebar(v, ownerData);
+            });
+
+            vehiclesGrid.appendChild(card);
+        }
+    }, (error) => {
+        console.error("Error al escuchar vehículos:", error);
+    });
+</script>
