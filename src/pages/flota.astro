@@ -168,7 +168,7 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
             card.innerHTML = `
                 <div>
                     <div class="car-image-container">
-                        <img src="${v.mainImage}" alt="${v.title}" />
+                        <img src="${(v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : v.mainImage)}" alt="${v.title}" />
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-center mb-2">

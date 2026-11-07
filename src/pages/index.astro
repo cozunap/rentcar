@@ -343,7 +343,7 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
                 <div>
                     <!-- Car Image Container (Exact 300px white clean background) -->
                     <div class="car-image-container">
-                        <img src="${v.mainImage}" alt="${v.title}" />
+                        <img src="${(v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : v.mainImage)}" alt="${v.title}" />
                     </div>
 
                     <!-- Card Body -->
