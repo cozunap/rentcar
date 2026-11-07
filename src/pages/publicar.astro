@@ -2,149 +2,186 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Publicar Mi Vehículo | Tu Carro y Más Rent A Car">
-    <div class="py-12 bg-slate-50 min-h-screen">
+<Layout title="Publicar Mi Vehículo en Renta | Tu Carro y Más RD">
+    <div class="py-12 bg-[#f8fafc] min-h-screen">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Breadcrumbs -->
-            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
-                <a href="/" class="hover:text-[#0d6efd]">Inicio</a>
+            <nav class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-6">
+                <a href="/" class="hover:text-[#1d4ed8]">Inicio</a>
                 <span>/</span>
-                <a href="/panel" class="hover:text-[#0d6efd]">Mi Panel</a>
+                <a href="/panel" class="hover:text-[#1d4ed8]">Mi Panel</a>
                 <span>/</span>
                 <span class="text-slate-800">Publicar Vehículo</span>
             </nav>
 
-            <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden">
+            <div class="bg-white border border-slate-200 shadow-xl overflow-hidden">
                 
-                <!-- Header Banner -->
-                <div class="bg-[#0d1f3c] text-white p-8 sm:p-10 relative">
-                    <div class="max-w-2xl relative z-10">
-                        <span class="px-3 py-1 rounded-full bg-[#0d6efd]/30 text-blue-300 text-xs font-bold uppercase tracking-wider mb-3 inline-block">
-                            Convertidor Automático WebP 1500px Activo
-                        </span>
-                        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Publicar Nuevo Vehículo</h1>
-                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
-                            Completa los datos de tu vehículo y sube tus fotos. Nuestro sistema convertirá automáticamente todas las imágenes a formato WebP optimizado en 1500x1500px para máxima velocidad y fidelidad.
-                        </p>
-                    </div>
+                <!-- Corporate Header Banner -->
+                <div class="bg-[#0f172a] text-white p-8 sm:p-10 border-b border-slate-800">
+                    <span class="px-3 py-1 bg-[#1d4ed8]/20 text-[#60a5fa] border border-[#1d4ed8]/40 text-[10px] font-black uppercase tracking-widest mb-3 inline-block">
+                        Panel de Propietario • Alquiler de Vehículos
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight uppercase font-['Outfit',sans-serif]">
+                        Publicar Vehículo en Renta
+                    </h1>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed max-w-2xl">
+                        Registra tu vehículo en simples pasos. Nuestro sistema optimiza y cuadra automáticamente todas las fotos en formato WebP de alta definición.
+                    </p>
                 </div>
 
-                <!-- Form Section -->
+                <!-- Step-by-Step Form -->
                 <form id="vehicle-form" class="p-8 sm:p-10 space-y-8">
                     
-                    <div id="form-alert" class="hidden p-4 rounded-xl text-xs font-medium border text-center"></div>
+                    <div id="form-alert" class="hidden p-4 text-xs font-medium border text-center"></div>
 
-                    <!-- STEP 1: FOTOS DEL VEHÍCULO -->
+                    <!-- GUÍA DE ESPECIFICACIONES DE FOTOGRAFÍAS -->
+                    <div class="bg-blue-50/70 border border-blue-200 p-5 space-y-3">
+                        <div class="flex items-center gap-2 text-[#1d4ed8] font-bold text-xs uppercase tracking-wider">
+                            <i class="fas fa-info-circle text-base"></i>
+                            <span>Guía de Especificaciones para Fotos de Vehículos</span>
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                            <li><strong>Recomendación de formato:</strong> Se recomienda subir fotos en proporción <strong>cuadrada (1:1)</strong> para un encuadre perfecto.</li>
+                            <li><strong>Conversión automática:</strong> Si tu foto es horizontal o vertical, nuestro sistema la centrará y convertirá automáticamente a formato <strong>cuadrado 1500x1500px WebP</strong> sobre fondo blanco nítido para que el auto nunca se vea cortado.</li>
+                            <li><strong>Encuadre sugerido:</strong> Toma la foto en ángulo 3/4 frontal donde se aprecie el vehículo completo (ruedas, retrovisores y carrocería) con buena iluminación.</li>
+                        </ul>
+                    </div>
+
+                    <!-- PASO 1: FOTOS (PRINCIPAL Y GALERÍA) -->
                     <div class="space-y-4">
                         <div class="border-b border-slate-100 pb-3">
-                            <h2 class="text-base font-bold text-[#0d1f3c] flex items-center gap-2">
-                                <i class="fas fa-camera text-[#0d6efd]"></i>
-                                <span>1. Fotos del Vehículo (Conversión WebP Automática)</span>
+                            <h2 class="text-sm font-bold uppercase tracking-wider text-[#0f172a] flex items-center gap-2">
+                                <i class="fas fa-camera text-[#1d4ed8]"></i>
+                                <span>1. Fotos del Vehículo (Formato Cuadrado WebP 1500px)</span>
                             </h2>
-                            <p class="text-xs text-slate-500 mt-0.5">Sube la foto principal y fotos adicionales. Se redimensionarán a 1500x1500px sin perder calidad.</p>
                         </div>
 
-                        <!-- Dropzone for Main Photo -->
+                        <!-- Foto Principal -->
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                                Foto Principal del Auto * (Portada en el catálogo)
+                                <i class="fas fa-star text-amber-500 me-1"></i> Foto Principal de Portada *
                             </label>
-                            <div id="main-dropzone" class="border-2 border-dashed border-slate-300 hover:border-[#0d6efd] rounded-2xl p-6 text-center cursor-pointer transition-colors bg-slate-50/50 hover:bg-blue-50/20 relative">
+                            <div id="main-dropzone" class="border-2 border-dashed border-slate-300 hover:border-[#1d4ed8] p-6 text-center cursor-pointer transition-colors bg-slate-50 hover:bg-blue-50/20">
                                 <input type="file" id="main-image-input" accept="image/*" class="hidden" required />
-                                <div id="main-upload-prompt" class="space-y-2">
-                                    <div class="w-12 h-12 rounded-full bg-blue-100 text-[#0d6efd] flex items-center justify-center mx-auto text-xl">
-                                        <i class="fas fa-cloud-upload-alt"></i>
+                                <div id="main-prompt" class="space-y-2">
+                                    <div class="w-12 h-12 bg-white text-[#1d4ed8] border border-slate-200 flex items-center justify-center mx-auto text-xl shadow-xs">
+                                        <i class="fas fa-cloud-arrow-up"></i>
                                     </div>
-                                    <p class="text-sm font-semibold text-slate-700">Haz clic o arrastra la foto principal aquí</p>
-                                    <p class="text-xs text-slate-400">JPG, PNG o WEBP. Se convertirá automáticamente a 1500px WebP</p>
+                                    <p class="text-xs font-bold uppercase tracking-wider text-slate-700">Seleccionar Foto Principal</p>
+                                    <p class="text-[11px] text-slate-400">JPG, PNG o WEBP. Se convertirá automáticamente a Cuadrado 1500x1500px.</p>
                                 </div>
-                                <div id="main-preview-container" class="hidden relative">
-                                    <img id="main-preview-img" src="" alt="Vista previa principal" class="w-full max-h-80 object-cover rounded-xl shadow-md mx-auto" />
-                                    <div id="main-badge-info" class="mt-2 text-xs font-semibold text-emerald-600"></div>
-                                    <button type="button" id="btn-change-main" class="mt-2 px-3 py-1 bg-white border border-slate-200 text-xs font-semibold rounded-lg text-slate-700 hover:bg-slate-100">
+                                <div id="main-preview-box" class="hidden space-y-3">
+                                    <div class="w-48 h-48 mx-auto bg-white border border-slate-200 p-2 shadow-sm">
+                                        <img id="main-preview-img" src="" alt="Vista previa principal" class="w-full h-full object-contain" />
+                                    </div>
+                                    <span id="main-status-text" class="text-xs font-bold text-emerald-700 block"></span>
+                                    <button type="button" id="btn-change-main" class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 bg-white border border-slate-300 hover:bg-slate-100">
                                         Cambiar Foto
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Extra Gallery Photos -->
+                        <!-- Galería de Fotos Cuadradas -->
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                                Galería Adicional (Opcional - hasta 6 fotos)
+                                <i class="fas fa-images text-[#1d4ed8] me-1"></i> Galería Adicional (Interiores, lateral, trasera - hasta 6 fotos)
                             </label>
                             <div class="flex items-center gap-3">
-                                <label for="gallery-input" class="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 hover:border-[#0d6efd] bg-white text-slate-700 hover:text-[#0d6efd] text-xs font-bold transition-all shadow-sm">
-                                    <i class="fas fa-images"></i> Seleccionar Fotos Adicionales
+                                <label for="gallery-input" class="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-300 text-slate-700 hover:text-[#1d4ed8] hover:border-[#1d4ed8] text-xs font-bold uppercase tracking-wider luxury-btn">
+                                    <i class="fas fa-plus"></i> Agregar Fotos a la Galería
                                 </label>
-                                <span id="gallery-status-text" class="text-xs text-slate-400">0 fotos agregadas</span>
+                                <span id="gallery-count" class="text-xs text-slate-400 font-medium">0 fotos añadidas</span>
                                 <input type="file" id="gallery-input" accept="image/*" multiple class="hidden" />
                             </div>
-                            <!-- Gallery Preview Grid -->
-                            <div id="gallery-preview-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4"></div>
+                            <!-- Miniatura grid cuadrada -->
+                            <div id="gallery-thumbs-grid" class="grid grid-cols-3 sm:grid-cols-6 gap-3 mt-4"></div>
                         </div>
                     </div>
 
-                    <!-- STEP 2: ESPECIFICACIONES DEL VEHÍCULO -->
-                    <div class="space-y-4 pt-4">
+                    <!-- PASO 2: ESPECIFICACIONES CON ICONOS FONT AWESOME -->
+                    <div class="space-y-4 pt-4 border-t border-slate-100">
                         <div class="border-b border-slate-100 pb-3">
-                            <h2 class="text-base font-bold text-[#0d1f3c] flex items-center gap-2">
-                                <i class="fas fa-car text-[#0d6efd]"></i>
-                                <span>2. Datos y Especificaciones del Vehículo</span>
+                            <h2 class="text-sm font-bold uppercase tracking-wider text-[#0f172a] flex items-center gap-2">
+                                <i class="fas fa-sliders text-[#1d4ed8]"></i>
+                                <span>2. Especificaciones Técnicas del Auto</span>
                             </h2>
+                            <p class="text-xs text-slate-400">Cada especificación aparecerá con su icono correspondiente en la ficha del vehículo.</p>
                         </div>
 
+                        <!-- Marca / Modelo / Año -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-brand">Marca *</label>
-                                <input type="text" id="v-brand" required placeholder="Ej: Honda, Jeep, Toyota" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-brand">
+                                    <i class="fas fa-certificate text-[#1d4ed8] me-1"></i> Marca *
+                                </label>
+                                <input type="text" id="v-brand" required placeholder="Ej: Honda, Jeep, Toyota" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-model">Modelo *</label>
-                                <input type="text" id="v-model" required placeholder="Ej: CR-V EX, Cherokee" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-model">
+                                    <i class="fas fa-car-side text-[#1d4ed8] me-1"></i> Modelo *
+                                </label>
+                                <input type="text" id="v-model" required placeholder="Ej: CR-V EX, Cherokee Summit" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-year">Año *</label>
-                                <input type="number" id="v-year" required min="1995" max="2030" value="2020" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-year">
+                                    <i class="fas fa-calendar-alt text-[#1d4ed8] me-1"></i> Año *
+                                </label>
+                                <input type="number" id="v-year" required min="2000" max="2030" value="2020" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                         </div>
 
+                        <!-- Categoría / Precio / Transmisión -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-category">Categoría *</label>
-                                <select id="v-category" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-category">
+                                    <i class="fas fa-tag text-[#1d4ed8] me-1"></i> Categoría *
+                                </label>
+                                <select id="v-category" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
                                     <option value="SUV">SUV</option>
                                     <option value="Premium">Premium</option>
                                     <option value="Sedán">Sedán</option>
-                                    <option value="Camioneta">Camioneta 4x4</option>
+                                    <option value="Camioneta 4x4">Camioneta 4x4</option>
                                     <option value="Económico">Económico</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-price">Precio por Día (USD) *</label>
-                                <div class="relative">
-                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
-                                    <input type="number" id="v-price" required min="10" max="5000" placeholder="55" class="w-full pl-8 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
-                                </div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-price">
+                                    <i class="fas fa-dollar-sign text-[#1d4ed8] me-1"></i> Precio por Día (USD) *
+                                </label>
+                                <input type="number" id="v-price" required min="10" max="3000" placeholder="55" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-transmission">Transmisión *</label>
-                                <select id="v-transmission" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-transmission">
+                                    <i class="fas fa-gear text-[#1d4ed8] me-1"></i> Transmisión *
+                                </label>
+                                <select id="v-transmission" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
                                     <option value="automatic">Automática</option>
                                     <option value="manual">Manual</option>
                                 </select>
                             </div>
                         </div>
 
+                        <!-- Asientos / Maletas / Combustible -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-seats">Pasajeros</label>
-                                <input type="number" id="v-seats" min="2" max="15" value="5" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-seats">
+                                    <i class="fas fa-users text-[#1d4ed8] me-1"></i> Pasajeros
+                                </label>
+                                <input type="number" id="v-seats" min="2" max="15" value="5" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-fuel">Combustible</label>
-                                <select id="v-fuel" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-luggage">
+                                    <i class="fas fa-suitcase-rolling text-[#1d4ed8] me-1"></i> Capacidad Maletas
+                                </label>
+                                <input type="text" id="v-luggage" value="3-4 Maletas" placeholder="Ej: 3 Maletas grandes" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-fuel">
+                                    <i class="fas fa-gas-pump text-[#1d4ed8] me-1"></i> Combustible
+                                </label>
+                                <select id="v-fuel" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
                                     <option value="Gasolina">Gasolina</option>
                                     <option value="Diesel">Diesel</option>
                                     <option value="Híbrido">Híbrido</option>
@@ -152,60 +189,69 @@ import Layout from '../layouts/Layout.astro';
                                     <option value="Gas / GLP">Gas / GLP</option>
                                 </select>
                             </div>
+                        </div>
+
+                        <!-- Ubicación / Color -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-city">Ciudad / Ubicación</label>
-                                <input type="text" id="v-city" value="Santo Domingo Este" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-city">
+                                    <i class="fas fa-map-marker-alt text-[#1d4ed8] me-1"></i> Ciudad / Ubicación *
+                                </label>
+                                <input type="text" id="v-city" required value="Santo Domingo Este" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-color">
+                                    <i class="fas fa-palette text-[#1d4ed8] me-1"></i> Color del Vehículo
+                                </label>
+                                <input type="text" id="v-color" placeholder="Ej: Blanca, Gris Ratón, Negro" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                         </div>
 
+                        <!-- Descripción -->
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-description">
-                                Descripción Detallada del Vehículo
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-desc">
+                                <i class="fas fa-align-left text-[#1d4ed8] me-1"></i> Descripción Detallada
                             </label>
-                            <textarea id="v-description" rows="3" placeholder="Indica el color, equipamiento, condiciones de entrega o requisitos para rentar..." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]"></textarea>
+                            <textarea id="v-desc" rows="3" placeholder="Indica condiciones del vehículo, aire acondicionado, equipamiento o requisitos de entrega..." class="w-full p-4 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]"></textarea>
                         </div>
                     </div>
 
-                    <!-- STEP 3: INFORMACIÓN DE CONTACTO / WHATSAPP -->
-                    <div class="space-y-4 pt-4">
+                    <!-- PASO 3: CONTACTO DIRECTO POR WHATSAPP -->
+                    <div class="space-y-4 pt-4 border-t border-slate-100">
                         <div class="border-b border-slate-100 pb-3">
-                            <h2 class="text-base font-bold text-[#0d1f3c] flex items-center gap-2">
-                                <i class="fab fa-whatsapp text-emerald-500"></i>
-                                <span>3. Contacto Directo del Propietario</span>
+                            <h2 class="text-sm font-bold uppercase tracking-wider text-[#0f172a] flex items-center gap-2">
+                                <i class="fab fa-whatsapp text-emerald-600"></i>
+                                <span>3. WhatsApp de Contacto para Alquilar</span>
                             </h2>
-                            <p class="text-xs text-slate-500 mt-0.5">Los clientes que vean este vehículo se comunicarán directamente con este número de WhatsApp.</p>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-owner-whatsapp">
-                                    Número de WhatsApp Independiente *
+                                    <i class="fab fa-whatsapp text-emerald-600 me-1"></i> Número de WhatsApp Independiente *
                                 </label>
-                                <div class="relative">
-                                    <i class="fab fa-whatsapp absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500 text-base"></i>
-                                    <input type="tel" id="v-owner-whatsapp" required placeholder="8499154010" class="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
-                                </div>
+                                <input type="tel" id="v-owner-whatsapp" required placeholder="8499154010" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1" for="v-owner-name">
-                                    Nombre a Mostrar
+                                    <i class="fas fa-user-check text-[#1d4ed8] me-1"></i> Nombre a Mostrar
                                 </label>
-                                <input type="text" id="v-owner-name" placeholder="Tu Nombre o Agencia" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd]" />
+                                <input type="text" id="v-owner-name" placeholder="Tu Nombre o Agencia" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
                             </div>
                         </div>
                     </div>
 
-                    <!-- SUBMIT BUTTON -->
+                    <!-- BOTÓN DE PUBLICACIÓN -->
                     <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <p class="text-xs text-slate-400">
-                            <i class="fas fa-shield-alt text-[#0d6efd] me-1"></i> Publicación instantánea visible en el catálogo principal.
+                            <i class="fas fa-check-circle text-emerald-600 me-1"></i> Publicación instantánea en el catálogo oficial de renta.
                         </p>
                         <button 
                             type="submit" 
                             id="btn-publish-submit" 
-                            class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2"
+                            class="w-full sm:w-auto px-8 py-3.5 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-bold text-xs uppercase tracking-wider transition-colors luxury-btn flex items-center justify-center gap-2 shadow-sm"
                         >
-                            <span id="btn-publish-text">Publicar Vehículo Ahora</span>
+                            <span id="btn-publish-text">Publicar Vehículo en Renta</span>
                             <i id="btn-publish-spinner" class="fas fa-circle-notch fa-spin hidden"></i>
                         </button>
                     </div>
@@ -223,21 +269,20 @@ import Layout from '../layouts/Layout.astro';
     import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
     import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
     import { auth, db, storage } from "../lib/firebase/client";
-    import { convertToWebP } from "../lib/imageOptimizer";
+    import { convertToSquareWebP } from "../lib/imageOptimizer";
 
     let currentUser: any = null;
-    let mainOptimizedWebp: { dataUrl: string; blob: Blob; file: File; width: number; height: number; newSize: number } | null = null;
-    let galleryOptimizedWebp: Array<{ dataUrl: string; blob: Blob; file: File; width: number; height: number }> = [];
+    let mainSquareWebp: any = null;
+    let gallerySquareWebp: any[] = [];
 
     const formAlert = document.getElementById('form-alert');
     function showAlert(msg: string, isError = true) {
         if (!formAlert) return;
         formAlert.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'border-red-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
         formAlert.classList.add(isError ? 'bg-red-50' : 'bg-emerald-50', isError ? 'text-red-700' : 'text-emerald-700', isError ? 'border-red-200' : 'border-emerald-200');
-        formAlert.innerHTML = msg;
+        formAlert.textContent = msg;
     }
 
-    // Require Auth
     onAuthStateChanged(auth, async (user) => {
         if (!user) {
             window.location.href = '/auth';
@@ -245,32 +290,31 @@ import Layout from '../layouts/Layout.astro';
         }
         currentUser = user;
 
-        // Auto-fill owner info from user profile
         try {
             const uSnap = await getDoc(doc(db, "users", user.uid));
             if (uSnap.exists()) {
-                const uData = uSnap.data();
-                const whatsappInput = document.getElementById('v-owner-whatsapp') as HTMLInputElement;
-                const nameInput = document.getElementById('v-owner-name') as HTMLInputElement;
-                if (whatsappInput && uData.whatsapp) whatsappInput.value = uData.whatsapp;
-                if (nameInput && uData.fullName) nameInput.value = uData.fullName;
+                const u = uSnap.data();
+                const wInput = document.getElementById('v-owner-whatsapp') as HTMLInputElement;
+                const nInput = document.getElementById('v-owner-name') as HTMLInputElement;
+                if (wInput && u.whatsapp) wInput.value = u.whatsapp;
+                if (nInput && u.fullName) nInput.value = u.fullName;
             }
         } catch (e) {
-            console.warn("Could not prefill user data", e);
+            console.warn(e);
         }
     });
 
-    // 1. MAIN IMAGE HANDLERS
+    // FOTO PRINCIPAL
     const mainDropzone = document.getElementById('main-dropzone');
     const mainInput = document.getElementById('main-image-input') as HTMLInputElement;
-    const mainPrompt = document.getElementById('main-upload-prompt');
-    const mainPreviewContainer = document.getElementById('main-preview-container');
+    const mainPrompt = document.getElementById('main-prompt');
+    const mainPreviewBox = document.getElementById('main-preview-box');
     const mainPreviewImg = document.getElementById('main-preview-img') as HTMLImageElement;
-    const mainBadgeInfo = document.getElementById('main-badge-info');
+    const mainStatus = document.getElementById('main-status-text');
     const btnChangeMain = document.getElementById('btn-change-main');
 
     mainDropzone?.addEventListener('click', (e) => {
-        if (e.target !== btnChangeMain && mainPreviewContainer?.classList.contains('hidden')) {
+        if (e.target !== btnChangeMain && mainPreviewBox?.classList.contains('hidden')) {
             mainInput?.click();
         }
     });
@@ -281,59 +325,56 @@ import Layout from '../layouts/Layout.astro';
         if (!file) return;
 
         try {
-            showAlert('Optimizando y convirtiendo a formato WebP 1500px...', false);
-            // Convert to 1500x1500px WebP
-            mainOptimizedWebp = await convertToWebP(file, 1500, 1500, 0.88);
-            
-            if (mainPreviewImg && mainPreviewContainer && mainPrompt && mainBadgeInfo) {
-                mainPreviewImg.src = mainOptimizedWebp.dataUrl;
+            showAlert('Convirtiendo foto a formato cuadrado 1500x1500px WebP...', false);
+            mainSquareWebp = await convertToSquareWebP(file, 1500, 0.88);
+            if (mainPreviewImg && mainPreviewBox && mainPrompt && mainStatus) {
+                mainPreviewImg.src = mainSquareWebp.dataUrl;
                 mainPrompt.classList.add('hidden');
-                mainPreviewContainer.classList.remove('hidden');
-                const kb = Math.round(mainOptimizedWebp.newSize / 1024);
-                mainBadgeInfo.textContent = `✓ Convertida a WebP 1500px (${mainOptimizedWebp.width}x${mainOptimizedWebp.height}px, ${kb} KB)`;
+                mainPreviewBox.classList.remove('hidden');
+                const kb = Math.round(mainSquareWebp.newSize / 1024);
+                mainStatus.textContent = `✓ Convertida a Cuadrada 1500x1500px WebP (${kb} KB) - Vehículo Completo`;
             }
             if (formAlert) formAlert.classList.add('hidden');
-        } catch (err: any) {
-            showAlert('Error al procesar la imagen: ' + err.message, true);
+        } catch (e: any) {
+            showAlert("Error al procesar foto principal: " + e.message, true);
         }
     });
 
-    // 2. GALLERY IMAGES HANDLERS
+    // GALERÍA DE FOTOS
     const galleryInput = document.getElementById('gallery-input') as HTMLInputElement;
-    const galleryStatus = document.getElementById('gallery-status-text');
-    const galleryGrid = document.getElementById('gallery-preview-grid');
+    const galleryCount = document.getElementById('gallery-count');
+    const galleryGrid = document.getElementById('gallery-thumbs-grid');
 
     galleryInput?.addEventListener('change', async () => {
         const files = galleryInput.files;
         if (!files || files.length === 0) return;
 
-        showAlert('Procesando imágenes de galería a WebP 1500px...', false);
-        galleryOptimizedWebp = [];
+        showAlert('Procesando fotos de galería a formato cuadrado 1500px...', false);
+        gallerySquareWebp = [];
         if (galleryGrid) galleryGrid.innerHTML = '';
 
         for (let i = 0; i < Math.min(files.length, 6); i++) {
-            const f = files[i];
             try {
-                const opt = await convertToWebP(f, 1500, 1500, 0.85);
-                galleryOptimizedWebp.push(opt);
+                const opt = await convertToSquareWebP(files[i], 1500, 0.85);
+                gallerySquareWebp.push(opt);
 
-                const card = document.createElement('div');
-                card.className = "relative h-28 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 group";
-                card.innerHTML = `
-                    <img src="${opt.dataUrl}" class="w-full h-full object-cover" />
-                    <span class="absolute bottom-1 right-1 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-mono">WebP</span>
+                const item = document.createElement('div');
+                item.className = "w-full aspect-square bg-white border border-slate-200 p-1 overflow-hidden relative shadow-xs";
+                item.innerHTML = `
+                    <img src="${opt.dataUrl}" class="w-full h-full object-contain" />
+                    <span class="absolute bottom-1 right-1 text-[8px] bg-black/70 text-white px-1 font-mono">1:1</span>
                 `;
-                galleryGrid?.appendChild(card);
-            } catch (e) {
-                console.error("Gallery conversion error:", e);
+                galleryGrid?.appendChild(item);
+            } catch (err) {
+                console.error(err);
             }
         }
 
-        if (galleryStatus) galleryStatus.textContent = `${galleryOptimizedWebp.length} fotos optimizadas`;
+        if (galleryCount) galleryCount.textContent = `${gallerySquareWebp.length} fotos cuadradas listas`;
         if (formAlert) formAlert.classList.add('hidden');
     });
 
-    // 3. SUBMIT VEHICLE FORM
+    // SUBMIT VEHICLE
     const form = document.getElementById('vehicle-form') as HTMLFormElement;
     form?.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -343,8 +384,8 @@ import Layout from '../layouts/Layout.astro';
             return;
         }
 
-        if (!mainOptimizedWebp) {
-            showAlert('Debes subir la foto principal del vehículo.', true);
+        if (!mainSquareWebp) {
+            showAlert('Por favor sube la foto principal del vehículo.', true);
             return;
         }
 
@@ -355,55 +396,62 @@ import Layout from '../layouts/Layout.astro';
         const pricePerDay = parseFloat((document.getElementById('v-price') as HTMLInputElement).value);
         const transmission = (document.getElementById('v-transmission') as HTMLSelectElement).value;
         const seats = parseInt((document.getElementById('v-seats') as HTMLInputElement).value, 10) || 5;
+        const luggage = (document.getElementById('v-luggage') as HTMLInputElement).value.trim() || '3-4 Maletas';
         const fuelType = (document.getElementById('v-fuel') as HTMLSelectElement).value;
         const city = (document.getElementById('v-city') as HTMLInputElement).value.trim() || 'Santo Domingo Este';
-        const description = (document.getElementById('v-description') as HTMLTextAreaElement).value.trim();
-        const ownerWhatsappRaw = (document.getElementById('v-owner-whatsapp') as HTMLInputElement).value.trim();
-        const digits = ownerWhatsappRaw.replace(/\D/g, '');
+        const color = (document.getElementById('v-color') as HTMLInputElement).value.trim() || 'Blanca';
+        const description = (document.getElementById('v-desc') as HTMLTextAreaElement).value.trim();
+
+        const rawW = (document.getElementById('v-owner-whatsapp') as HTMLInputElement).value.trim();
+        const digits = rawW.replace(/\D/g, '');
         const ownerWhatsapp = digits.startsWith('1') ? `+${digits}` : `+1${digits}`;
+        const ownerName = (document.getElementById('v-owner-name') as HTMLInputElement).value.trim() || 'Tu Carro y Más';
 
         const title = `${brand} ${model} ${year}`;
-        const vehicleId = `v-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+        const vehicleId = `v-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
 
         const btnText = document.getElementById('btn-publish-text');
         const spinner = document.getElementById('btn-publish-spinner');
         btnText?.classList.add('hidden');
         spinner?.classList.remove('hidden');
-        showAlert('Subiendo fotos optimizadas y registrando vehículo...', false);
+        showAlert('Subiendo fotos cuadradas y registrando vehículo...', false);
 
         try {
-            // A. Upload Main Image to Firebase Storage
-            const mainFileRef = ref(storage, `vehicles/${vehicleId}/main_${Date.now()}.webp`);
-            await uploadBytes(mainFileRef, mainOptimizedWebp.blob, { contentType: 'image/webp' });
-            const mainImageUrl = await getDownloadURL(mainFileRef);
+            // A. Upload Main Square Photo
+            const mainRef = ref(storage, `vehicles/${vehicleId}/main_${Date.now()}.webp`);
+            await uploadBytes(mainRef, mainSquareWebp.blob, { contentType: 'image/webp' });
+            const mainImageUrl = await getDownloadURL(mainRef);
 
-            // B. Upload Gallery Images
+            // B. Upload Gallery Square Photos
             const galleryUrls: string[] = [mainImageUrl];
-            for (let i = 0; i < galleryOptimizedWebp.length; i++) {
+            for (let i = 0; i < gallerySquareWebp.length; i++) {
                 const gRef = ref(storage, `vehicles/${vehicleId}/gallery_${i}_${Date.now()}.webp`);
-                await uploadBytes(gRef, galleryOptimizedWebp[i].blob, { contentType: 'image/webp' });
+                await uploadBytes(gRef, gallerySquareWebp[i].blob, { contentType: 'image/webp' });
                 const gUrl = await getDownloadURL(gRef);
                 galleryUrls.push(gUrl);
             }
 
-            // C. Save Vehicle in Firestore
+            // C. Save in Firestore
             const vehicleDoc = {
                 ownerId: currentUser.uid,
                 ownerWhatsapp: ownerWhatsapp,
+                ownerName: ownerName,
                 title: title,
                 brand: brand,
                 model: model,
                 year: year,
+                category: category,
                 pricePerDay: pricePerDay,
                 price: pricePerDay,
-                mainImage: mainImageUrl,
-                images: galleryUrls,
-                description: description || `Vehículo ${title} disponible para renta en ${city}.`,
-                category: category,
                 transmission: transmission,
                 seats: seats,
+                luggage: luggage,
                 fuelType: fuelType,
+                color: color,
                 city: city,
+                description: description || `Color ${color}. ${seats} Asientos, ${luggage}. Confort y seguridad para viajar en República Dominicana.`,
+                mainImage: mainImageUrl,
+                images: galleryUrls,
                 isAvailable: true,
                 featured: false,
                 createdAt: serverTimestamp()
@@ -411,14 +459,15 @@ import Layout from '../layouts/Layout.astro';
 
             await setDoc(doc(db, "vehicles", vehicleId), vehicleDoc);
 
-            showAlert('¡Vehículo publicado con éxito! Redirigiendo a tu panel...', false);
+            showAlert('¡Vehículo publicado con éxito en el catálogo de renta! Redirigiendo...', false);
             setTimeout(() => {
-                window.location.href = '/panel';
+                window.location.href = '/flota';
             }, 800);
+
         } catch (err: any) {
             btnText?.classList.remove('hidden');
             spinner?.classList.add('hidden');
-            showAlert('Error al publicar: ' + err.message, true);
+            showAlert("Error al publicar: " + err.message, true);
         }
     });
 </script>
