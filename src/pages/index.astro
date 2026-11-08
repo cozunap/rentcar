@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import VehicleSidebar from '../components/VehicleSidebar.astro';
+import BookingModal from '../components/BookingModal.astro';
 ---
 
 <Layout title="Tu Carro y Más Rent A Car | Alquiler de Autos en Santo Domingo">
@@ -355,8 +356,9 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
         </div>
     </section>
 
-    <!-- Interactive Sidebar Drawer -->
+    <!-- Interactive Sidebar Drawer & RentGo Modal Pop-up -->
     <VehicleSidebar />
+    <BookingModal />
 
 </Layout>
 
@@ -409,6 +411,106 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
     setInterval(() => {
         goToSlide((currentIdx + 1) % slides.length);
     }, 3800);
+
+    // RENTGO MODAL REFERENCES (JetPopup Pattern)
+    const rentgoModal = document.getElementById('rentgo-booking-modal');
+    const rentgoBackdrop = document.getElementById('rentgo-modal-backdrop');
+    const rentgoCard = document.getElementById('rentgo-modal-card');
+    const rentgoClose = document.getElementById('rentgo-modal-close');
+
+    const mImg = document.getElementById('rentgo-modal-img') as HTMLImageElement;
+    const mCategory = document.getElementById('rentgo-modal-category');
+    const mTitle = document.getElementById('rentgo-modal-title');
+    const mCity = document.getElementById('rentgo-modal-city');
+    const mRate = document.getElementById('rentgo-modal-rate');
+    const mSeats = document.getElementById('rentgo-modal-seats');
+    const mLuggage = document.getElementById('rentgo-modal-luggage');
+    const mTrans = document.getElementById('rentgo-modal-trans');
+    const mFuel = document.getElementById('rentgo-modal-fuel');
+
+    const mDateStart = document.getElementById('rentgo-date-start') as HTMLInputElement;
+    const mDateEnd = document.getElementById('rentgo-date-end') as HTMLInputElement;
+    const mDaysBadge = document.getElementById('rentgo-modal-days-badge');
+    const mCalcText = document.getElementById('rentgo-modal-calc-text');
+    const mTotal = document.getElementById('rentgo-modal-total');
+    const mWhatsappBtn = document.getElementById('rentgo-modal-whatsapp-btn') as HTMLAnchorElement;
+    const mBtnLabel = document.getElementById('rentgo-modal-btn-label');
+
+    let activeModalPrice = 50;
+    let activeModalTitle = 'Vehículo';
+    let activeModalCleanPhone = '18499154010';
+
+    function updateModalQuote() {
+        if (!mDateStart || !mDateEnd || !mDaysBadge || !mCalcText || !mTotal || !mWhatsappBtn) return;
+        const start = new Date(mDateStart.value);
+        const end = new Date(mDateEnd.value);
+
+        let diffDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
+        if (isNaN(diffDays) || diffDays < 1) diffDays = 1;
+
+        const total = diffDays * activeModalPrice;
+        mDaysBadge.textContent = `${diffDays} día${diffDays > 1 ? 's' : ''}`;
+        mCalcText.textContent = `$${activeModalPrice} USD x ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+        mTotal.textContent = `$${total} USD`;
+
+        const datesFormatted = `desde ${mDateStart.value} hasta ${mDateEnd.value}`;
+        const calculatedMsg = encodeURIComponent(
+            `Hola Rent A Car, me interesa reservar la ${activeModalTitle} ${datesFormatted} (${diffDays} días). Total estimado: $${total} USD. ¿Tienen disponibilidad inmediata para entrega?`
+        );
+        mWhatsappBtn.href = `https://wa.me/${activeModalCleanPhone}?text=${calculatedMsg}`;
+        if (mBtnLabel) mBtnLabel.textContent = `Confirmar Reserva (${diffDays} días: $${total} USD)`;
+    }
+
+    function openRentgoModal(vehicle: any, owner: any) {
+        if (!rentgoModal || !rentgoBackdrop || !rentgoCard) return;
+
+        activeModalPrice = vehicle.pricePerDay || vehicle.price || 50;
+        activeModalTitle = vehicle.title;
+
+        const rawPhone = owner?.whatsapp || owner?.phone || vehicle.ownerWhatsapp || '18499154010';
+        activeModalCleanPhone = rawPhone.replace(/\D/g, '');
+
+        if (mCategory) mCategory.textContent = vehicle.category || 'SUV';
+        if (mImg) mImg.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : (vehicle.mainImage || "/Honda.webp");
+        if (mTitle) mTitle.textContent = vehicle.title;
+        if (mCity) mCity.querySelector('span')!.textContent = vehicle.city || 'Santo Domingo Este, República Dominicana';
+        if (mRate) mRate.textContent = `$${activeModalPrice}`;
+        if (mSeats) mSeats.textContent = `${vehicle.seats || 5} Plazas`;
+        if (mLuggage) mLuggage.textContent = vehicle.luggage || (vehicle.seats > 5 ? '4-5 Maletas' : '3-4 Maletas');
+        if (mTrans) mTrans.textContent = vehicle.transmission === 'manual' ? 'Manual' : 'Automática';
+        if (mFuel) mFuel.textContent = vehicle.fuelType || 'Gasolina';
+
+        if (mDateStart && searchStart) mDateStart.value = searchStart.value || formatInputDate(today);
+        if (mDateEnd && searchEnd) mDateEnd.value = searchEnd.value || formatInputDate(futureDate);
+
+        updateModalQuote();
+
+        rentgoModal.classList.remove('pointer-events-none', 'opacity-0');
+        rentgoModal.classList.add('pointer-events-auto', 'opacity-100');
+        rentgoBackdrop.classList.remove('opacity-0');
+        rentgoBackdrop.classList.add('opacity-100');
+        rentgoCard.classList.remove('scale-95');
+        rentgoCard.classList.add('scale-100');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeRentgoModal() {
+        if (!rentgoModal || !rentgoBackdrop || !rentgoCard) return;
+        rentgoCard.classList.remove('scale-100');
+        rentgoCard.classList.add('scale-95');
+        rentgoBackdrop.classList.remove('opacity-100');
+        rentgoBackdrop.classList.add('opacity-0');
+        setTimeout(() => {
+            rentgoModal.classList.remove('pointer-events-auto', 'opacity-100');
+            rentgoModal.classList.add('pointer-events-none', 'opacity-0');
+            document.body.classList.remove('overflow-hidden');
+        }, 250);
+    }
+
+    mDateStart?.addEventListener('change', updateModalQuote);
+    mDateEnd?.addEventListener('change', updateModalQuote);
+    rentgoClose?.addEventListener('click', closeRentgoModal);
+    rentgoBackdrop?.addEventListener('click', closeRentgoModal);
 
     // SIDEBAR REFERENCES
     const fleetGrid = document.getElementById('fleet-grid');
@@ -578,57 +680,114 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
             const cleanPhone = (ownerData?.whatsapp || v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
             const msg = encodeURIComponent(`Hola, me interesa reservar la ${v.title}`);
             const badgeColor = v.category === 'Premium' ? 'bg-[#0f172a] text-white' : 'bg-[#1d4ed8] text-white';
-            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : v.mainImage;
+            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
+            const price = v.pricePerDay || v.price || 50;
 
             const card = document.createElement('div');
-            card.className = "luxury-card flex flex-col justify-between overflow-hidden cursor-pointer";
+            card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
             card.innerHTML = `
                 <div>
-                    <!-- Car Image Container -->
-                    <div class="car-image-container">
+                    <!-- Car Image Container with Agency Badges -->
+                    <div class="car-image-container relative">
                         <img src="${carImg}" alt="${v.title}" />
+                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${badgeColor} shadow-md">
+                                ${v.category || 'SUV'}
+                            </span>
+                            <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+                                <i class="fas fa-bolt me-1"></i> Reserva Inmediata
+                            </span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
+                            <span class="text-xs font-bold text-slate-400">DESDE</span>
+                            <strong class="text-base font-black text-[#1d4ed8] font-mono">$${price}</strong>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase">/día</span>
+                        </div>
                     </div>
 
                     <!-- Card Body -->
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="text-xl font-bold text-[#0f172a] mb-0 tracking-tight">${v.title}</h4>
-                            <span class="px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider ${badgeColor}">
-                                ${v.category || 'SUV'}
-                            </span>
+                    <div class="p-5 sm:p-6">
+                        <div class="flex justify-between items-start mb-1.5">
+                            <h4 class="text-xl font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors">${v.title}</h4>
                         </div>
-                        <p class="text-slate-500 text-xs mb-4 leading-normal">
+                        <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8] text-[11px]"></i>
+                            <span>${v.city || 'Santo Domingo Este'}</span>
+                            <span class="mx-1">•</span>
+                            <span class="text-emerald-700 font-semibold"><i class="fas fa-check-circle text-[10px]"></i> Verificado</span>
+                        </p>
+                        <p class="text-slate-500 text-xs mb-4 line-clamp-2 leading-relaxed">
                             ${v.description || 'Color ' + (v.color || 'Elegante') + '. Confort para familia o negocios.'}
                         </p>
 
-                        <!-- Specs Row -->
-                        <div class="grid grid-cols-2 text-center text-xs text-slate-700 border-t border-b border-slate-100 py-3 mb-5">
-                            <div class="border-r border-slate-200">
-                                <i class="fas fa-user text-[#1d4ed8] me-1.5"></i> ${v.seats || 5} Asientos
+                        <!-- RentGo Specs 4-Pill Row -->
+                        <div class="grid grid-cols-4 gap-1.5 text-center text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2.5 mb-5">
+                            <div title="Capacidad de Pasajeros">
+                                <i class="fas fa-user-friends text-[#1d4ed8] text-xs block mb-0.5"></i>
+                                <span class="text-[10px] font-bold text-slate-800">${v.seats || 5}</span>
                             </div>
-                            <div>
-                                <i class="fas fa-suitcase-rolling text-[#1d4ed8] me-1.5"></i> ${v.luggage || (v.seats > 5 ? '4-5 Maletas' : '3-4 Maletas')}
+                            <div title="Espacio de Maletas">
+                                <i class="fas fa-suitcase-rolling text-[#1d4ed8] text-xs block mb-0.5"></i>
+                                <span class="text-[10px] font-bold text-slate-800">${v.seats > 5 ? '4-5' : '3-4'}</span>
+                            </div>
+                            <div title="Transmisión">
+                                <i class="fas fa-cogs text-[#1d4ed8] text-xs block mb-0.5"></i>
+                                <span class="text-[10px] font-bold text-slate-800">${(v.transmission || 'auto').slice(0, 4).toUpperCase()}</span>
+                            </div>
+                            <div title="Combustible">
+                                <i class="fas fa-gas-pump text-[#1d4ed8] text-xs block mb-0.5"></i>
+                                <span class="text-[10px] font-bold text-slate-800">${(v.fuelType || 'Gas').slice(0, 4)}</span>
                             </div>
                         </div>
 
-                        <!-- Direct WhatsApp Button -->
-                        <div class="space-y-2">
-                            <a href="https://wa.me/${cleanPhone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn w-full py-3.5 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors luxury-btn">
-                                <i class="fab fa-whatsapp text-lg"></i>
-                                <span>Reservar ${v.model || v.title}</span>
-                            </a>
-                            <button type="button" class="view-details-btn w-full py-2 text-xs text-slate-500 hover:text-[#1d4ed8] font-semibold text-center uppercase tracking-wider">
-                                <i class="fas fa-calculator me-1"></i> Cotizar Fechas y Ficha Técnica
+                        <!-- CTA Actions (Double CTA: RentGo Booking Pop-up & Fast WhatsApp) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                            <button 
+                              type="button" 
+                              class="open-modal-btn w-full py-3 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 luxury-btn shadow-sm"
+                              style="border-radius: 0px !important;"
+                            >
+                                <i class="fas fa-calendar-check text-sm"></i>
+                                <span>Cotizar / Reservar</span>
                             </button>
+                            <a 
+                              href="https://wa.me/${cleanPhone}?text=${msg}" 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              class="whatsapp-btn w-full py-3 px-3 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors luxury-btn"
+                              style="border-radius: 0px !important;"
+                            >
+                                <i class="fab fa-whatsapp text-base"></i>
+                                <span>WhatsApp</span>
+                            </a>
                         </div>
+                        <button 
+                          type="button" 
+                          class="view-sidebar-btn w-full mt-2 py-1.5 text-[11px] text-slate-400 hover:text-slate-700 font-semibold text-center uppercase tracking-wider"
+                        >
+                            <i class="fas fa-info-circle me-1"></i> Ver Ficha Completa
+                        </button>
                     </div>
                 </div>
             `;
 
+            // CTA Handlers
+            const modalBtn = card.querySelector('.open-modal-btn');
+            modalBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openRentgoModal(v, ownerData);
+            });
+
+            const sidebarBtn = card.querySelector('.view-sidebar-btn');
+            sidebarBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openSidebar(v, ownerData);
+            });
+
             card.addEventListener('click', (e) => {
                 const target = e.target as HTMLElement;
-                if (target.closest('.whatsapp-btn')) return;
-                openSidebar(v, ownerData);
+                if (target.closest('.whatsapp-btn') || target.closest('.open-modal-btn') || target.closest('.view-sidebar-btn')) return;
+                openRentgoModal(v, ownerData);
             });
 
             fleetGrid.appendChild(card);
