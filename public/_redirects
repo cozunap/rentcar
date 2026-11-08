@@ -1,0 +1,12 @@
+# Cloudflare Pages Redirects
+# Mientras el modo "Coming Soon" esté activo, redirige todas las rutas al Coming Soon
+/brands / 302
+/publicar / 302
+/panel / 302
+/auth / 302
+/nosotros / 302
+/contacto / 302
+/vehiculos / 302
+/vehiculos/* / 302
+/vehiculo/* / 302
+/dealer/* / 302
