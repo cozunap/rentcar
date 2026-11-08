@@ -277,3 +277,20 @@ const whatsappMessage = encodeURIComponent(
     </div>
   </div>
 </Layout>
+
+<script define:vars={{ initialVehicle: vehicle }}>
+  // En caso de que se acceda a un vehículo publicado por el usuario en localStorage
+  const currentPathId = window.location.pathname.split("/").filter(Boolean).pop();
+  let stored = [];
+  try {
+    const raw = localStorage.getItem("tucarroymas_user_published_vehicles_v1");
+    if (raw) stored = JSON.parse(raw);
+  } catch(e) {}
+
+  const match = stored.find(v => v.id === currentPathId);
+  if (match) {
+    // Actualizar campos dinámicos
+    const titleEl = document.querySelector("h1");
+    if (titleEl) titleEl.innerText = match.title;
+  }
+</script>

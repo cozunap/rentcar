@@ -1,158 +1,410 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { TRANSPORT_TYPES, DOMINICAN_PROVINCES } from "../lib/carDealerData";
+import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
+import { BRAND_CATALOG_DATABASE } from "../lib/catalogTaxonomy";
+
+// Orden alfabético estricto de todas las marcas registradas
+const allBrandsSorted = [...ALL_DOMINICAN_BRANDS].sort((a, b) => 
+  a.name.localeCompare(b.name, "es", { sensitivity: "base" })
+);
+
+// Generador de años desde el próximo año hasta 1970
+const currentYear = new Date().getFullYear();
+const availableYears: number[] = [];
+for (let y = currentYear + 1; y >= 1970; y--) {
+  availableYears.push(y);
+}
 ---
 
-<Layout title="Publicar Anuncio | TuCarroYMas">
-  <div class="bg-[#f8fafc] text-slate-800 min-h-screen py-12 px-4 sm:px-8">
+<Layout title="Publicar Vehículo o Maquinaria | TuCarroYMas Dominicana">
+  <div class="bg-[#f8fafc] text-slate-800 min-h-screen py-10 px-4 sm:px-8">
     <div class="max-w-4xl mx-auto">
       
       <!-- Wizard Header -->
       <div class="border-b border-slate-200 pb-6 mb-8 text-center sm:text-left">
-        <span class="text-blue-600 font-bold uppercase tracking-widest text-xs">Directorio de Concesionarios y Particulares</span>
+        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#D54000] mb-2">
+          <a href="/" class="hover:underline">Inicio</a>
+          <span>/</span>
+          <span>Formulario de Publicación</span>
+        </div>
         <h1 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-slate-900 mt-1">
-          Publicar Vehículo o Maquinaria (Gratis)
+          Publicar Vehículo o Maquinaria
         </h1>
-        <p class="text-sm text-slate-500 mt-2 font-medium">
-          Completa la ficha técnica según el tipo de transporte. Las fotografías son optimizadas a 1500x1500px WebP para garantizar máxima velocidad y nitidez sin distorsión.
+        <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
+          Completa los datos de tu vehículo. Tu anuncio se publicará al instante en el catálogo con contacto directo a tu WhatsApp y optimización fotográfica en formato cuadrado WebP (1500x1500px).
         </p>
       </div>
 
-      <!-- FORM BUILDER (Ozuna Engine Pattern - Clean White Surface) -->
-      <form id="publish-form" class="bg-white border border-slate-200 p-6 sm:p-10 shadow-sm space-y-8">
+      <!-- FORMULARIO MULTICATEGORÍA DINÁMICO -->
+      <form id="publish-form" class="bg-white border border-slate-200 p-6 sm:p-10 shadow-sm space-y-8 rounded-sm">
         
-        <!-- Step 1: Transport Category Selection -->
+        <!-- Paso 1: Tipo de Transporte (Todas las categorías del sitio web) -->
         <div>
-          <h2 class="text-sm font-black uppercase tracking-wider text-blue-600 mb-4 pb-2 border-b border-slate-200 flex items-center gap-2">
-            <span>1.</span> Selecciona el Tipo de Transporte
-          </h2>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-4">
+            <h2 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#D54000] text-white flex items-center justify-center text-xs">1</span>
+              Selecciona el Tipo de Transporte *
+            </h2>
+            <span class="text-[11px] text-slate-400 font-bold uppercase">6 Categorías Oficiales</span>
+          </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {TRANSPORT_TYPES.map(cat => (
-              <label class="border border-slate-200 p-3 flex flex-col justify-between hover:border-blue-500 cursor-pointer bg-slate-50 hover:bg-white has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/50 transition-all">
-                <input type="radio" name="transportType" value={cat.id} required class="sr-only" />
-                <span class="font-bold text-xs text-slate-900 uppercase">{cat.nameEs}</span>
-                <span class="text-[10px] text-slate-500 mt-1">{cat.name}</span>
+            {TRANSPORT_TYPES.map((cat, idx) => (
+              <label class="border border-slate-200 p-3.5 flex flex-col justify-between hover:border-[#D54000] cursor-pointer bg-slate-50 hover:bg-white has-[:checked]:border-[#D54000] has-[:checked]:bg-orange-50/50 has-[:checked]:ring-1 has-[:checked]:ring-[#D54000] transition-all rounded-xs">
+                <input 
+                  type="radio" 
+                  name="transportType" 
+                  value={cat.id} 
+                  required 
+                  checked={idx === 0}
+                  class="sr-only transport-radio" 
+                />
+                <div>
+                  <span class="font-bold text-xs text-slate-900 uppercase block">{cat.nameEs}</span>
+                  <span class="text-[10px] text-slate-500 mt-0.5 block">{cat.description}</span>
+                </div>
               </label>
             ))}
           </div>
         </div>
 
-        <!-- Step 2: Basic Vehicle Information -->
+        <!-- Paso 2: Información General y Técnica con Contenido Dinámico -->
         <div>
-          <h2 class="text-sm font-black uppercase tracking-wider text-blue-600 mb-4 pb-2 border-b border-slate-200 flex items-center gap-2">
-            <span>2.</span> Información General y Técnica
-          </h2>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-4">
+            <h2 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#D54000] text-white flex items-center justify-center text-xs">2</span>
+              Información General y Técnica *
+            </h2>
+            <span class="text-[11px] text-slate-400 font-bold uppercase">Ficha Técnica</span>
+          </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Título del Anuncio *</label>
-              <input type="text" id="title" required placeholder="Ej. Toyota Camry SE 2023 / Cat 320D" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
+            <!-- Título del Anuncio (Manual) -->
+            <div class="sm:col-span-2">
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Título del Anuncio *
+              </label>
+              <input 
+                type="text" 
+                id="pub-title" 
+                required 
+                placeholder="Ej. Toyota Camry SE 2023 / Nissan Rogue AWD / Sea Ray SPX 210" 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium rounded-xs" 
+              />
             </div>
 
+            <!-- Marca Fabricante (Dropdown con todas las marcas dinámicas A-Z) -->
             <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Marca Fabricante *</label>
-              <input type="text" id="make" required placeholder="Ej. Toyota, Freightliner, Caterpillar..." class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
-            </div>
-
-            <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Modelo *</label>
-              <input type="text" id="model" required placeholder="Ej. Camry SE, Cascadia 126, MT-09..." class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
-            </div>
-
-            <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Año de Fabricación *</label>
-              <input type="number" id="year" required min="1950" max="2027" value="2023" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
-            </div>
-
-            <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Condición *</label>
-              <select id="condition" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer">
-                <option value="usado">Usado Certificado</option>
-                <option value="nuevo">Nuevo de Agencia (0 Km)</option>
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Marca Fabricante *
+              </label>
+              <select 
+                id="pub-make" 
+                required 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-xs"
+              >
+                <option value="">Selecciona la Marca</option>
+                {allBrandsSorted.map(b => (
+                  <option value={b.name}>{b.name}</option>
+                ))}
               </select>
             </div>
 
+            <!-- Modelo (Dropdown dinámico que se carga automáticamente según la Marca) -->
             <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Precio de Venta (USD) *</label>
-              <input type="number" id="price" required placeholder="25000" min="500" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Modelo *
+              </label>
+              <select 
+                id="pub-model" 
+                required 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-xs"
+              >
+                <option value="">Primero selecciona la marca</option>
+              </select>
             </div>
 
+            <!-- Año de Fabricación (Dropdown con todos los años de 2027 a 1970) -->
             <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Kilometraje o Horas Operativas *</label>
-              <input type="text" id="mileageOrHours" required placeholder="Ej. 19,400 mi / 3,100 Horas" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Año de Fabricación *
+              </label>
+              <select 
+                id="pub-year" 
+                required 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-xs"
+              >
+                {availableYears.map((yr, idx) => (
+                  <option value={yr} selected={yr === 2023}>{yr}</option>
+                ))}
+              </select>
             </div>
 
+            <!-- Condición (Nuevo o Usado solamente) -->
             <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Provincia *</label>
-              <select id="location" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer">
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Condición *
+              </label>
+              <select 
+                id="pub-condition" 
+                required 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-xs"
+              >
+                <option value="usado" selected>Usado</option>
+                <option value="nuevo">Nuevo</option>
+              </select>
+            </div>
+
+            <!-- Precio de Venta (Manual en USD) -->
+            <div>
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Precio de Venta (USD) *
+              </label>
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-xs font-bold text-slate-400">$</span>
+                <input 
+                  type="number" 
+                  id="pub-price" 
+                  required 
+                  placeholder="25000" 
+                  min="100" 
+                  step="100"
+                  class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 pl-7 pr-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium rounded-xs" 
+                />
+              </div>
+            </div>
+
+            <!-- Kilometraje o Horas Operativas (Manual) -->
+            <div>
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Kilometraje o Horas Operativas *
+              </label>
+              <input 
+                type="text" 
+                id="pub-mileage" 
+                required 
+                placeholder="Ej. 18,500 mi / 45,000 km / 250 Horas" 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium rounded-xs" 
+              />
+            </div>
+
+            <!-- Provincia (Dropdown de Provincias Dominicanas) -->
+            <div class="sm:col-span-2">
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Provincia de Ubicación *
+              </label>
+              <select 
+                id="pub-location" 
+                required 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-xs"
+              >
                 {DOMINICAN_PROVINCES.map(p => (
-                  <option value={p}>{p}</option>
+                  <option value={p} selected={p === "Distrito Nacional"}>{p}</option>
                 ))}
               </select>
             </div>
           </div>
 
+          <!-- Descripción (Manual) -->
           <div class="mt-4">
-            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Descripción Completa del Anuncio</label>
-            <textarea id="description" rows="4" placeholder="Detalles de mantenimiento, extras, accesorios, historial..." class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium"></textarea>
+            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+              Descripción Completa del Vehículo *
+            </label>
+            <textarea 
+              id="pub-description" 
+              rows="4" 
+              required
+              placeholder="Detalles sobre el estado del motor, transmisión, mantenimientos al día, historial de dueño, accesorios, etc." 
+              class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium rounded-xs"
+            ></textarea>
           </div>
         </div>
 
-        <!-- Step 3: Client-side Image Squaring (Optimización Visual) -->
+        <!-- Paso 3: Fotografía Principal y Galería de Fotos Adicionales -->
         <div>
-          <h2 class="text-sm font-black uppercase tracking-wider text-blue-600 mb-4 pb-2 border-b border-slate-200 flex items-center gap-2">
-            <span>3.</span> Fotografía Principal (Optimización Cuadrada WebP 1500x1500px)
-          </h2>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-4">
+            <h2 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#D54000] text-white flex items-center justify-center text-xs">3</span>
+              Fotografía Principal & Galería de Fotos *
+            </h2>
+            <span class="text-[11px] text-slate-400 font-bold uppercase">WebP 1500x1500px</span>
+          </div>
 
-          <div class="border-2 border-dashed border-slate-300 p-6 text-center bg-slate-50 hover:border-blue-500 transition-colors">
-            <input type="file" id="image-file" accept="image/*" class="hidden" />
-            <label for="image-file" class="cursor-pointer flex flex-col items-center">
-              <svg class="w-10 h-10 text-blue-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-              <span class="text-xs font-bold text-slate-900 uppercase">Seleccionar Imagen desde tu Dispositivo</span>
-              <span class="text-[11px] text-slate-500 mt-1">El optimizador la convertirá automáticamente a formato cuadrado WebP</span>
+          <!-- Foto Principal -->
+          <div class="mb-5">
+            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+              1. Fotografía Principal de Portada *
             </label>
-            <div id="image-preview-container" class="hidden mt-4">
-              <img id="image-preview" src="" alt="Vista previa" class="w-32 h-32 object-cover mx-auto border border-slate-200 shadow-md" />
-              <p id="image-status" class="text-xs text-emerald-600 mt-2 font-mono font-bold"></p>
+            <div class="border-2 border-dashed border-slate-300 p-6 text-center bg-slate-50 hover:border-[#D54000] transition-colors rounded-xs">
+              <input type="file" id="main-image-file" accept="image/*" class="hidden" required />
+              <label for="main-image-file" class="cursor-pointer flex flex-col items-center">
+                <svg class="w-8 h-8 text-[#D54000] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span class="text-xs font-bold text-slate-900 uppercase">Seleccionar Foto Principal</span>
+                <span class="text-[11px] text-slate-500 mt-0.5">Se optimiza automáticamente en formato cuadrado WebP 1500x1500px</span>
+              </label>
+              <div id="main-image-preview-box" class="hidden mt-4">
+                <img id="main-image-preview" src="" alt="Portada" class="w-32 h-32 object-cover mx-auto border-2 border-orange-200 shadow-md rounded-xs" />
+                <p id="main-image-status" class="text-xs text-emerald-600 mt-2 font-mono font-bold"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Galería de Fotos Adicionales (Debajo de la foto principal) -->
+          <div>
+            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+              2. Galería de Fotos Adicionales (Opcional - Hasta 5 fotos)
+            </label>
+            <div class="border-2 border-dashed border-slate-300 p-6 text-center bg-slate-50 hover:border-[#D54000] transition-colors rounded-xs">
+              <input type="file" id="gallery-image-files" accept="image/*" multiple class="hidden" />
+              <label for="gallery-image-files" class="cursor-pointer flex flex-col items-center">
+                <svg class="w-8 h-8 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <span class="text-xs font-bold text-slate-900 uppercase">Añadir Fotos a la Galería</span>
+                <span class="text-[11px] text-slate-500 mt-0.5">Vistas de interiores, tablero, motor, neumáticos y baúl</span>
+              </label>
+              <div id="gallery-preview-container" class="hidden mt-4 flex flex-wrap gap-3 justify-center">
+                <!-- Miniaturas de la galería -->
+              </div>
+              <p id="gallery-status" class="text-xs text-slate-500 mt-2 font-mono"></p>
             </div>
           </div>
         </div>
 
-        <!-- Step 4: Seller Direct Contact Info -->
+        <!-- Paso 4: Datos de Contacto y Tipo de Vendedor (Privado vs Concesionario/Dealer) -->
         <div>
-          <h2 class="text-sm font-black uppercase tracking-wider text-blue-600 mb-4 pb-2 border-b border-slate-200 flex items-center gap-2">
-            <span>4.</span> Datos de Contacto Directo
-          </h2>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-4">
+            <h2 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#D54000] text-white flex items-center justify-center text-xs">4</span>
+              Tipo de Vendedor y Contacto *
+            </h2>
+            <span class="text-[11px] text-slate-400 font-bold uppercase">Canal de Venta</span>
+          </div>
 
+          <!-- Selector de Tipo de Vendedor: Privado vs Dealer -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <label class="border-2 p-4 cursor-pointer flex items-start gap-3 rounded-xs transition-all has-[:checked]:border-[#D54000] has-[:checked]:bg-orange-50/40 border-slate-200">
+              <input type="radio" name="sellerType" value="privado" checked class="mt-1 accent-[#D54000]" id="seller-type-private" />
+              <div>
+                <span class="text-xs font-black uppercase text-slate-900 block">Vendedor Privado (Particular)</span>
+                <span class="text-[11px] text-slate-500 mt-1 block">
+                  Ideal para vender tu vehículo personal. Publicación individual rápida de 1 vehículo a la vez.
+                </span>
+              </div>
+            </label>
+
+            <label class="border-2 p-4 cursor-pointer flex items-start gap-3 rounded-xs transition-all has-[:checked]:border-[#D54000] has-[:checked]:bg-orange-50/40 border-slate-200">
+              <input type="radio" name="sellerType" value="dealer" class="mt-1 accent-[#D54000]" id="seller-type-dealer" />
+              <div>
+                <span class="text-xs font-black uppercase text-slate-900 flex items-center gap-1.5">
+                  Concesionario / Dealer
+                  <span class="bg-[#D54000] text-white text-[9px] font-black px-1.5 py-0.2 rounded-xs">LANDING PAGE PROPIA</span>
+                </span>
+                <span class="text-[11px] text-slate-500 mt-1 block">
+                  Crea tu propia página web de Concesionario dentro de TuCarroYMas con todo tu inventario reunido y branding exclusivo.
+                </span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Campos Básicos de Contacto -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Nombre del Vendedor / Dealer *</label>
-              <input type="text" id="sellerName" required placeholder="Tu Nombre o Concesionario" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5" id="label-seller-name">
+                Nombre del Vendedor *
+              </label>
+              <input 
+                type="text" 
+                id="pub-seller-name" 
+                required 
+                placeholder="Ej. Carlos Martínez" 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium rounded-xs" 
+              />
             </div>
 
             <div>
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">Teléfono WhatsApp Dominicano *</label>
-              <input type="text" id="sellerWhatsapp" required placeholder="8295550199 (Sin guiones)" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium" />
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5">
+                Teléfono WhatsApp Dominicano *
+              </label>
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-xs font-bold text-[#25D366]">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </span>
+                <input 
+                  type="text" 
+                  id="pub-seller-whatsapp" 
+                  required 
+                  placeholder="8295550199 (10 dígitos)" 
+                  class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 pl-8 pr-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium rounded-xs" 
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección Exclusiva para Concesionarios: Creación de Landing Page Propia -->
+          <div id="dealer-landing-config" class="hidden mt-5 p-5 bg-orange-50/60 border border-orange-200 rounded-xs space-y-4">
+            <div class="flex items-center gap-2 text-[#D54000] font-black text-xs uppercase tracking-wider">
+              <i class="fa-solid fa-store"></i>
+              Configuración de tu Landing Page Oficial de Dealer
+            </div>
+            <p class="text-xs text-slate-600">
+              Tu concesionario tendrá su enlace permanente: <code class="font-mono bg-white px-2 py-0.5 border border-orange-200 text-[#D54000] font-bold">tucarroymas.com/dealer/[tu-dealer]</code>
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs uppercase font-bold text-slate-700 mb-1">
+                  Tipo o Especialidad de Dealer
+                </label>
+                <input 
+                  type="text" 
+                  id="dealer-specialty" 
+                  placeholder="Ej. Concesionario Multimarca / Dealer Oficial Toyota" 
+                  class="w-full bg-white border border-slate-300 text-slate-900 text-xs py-2 px-3 focus:outline-none focus:border-[#D54000] font-medium rounded-xs" 
+                />
+              </div>
+
+              <div>
+                <label class="block text-xs uppercase font-bold text-slate-700 mb-1">
+                  Slug / URL Personalizada
+                </label>
+                <input 
+                  type="text" 
+                  id="dealer-slug" 
+                  placeholder="ej-auto-dealer-santiago" 
+                  class="w-full bg-white border border-slate-300 text-slate-900 text-xs py-2 px-3 focus:outline-none focus:border-[#D54000] font-medium rounded-xs font-mono" 
+                />
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="block text-xs uppercase font-bold text-slate-700 mb-1">
+                  Reseña / Biografía del Concesionario
+                </label>
+                <textarea 
+                  id="dealer-bio-text" 
+                  rows="2" 
+                  placeholder="Describe los años de experiencia, financiamiento disponible, garantías o servicios de tu dealer..." 
+                  class="w-full bg-white border border-slate-300 text-slate-900 text-xs py-2 px-3 focus:outline-none focus:border-[#D54000] font-medium rounded-xs"
+                ></textarea>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Submit Button -->
+        <!-- Botón de Envío y Alerta -->
         <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p class="text-xs text-slate-500 font-medium">
-            Al publicar confirmas que la unidad es legítima y verificable.
+            Al publicar confirmas que el vehículo o maquinaria está disponible legalmente en República Dominicana.
           </p>
           <button 
             type="submit" 
             id="submit-btn"
-            class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-black text-xs uppercase py-3.5 px-8 tracking-wider shadow-md shadow-blue-600/30 transition-all cursor-pointer"
+            class="w-full sm:w-auto bg-[#D54000] hover:bg-[#b83600] text-white font-black text-xs uppercase py-3.5 px-8 tracking-wider shadow-lg shadow-orange-600/30 transition-all cursor-pointer rounded-xs"
           >
-            Publicar Anuncio Ahora
+            Publicar Ahora en el Sitio Web
           </button>
         </div>
 
-        <div id="form-alert" class="hidden p-4 text-xs font-bold uppercase"></div>
+        <div id="form-alert" class="hidden p-4 text-xs font-bold uppercase rounded-xs"></div>
       </form>
 
     </div>
@@ -160,45 +412,290 @@ import { TRANSPORT_TYPES, DOMINICAN_PROVINCES } from "../lib/carDealerData";
 </Layout>
 
 <script>
-  import { optimizeToSquareWebp } from "../lib/imageOptimizer";
+  import { BRAND_CATALOG_DATABASE } from "../lib/catalogTaxonomy";
+  import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
+  import { convertToSquareWebP } from "../lib/imageOptimizer";
+  import { saveUserVehicle, saveDealerProfile } from "../lib/userListingsStore";
 
-  const fileInput = document.getElementById("image-file") as HTMLInputElement;
-  const preview = document.getElementById("image-preview") as HTMLImageElement;
-  const previewContainer = document.getElementById("image-preview-container");
-  const status = document.getElementById("image-status");
-  const form = document.getElementById("publish-form");
+  // Elementos DOM
+  const form = document.getElementById("publish-form") as HTMLFormElement;
+  const transportRadios = document.querySelectorAll<HTMLInputElement>(".transport-radio");
+  const makeSelect = document.getElementById("pub-make") as HTMLSelectElement;
+  const modelSelect = document.getElementById("pub-model") as HTMLSelectElement;
+  const mainImageInput = document.getElementById("main-image-file") as HTMLInputElement;
+  const mainPreview = document.getElementById("main-image-preview") as HTMLImageElement;
+  const mainPreviewBox = document.getElementById("main-image-preview-box");
+  const mainStatus = document.getElementById("main-image-status");
+  const galleryInput = document.getElementById("gallery-image-files") as HTMLInputElement;
+  const galleryContainer = document.getElementById("gallery-preview-container");
+  const galleryStatus = document.getElementById("gallery-status");
+
+  // Vendedor Privado vs Dealer
+  const privateRadio = document.getElementById("seller-type-private") as HTMLInputElement;
+  const dealerRadio = document.getElementById("seller-type-dealer") as HTMLInputElement;
+  const dealerLandingConfig = document.getElementById("dealer-landing-config");
+  const labelSellerName = document.getElementById("label-seller-name");
+  const sellerNameInput = document.getElementById("pub-seller-name") as HTMLInputElement;
+  const dealerSlugInput = document.getElementById("dealer-slug") as HTMLInputElement;
   const formAlert = document.getElementById("form-alert");
 
-  let optimizedBlob: Blob | null = null;
+  let mainImageDataUrl: string = "";
+  const galleryDataUrls: string[] = [];
 
-  fileInput?.addEventListener("change", async (e: any) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  // Marcas ordenadas de A a Z
+  const allBrandsSorted = [...ALL_DOMINICAN_BRANDS].sort((a, b) => 
+    a.name.localeCompare(b.name, "es", { sensitivity: "base" })
+  );
 
-    if (status) status.innerText = "Optimizando a cuadrado WebP 1500x1500px...";
-    previewContainer?.classList.remove("hidden");
+  // 1. Filtrar Marcas según el Tipo de Transporte seleccionado
+  function updateMakesByTransport() {
+    let selectedTransport = "cars";
+    transportRadios.forEach(r => {
+      if (r.checked) selectedTransport = r.value;
+    });
 
-    try {
-      optimizedBlob = await optimizeToSquareWebp(file, 1500);
-      if (preview && optimizedBlob) {
-        preview.src = URL.createObjectURL(optimizedBlob);
-      }
-      if (status) status.innerText = "✓ Imagen optimizada con éxito (1500x1500px WebP)";
-    } catch (err) {
-      if (status) status.innerText = "Error optimizando la imagen.";
+    const currentMake = makeSelect.value;
+    const filteredBrands = allBrandsSorted.filter(brand => {
+      const meta = BRAND_CATALOG_DATABASE[brand.name];
+      if (!meta) return true;
+      return meta.transportTypes.includes(selectedTransport);
+    });
+
+    makeSelect.innerHTML = '<option value="">Selecciona la Marca</option>';
+    filteredBrands.forEach(b => {
+      const opt = document.createElement("option");
+      opt.value = b.name;
+      opt.textContent = b.name;
+      if (b.name === currentMake) opt.selected = true;
+      makeSelect.appendChild(opt);
+    });
+
+    updateModelsByMake();
+  }
+
+  // 2. Cargar Modelos dinámicamente según la Marca seleccionada (Orden A-Z)
+  function updateModelsByMake() {
+    const selectedMake = makeSelect.value;
+    if (!selectedMake || !BRAND_CATALOG_DATABASE[selectedMake]) {
+      modelSelect.innerHTML = '<option value="">Primero selecciona la marca</option>';
+      return;
+    }
+
+    const meta = BRAND_CATALOG_DATABASE[selectedMake];
+    const sortedModels = [...meta.models].sort((a, b) => 
+      a.localeCompare(b, "es", { sensitivity: "base" })
+    );
+
+    modelSelect.innerHTML = '<option value="">Selecciona el Modelo</option>';
+    sortedModels.forEach(m => {
+      const opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m;
+      modelSelect.appendChild(opt);
+    });
+  }
+
+  transportRadios.forEach(r => r.addEventListener("change", updateMakesByTransport));
+  makeSelect?.addEventListener("change", updateModelsByMake);
+
+  // 3. Toggle Dealer vs Vendedor Privado
+  function toggleSellerMode() {
+    if (dealerRadio?.checked) {
+      dealerLandingConfig?.classList.remove("hidden");
+      if (labelSellerName) labelSellerName.innerText = "Nombre Oficial del Concesionario / Dealer *";
+      if (sellerNameInput) sellerNameInput.placeholder = "Ej. Auto Comercial Santiago / Caribbean Motors";
+    } else {
+      dealerLandingConfig?.classList.add("hidden");
+      if (labelSellerName) labelSellerName.innerText = "Nombre del Vendedor Particular *";
+      if (sellerNameInput) sellerNameInput.placeholder = "Ej. Carlos Martínez";
+    }
+  }
+
+  privateRadio?.addEventListener("change", toggleSellerMode);
+  dealerRadio?.addEventListener("change", toggleSellerMode);
+
+  // Auto-completar slug de dealer a partir del nombre
+  sellerNameInput?.addEventListener("input", () => {
+    if (dealerRadio?.checked && dealerSlugInput) {
+      dealerSlugInput.value = sellerNameInput.value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
     }
   });
 
-  form?.addEventListener("submit", async (e) => {
+  // 4. Optimización de Foto Principal a Cuadrado WebP 1500x1500px
+  mainImageInput?.addEventListener("change", async (e: any) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (mainStatus) mainStatus.innerText = "Procesando y encuadrando imagen a 1500x1500px WebP...";
+    mainPreviewBox?.classList.remove("hidden");
+
+    try {
+      const result = await convertToSquareWebP(file, 1500, 0.88);
+      mainImageDataUrl = result.dataUrl;
+      if (mainPreview) mainPreview.src = result.dataUrl;
+      if (mainStatus) mainStatus.innerText = `✓ Foto principal optimizada (1500x1500px WebP - ${(result.newSize / 1024).toFixed(0)} KB)`;
+    } catch (err) {
+      if (mainStatus) mainStatus.innerText = "Error procesando la imagen.";
+    }
+  });
+
+  // 5. Galería de Fotos Adicionales
+  galleryInput?.addEventListener("change", async (e: any) => {
+    const files: File[] = Array.from(e.target.files || []);
+    if (!files.length) return;
+
+    if (galleryStatus) galleryStatus.innerText = `Optimizando ${files.length} fotos para la galería...`;
+    if (galleryContainer) {
+      galleryContainer.innerHTML = "";
+      galleryContainer.classList.remove("hidden");
+    }
+
+    galleryDataUrls.length = 0; // Limpiar anteriores
+
+    for (const file of files.slice(0, 5)) {
+      try {
+        const result = await convertToSquareWebP(file, 1500, 0.85);
+        galleryDataUrls.push(result.dataUrl);
+
+        if (galleryContainer) {
+          const thumb = document.createElement("img");
+          thumb.src = result.dataUrl;
+          thumb.className = "w-20 h-20 object-cover border border-slate-200 shadow-sm rounded-xs";
+          galleryContainer.appendChild(thumb);
+        }
+      } catch (e) {
+        console.error("Error optimizando imagen de galería:", e);
+      }
+    }
+
+    if (galleryStatus) {
+      galleryStatus.innerText = `✓ ${galleryDataUrls.length} fotos añadidas a la galería en formato WebP cuadrado.`;
+    }
+  });
+
+  // 6. Publicación del Anuncio (Actualiza inmediatamente el Frontend)
+  form?.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    let selectedTransport = "cars";
+    transportRadios.forEach(r => {
+      if (r.checked) selectedTransport = r.value;
+    });
+
+    const isDealer = dealerRadio.checked;
+
+    // Si es vendedor privado, verificar si ya tiene un vehículo publicado en esta sesión/navegador
+    const existingVehicles = JSON.parse(localStorage.getItem("tucarroymas_user_published_vehicles_v1") || "[]");
+    if (!isDealer && existingVehicles.some((v: any) => !v.seller?.isDealer)) {
+      const confirmReplace = confirm("Como vendedor privado tienes permitido 1 vehículo activo a la vez. ¿Deseas reemplazar tu publicación anterior por este nuevo vehículo?");
+      if (!confirmReplace) return;
+    }
+
+    const title = (document.getElementById("pub-title") as HTMLInputElement).value;
+    const make = makeSelect.value;
+    const model = modelSelect.value;
+    const year = Number((document.getElementById("pub-year") as HTMLSelectElement).value);
+    const condition = (document.getElementById("pub-condition") as HTMLSelectElement).value as any;
+    const price = Number((document.getElementById("pub-price") as HTMLInputElement).value);
+    const mileageOrHours = (document.getElementById("pub-mileage") as HTMLInputElement).value;
+    const location = (document.getElementById("pub-location") as HTMLSelectElement).value;
+    const description = (document.getElementById("pub-description") as HTMLTextAreaElement).value;
+    const sellerName = sellerNameInput.value;
+    const sellerWhatsapp = (document.getElementById("pub-seller-whatsapp") as HTMLInputElement).value;
+
+    const id = `${make.toLowerCase()}-${model.toLowerCase()}-${year}-${Date.now()}`.replace(/[^a-z0-9]+/g, "-");
+
+    // Imagen por defecto si el usuario no cargó foto propia
+    const fallbackImage = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80";
+    const finalImageUrl = mainImageDataUrl || fallbackImage;
+    const finalGallery = galleryDataUrls.length > 0 ? galleryDataUrls : [finalImageUrl];
+
+    let dealerSlug = "";
+    if (isDealer) {
+      dealerSlug = dealerSlugInput.value || sellerName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      const dealerSpecialty = (document.getElementById("dealer-specialty") as HTMLInputElement).value || "Concesionario Autorizado";
+      const dealerBio = (document.getElementById("dealer-bio-text") as HTMLTextAreaElement).value;
+
+      saveDealerProfile({
+        slug: dealerSlug,
+        name: sellerName,
+        dealerType: dealerSpecialty,
+        phone: sellerWhatsapp,
+        whatsapp: sellerWhatsapp,
+        location: location,
+        bio: dealerBio,
+        logoUrl: finalImageUrl,
+        bannerUrl: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1600&q=80",
+        verified: true,
+        createdAt: new Date().toISOString()
+      });
+    }
+
+    const newVehicleListing = {
+      id,
+      title,
+      slug: id,
+      transportType: selectedTransport,
+      category: selectedTransport === "cars" ? "sedans" : selectedTransport === "water-transport" ? "boats" : selectedTransport === "trucks-buses" ? "commercial" : "machinery",
+      make,
+      model,
+      year,
+      condition,
+      price,
+      currency: "USD",
+      mileageOrHours,
+      engine: "Motor Estándar Optimizado",
+      fuelType: "Gasolina",
+      transmission: "Automática",
+      drivetrain: "Tracción Estándar",
+      location,
+      color: "Color de Fábrica",
+      featured: true,
+      status: "disponible" as const,
+      description,
+      imageUrl: finalImageUrl,
+      gallery: finalGallery,
+      features: ["Documentos al día", "Inspección disponible", "Garantía", "WhatsApp directo"],
+      specs: {
+        doors: 4,
+        passengers: 5,
+        engineSize: "Estándar"
+      },
+      seller: {
+        name: sellerName,
+        phone: sellerWhatsapp,
+        whatsapp: sellerWhatsapp,
+        dealerType: isDealer ? "Concesionario Dealer Oficial" : "Vendedor Particular",
+        isDealer: isDealer,
+        dealerSlug: dealerSlug || undefined
+      }
+    };
+
+    saveUserVehicle(newVehicleListing as any);
+
     if (formAlert) {
-      formAlert.className = "p-4 text-xs font-bold uppercase bg-emerald-100 text-emerald-800 border border-emerald-300";
-      formAlert.innerText = "✓ ¡Anuncio enviado con éxito al directorio! Será visible inmediatamente.";
+      formAlert.className = "p-4 text-xs font-bold uppercase bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xs";
+      if (isDealer) {
+        formAlert.innerHTML = `✓ ¡Vehículo publicado y Landing Page de Dealer activada con éxito!<br/><a href="/dealer/${dealerSlug}" class="underline mt-1 block">Visitar la landing page de tu dealer &rarr;</a>`;
+      } else {
+        formAlert.innerText = "✓ ¡Vehículo publicado con éxito en TuCarroYMas! Redirigiendo al catálogo...";
+      }
       formAlert.classList.remove("hidden");
     }
 
     setTimeout(() => {
-      window.location.href = "/vehiculos";
+      if (isDealer && dealerSlug) {
+        window.location.href = `/dealer/${dealerSlug}`;
+      } else {
+        window.location.href = "/vehiculos";
+      }
     }, 1500);
   });
+
+  // Inicializar selectores
+  updateMakesByTransport();
 </script>

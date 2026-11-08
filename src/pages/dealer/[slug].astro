@@ -1,0 +1,210 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SEED_DEALERS } from "../../lib/userListingsStore";
+import { DOMINICAN_PROVINCES } from "../../lib/carDealerData";
+
+export function getStaticPaths() {
+  return SEED_DEALERS.map(dealer => ({
+    params: { slug: dealer.slug },
+    props: { dealer }
+  }));
+}
+
+const { dealer } = Astro.props;
+---
+
+<Layout title={`${dealer.name} | Concesionario Oficial en República Dominicana`}>
+  <div class="bg-slate-50 min-h-screen pb-16">
+    
+    <!-- Dealer Header Banner -->
+    <div class="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-900">
+      <img 
+        id="dealer-banner"
+        src={dealer.bannerUrl || "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1600&q=80"} 
+        alt={dealer.name}
+        class="w-full h-full object-cover opacity-60"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent"></div>
+    </div>
+
+    <!-- Dealer Profile Card Card Overlay -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-8 -mt-24 relative z-10">
+      <div class="bg-white border border-slate-200 rounded-sm p-6 sm:p-8 shadow-xl">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div class="flex items-center gap-5">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-900 border-4 border-white shadow-lg overflow-hidden flex items-center justify-center p-3 shrink-0">
+              <img id="dealer-logo" src={dealer.logoUrl || "/brands/toyota.svg"} alt={dealer.name} class="max-h-full max-w-full object-contain" />
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h1 id="dealer-title" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                  {dealer.name}
+                </h1>
+                {dealer.verified && (
+                  <span class="inline-flex items-center px-2 py-0.5 text-[10px] font-black uppercase bg-emerald-100 text-emerald-800 rounded-xs">
+                    ✓ Verificado
+                  </span>
+                )}
+              </div>
+              <p id="dealer-badge" class="text-xs font-bold text-[#D54000] uppercase tracking-wider mt-0.5">
+                {dealer.dealerType}
+              </p>
+              <p id="dealer-location" class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-location-dot text-slate-400"></i>
+                Provincia: {dealer.location}, República Dominicana
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+            <a 
+              id="dealer-whatsapp-btn"
+              href={`https://wa.me/1${dealer.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hola ${dealer.name}, te contacto desde tu página oficial en TuCarroYMas para consultar por tu inventario disponible.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-xs uppercase py-3 px-6 rounded-sm flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
+            >
+              <i class="fa-brands fa-whatsapp text-base"></i>
+              WhatsApp Directo
+            </a>
+            <a 
+              id="dealer-phone-btn"
+              href={`tel:${dealer.phone.replace(/[^0-9+]/g, '')}`}
+              class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase py-3 px-5 rounded-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              <i class="fa-solid fa-phone"></i>
+              Llamar
+            </a>
+          </div>
+        </div>
+
+        <!-- Bio / Description -->
+        <div class="mt-6 pt-6 border-t border-slate-100">
+          <h3 class="text-xs uppercase font-bold text-slate-400 tracking-wider mb-2">Sobre Nosotros</h3>
+          <p id="dealer-bio" class="text-sm text-slate-700 leading-relaxed max-w-4xl">
+            {dealer.bio || "Concesionario certificado en República Dominicana. Contamos con vehículos de alta calidad, garantía comprobada y opciones directas de financiamiento."}
+          </p>
+        </div>
+      </div>
+
+      <!-- Dealer Inventory Section -->
+      <div class="mt-10">
+        <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+          <div>
+            <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">
+              Inventario Publicado por este Concesionario
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">Unidades listas para entrega inmediata e inspección presencial.</p>
+          </div>
+          <span id="dealer-inventory-count" class="px-3 py-1 bg-white border border-slate-200 text-xs font-bold text-[#D54000] rounded-xs shadow-xs">
+            Cargando unidades...
+          </span>
+        </div>
+
+        <div id="dealer-inventory-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div id="dealer-no-inventory" class="hidden text-center py-16 bg-white border border-slate-200 p-8 rounded-sm">
+          <i class="fa-solid fa-car text-slate-300 text-4xl mb-3"></i>
+          <h3 class="text-base font-bold text-slate-800">No hay unidades publicadas actualmente</h3>
+          <p class="text-xs text-slate-500 mt-1">Este concesionario actualizará su inventario próximamente.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script define:vars={{ initialDealer: dealer }}>
+  import { getAllCombinedVehicles, getStoredDealers } from "../../lib/userListingsStore";
+
+  // Buscar información de perfil personalizada si fue creado por el usuario en localStorage
+  const slug = window.location.pathname.split("/").filter(Boolean).pop();
+  const allDealers = getStoredDealers();
+  const currentDealer = allDealers.find(d => d.slug === slug) || initialDealer;
+
+  // Actualizar DOM con datos dinámicos si difiere
+  if (currentDealer) {
+    const titleEl = document.getElementById("dealer-title");
+    const badgeEl = document.getElementById("dealer-badge");
+    const locationEl = document.getElementById("dealer-location");
+    const bioEl = document.getElementById("dealer-bio");
+    const logoEl = document.getElementById("dealer-logo") as HTMLImageElement;
+    const bannerEl = document.getElementById("dealer-banner") as HTMLImageElement;
+    const waBtn = document.getElementById("dealer-whatsapp-btn") as HTMLAnchorElement;
+    const phoneBtn = document.getElementById("dealer-phone-btn") as HTMLAnchorElement;
+
+    if (titleEl) titleEl.innerText = currentDealer.name;
+    if (badgeEl) badgeEl.innerText = currentDealer.dealerType;
+    if (locationEl) locationEl.innerHTML = `<i class="fa-solid fa-location-dot text-slate-400"></i> Provincia: ${currentDealer.location}, República Dominicana`;
+    if (bioEl && currentDealer.bio) bioEl.innerText = currentDealer.bio;
+    if (logoEl && currentDealer.logoUrl) logoEl.src = currentDealer.logoUrl;
+    if (bannerEl && currentDealer.bannerUrl) bannerEl.src = currentDealer.bannerUrl;
+    if (waBtn) {
+      waBtn.href = `https://wa.me/1${currentDealer.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(`Hola ${currentDealer.name}, te contacto desde tu página oficial en TuCarroYMas para consultar por tu inventario disponible.`)}`;
+    }
+    if (phoneBtn) {
+      phoneBtn.href = `tel:${currentDealer.phone.replace(/[^0-9+]/g, "")}`;
+    }
+  }
+
+  // Filtrar vehículos de este dealer
+  const allVehicles = getAllCombinedVehicles();
+  const dealerVehicles = allVehicles.filter(v => {
+    if (!v.seller) return false;
+    const matchName = v.seller.name.toLowerCase() === currentDealer.name.toLowerCase();
+    const matchPhone = v.seller.phone.replace(/[^0-9]/g, "") === currentDealer.phone.replace(/[^0-9]/g, "");
+    return matchName || matchPhone;
+  });
+
+  const countBadge = document.getElementById("dealer-inventory-count");
+  const grid = document.getElementById("dealer-inventory-grid");
+  const emptyState = document.getElementById("dealer-no-inventory");
+
+  if (countBadge) countBadge.innerText = `${dealerVehicles.length} Unidades Disponibles`;
+
+  if (dealerVehicles.length === 0) {
+    grid?.classList.add("hidden");
+    emptyState?.classList.remove("hidden");
+  } else if (grid) {
+    grid.innerHTML = "";
+    dealerVehicles.forEach(v => {
+      const card = document.createElement("div");
+      card.className = "group bg-white border border-slate-200 hover:border-[#D54000] transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between rounded-sm overflow-hidden";
+      card.innerHTML = `
+        <div>
+          <a href="/vehiculo/${v.id}" class="block relative h-48 overflow-hidden bg-slate-900 cursor-pointer">
+            <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute bottom-2.5 right-2.5 bg-white/95 px-2 py-0.5 text-[11px] font-mono font-bold text-slate-800 border border-slate-200 shadow-sm rounded-xs">
+              ${v.location}
+            </div>
+          </a>
+          <div class="p-4">
+            <a href="/vehiculo/${v.id}">
+              <h3 class="text-sm font-black text-slate-900 group-hover:text-[#D54000] transition-colors line-clamp-1 cursor-pointer">
+                ${v.title}
+              </h3>
+            </a>
+            <div class="mt-1.5 flex items-baseline gap-2">
+              <span class="text-xl font-black text-[#D54000]">
+                $${Number(v.price).toLocaleString()} <span class="text-xs text-slate-600 font-bold">${v.currency}</span>
+              </span>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-between">
+              <span>${v.transmission || "Automática"}</span>
+              <span>${v.fuelType || "Gasolina"}</span>
+              <span>${v.mileageOrHours}</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 pt-0">
+          <a href="/vehiculo/${v.id}" class="w-full bg-[#D54000] hover:bg-[#b83600] text-white font-black text-xs uppercase py-2.5 px-4 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer">
+            Ver Ficha Completa
+          </a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+</script>

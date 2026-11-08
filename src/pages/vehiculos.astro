@@ -182,7 +182,22 @@ import { VEHICLE_STYLES } from "../lib/vehicleStyles";
 </Layout>
 
 <script define:vars={{ seedData: DEMO_VEHICLES_SEED, stylesData: VEHICLE_STYLES }}>
-  let vehicles = [...seedData];
+  // Leer vehículos guardados dinámicamente por el usuario desde localStorage y combinarlos
+  let userVehicles = [];
+  try {
+    const raw = localStorage.getItem("tucarroymas_user_published_vehicles_v1");
+    if (raw) userVehicles = JSON.parse(raw);
+  } catch (e) {
+    console.error("Error cargando vehículos locales:", e);
+  }
+
+  let vehicles = [...userVehicles, ...seedData];
+
+  // Actualizar badge de total con unidades reales
+  const totalBadge = document.getElementById("vehicle-count-badge");
+  if (totalBadge) {
+    totalBadge.innerText = `${vehicles.length} Unidades`;
+  }
   
   // URL Param Parsing
   const urlParams = new URLSearchParams(window.location.search);
