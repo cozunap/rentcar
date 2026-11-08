@@ -1,17 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TRANSPORT_TYPES, DOMINICAN_PROVINCES } from "../lib/carDealerData";
+import { DOMINICAN_PROVINCES } from "../lib/carDealerData";
 import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
+import { VEHICLE_STYLES } from "../lib/vehicleStyles";
 ---
 
-<Layout title="Catálogo de Vehículos y Transporte | Crocoblock Car Dealer New">
+<Layout title="Catálogo de Vehículos y Transporte en República Dominicana | TuCarroYMas">
   <div class="bg-[#f8fafc] text-slate-800 min-h-screen py-10 px-4 sm:px-8">
     <div class="max-w-7xl mx-auto">
       
       <!-- Catalog Header -->
       <div class="border-b border-slate-200 pb-6 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#D54000] mb-2">
             <a href="/" class="hover:underline">Inicio</a>
             <span>/</span>
             <span>Inventario Multicategoría</span>
@@ -20,33 +21,35 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
             Catálogo de Vehículos & Transporte
           </h1>
           <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
-            Filtros facetados en tiempo real (JetSmartFilters) por categoría de transporte, marca, condición y provincia.
+            Filtros facetados en tiempo real por tipo de transporte, condición, provincia y rango de precio.
           </p>
         </div>
 
         <div class="flex items-center gap-3">
           <span class="text-xs text-slate-500 font-medium">Total listados:</span>
-          <span id="vehicle-count-badge" class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 font-mono font-bold text-xs">
+          <span id="vehicle-count-badge" class="px-3 py-1 bg-orange-50 border border-orange-200 text-[#D54000] font-mono font-bold text-xs">
             {DEMO_VEHICLES_SEED.length} Unidades
           </span>
         </div>
       </div>
 
-      <!-- Main Layout: Sidebar Filters + Listings Grid (Crocoblock JetSmartFilters Architecture) -->
+      <!-- Main Layout: Sidebar Filters + Listings Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         
-        <!-- SIDEBAR FILTERS (JetSmartFilters Clean Light Pattern) -->
+        <!-- SIDEBAR FILTERS -->
         <aside class="lg:col-span-1 space-y-6">
-          <div class="bg-white border border-slate-200 p-5 shadow-sm">
+          <div class="bg-white border border-slate-200 p-5 shadow-sm rounded-sm">
+            
+            <!-- Header de Filtros: "Filtrar" y "Limpiar Todo" -->
             <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-5">
               <h2 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
-                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-                Filtros JetSmart
+                <svg class="w-4 h-4 text-[#D54000]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                Filtrar
               </h2>
               <button 
                 id="reset-filters-btn"
                 type="button" 
-                class="text-[11px] font-bold text-slate-500 hover:text-blue-600 underline uppercase cursor-pointer"
+                class="text-[11px] font-bold text-slate-500 hover:text-[#D54000] underline uppercase cursor-pointer"
               >
                 Limpiar Todo
               </button>
@@ -60,59 +63,53 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
                   type="text" 
                   id="search-input"
                   placeholder="Modelo, marca, motor..."
-                  class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 pl-8 pr-3 focus:outline-none focus:border-blue-600 font-medium placeholder:text-slate-400"
+                  class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 pl-8 pr-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium placeholder:text-slate-400 rounded-sm"
                 />
                 <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               </div>
             </div>
 
-            <!-- Filter: Transport Type (JetSmartFilters Radio / List) -->
-            <div class="mb-6">
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-2.5">
+            <!-- Filter: Tipo de Transporte (Dropdown Select con todas las categorías oficiales de portada) -->
+            <div class="mb-5">
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-2">
                 Tipo de Transporte
               </label>
-              <div class="space-y-1" id="transport-type-filters">
-                <label class="flex items-center justify-between p-2 text-xs text-slate-700 hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200">
-                  <div class="flex items-center gap-2">
-                    <input type="radio" name="transportFilter" value="all" checked class="accent-blue-600" />
-                    <span class="font-semibold">Todos los Transportes</span>
-                  </div>
-                </label>
-                {TRANSPORT_TYPES.map(cat => (
-                  <label class="flex items-center justify-between p-2 text-xs text-slate-700 hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200">
-                    <div class="flex items-center gap-2">
-                      <input type="radio" name="transportFilter" value={cat.id} class="accent-blue-600" />
-                      <span>{cat.nameEs}</span>
-                    </div>
-                  </label>
+              <select 
+                id="transport-select" 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-sm"
+              >
+                <option value="all">Todos los Transportes</option>
+                {VEHICLE_STYLES.map(style => (
+                  <option value={style.id}>{style.nameEs}</option>
                 ))}
-              </div>
+              </select>
+            </div>
+
+            <!-- Filter: Condición (Nuevos, Usados y Certificados) -->
+            <div class="mb-5">
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-2">Condición</label>
+              <select 
+                id="condition-select" 
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-sm"
+              >
+                <option value="all">Todas las Condiciones</option>
+                <option value="nuevo">Nuevos</option>
+                <option value="usado">Usados</option>
+                <option value="certificado">Certificados</option>
+              </select>
             </div>
 
             <!-- Filter: Location / Province -->
-            <div class="mb-6">
+            <div class="mb-5">
               <label class="block text-xs uppercase font-bold text-slate-700 mb-2">Provincia</label>
               <select 
                 id="location-select" 
-                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer"
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] font-medium cursor-pointer rounded-sm"
               >
                 <option value="all">Todas las Provincias</option>
                 {DOMINICAN_PROVINCES.map(p => (
                   <option value={p}>{p}</option>
                 ))}
-              </select>
-            </div>
-
-            <!-- Filter: Condition -->
-            <div class="mb-6">
-              <label class="block text-xs uppercase font-bold text-slate-700 mb-2">Condición</label>
-              <select 
-                id="condition-select" 
-                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer"
-              >
-                <option value="all">Todas las Condiciones</option>
-                <option value="nuevo">Nuevo (0 Km)</option>
-                <option value="usado">Usado Certificado</option>
               </select>
             </div>
 
@@ -126,22 +123,22 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
                 max="150000" 
                 step="5000" 
                 value="150000" 
-                class="w-full accent-blue-600 cursor-pointer"
+                class="w-full accent-[#D54000] cursor-pointer"
               />
               <div class="flex items-center justify-between text-xs text-slate-500 font-mono mt-1">
                 <span>$10,000</span>
-                <span id="price-range-display" class="font-bold text-blue-600">$150,000 USD</span>
+                <span id="price-range-display" class="font-bold text-[#D54000]">$150,000 USD</span>
               </div>
             </div>
 
           </div>
         </aside>
 
-        <!-- LISTINGS CONTENT (JetEngine Listing Grid Pattern - Clean Light) -->
+        <!-- LISTINGS CONTENT -->
         <main class="lg:col-span-3">
           
           <!-- Top Sort & View Controls -->
-          <div class="bg-white border border-slate-200 p-3 sm:px-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-sm">
+          <div class="bg-white border border-slate-200 p-3 sm:px-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-sm rounded-sm">
             <div class="text-slate-600">
               Mostrando <span id="visible-count" class="text-slate-900 font-bold">{DEMO_VEHICLES_SEED.length}</span> resultados filtrados
             </div>
@@ -150,7 +147,7 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
               <label class="text-slate-600 font-medium">Ordenar por:</label>
               <select 
                 id="sort-select" 
-                class="bg-slate-50 border border-slate-300 text-slate-900 text-xs py-1.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer"
+                class="bg-slate-50 border border-slate-300 text-slate-900 text-xs py-1.5 px-3 focus:outline-none focus:border-[#D54000] font-medium cursor-pointer rounded-sm"
               >
                 <option value="featured">Destacados Primero</option>
                 <option value="price-asc">Precio: Menor a Mayor</option>
@@ -160,49 +157,40 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
             </div>
           </div>
 
-          <!-- The Dynamic Fleet Grid (Embedded initial seed + Live 0ms filtering) -->
+          <!-- Listings Dynamic Grid -->
           <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <!-- Dynamically populated by client-side JS or initial render -->
+            <!-- Cards renderizadas dinámicamente -->
           </div>
 
-          <!-- Empty State -->
-          <div id="no-results" class="hidden bg-white border border-slate-200 p-12 text-center shadow-sm">
-            <svg class="w-12 h-12 text-slate-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <h3 class="text-base font-bold text-slate-900 uppercase">No se encontraron vehículos</h3>
-            <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-              Prueba cambiando o limpiando los filtros para ver otras opciones en nuestro inventario multicategoría.
+          <!-- No Results Fallback -->
+          <div id="no-results" class="hidden text-center py-16 bg-white border border-slate-200 p-8 shadow-sm rounded-sm">
+            <div class="w-16 h-16 mx-auto mb-4 bg-orange-50 text-[#D54000] rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h3 class="text-base font-black text-slate-900">No encontramos vehículos con estos criterios</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+              Prueba cambiando el tipo de transporte, ajustando el rango de precio o buscando otra marca.
             </p>
           </div>
+
         </main>
 
       </div>
-    </div>
-  </div>
 
-  <!-- QUICK VIEW DETAIL MODAL (Light Clean Surface) -->
-  <div id="quick-view-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
-      <button 
-        id="modal-close-btn"
-        class="absolute top-4 right-4 z-10 w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center justify-center transition-colors font-bold cursor-pointer"
-      >
-        ✕
-      </button>
-      <div id="modal-content" class="p-6">
-        <!-- Injected via JavaScript -->
-      </div>
     </div>
   </div>
 </Layout>
 
-<script define:vars={{ seedData: DEMO_VEHICLES_SEED }}>
+<script define:vars={{ seedData: DEMO_VEHICLES_SEED, stylesData: VEHICLE_STYLES }}>
   let vehicles = [...seedData];
   
   // URL Param Parsing
   const urlParams = new URLSearchParams(window.location.search);
   const initialType = urlParams.get("type");
+  const initialBody = urlParams.get("body");
   const initialMake = urlParams.get("make");
   const initialLocation = urlParams.get("location");
+  const initialCondition = urlParams.get("condition");
   const initialMaxPrice = urlParams.get("maxPrice");
 
   // Elements
@@ -210,26 +198,42 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
   const noResults = document.getElementById("no-results");
   const visibleCount = document.getElementById("visible-count");
   const searchInput = document.getElementById("search-input");
-  const locationSelect = document.getElementById("location-select");
+  const transportSelect = document.getElementById("transport-select");
   const conditionSelect = document.getElementById("condition-select");
+  const locationSelect = document.getElementById("location-select");
   const priceRange = document.getElementById("price-range");
   const priceDisplay = document.getElementById("price-range-display");
   const sortSelect = document.getElementById("sort-select");
   const resetBtn = document.getElementById("reset-filters-btn");
-  const modal = document.getElementById("quick-view-modal");
-  const modalClose = document.getElementById("modal-close-btn");
-  const modalContent = document.getElementById("modal-content");
 
   // Set initial filter values from URL
   if (initialMake && searchInput) searchInput.value = initialMake;
   if (initialLocation && locationSelect) locationSelect.value = initialLocation;
+  if (initialCondition && conditionSelect) conditionSelect.value = initialCondition;
+  
   if (initialMaxPrice && priceRange) {
     priceRange.value = initialMaxPrice;
     if (priceDisplay) priceDisplay.innerText = `$${Number(initialMaxPrice).toLocaleString()} USD`;
   }
-  if (initialType) {
-    const radio = document.querySelector(`input[name="transportFilter"][value="${initialType}"]`);
-    if (radio) radio.checked = true;
+  
+  // Sincronización del selector de tipo de transporte
+  if (transportSelect) {
+    if (initialBody) {
+      transportSelect.value = initialBody;
+    } else if (initialType) {
+      if (initialType === "water-transport") transportSelect.value = "boats";
+      else if (initialType === "machinery" || initialType === "special-machinery") transportSelect.value = "machinery";
+      else if (initialType === "trucks-buses") transportSelect.value = "commercial";
+      else if (initialType === "mototechnics") transportSelect.value = "coupes";
+    }
+  }
+
+  function getCategoryLabel(v) {
+    if (v.category) {
+      const match = stylesData.find(s => s.id === v.category);
+      if (match) return match.nameEs;
+    }
+    return v.transportType.replace("-", " ").toUpperCase();
   }
 
   function renderGrid(items) {
@@ -249,36 +253,53 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
     items.forEach(v => {
       const card = document.createElement("div");
-      card.className = "group bg-white border border-slate-200 hover:border-blue-500 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between";
+      card.className = "group bg-white border border-slate-200 hover:border-[#D54000] transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between rounded-sm overflow-hidden";
+      
+      const conditionBadgeClass = v.condition === 'nuevo' 
+        ? 'bg-blue-600 text-white' 
+        : v.condition === 'certificado' 
+        ? 'bg-emerald-600 text-white' 
+        : 'bg-amber-600 text-white';
+
+      const conditionText = v.condition === 'nuevo' 
+        ? 'NUEVO' 
+        : v.condition === 'certificado' 
+        ? 'CERTIFICADO' 
+        : 'USADO';
+
       card.innerHTML = `
         <div>
-          <div class="relative h-48 overflow-hidden bg-slate-100">
+          <!-- Link to Details Page on Image -->
+          <a href="/vehiculo/${v.id}" class="block relative h-48 overflow-hidden bg-slate-900 cursor-pointer">
             <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div class="absolute top-2.5 left-2.5 flex flex-col gap-1">
-              <span class="px-2 py-0.5 text-[9px] font-black uppercase tracking-wider bg-blue-600 text-white shadow-sm">
-                ${v.transportType.replace("-", " ").toUpperCase()}
+            <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10">
+              <span class="px-2 py-0.5 text-[9px] font-black uppercase tracking-wider bg-slate-900/90 text-white shadow-sm rounded-xs">
+                ${getCategoryLabel(v)}
               </span>
-              <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-white/95 text-emerald-700 border border-emerald-300 shadow-sm">
-                ${v.condition.toUpperCase()}
+              <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${conditionBadgeClass} shadow-sm rounded-xs">
+                ${conditionText}
               </span>
             </div>
-            <div class="absolute bottom-2.5 right-2.5 bg-white/95 px-2 py-0.5 text-[11px] font-mono font-bold text-slate-800 border border-slate-200 shadow-sm">
+            <div class="absolute bottom-2.5 right-2.5 bg-white/95 px-2 py-0.5 text-[11px] font-mono font-bold text-slate-800 border border-slate-200 shadow-sm rounded-xs">
               ${v.location}
             </div>
-          </div>
+          </a>
 
           <div class="p-4">
-            <h3 class="text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
-              ${v.title}
-            </h3>
+            <!-- Link to Details Page on Title -->
+            <a href="/vehiculo/${v.id}">
+              <h3 class="text-sm font-black text-slate-900 group-hover:text-[#D54000] transition-colors line-clamp-1 cursor-pointer">
+                ${v.title}
+              </h3>
+            </a>
 
             <div class="mt-1.5 flex items-baseline gap-2">
-              <span class="text-xl font-black text-slate-900">
-                $${Number(v.price).toLocaleString()} <span class="text-xs text-blue-600 font-bold">${v.currency}</span>
+              <span class="text-xl font-black text-[#D54000]">
+                $${Number(v.price).toLocaleString()} <span class="text-xs text-slate-600 font-bold">${v.currency}</span>
               </span>
             </div>
 
-            <div class="mt-3 grid grid-cols-2 gap-1.5 text-[11px] text-slate-700 py-2 border-y border-slate-200 bg-slate-50 px-2">
+            <div class="mt-3 grid grid-cols-2 gap-1.5 text-[11px] text-slate-700 py-2 border-y border-slate-200 bg-slate-50 px-2 rounded-xs">
               <div class="truncate"><span class="text-slate-500 font-medium">Uso:</span> <span class="font-bold text-slate-900">${v.mileageOrHours}</span></div>
               <div class="truncate"><span class="text-slate-500 font-medium">Trans:</span> <span class="font-bold text-slate-900">${v.transmission.split(" ")[0]}</span></div>
               <div class="truncate"><span class="text-slate-500 font-medium">Comb:</span> <span class="font-bold text-slate-900">${v.fuelType}</span></div>
@@ -294,87 +315,29 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
         <div class="p-4 pt-0 grid grid-cols-2 gap-2">
           <a 
-            href="https://wa.me/${v.seller.whatsapp}?text=${encodeURIComponent("Hola, estoy interesado en el anuncio: " + v.title + " ($" + v.price + " USD) en TuCarroYMás.")}"
+            href="https://wa.me/${v.seller.whatsapp}?text=${encodeURIComponent("Hola, estoy interesado en el anuncio: " + v.title + " ($" + Number(v.price).toLocaleString() + " USD) en TuCarroYMas.")}"
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center"
+            class="bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-xs uppercase py-2.5 px-2 flex items-center justify-center gap-1.5 transition-all text-center rounded-xs shadow-xs"
           >
+            <i class="fa-brands fa-whatsapp text-sm"></i>
             WhatsApp
           </a>
-          <button 
-            type="button"
-            data-id="${v.id}"
-            class="quick-view-btn bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center cursor-pointer"
+          <!-- Direct Link to the Detailed Page -->
+          <a 
+            href="/vehiculo/${v.id}"
+            class="bg-slate-900 hover:bg-[#D54000] text-white font-bold text-xs uppercase py-2.5 px-2 flex items-center justify-center transition-all text-center cursor-pointer rounded-xs"
           >
             Detalles
-          </button>
+          </a>
         </div>
       `;
       fleetGrid.appendChild(card);
     });
-
-    // Attach modal events to buttons
-    document.querySelectorAll(".quick-view-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-id");
-        const found = vehicles.find(x => x.id === id);
-        if (found) showQuickView(found);
-      });
-    });
-  }
-
-  function showQuickView(v) {
-    if (!modal || !modalContent) return;
-    modalContent.innerHTML = `
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-64 object-cover border border-slate-200" />
-          <div class="mt-4 flex flex-wrap gap-1.5">
-            ${v.features.map(f => `<span class="text-[10px] bg-slate-100 border border-slate-200 px-2 py-1 text-slate-700 font-medium">${f}</span>`).join("")}
-          </div>
-        </div>
-        <div class="flex flex-col justify-between">
-          <div>
-            <span class="text-xs uppercase font-bold text-blue-600">${v.transportType.replace("-", " ")}</span>
-            <h2 class="text-xl font-black text-slate-900 mt-1">${v.title}</h2>
-            <div class="text-2xl font-black text-slate-900 mt-2">$${Number(v.price).toLocaleString()} ${v.currency}</div>
-            
-            <p class="text-xs text-slate-600 mt-3 leading-relaxed">${v.description}</p>
-
-            <div class="mt-4 space-y-1.5 text-xs text-slate-700 border-t border-slate-200 pt-3">
-              <div><strong class="text-slate-900">Motor:</strong> ${v.engine}</div>
-              <div><strong class="text-slate-900">Uso / Horas:</strong> ${v.mileageOrHours}</div>
-              <div><strong class="text-slate-900">Tracción:</strong> ${v.drivetrain}</div>
-              <div><strong class="text-slate-900">Color:</strong> ${v.color}</div>
-              <div><strong class="text-slate-900">Ubicación:</strong> ${v.location}, Rep. Dom.</div>
-            </div>
-          </div>
-
-          <div class="mt-6 pt-4 border-t border-slate-200 flex flex-col gap-2">
-            <a 
-              href="https://wa.me/${v.seller.whatsapp}?text=${encodeURIComponent("Hola, quiero cotizar: " + v.title)}"
-              target="_blank"
-              class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase py-3 text-center transition-all"
-            >
-              Contactar al Vendedor por WhatsApp (${v.seller.phone})
-            </a>
-          </div>
-        </div>
-      </div>
-    `;
-    modal.classList.remove("hidden");
-  }
-
-  if (modalClose && modal) {
-    modalClose.addEventListener("click", () => modal.classList.add("hidden"));
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.add("hidden");
-    });
   }
 
   function applyFilters() {
-    const selectedRadio = document.querySelector('input[name="transportFilter"]:checked');
-    const selectedType = selectedRadio ? selectedRadio.value : "all";
+    const selectedCategory = transportSelect?.value || "all";
     const keyword = searchInput?.value.toLowerCase().trim() || "";
     const loc = locationSelect?.value || "all";
     const cond = conditionSelect?.value || "all";
@@ -382,14 +345,33 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
     const sortBy = sortSelect?.value || "featured";
 
     let filtered = vehicles.filter(v => {
-      if (selectedType !== "all" && v.transportType !== selectedType) return false;
-      if (loc !== "all" && v.location !== loc) return false;
+      // Filtrado por categoría de transporte (Dropdown con todos los estilos de portada)
+      if (selectedCategory !== "all") {
+        if (v.category) {
+          if (v.category !== selectedCategory) return false;
+        } else {
+          // Fallback por transportType
+          if (selectedCategory === "boats" && v.transportType !== "water-transport") return false;
+          if (selectedCategory === "machinery" && v.transportType !== "machinery" && v.transportType !== "special-machinery") return false;
+          if (selectedCategory === "commercial" && v.transportType !== "trucks-buses") return false;
+        }
+      }
+
+      // Filtrado por condición (Nuevos, Usados, Certificados)
       if (cond !== "all" && v.condition !== cond) return false;
+
+      // Filtrado por provincia
+      if (loc !== "all" && v.location !== loc) return false;
+
+      // Filtrado por precio
       if (Number(v.price) > maxP) return false;
+
+      // Filtrado por palabra clave
       if (keyword) {
         const fullText = `${v.title} ${v.make} ${v.model} ${v.engine} ${v.description}`.toLowerCase();
         if (!fullText.includes(keyword)) return false;
       }
+
       return true;
     });
 
@@ -407,27 +389,24 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
   // Event Listeners
   searchInput?.addEventListener("input", applyFilters);
-  locationSelect?.addEventListener("change", applyFilters);
+  transportSelect?.addEventListener("change", applyFilters);
   conditionSelect?.addEventListener("change", applyFilters);
+  locationSelect?.addEventListener("change", applyFilters);
   sortSelect?.addEventListener("change", applyFilters);
   priceRange?.addEventListener("input", (e) => {
     if (priceDisplay) priceDisplay.innerText = `$${Number(e.target.value).toLocaleString()} USD`;
     applyFilters();
   });
-  document.querySelectorAll('input[name="transportFilter"]').forEach(r => {
-    r.addEventListener("change", applyFilters);
-  });
 
   resetBtn?.addEventListener("click", () => {
     if (searchInput) searchInput.value = "";
-    if (locationSelect) locationSelect.value = "all";
+    if (transportSelect) transportSelect.value = "all";
     if (conditionSelect) conditionSelect.value = "all";
+    if (locationSelect) locationSelect.value = "all";
     if (priceRange) {
       priceRange.value = "150000";
       if (priceDisplay) priceDisplay.innerText = "$150,000 USD";
     }
-    const defaultRadio = document.querySelector('input[name="transportFilter"][value="all"]');
-    if (defaultRadio) defaultRadio.checked = true;
     applyFilters();
   });
 

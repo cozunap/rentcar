@@ -1,0 +1,279 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { DEMO_VEHICLES_SEED } from "../../lib/carDealerSeed";
+import { VEHICLE_STYLES } from "../../lib/vehicleStyles";
+
+export function getStaticPaths() {
+  return DEMO_VEHICLES_SEED.map(vehicle => ({
+    params: { id: vehicle.id },
+    props: { vehicle }
+  }));
+}
+
+const { vehicle } = Astro.props;
+
+// Categoría visual amigable
+const currentStyle = VEHICLE_STYLES.find(s => s.id === vehicle.category);
+const categoryLabel = currentStyle ? currentStyle.nameEs : vehicle.transportType.replace("-", " ").toUpperCase();
+
+// Mensaje pre-llenado de WhatsApp
+const whatsappMessage = encodeURIComponent(
+  `¡Hola! Estoy interesado en el vehículo publicado en TuCarroYMas: ${vehicle.title} (${vehicle.year}) por $${Number(vehicle.price).toLocaleString()} ${vehicle.currency}. ¿Aún está disponible para coordinar una inspección?`
+);
+---
+
+<Layout title={`${vehicle.title} en Venta en República Dominicana | TuCarroYMas`}>
+  <div class="bg-[#f8fafc] text-slate-800 min-h-screen py-8 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Migas de pan (Breadcrumb) -->
+      <nav class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400 mb-6">
+        <a href="/" class="hover:text-[#D54000] transition-colors">Inicio</a>
+        <span>/</span>
+        <a href="/vehiculos" class="hover:text-[#D54000] transition-colors">Inventario</a>
+        <span>/</span>
+        <span class="text-slate-800 truncate max-w-md">{vehicle.title}</span>
+      </nav>
+
+      <!-- Encabezado del Vehículo -->
+      <div class="bg-white border border-slate-200 p-6 rounded-sm shadow-sm mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-slate-900 text-white rounded-xs">
+              {categoryLabel}
+            </span>
+            <span class={`px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider rounded-xs ${
+              vehicle.condition === 'nuevo' 
+                ? 'bg-blue-600 text-white' 
+                : vehicle.condition === 'certificado'
+                ? 'bg-emerald-600 text-white'
+                : 'bg-amber-600 text-white'
+            }`}>
+              {vehicle.condition === 'nuevo' ? 'Nuevo (0 Km)' : vehicle.condition === 'certificado' ? 'Certificado' : 'Usado'}
+            </span>
+            <span class="text-xs text-slate-500 font-medium ml-2">
+              <i class="fa-solid fa-location-dot text-[#D54000] mr-1"></i> {vehicle.location}, Rep. Dom.
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            {vehicle.title}
+          </h1>
+          <p class="text-xs text-slate-500 mt-1">
+            Marca: <strong class="text-slate-800">{vehicle.make}</strong> &bull; Modelo: <strong class="text-slate-800">{vehicle.model}</strong> &bull; Año: <strong class="text-slate-800">{vehicle.year}</strong>
+          </p>
+        </div>
+
+        <div class="text-left md:text-right">
+          <div class="text-xs uppercase tracking-wider text-slate-400 font-bold">Precio de Venta</div>
+          <div class="text-3xl sm:text-4xl font-black text-[#D54000]">
+            ${Number(vehicle.price).toLocaleString()} <span class="text-base text-slate-600 font-bold">{vehicle.currency}</span>
+          </div>
+          <span class="inline-block text-[10px] uppercase font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 mt-1 rounded-xs">
+            {vehicle.status === 'disponible' ? '✓ Disponible para Entrega' : 'Reservado'}
+          </span>
+        </div>
+      </div>
+
+      <!-- Grid Principal: Galería y Ficha Técnica (Izquierda) + Sidebar Dueño/Customer Card (Derecha) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- COLUMNA IZQUIERDA: Fotos + Especificaciones completas (2 Cols) -->
+        <div class="lg:col-span-2 space-y-6">
+          
+          <!-- Galería de Fotos Principal -->
+          <div class="bg-white border border-slate-200 rounded-sm overflow-hidden shadow-sm">
+            <div class="relative h-[340px] sm:h-[440px] bg-slate-900 overflow-hidden flex items-center justify-center">
+              <img 
+                id="main-vehicle-photo" 
+                src={vehicle.imageUrl} 
+                alt={vehicle.title} 
+                class="w-full h-full object-cover transition-all duration-300"
+              />
+              <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-xs text-white text-xs px-3 py-1 font-mono font-medium rounded-xs">
+                HD 1080p
+              </div>
+            </div>
+
+            <!-- Miniaturas de la Galería -->
+            {vehicle.gallery && vehicle.gallery.length > 1 && (
+              <div class="p-3 bg-slate-50 border-t border-slate-200 flex items-center gap-3 overflow-x-auto">
+                {vehicle.gallery.map((photo, index) => (
+                  <button 
+                    type="button" 
+                    onclick={`document.getElementById('main-vehicle-photo').src = '${photo}'`}
+                    class="w-20 h-14 shrink-0 border-2 border-slate-200 hover:border-[#D54000] rounded-xs overflow-hidden cursor-pointer transition-all"
+                  >
+                    <img src={photo} alt={`Foto ${index + 1}`} class="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <!-- Descripción del Anuncio -->
+          <div class="bg-white border border-slate-200 p-6 rounded-sm shadow-sm">
+            <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider mb-3 pb-2 border-b border-slate-100 flex items-center gap-2">
+              <svg class="w-5 h-5 text-[#D54000]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Descripción General
+            </h3>
+            <p class="text-sm text-slate-700 leading-relaxed">
+              {vehicle.description}
+            </p>
+          </div>
+
+          <!-- Especificaciones Técnicas Detalladas (Specs Grid) -->
+          <div class="bg-white border border-slate-200 p-6 rounded-sm shadow-sm">
+            <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
+              <svg class="w-5 h-5 text-[#D54000]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+              Ficha Técnica & Especificaciones
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 font-medium">Motor / Cilindrada</span>
+                <span class="font-bold text-slate-900 text-right">{vehicle.engine}</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 font-medium">Uso / Kilometraje</span>
+                <span class="font-bold text-slate-900">{vehicle.mileageOrHours}</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 font-medium">Transmisión</span>
+                <span class="font-bold text-slate-900">{vehicle.transmission}</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 font-medium">Tracción / Drivetrain</span>
+                <span class="font-bold text-slate-900">{vehicle.drivetrain}</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 font-medium">Tipo de Combustible</span>
+                <span class="font-bold text-slate-900">{vehicle.fuelType}</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 font-medium">Color Exterior / Interior</span>
+                <span class="font-bold text-slate-900">{vehicle.color}</span>
+              </div>
+
+              <!-- Specs adicionales dinámicas -->
+              {Object.entries(vehicle.specs).map(([label, value]) => (
+                <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200">
+                  <span class="text-slate-500 font-medium">{label}</span>
+                  <span class="font-bold text-slate-900 text-right">{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Equipamiento & Características Destacadas -->
+          {vehicle.features && vehicle.features.length > 0 && (
+            <div class="bg-white border border-slate-200 p-6 rounded-sm shadow-sm">
+              <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#D54000]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Equipamiento & Confort
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {vehicle.features.map(feat => (
+                  <div class="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-slate-50 p-2.5 border border-slate-200">
+                    <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        <!-- COLUMNA DERECHA: SIDEBAR CON EL CARD DEL CUSTOMER / DUEÑO + COMUNICACIÓN DIRECTA (1 Col) -->
+        <aside class="space-y-6">
+          
+          <!-- CUSTOMER CARD / PERFIL DEL DUEÑO / VENDEDOR -->
+          <div class="bg-white border-2 border-slate-200 rounded-sm p-6 shadow-md sticky top-24">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+              <span class="text-xs uppercase tracking-wider font-bold text-[#D54000]">
+                Información del Vendedor
+              </span>
+              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                <i class="fa-solid fa-circle-check"></i> Verificado
+              </span>
+            </div>
+
+            <!-- Perfil del Dealer / Dueño -->
+            <div class="flex items-center gap-3.5 mt-4">
+              <div class="w-14 h-14 rounded-full bg-slate-900 text-white font-black text-xl flex items-center justify-center shadow-sm shrink-0 border-2 border-[#D54000]">
+                {vehicle.seller.name.substring(0, 2).toUpperCase()}
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 leading-tight">
+                  {vehicle.seller.name}
+                </h4>
+                <p class="text-xs text-slate-500 font-medium mt-0.5">
+                  {vehicle.seller.dealerType}
+                </p>
+                <div class="flex items-center gap-1 text-amber-500 text-xs mt-1">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span class="text-[11px] font-bold text-slate-600 ml-1">
+                    {vehicle.seller.rating || 5.0} (Calificación Excelente)
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Métodos de Contacto Directo -->
+            <div class="mt-6 space-y-3">
+              
+              <!-- Botón WhatsApp Directo Oficial -->
+              <a 
+                href={`https://wa.me/${vehicle.seller.whatsapp}?text=${whatsappMessage}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-extrabold text-xs uppercase py-3.5 px-4 rounded-sm flex items-center justify-center gap-2.5 shadow-sm hover:shadow transition-all text-center cursor-pointer tracking-wider"
+              >
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                Contactar por WhatsApp
+              </a>
+
+              <!-- Botón Llamar por Teléfono Directo -->
+              <a 
+                href={`tel:${vehicle.seller.phone.replace(/[^0-9+]/g, '')}`}
+                class="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase py-3 px-4 rounded-sm flex items-center justify-center gap-2 transition-all text-center cursor-pointer tracking-wider"
+              >
+                <i class="fa-solid fa-phone"></i>
+                Llamar: {vehicle.seller.phone}
+              </a>
+
+            </div>
+
+            <!-- Resumen Rápido del Vehículo para el Comprador -->
+            <div class="mt-6 pt-5 border-t border-slate-100 text-xs text-slate-600 space-y-2 bg-slate-50 -mx-6 -mb-6 p-6 rounded-b-sm">
+              <div class="font-bold text-slate-900 mb-2 uppercase text-[11px] tracking-wider">
+                Garantía y Seguridad TuCarroYMas
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-[#D54000]"></i>
+                <span>Inspección física disponible con cita</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-file-invoice text-[#D54000]"></i>
+                <span>Matrícula y documentación al día en DGII</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-handshake text-[#D54000]"></i>
+                <span>Trato directo con el vendedor sin comisiones</span>
+              </div>
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+  </div>
+</Layout>

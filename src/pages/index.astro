@@ -261,7 +261,7 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
 
             <div class="p-4 pt-0">
               <a 
-                href={`/vehiculos?make=${encodeURIComponent(item.make)}`}
+                href={`/vehiculo/${item.id}`}
                 class="w-full bg-[#D54000] hover:bg-[#b83600] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
               >
                 Ver más
@@ -320,7 +320,7 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
 
               <div class="p-4 pt-0">
                 <a 
-                  href={`/vehiculos?make=${encodeURIComponent(item.make)}`}
+                  href={`/vehiculo/${item.id}`}
                   class="w-full bg-[#D54000] hover:bg-[#b83600] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
                 >
                   Ver más

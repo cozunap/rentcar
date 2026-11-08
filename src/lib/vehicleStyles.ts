@@ -83,5 +83,11 @@ export const VEHICLE_STYLES: VehicleStyleItem[] = [
     "name": "Electrics",
     "nameEs": "100% Eléctricos (EV)",
     "image": "/styles/d-electric.svg"
+  },
+  {
+    "id": "machinery",
+    "name": "Machinery & Heavy Equipment",
+    "nameEs": "Maquinaria Pesada & Agrícola",
+    "image": "/brands/johndeere.svg"
   }
 ];

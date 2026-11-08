@@ -106,6 +106,7 @@ export interface DealershipListing {
   title: string;
   slug: string;
   transportType: "cars" | "trucks-buses" | "special-machinery" | "water-transport" | "mototechnics" | "machinery";
+  category?: string; // Estilo o categoría exacta: sedans, suvs, trucks, commercial, boats, coupes, hatchbacks, vans, convertibles, wagons, 4wds, hybrids, electrics, machinery
   make: string;
   model: string;
   year: number;
