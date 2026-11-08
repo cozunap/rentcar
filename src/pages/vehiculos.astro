@@ -1,436 +1,436 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { VEHICLE_BRANDS, DOMINICAN_PROVINCES, MARKETPLACE_CATEGORIES } from '../lib/constants';
+import Layout from "../layouts/Layout.astro";
+import { TRANSPORT_TYPES, DOMINICAN_PROVINCES } from "../lib/carDealerData";
+import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 ---
 
-<Layout 
-    title="Inventario de Vehículos, Motos y Botes | TuCarroYMás.com"
-    description="Explora todo el inventario de carros, camionetas, SUVs, motocicletas, botes y camiones en venta directa. Filtros instantáneos y contacto directo con el vendedor por WhatsApp."
->
-    <!-- Header Banner -->
-    <div class="bg-[#070b16] text-white py-12 text-center border-b border-slate-800">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-950/90 border border-blue-500/40 text-[#38bdf8] text-[10px] font-black uppercase tracking-widest mb-3">
-                <i class="fas fa-layer-group"></i> Catálogo Completo de Unidades
-            </span>
-            <h1 class="text-3xl sm:text-5xl font-black mb-3 uppercase font-['Outfit',sans-serif] tracking-tight">
-                Inventario en Venta Directa
-            </h1>
-            <p class="text-slate-300 text-sm max-w-2xl mx-auto">
-                Carros, Camionetas 4x4, SUVs, Motos, Botes y Camiones. Trato directo sin comisiones ni intermediarios.
-            </p>
+<Layout title="Catálogo de Vehículos y Transporte | Crocoblock Car Dealer New">
+  <div class="bg-[#070b16] text-white min-h-screen py-10 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Catalog Header -->
+      <div class="border-b border-white/10 pb-6 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">
+            <a href="/" class="hover:underline">Inicio</a>
+            <span>/</span>
+            <span>Inventario Multicategoría</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
+            Catálogo de Vehículos & Transporte
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">
+            Filtros facetados en tiempo real (JetSmartFilters) por categoría de transporte, marca, condición y provincia.
+          </p>
         </div>
-    </div>
 
-    <!-- Main Content & Live Faceted Filters -->
-    <section class="py-12 bg-[#f8fafc]">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-slate-400">Total listados:</span>
+          <span id="vehicle-count-badge" class="px-3 py-1 bg-blue-600/20 border border-blue-500/40 text-blue-400 font-mono font-bold text-xs">
+            {DEMO_VEHICLES_SEED.length} Unidades
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Layout: Sidebar Filters + Listings Grid (Crocoblock JetSmartFilters Architecture) -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        
+        <!-- SIDEBAR FILTERS (JetSmartFilters Pattern) -->
+        <aside class="lg:col-span-1 space-y-6">
+          <div class="bg-[#0b1329] border border-white/10 p-5 shadow-xl">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+              <h2 class="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                Filtros JetSmart
+              </h2>
+              <button 
+                id="reset-filters-btn"
+                type="button" 
+                class="text-[11px] font-bold text-slate-400 hover:text-blue-400 underline uppercase"
+              >
+                Limpiar Todo
+              </button>
+            </div>
+
+            <!-- Search Keyword -->
+            <div class="mb-5">
+              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Palabra Clave</label>
+              <div class="relative">
+                <input 
+                  type="text" 
+                  id="search-input"
+                  placeholder="Modelo, marca, motor..."
+                  class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 pl-8 pr-3 focus:outline-none focus:border-blue-500"
+                />
+                <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+            </div>
+
+            <!-- Filter: Transport Type (JetSmartFilters Radio / List) -->
+            <div class="mb-6">
+              <label class="block text-xs uppercase font-bold text-slate-300 mb-2.5">
+                Tipo de Transporte
+              </label>
+              <div class="space-y-1.5" id="transport-type-filters">
+                <label class="flex items-center justify-between p-2 text-xs text-slate-300 hover:bg-white/5 cursor-pointer border border-transparent hover:border-white/10">
+                  <div class="flex items-center gap-2">
+                    <input type="radio" name="transportFilter" value="all" checked class="accent-blue-600" />
+                    <span>Todos los Transportes</span>
+                  </div>
+                </label>
+                {TRANSPORT_TYPES.map(cat => (
+                  <label class="flex items-center justify-between p-2 text-xs text-slate-300 hover:bg-white/5 cursor-pointer border border-transparent hover:border-white/10">
+                    <div class="flex items-center gap-2">
+                      <input type="radio" name="transportFilter" value={cat.id} class="accent-blue-600" />
+                      <span>{cat.nameEs}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- Filter: Location / Province -->
+            <div class="mb-6">
+              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Provincia</label>
+              <select 
+                id="location-select" 
+                class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500"
+              >
+                <option value="all">Todas las Provincias</option>
+                {DOMINICAN_PROVINCES.map(p => (
+                  <option value={p}>{p}</option>
+                ))}
+              </select>
+            </div>
+
+            <!-- Filter: Condition -->
+            <div class="mb-6">
+              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Condición</label>
+              <select 
+                id="condition-select" 
+                class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500"
+              >
+                <option value="all">Todas las Condiciones</option>
+                <option value="nuevo">Nuevo (0 Km)</option>
+                <option value="usado">Usado Certificado</option>
+              </select>
+            </div>
+
+            <!-- Filter: Price Range -->
+            <div>
+              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Precio Máximo (USD)</label>
+              <input 
+                type="range" 
+                id="price-range" 
+                min="10000" 
+                max="150000" 
+                step="5000" 
+                value="150000" 
+                class="w-full accent-blue-600 cursor-pointer"
+              />
+              <div class="flex items-center justify-between text-xs text-slate-400 font-mono mt-1">
+                <span>$10,000</span>
+                <span id="price-range-display" class="font-bold text-blue-400">$150,000 USD</span>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+        <!-- LISTINGS CONTENT (JetEngine Listing Grid Pattern) -->
+        <main class="lg:col-span-3">
+          
+          <!-- Top Sort & View Controls -->
+          <div class="bg-[#0b1329] border border-white/10 p-3 sm:px-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div class="text-slate-400">
+              Mostrando <span id="visible-count" class="text-white font-bold">{DEMO_VEHICLES_SEED.length}</span> resultados filtrados
+            </div>
             
-            <!-- BARRA DE FILTROS FACETADOS EN MEMORIA (0ms Lag) -->
-            <div class="bg-white border-2 border-slate-900 shadow-xl p-5 mb-8 space-y-4" style="border-radius: 0px !important;">
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
-                    <!-- Búsqueda por Texto -->
-                    <div class="lg:col-span-2">
-                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-keyword">
-                            <i class="fas fa-search text-[#1d4ed8] me-1"></i> Búsqueda por Marca o Modelo
-                        </label>
-                        <div class="relative">
-                            <input 
-                                type="text" 
-                                id="v-filter-keyword" 
-                                placeholder="Ej: Toyota Hilux, Yamaha, Sea Ray, Honda..." 
-                                class="w-full text-xs font-semibold p-3 pl-9 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]"
-                            />
-                            <i class="fas fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        </div>
-                    </div>
-
-                    <!-- Categoría de Transporte -->
-                    <div>
-                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-category">
-                            <i class="fas fa-layer-group text-[#1d4ed8] me-1"></i> Categoría
-                        </label>
-                        <select id="v-filter-category" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Todas las Categorías</option>
-                            {MARKETPLACE_CATEGORIES.map(c => <option value={c.id}>{c.name}</option>)}
-                        </select>
-                    </div>
-
-                    <!-- Ubicación / Provincia -->
-                    <div>
-                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-province">
-                            <i class="fas fa-location-dot text-[#1d4ed8] me-1"></i> Ubicación
-                        </label>
-                        <select id="v-filter-province" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Cualquier Ubicación</option>
-                            {DOMINICAN_PROVINCES.map(p => <option value={p}>{p}</option>)}
-                        </select>
-                    </div>
-
-                    <!-- Ordenar -->
-                    <div>
-                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-sort">
-                            <i class="fas fa-arrow-down-short-wide text-[#1d4ed8] me-1"></i> Ordenar
-                        </label>
-                        <select id="v-filter-sort" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="recent">Más Recientes</option>
-                            <option value="price-asc">Precio: Menor a Mayor</option>
-                            <option value="price-desc">Precio: Mayor a Menor</option>
-                            <option value="year-desc">Año: Más Nuevo</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Active Filters bar & Count -->
-                <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
-                    <span id="vehicles-total-count" class="font-bold text-slate-700">
-                        Cargando inventario...
-                    </span>
-                    <a href="/publicar" class="text-[#15803d] font-black hover:underline flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
-                        <i class="fas fa-plus-circle text-sm"></i> Publicar Mi Unidad Gratis
-                    </a>
-                </div>
-
+            <div class="flex items-center gap-3">
+              <label class="text-slate-400">Ordenar por:</label>
+              <select 
+                id="sort-select" 
+                class="bg-[#131d38] border border-white/10 text-white text-xs py-1.5 px-3 focus:outline-none focus:border-blue-500"
+              >
+                <option value="featured">Destacados Primero</option>
+                <option value="price-asc">Precio: Menor a Mayor</option>
+                <option value="price-desc">Precio: Mayor a Menor</option>
+                <option value="year-desc">Año: Más Reciente</option>
+              </select>
             </div>
+          </div>
 
-            <!-- Grid de Unidades en Venta -->
-            <div id="vehicles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Skeletons -->
-                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
-                    <div class="h-64 bg-slate-100"></div>
-                    <div class="h-6 bg-slate-100 w-1/2"></div>
-                </div>
-                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
-                    <div class="h-64 bg-slate-100"></div>
-                    <div class="h-6 bg-slate-100 w-1/2"></div>
-                </div>
-            </div>
+          <!-- The Dynamic Fleet Grid (Embedded initial seed + Live 0ms filtering) -->
+          <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Dynamically populated by client-side JS or initial render -->
+          </div>
 
-        </div>
-    </section>
+          <!-- Empty State -->
+          <div id="no-results" class="hidden bg-[#0b1329] border border-white/10 p-12 text-center">
+            <svg class="w-12 h-12 text-slate-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h3 class="text-base font-bold text-white uppercase">No se encontraron vehículos</h3>
+            <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+              Prueba cambiando o limpiando los filtros para ver otras opciones en nuestro inventario multicategoría.
+            </p>
+          </div>
+        </main>
 
-    <!-- Modal Detalle Rápido de Compra (JetPopup) -->
-    <div 
-      id="sale-quick-modal" 
-      class="fixed inset-0 z-50 pointer-events-none transition-all duration-300 opacity-0 flex items-center justify-center p-3 sm:p-4 md:p-6" 
-      aria-hidden="true"
-    >
-        <div id="sale-modal-backdrop" class="absolute inset-0 bg-[#070b16]/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-pointer"></div>
-
-        <div id="sale-modal-card" class="relative w-full max-w-2xl bg-white border-2 border-slate-900 shadow-2xl flex flex-col transform scale-95 transition-all duration-300 max-h-[92vh] overflow-hidden z-10" style="border-radius: 0px !important;">
-            <!-- Modal Header -->
-            <div class="px-5 py-3.5 bg-[#090e1a] text-white flex items-center justify-between border-b border-slate-800">
-                <div class="flex items-center gap-2">
-                    <span class="px-2 py-0.5 text-[10px] font-black uppercase tracking-widest bg-[#15803d] text-white">
-                        Venta Directa
-                    </span>
-                    <span id="sm-condition-badge" class="text-xs font-semibold text-slate-300">
-                        Usado
-                    </span>
-                </div>
-                <button id="sale-modal-close" type="button" aria-label="Cerrar" class="w-8 h-8 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors luxury-btn">
-                    <i class="fas fa-times text-sm"></i>
-                </button>
-            </div>
-
-            <!-- Modal Content -->
-            <div class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5">
-                <div class="w-full h-64 sm:h-72 bg-white border border-slate-200 p-2 overflow-hidden flex items-center justify-center">
-                    <img id="sm-main-img" src="" alt="Vehículo" class="w-full h-full object-contain" />
-                </div>
-
-                <div class="flex flex-col sm:flex-row justify-between items-start gap-2 border-b border-slate-200 pb-4">
-                    <div>
-                        <h3 id="sm-title" class="text-2xl font-black text-[#0f172a] tracking-tight">Cargando...</h3>
-                        <p id="sm-location" class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
-                            <i class="fas fa-location-dot text-[#1d4ed8]"></i>
-                            <span>República Dominicana</span>
-                        </p>
-                    </div>
-                    <div class="text-left sm:text-right">
-                        <span id="sm-price" class="text-3xl font-black text-[#15803d] font-mono">$0 USD</span>
-                        <span id="sm-seller" class="text-[11px] block font-semibold text-slate-400 uppercase mt-0.5">Vendedor Particular</span>
-                    </div>
-                </div>
-
-                <!-- Specs Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                    <div class="p-2.5 bg-slate-50 border border-slate-200">
-                        <i class="fas fa-gears text-[#1d4ed8] text-sm mb-1 block"></i>
-                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Motor</span>
-                        <strong id="sm-engine" class="text-slate-800 font-bold">2.0L</strong>
-                    </div>
-                    <div class="p-2.5 bg-slate-50 border border-slate-200">
-                        <i class="fas fa-gauge-high text-[#1d4ed8] text-sm mb-1 block"></i>
-                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Uso / Millas</span>
-                        <strong id="sm-mileage" class="text-slate-800 font-bold">45,000 mi</strong>
-                    </div>
-                    <div class="p-2.5 bg-slate-50 border border-slate-200">
-                        <i class="fas fa-gear text-[#1d4ed8] text-sm mb-1 block"></i>
-                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Transmisión</span>
-                        <strong id="sm-trans" class="text-slate-800 font-bold">Automática</strong>
-                    </div>
-                    <div class="p-2.5 bg-slate-50 border border-slate-200">
-                        <i class="fas fa-arrows-split-up-and-left text-[#1d4ed8] text-sm mb-1 block"></i>
-                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Tracción</span>
-                        <strong id="sm-drivetrain" class="text-slate-800 font-bold">4x4</strong>
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Descripción de la Unidad</h4>
-                    <p id="sm-desc" class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 border border-slate-200"></p>
-                </div>
-            </div>
-
-            <!-- Modal Footer CTA WhatsApp Directo -->
-            <div class="p-4 sm:p-5 border-t border-slate-200 bg-white shadow-lg space-y-2">
-                <a id="sm-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-4 px-6 bg-[#15803d] hover:bg-[#166534] text-white font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all luxury-btn shadow-md" style="border-radius: 0px !important;">
-                    <i class="fab fa-whatsapp text-2xl"></i>
-                    <span>Contactar al Vendedor por WhatsApp</span>
-                </a>
-                <p class="text-[11px] text-center text-slate-400">
-                    Trato directo y sin intermediarios con el propietario o concesionario.
-                </p>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
+  <!-- QUICK VIEW DETAIL MODAL -->
+  <div id="quick-view-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-[#0b1329] border border-white/10 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+      <button 
+        id="modal-close-btn"
+        class="absolute top-4 right-4 z-10 w-8 h-8 bg-black/60 hover:bg-red-600 text-white flex items-center justify-center transition-colors"
+      >
+        ✕
+      </button>
+      <div id="modal-content" class="p-6">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
 </Layout>
 
-<script>
-    import { collection, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
-    import { db } from "../lib/firebase/client";
+<script define:vars={{ seedData: DEMO_VEHICLES_SEED }}>
+  let vehicles = [...seedData];
+  
+  // URL Param Parsing
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialType = urlParams.get("type");
+  const initialMake = urlParams.get("make");
+  const initialLocation = urlParams.get("location");
+  const initialMaxPrice = urlParams.get("maxPrice");
 
-    const vGrid = document.getElementById('vehicles-grid');
-    const totalCount = document.getElementById('vehicles-total-count');
+  // Elements
+  const fleetGrid = document.getElementById("fleet-grid");
+  const noResults = document.getElementById("no-results");
+  const visibleCount = document.getElementById("visible-count");
+  const searchInput = document.getElementById("search-input");
+  const locationSelect = document.getElementById("location-select");
+  const conditionSelect = document.getElementById("condition-select");
+  const priceRange = document.getElementById("price-range");
+  const priceDisplay = document.getElementById("price-range-display");
+  const sortSelect = document.getElementById("sort-select");
+  const resetBtn = document.getElementById("reset-filters-btn");
+  const modal = document.getElementById("quick-view-modal");
+  const modalClose = document.getElementById("modal-close-btn");
+  const modalContent = document.getElementById("modal-content");
 
-    // Modal References
-    const modal = document.getElementById('sale-quick-modal');
-    const backdrop = document.getElementById('sale-modal-backdrop');
-    const card = document.getElementById('sale-modal-card');
-    const closeBtn = document.getElementById('sale-modal-close');
+  // Set initial filter values from URL
+  if (initialMake && searchInput) searchInput.value = initialMake;
+  if (initialLocation && locationSelect) locationSelect.value = initialLocation;
+  if (initialMaxPrice && priceRange) {
+    priceRange.value = initialMaxPrice;
+    if (priceDisplay) priceDisplay.innerText = `$${Number(initialMaxPrice).toLocaleString()} USD`;
+  }
+  if (initialType) {
+    const radio = document.querySelector(`input[name="transportFilter"][value="${initialType}"]`);
+    if (radio) radio.checked = true;
+  }
 
-    const mImg = document.getElementById('sm-main-img') as HTMLImageElement;
-    const mTitle = document.getElementById('sm-title');
-    const mLocation = document.getElementById('sm-location');
-    const mPrice = document.getElementById('sm-price');
-    const mSeller = document.getElementById('sm-seller');
-    const mEngine = document.getElementById('sm-engine');
-    const mMileage = document.getElementById('sm-mileage');
-    const mTrans = document.getElementById('sm-trans');
-    const mDrivetrain = document.getElementById('sm-drivetrain');
-    const mDesc = document.getElementById('sm-desc');
-    const mCondBadge = document.getElementById('sm-condition-badge');
-    const mWhatsappBtn = document.getElementById('sm-whatsapp-btn') as HTMLAnchorElement;
+  function renderGrid(items) {
+    if (!fleetGrid) return;
+    fleetGrid.innerHTML = "";
 
-    function openModal(vehicle: any, owner: any) {
-        if (!modal || !backdrop || !card) return;
-
-        const price = vehicle.price || vehicle.pricePerDay || 0;
-        const currency = vehicle.currency || 'USD';
-        const formattedPrice = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
-
-        const rawPhone = owner?.whatsapp || owner?.phone || vehicle.ownerWhatsapp || '18499154010';
-        const cleanPhone = rawPhone.replace(/\D/g, '');
-
-        if (mImg) mImg.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : (vehicle.mainImage || "/Honda.webp");
-        if (mTitle) mTitle.textContent = vehicle.title;
-        if (mLocation) mLocation.querySelector('span')!.textContent = `${vehicle.province || vehicle.city || 'República Dominicana'}`;
-        if (mPrice) mPrice.textContent = formattedPrice;
-        if (mSeller) mSeller.textContent = vehicle.sellerType === 'dealer' ? 'Dealer Autorizado' : 'Vendedor Particular';
-        if (mCondBadge) mCondBadge.textContent = vehicle.condition || 'Usado';
-        if (mEngine) mEngine.textContent = vehicle.engine || 'Estándar';
-        if (mMileage) mMileage.textContent = `${(vehicle.mileage || 45000).toLocaleString()} ${vehicle.mileageUnit || 'mi'}`;
-        if (mTrans) mTrans.textContent = vehicle.transmission || 'Automática';
-        if (mDrivetrain) mDrivetrain.textContent = vehicle.drivetrain || 'Estándar';
-        if (mDesc) mDesc.textContent = vehicle.description || `Unidad ${vehicle.title} disponible para venta directa en ${vehicle.province || 'República Dominicana'}.`;
-
-        const msg = encodeURIComponent(`Hola, vi en TuCarroYMás.com su ${vehicle.title} anunciado en ${formattedPrice}. ¿Aún está disponible?`);
-        if (mWhatsappBtn) mWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
-
-        modal.classList.remove('pointer-events-none', 'opacity-0');
-        modal.classList.add('pointer-events-auto', 'opacity-100');
-        backdrop.classList.remove('opacity-0');
-        backdrop.classList.add('opacity-100');
-        card.classList.remove('scale-95');
-        card.classList.add('scale-100');
-        document.body.classList.add('overflow-hidden');
+    if (items.length === 0) {
+      fleetGrid.classList.add("hidden");
+      noResults?.classList.remove("hidden");
+      if (visibleCount) visibleCount.innerText = "0";
+      return;
     }
 
-    function closeModal() {
-        if (!modal || !backdrop || !card) return;
-        card.classList.remove('scale-100');
-        card.classList.add('scale-95');
-        backdrop.classList.remove('opacity-100');
-        backdrop.classList.add('opacity-0');
-        setTimeout(() => {
-            modal.classList.remove('pointer-events-auto', 'opacity-100');
-            modal.classList.add('pointer-events-none', 'opacity-0');
-            document.body.classList.remove('overflow-hidden');
-        }, 250);
-    }
+    fleetGrid.classList.remove("hidden");
+    noResults?.classList.add("hidden");
+    if (visibleCount) visibleCount.innerText = items.length.toString();
 
-    closeBtn?.addEventListener('click', closeModal);
-    backdrop?.addEventListener('click', closeModal);
+    items.forEach(v => {
+      const card = document.createElement("div");
+      card.className = "group bg-[#0b1329] border border-white/10 hover:border-blue-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between";
+      card.innerHTML = `
+        <div>
+          <div class="relative h-48 overflow-hidden bg-black/40">
+            <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute top-2.5 left-2.5 flex flex-col gap-1">
+              <span class="px-2 py-0.5 text-[9px] font-black uppercase tracking-wider bg-blue-600 text-white">
+                ${v.transportType.replace("-", " ").toUpperCase()}
+              </span>
+              <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/80 text-emerald-400 border border-emerald-500/30">
+                ${v.condition.toUpperCase()}
+              </span>
+            </div>
+            <div class="absolute bottom-2.5 right-2.5 bg-black/80 px-2 py-0.5 text-[11px] font-mono text-white border border-white/10">
+              ${v.location}
+            </div>
+          </div>
 
-    // Filters
-    let allVehicles: any[] = [];
-    const filterKeyword = document.getElementById('v-filter-keyword') as HTMLInputElement;
-    const filterCategory = document.getElementById('v-filter-category') as HTMLSelectElement;
-    const filterProvince = document.getElementById('v-filter-province') as HTMLSelectElement;
-    const filterSort = document.getElementById('v-filter-sort') as HTMLSelectElement;
+          <div class="p-4">
+            <h3 class="text-sm font-black text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+              ${v.title}
+            </h3>
 
-    // Read URL params (?categoria=motos o ?marca=Toyota)
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('categoria') && filterCategory) {
-        filterCategory.value = urlParams.get('categoria')!;
-    }
-    if (urlParams.get('provincia') && filterProvince) {
-        filterProvince.value = urlParams.get('provincia')!;
-    }
+            <div class="mt-1.5 flex items-baseline gap-2">
+              <span class="text-xl font-black text-white">
+                $${Number(v.price).toLocaleString()} <span class="text-xs text-blue-400 font-semibold">${v.currency}</span>
+              </span>
+            </div>
 
-    function renderVehicles() {
-        if (!vGrid) return;
-        vGrid.innerHTML = '';
+            <div class="mt-3 grid grid-cols-2 gap-1.5 text-[11px] text-slate-300 py-2 border-y border-white/10 bg-white/[0.02] px-2">
+              <div class="truncate"><span class="text-slate-500">Uso:</span> <span class="font-semibold text-white">${v.mileageOrHours}</span></div>
+              <div class="truncate"><span class="text-slate-500">Trans:</span> <span class="font-semibold text-white">${v.transmission.split(" ")[0]}</span></div>
+              <div class="truncate"><span class="text-slate-500">Comb:</span> <span class="font-semibold text-white">${v.fuelType}</span></div>
+              <div class="truncate"><span class="text-slate-500">Año:</span> <span class="font-semibold text-white">${v.year}</span></div>
+            </div>
 
-        let results = [...allVehicles];
+            <div class="mt-3 flex items-center justify-between text-xs text-slate-400">
+              <span class="text-slate-300 font-medium truncate text-[11px]">${v.seller.name}</span>
+              <span class="text-[9px] text-emerald-400 font-bold uppercase">${v.seller.dealerType}</span>
+            </div>
+          </div>
+        </div>
 
-        // Keyword filter
-        const kw = filterKeyword?.value.toLowerCase().trim() || '';
-        if (kw) {
-            results = results.filter(i => 
-                (i.v.title || '').toLowerCase().includes(kw) ||
-                (i.v.brand || '').toLowerCase().includes(kw) ||
-                (i.v.model || '').toLowerCase().includes(kw) ||
-                (i.v.engine || '').toLowerCase().includes(kw)
-            );
-        }
-
-        // Category filter
-        const cat = filterCategory?.value || 'all';
-        if (cat !== 'all') {
-            results = results.filter(i => 
-                (i.v.category || '').toLowerCase() === cat.toLowerCase()
-            );
-        }
-
-        // Province filter
-        const prov = filterProvince?.value || 'all';
-        if (prov !== 'all') {
-            results = results.filter(i => 
-                (i.v.province || i.v.city || '').toLowerCase().includes(prov.toLowerCase())
-            );
-        }
-
-        // Sort
-        const sortVal = filterSort?.value || 'recent';
-        if (sortVal === 'price-asc') {
-            results.sort((a, b) => (a.v.price || a.v.pricePerDay || 0) - (b.v.price || b.v.pricePerDay || 0));
-        } else if (sortVal === 'price-desc') {
-            results.sort((a, b) => (b.v.price || b.v.pricePerDay || 0) - (a.v.price || a.v.pricePerDay || 0));
-        } else if (sortVal === 'year-desc') {
-            results.sort((a, b) => (b.v.year || 0) - (a.v.year || 0));
-        }
-
-        if (totalCount) {
-            totalCount.textContent = `${results.length} Unidad${results.length === 1 ? '' : 'es'} Disponible${results.length === 1 ? '' : 's'}`;
-        }
-
-        if (results.length === 0) {
-            vGrid.innerHTML = `
-                <div class="col-span-full text-center py-16 bg-white border border-slate-200 p-8">
-                    <i class="fas fa-car text-4xl text-slate-300 mb-3"></i>
-                    <p class="text-sm font-bold text-slate-700 uppercase">No hay unidades que coincidan con tu búsqueda</p>
-                    <p class="text-xs text-slate-500 mt-1">Prueba seleccionando "Todas las Categorías" o borrando el término de búsqueda.</p>
-                </div>
-            `;
-            return;
-        }
-
-        results.forEach(({ v, ownerData }) => {
-            const cleanPhone = (ownerData?.whatsapp || v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
-            const price = v.price || v.pricePerDay || 25000;
-            const currency = v.currency || 'USD';
-            const priceStr = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
-            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
-
-            const cardEl = document.createElement('div');
-            cardEl.className = "luxury-card flex flex-col justify-between overflow-hidden group";
-            cardEl.innerHTML = `
-                <div>
-                    <div class="car-image-container relative">
-                        <img src="${carImg}" alt="${v.title}" />
-                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#090e1a] text-white shadow-md">
-                                ${v.condition || 'Usado'}
-                            </span>
-                            <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
-                                <i class="fas fa-check-circle me-1"></i> Verificado
-                            </span>
-                        </div>
-                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
-                            <strong class="text-lg font-black text-[#15803d] font-mono">${priceStr}</strong>
-                        </div>
-                    </div>
-
-                    <div class="p-5">
-                        <h4 class="text-lg font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
-                        <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
-                            <i class="fas fa-location-dot text-[#1d4ed8] text-[11px]"></i>
-                            <span>${v.province || v.city || 'República Dominicana'}</span>
-                            <span class="mx-1">•</span>
-                            <span class="text-slate-400 font-semibold">${v.sellerType === 'dealer' ? 'Dealer' : 'Particular'}</span>
-                        </p>
-
-                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2 mb-4">
-                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span><strong>${v.engine || '2.0L'}</strong></div>
-                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Millas / Km</span><strong>${(v.mileage || 45000).toLocaleString()}</strong></div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <button type="button" class="view-car-btn py-2.5 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
-                                Ficha Técnica
-                            </button>
-                            <a href="https://wa.me/${cleanPhone}?text=Hola,%20me%20interesa%20comprar%20su%20${encodeURIComponent(v.title)}%20anunciado%20en%20TuCarroYMás.com" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 luxury-btn">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            cardEl.querySelector('.view-car-btn')?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openModal(v, ownerData);
-            });
-
-            cardEl.addEventListener('click', (e) => {
-                const target = e.target as HTMLElement;
-                if (target.closest('a') || target.closest('.view-car-btn')) return;
-                openModal(v, ownerData);
-            });
-
-            vGrid.appendChild(cardEl);
-        });
-    }
-
-    filterKeyword?.addEventListener('input', renderVehicles);
-    filterCategory?.addEventListener('change', renderVehicles);
-    filterProvince?.addEventListener('change', renderVehicles);
-    filterSort?.addEventListener('change', renderVehicles);
-
-    // Firestore Stream
-    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
-    onSnapshot(q, async (snap) => {
-        allVehicles = [];
-        for (const docSnap of snap.docs) {
-            const v = docSnap.data();
-            v.id = docSnap.id;
-            allVehicles.push({ v, ownerData: null });
-        }
-        renderVehicles();
+        <div class="p-4 pt-0 grid grid-cols-2 gap-2">
+          <a 
+            href="https://wa.me/${v.seller.whatsapp}?text=${encodeURIComponent("Hola, estoy interesado en el anuncio: " + v.title + " ($" + v.price + " USD) en TuCarroYMás.")}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center"
+          >
+            WhatsApp
+          </a>
+          <button 
+            type="button"
+            data-id="${v.id}"
+            class="quick-view-btn bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center cursor-pointer"
+          >
+            Detalles
+          </button>
+        </div>
+      `;
+      fleetGrid.appendChild(card);
     });
+
+    // Attach modal events to buttons
+    document.querySelectorAll(".quick-view-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        const found = vehicles.find(x => x.id === id);
+        if (found) showQuickView(found);
+      });
+    });
+  }
+
+  function showQuickView(v) {
+    if (!modal || !modalContent) return;
+    modalContent.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-64 object-cover border border-white/10" />
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            ${v.features.map(f => `<span class="text-[10px] bg-white/5 border border-white/10 px-2 py-1 text-slate-300">${f}</span>`).join("")}
+          </div>
+        </div>
+        <div class="flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase font-bold text-blue-400">${v.transportType.replace("-", " ")}</span>
+            <h2 class="text-xl font-black text-white mt-1">${v.title}</h2>
+            <div class="text-2xl font-black text-white mt-2">$${Number(v.price).toLocaleString()} ${v.currency}</div>
+            
+            <p class="text-xs text-slate-300 mt-3 leading-relaxed">${v.description}</p>
+
+            <div class="mt-4 space-y-1.5 text-xs text-slate-300 border-t border-white/10 pt-3">
+              <div><strong class="text-white">Motor:</strong> ${v.engine}</div>
+              <div><strong class="text-white">Uso / Horas:</strong> ${v.mileageOrHours}</div>
+              <div><strong class="text-white">Tracción:</strong> ${v.drivetrain}</div>
+              <div><strong class="text-white">Color:</strong> ${v.color}</div>
+              <div><strong class="text-white">Ubicación:</strong> ${v.location}, Rep. Dom.</div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2">
+            <a 
+              href="https://wa.me/${v.seller.whatsapp}?text=${encodeURIComponent("Hola, quiero cotizar: " + v.title)}"
+              target="_blank"
+              class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase py-3 text-center transition-all"
+            >
+              Contactar al Vendedor por WhatsApp (${v.seller.phone})
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+    modal.classList.remove("hidden");
+  }
+
+  if (modalClose && modal) {
+    modalClose.addEventListener("click", () => modal.classList.add("hidden"));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.add("hidden");
+    });
+  }
+
+  function applyFilters() {
+    const selectedRadio = document.querySelector('input[name="transportFilter"]:checked');
+    const selectedType = selectedRadio ? selectedRadio.value : "all";
+    const keyword = searchInput?.value.toLowerCase().trim() || "";
+    const loc = locationSelect?.value || "all";
+    const cond = conditionSelect?.value || "all";
+    const maxP = Number(priceRange?.value || 150000);
+    const sortBy = sortSelect?.value || "featured";
+
+    let filtered = vehicles.filter(v => {
+      if (selectedType !== "all" && v.transportType !== selectedType) return false;
+      if (loc !== "all" && v.location !== loc) return false;
+      if (cond !== "all" && v.condition !== cond) return false;
+      if (Number(v.price) > maxP) return false;
+      if (keyword) {
+        const fullText = `${v.title} ${v.make} ${v.model} ${v.engine} ${v.description}`.toLowerCase();
+        if (!fullText.includes(keyword)) return false;
+      }
+      return true;
+    });
+
+    // Sorting
+    if (sortBy === "price-asc") {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "price-desc") {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (sortBy === "year-desc") {
+      filtered.sort((a, b) => b.year - a.year);
+    }
+
+    renderGrid(filtered);
+  }
+
+  // Event Listeners
+  searchInput?.addEventListener("input", applyFilters);
+  locationSelect?.addEventListener("change", applyFilters);
+  conditionSelect?.addEventListener("change", applyFilters);
+  sortSelect?.addEventListener("change", applyFilters);
+  priceRange?.addEventListener("input", (e) => {
+    if (priceDisplay) priceDisplay.innerText = `$${Number(e.target.value).toLocaleString()} USD`;
+    applyFilters();
+  });
+  document.querySelectorAll('input[name="transportFilter"]').forEach(r => {
+    r.addEventListener("change", applyFilters);
+  });
+
+  resetBtn?.addEventListener("click", () => {
+    if (searchInput) searchInput.value = "";
+    if (locationSelect) locationSelect.value = "all";
+    if (conditionSelect) conditionSelect.value = "all";
+    if (priceRange) {
+      priceRange.value = "150000";
+      if (priceDisplay) priceDisplay.innerText = "$150,000 USD";
+    }
+    const defaultRadio = document.querySelector('input[name="transportFilter"][value="all"]');
+    if (defaultRadio) defaultRadio.checked = true;
+    applyFilters();
+  });
+
+  // Initial render
+  applyFilters();
 </script>

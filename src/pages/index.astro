@@ -1,282 +1,316 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { VEHICLE_BRANDS, DOMINICAN_PROVINCES, MARKETPLACE_CATEGORIES } from '../lib/constants';
+import Layout from "../layouts/Layout.astro";
+import { TRANSPORT_TYPES, DOMINICAN_PROVINCES } from "../lib/carDealerData";
+import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
+
+const featuredItems = DEMO_VEHICLES_SEED.slice(0, 6);
 ---
 
-<Layout 
-    title="TuCarroYMás.com | Dealer Digital de Vehículos, Motos, Botes y Pesados"
-    description="Compra y vende vehículos, camionetas, motos, botes y camiones en República Dominicana y el mundo. Publicación gratuita y trato directo por WhatsApp sin comisiones."
->
-    <!-- HERO DEALERSHIP BANNER -->
-    <section class="relative bg-[#070b16] text-white pt-12 pb-20 border-b border-slate-800 overflow-hidden">
-        
-        <!-- Background Lighting FX -->
-        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
-        <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/25 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none"></div>
+<Layout title="TuCarroYMás | Car Dealer & Marketplace Multicategoría República Dominicana">
+  <!-- HERO BANNER (Crocoblock Car Dealer New Pattern) -->
+  <section class="relative min-h-[640px] flex items-center justify-center bg-[#070b16] py-16 px-4 overflow-hidden">
+    <!-- Background Image with Gradient Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80" 
+        alt="Car Dealer Hero" 
+        class="w-full h-full object-cover opacity-25"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#070b16] via-[#070b16]/80 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#070b16] via-transparent to-[#070b16]"></div>
+    </div>
 
-        <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Value Prop & Title -->
-            <div class="text-center max-w-3xl mx-auto mb-10">
-                <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-blue-950/90 border border-blue-500/40 text-[#38bdf8] text-[11px] font-black uppercase tracking-widest mb-4 shadow-sm">
-                    <i class="fas fa-certificate text-emerald-400"></i> Portal Automotriz & Dealer Digital Global
+    <div class="relative z-10 max-w-6xl mx-auto w-full text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs uppercase tracking-widest font-black mb-6">
+        <span>●</span> Crocoblock Car Dealer New Architecture
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight uppercase max-w-4xl mx-auto leading-tight">
+        El Portal Líder de <span class="text-blue-500">Vehículos y Transporte</span> en RD
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto">
+        Compra y venta directa sin intermediarios. Automóviles, camiones pesados 18-wheelers, transporte acuático, motocicletas y maquinaria especializada en todas las provincias.
+      </p>
+
+      <!-- MASTER SEARCH & FILTERS BOX (JetSmartFilters Real-time Pattern) -->
+      <div class="mt-10 bg-[#0b1329]/95 border border-white/10 p-4 sm:p-6 shadow-2xl backdrop-blur-xl text-left max-w-5xl mx-auto">
+        <form action="/vehiculos" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 items-end">
+          
+          <!-- Filter 1: Transport Type (Crocoblock Types of Transport) -->
+          <div>
+            <label class="block text-xs uppercase font-bold text-slate-300 mb-1.5 tracking-wider">
+              Tipo de Transporte
+            </label>
+            <select 
+              name="type" 
+              class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500 cursor-pointer"
+            >
+              <option value="">Todos los Transportes</option>
+              {TRANSPORT_TYPES.map(t => (
+                <option value={t.id}>{t.nameEs}</option>
+              ))}
+            </select>
+          </div>
+
+          <!-- Filter 2: Make / Brand -->
+          <div>
+            <label class="block text-xs uppercase font-bold text-slate-300 mb-1.5 tracking-wider">
+              Marca
+            </label>
+            <input 
+              type="text" 
+              name="make" 
+              placeholder="Ej. Toyota, Freightliner, Cat..."
+              class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Filter 3: Dominican Province / Location -->
+          <div>
+            <label class="block text-xs uppercase font-bold text-slate-300 mb-1.5 tracking-wider">
+              Provincia
+            </label>
+            <select 
+              name="location" 
+              class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500 cursor-pointer"
+            >
+              <option value="">Toda República Dominicana</option>
+              {DOMINICAN_PROVINCES.map(p => (
+                <option value={p}>{p}</option>
+              ))}
+            </select>
+          </div>
+
+          <!-- Filter 4: Max Price (USD) -->
+          <div>
+            <label class="block text-xs uppercase font-bold text-slate-300 mb-1.5 tracking-wider">
+              Precio Máximo (USD)
+            </label>
+            <select 
+              name="maxPrice" 
+              class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500 cursor-pointer"
+            >
+              <option value="">Cualquier Precio</option>
+              <option value="15000">Hasta $15,000 USD</option>
+              <option value="30000">Hasta $30,000 USD</option>
+              <option value="50000">Hasta $50,000 USD</option>
+              <option value="100000">Hasta $100,000 USD</option>
+              <option value="200000">Más de $100,000 USD</option>
+            </select>
+          </div>
+
+          <!-- Search Button -->
+          <div>
+            <button 
+              type="submit" 
+              class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase py-3 px-4 tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all cursor-pointer"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              Filtrar
+            </button>
+          </div>
+        </form>
+
+        <!-- Quick Search Pills -->
+        <div class="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center gap-2 text-xs text-slate-400">
+          <span class="font-bold text-slate-300 uppercase tracking-wider text-[11px]">Búsquedas Populares:</span>
+          <a href="/vehiculos?type=cars" class="hover:text-blue-400 bg-white/5 px-2.5 py-1 border border-white/5">Sedanes y Eléctricos</a>
+          <a href="/vehiculos?type=trucks-buses" class="hover:text-blue-400 bg-white/5 px-2.5 py-1 border border-white/5">18-Wheelers y Pesados</a>
+          <a href="/vehiculos?type=water-transport" class="hover:text-blue-400 bg-white/5 px-2.5 py-1 border border-white/5">Lanchas Deportivas</a>
+          <a href="/vehiculos?type=special-machinery" class="hover:text-blue-400 bg-white/5 px-2.5 py-1 border border-white/5">Excavadoras y Maquinaria</a>
+          <a href="/vehiculos?type=mototechnics" class="hover:text-blue-400 bg-white/5 px-2.5 py-1 border border-white/5">SuperBikes Yamaha</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES OF TRANSPORT SECTION (Crocoblock Car Dealer Demo Taxonomy Grid) -->
+  <section class="py-16 px-4 bg-[#050811] border-y border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+        <div>
+          <span class="text-blue-400 font-bold uppercase tracking-widest text-xs">Directorio Completo</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mt-1">
+            Explora por Tipo de Transporte
+          </h2>
+        </div>
+        <a href="/vehiculos" class="mt-4 sm:mt-0 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 flex items-center gap-1">
+          Ver Catálogo Completo
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {TRANSPORT_TYPES.map(cat => (
+          <a 
+            href={`/vehiculos?type=${cat.id}`}
+            class="group bg-[#0b1329] border border-white/10 p-6 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 shadow-lg"
+          >
+            <div>
+              <div class="w-12 h-12 bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200 mb-4">
+                {cat.id === "cars" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M3 11h18v6H3v-6z"></path></svg>}
+                {cat.id === "trucks-buses" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10M13 16h8l2-4V9a1 1 0 00-1-1h-9M13 16H9m-4 0H3"></path></svg>}
+                {cat.id === "special-machinery" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>}
+                {cat.id === "water-transport" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>}
+                {cat.id === "mototechnics" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
+                {cat.id === "machinery" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>}
+              </div>
+
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-black text-white group-hover:text-blue-400 transition-colors uppercase">
+                  {cat.nameEs}
+                </h3>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-white/5 px-2 py-0.5">
+                  {cat.name}
                 </span>
-                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Outfit',sans-serif] leading-tight">
-                    El Dealer Digital de <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#38bdf8] via-blue-400 to-[#60a5fa]">Todo Tipo de Transporte</span>
-                </h1>
-                <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
-                    Carros, Camionetas, SUVs, Motocicletas, Botes y Vehículos Pesados. Publica gratis y contacta directamente al vendedor por WhatsApp.
-                </p>
+              </div>
+
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                {cat.description}
+              </p>
             </div>
 
-            <!-- UNIFIED SEARCH BOX (Cars.com / SuperCarros Style) -->
-            <div class="max-w-5xl mx-auto bg-white border-2 border-slate-900 shadow-2xl p-6 sm:p-8" style="border-radius: 0px !important;">
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-                    <!-- Categoría de Transporte -->
-                    <div>
-                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-cat">
-                            Categoría de Transporte
-                        </label>
-                        <select id="filter-cat" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Todas las Categorías</option>
-                            {MARKETPLACE_CATEGORIES.map(c => <option value={c.id}>{c.name}</option>)}
-                        </select>
-                    </div>
-
-                    <!-- Marca -->
-                    <div>
-                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-brand">
-                            Marca / Fabricante
-                        </label>
-                        <select id="filter-brand" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Todas las Marcas</option>
-                            {VEHICLE_BRANDS.map(b => <option value={b}>{b}</option>)}
-                        </select>
-                    </div>
-
-                    <!-- Ubicación / Provincia -->
-                    <div>
-                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-prov">
-                            Ubicación
-                        </label>
-                        <select id="filter-prov" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Cualquier Ubicación (RD y Global)</option>
-                            {DOMINICAN_PROVINCES.map(p => <option value={p}>{p}</option>)}
-                        </select>
-                    </div>
-
-                    <!-- Presupuesto Máximo -->
-                    <div>
-                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-price">
-                            Precio Máximo (USD)
-                        </label>
-                        <select id="filter-price" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Cualquier Precio</option>
-                            <option value="15000">Hasta $15,000 USD</option>
-                            <option value="30000">Hasta $30,000 USD</option>
-                            <option value="50000">Hasta $50,000 USD</option>
-                            <option value="100000">Hasta $100,000 USD</option>
-                            <option value="250000">Más de $100,000 USD</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Action Button -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-slate-100">
-                    <span class="text-xs text-slate-500 flex items-center gap-2">
-                        <i class="fas fa-bolt text-[#1d4ed8]"></i>
-                        <span>Búsqueda instantánea con actualización en tiempo real</span>
-                    </span>
-                    <button 
-                      type="button" 
-                      id="btn-search-catalog" 
-                      class="w-full sm:w-auto px-10 py-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-md flex items-center justify-center gap-2"
-                      style="border-radius: 0px !important;"
-                    >
-                        <i class="fas fa-search"></i>
-                        <span>Explorar Inventario</span>
-                    </button>
-                </div>
-
+            <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-white">
+              <span>Explorar Inventario</span>
+              <span class="text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
             </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
-            <!-- CATEGORY BADGES GRID (Cars, SUVs, Trucks, Motorcycles, Boats, Heavy) -->
-            <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                {MARKETPLACE_CATEGORIES.map(cat => (
-                    <a 
-                      href={`/vehiculos?categoria=${cat.id}`} 
-                      class="bg-slate-900/80 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 p-4 text-center transition-all group flex flex-col items-center justify-center"
-                      style="border-radius: 0px !important;"
-                    >
-                        <i class={`fas ${cat.icon} text-2xl text-[#38bdf8] group-hover:text-white group-hover:scale-110 transition-all mb-2`}></i>
-                        <strong class="text-xs font-bold text-white uppercase block leading-tight">{cat.name}</strong>
-                    </a>
-                ))}
-            </div>
-
+  <!-- FEATURED CAR DEALER LISTINGS (JetEngine Listing Grid Pattern) -->
+  <section class="py-16 px-4 bg-[#070b16]">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+        <div>
+          <span class="text-blue-400 font-bold uppercase tracking-widest text-xs">Inventario Destacado</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mt-1">
+            Unidades Certificadas Disponibles
+          </h2>
         </div>
-    </section>
+        <a href="/vehiculos" class="mt-4 sm:mt-0 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 flex items-center gap-1">
+          Ver las 8 Unidades Demo
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
 
-    <!-- SECTION: INVENTARIO DESTACADO -->
-    <section class="py-16 bg-[#f8fafc]">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] block mb-1">
-                        Inventario Verificado
-                    </span>
-                    <h2 class="text-2xl sm:text-4xl font-black text-[#0f172a] uppercase font-['Outfit',sans-serif] tracking-tight">
-                        Unidades Destacadas en el Dealer
-                    </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredItems.map(item => (
+          <div class="group bg-[#0b1329] border border-white/10 hover:border-blue-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+            <div>
+              <!-- Vehicle Image with Badges -->
+              <div class="relative h-56 overflow-hidden bg-black/40">
+                <img 
+                  src={item.imageUrl} 
+                  alt={item.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+                  <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-blue-600 text-white">
+                    {item.transportType.replace("-", " ").toUpperCase()}
+                  </span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-black/80 text-emerald-400 border border-emerald-500/30">
+                    {item.condition.toUpperCase()}
+                  </span>
                 </div>
-                <a href="/vehiculos" class="text-xs font-black uppercase tracking-wider text-[#1d4ed8] hover:text-[#1e40af] flex items-center gap-1.5 border-b border-[#1d4ed8] pb-0.5">
-                    <span>Ver Todo el Inventario</span>
-                    <i class="fas fa-arrow-right text-[11px]"></i>
-                </a>
+                <div class="absolute bottom-3 right-3 bg-black/80 px-2.5 py-1 text-xs font-mono font-bold text-white border border-white/10">
+                  {item.location}
+                </div>
+              </div>
+
+              <!-- Content Area -->
+              <div class="p-5">
+                <div class="flex items-start justify-between gap-3">
+                  <h3 class="text-base font-black text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <!-- Price Tag -->
+                <div class="mt-2 flex items-baseline gap-2">
+                  <span class="text-2xl font-black text-white">
+                    ${item.price.toLocaleString()} <span class="text-xs text-blue-400 font-semibold">{item.currency}</span>
+                  </span>
+                  <span class="text-xs text-slate-400">
+                    (≈ RD$ {(item.price * 60).toLocaleString()})
+                  </span>
+                </div>
+
+                <!-- Key Specs Grid (Car Dealer Pattern) -->
+                <div class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-300 py-3 border-y border-white/10 bg-white/[0.02] px-2">
+                  <div class="flex items-center gap-1.5 truncate">
+                    <span class="text-slate-500">Uso:</span>
+                    <span class="font-semibold text-white">{item.mileageOrHours}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 truncate">
+                    <span class="text-slate-500">Trans.:</span>
+                    <span class="font-semibold text-white">{item.transmission.split(" ")[0]}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 truncate">
+                    <span class="text-slate-500">Motor:</span>
+                    <span class="font-semibold text-white truncate">{item.engine.split("(")[0]}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 truncate">
+                    <span class="text-slate-500">Comb.:</span>
+                    <span class="font-semibold text-white">{item.fuelType}</span>
+                  </div>
+                </div>
+
+                <!-- Dealer Badge -->
+                <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
+                  <span class="flex items-center gap-1 text-slate-300 font-medium truncate">
+                    <svg class="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    {item.seller.name}
+                  </span>
+                  <span class="text-[10px] text-emerald-400 font-bold uppercase">{item.seller.dealerType}</span>
+                </div>
+              </div>
             </div>
 
-            <!-- Dynamic Grid from Firestore -->
-            <div id="dealer-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
-                    <div class="h-64 bg-slate-100"></div>
-                    <div class="h-6 bg-slate-100 w-1/2"></div>
-                </div>
-                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
-                    <div class="h-64 bg-slate-100"></div>
-                    <div class="h-6 bg-slate-100 w-1/2"></div>
-                </div>
-                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
-                    <div class="h-64 bg-slate-100"></div>
-                    <div class="h-6 bg-slate-100 w-1/2"></div>
-                </div>
+            <!-- Action Buttons -->
+            <div class="p-5 pt-0 grid grid-cols-2 gap-2">
+              <a 
+                href={`https://wa.me/${item.seller.whatsapp}?text=Hola,%20estoy%20interesado%20en%20el%20vehículo:%20${encodeURIComponent(item.title)}%20(Precio:%20$${item.price}%20USD)%20en%20TuCarroYMás.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase py-2.5 px-3 flex items-center justify-center gap-1.5 transition-all text-center"
+              >
+                WhatsApp
+              </a>
+              <a 
+                href={`/vehiculos?type=${item.transportType}`}
+                class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase py-2.5 px-3 flex items-center justify-center transition-all text-center"
+              >
+                Ver Ficha
+              </a>
             </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-        </div>
-    </section>
-
-    <!-- SECTION: SELL CTA HERO -->
-    <section class="py-16 bg-[#090e1a] text-white border-t border-slate-800">
-        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-            <span class="px-3.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-black uppercase tracking-widest inline-block">
-                Publicación 100% Gratuita • Sin Comisiones
-            </span>
-            <h2 class="text-3xl sm:text-5xl font-black uppercase font-['Outfit',sans-serif] tracking-tight max-w-3xl mx-auto">
-                ¿Tienes un Carro, Moto, Camioneta o Bote para Vender?
-            </h2>
-            <p class="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">
-                Publica tu unidad en minutos con fotos cuadradas automáticas en alta resolución. Los compradores te contactarán de forma directa e inmediata a tu WhatsApp.
-            </p>
-            <div class="pt-2">
-                <a 
-                  href="/publicar" 
-                  class="px-10 py-4 bg-[#15803d] hover:bg-[#166534] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-2xl inline-flex items-center gap-2"
-                  style="border-radius: 0px !important;"
-                >
-                    <i class="fas fa-plus-circle text-base"></i>
-                    <span>Publicar Mi Unidad Gratis Ahora</span>
-                </a>
-            </div>
-        </div>
-    </section>
+  <!-- CTA BANNER: SUBMISSION (JetFormBuilder Pattern) -->
+  <section class="py-16 px-4 bg-gradient-to-r from-blue-900 via-[#0b1329] to-[#070b16] border-t border-white/10">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+      <div>
+        <span class="text-blue-400 font-black uppercase tracking-widest text-xs">Publicación Gratuita para Usuarios y Concesionarios</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight mt-1">
+          ¿Tienes un vehículo o maquinaria para vender?
+        </h2>
+        <p class="text-sm text-slate-300 mt-2 max-w-xl">
+          Sube tus fotos con optimización automática 1500x1500px WebP, añade tus especificaciones técnicas y recibe contactos directos a tu WhatsApp al instante.
+        </p>
+      </div>
+      <a 
+        href="/publicar" 
+        class="bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase py-4 px-8 tracking-widest shadow-xl shadow-blue-600/40 shrink-0 transition-all hover:scale-105 cursor-pointer"
+      >
+        Publicar Anuncio Ahora
+      </a>
+    </div>
+  </section>
 </Layout>
-
-<script>
-    import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-    import { db } from "../lib/firebase/client";
-
-    const searchBtn = document.getElementById('btn-search-catalog');
-    searchBtn?.addEventListener('click', () => {
-        const cat = (document.getElementById('filter-cat') as HTMLSelectElement).value;
-        const brand = (document.getElementById('filter-brand') as HTMLSelectElement).value;
-        const prov = (document.getElementById('filter-prov') as HTMLSelectElement).value;
-        const price = (document.getElementById('filter-price') as HTMLSelectElement).value;
-
-        const params = new URLSearchParams();
-        if (cat !== 'all') params.append('categoria', cat);
-        if (brand !== 'all') params.append('marca', brand);
-        if (prov !== 'all') params.append('provincia', prov);
-        if (price !== 'all') params.append('precio', price);
-
-        window.location.href = `/vehiculos?${params.toString()}`;
-    });
-
-    // Stream from Firestore
-    const dealerGrid = document.getElementById('dealer-grid');
-    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
-
-    onSnapshot(q, (snap) => {
-        if (!dealerGrid) return;
-        dealerGrid.innerHTML = '';
-
-        if (snap.empty) {
-            dealerGrid.innerHTML = `
-                <div class="col-span-full text-center py-12 bg-white border border-slate-200 p-8">
-                    <i class="fas fa-car text-4xl text-slate-300 mb-3"></i>
-                    <p class="text-sm font-bold text-slate-700 uppercase">Aún no hay unidades registradas</p>
-                    <p class="text-xs text-slate-500 mt-1">Sé el primero en publicar tu vehículo gratis.</p>
-                </div>
-            `;
-            return;
-        }
-
-        snap.docs.forEach(docSnap => {
-            const v = docSnap.data();
-            v.id = docSnap.id;
-
-            const price = v.price || v.pricePerDay || 25000;
-            const currency = v.currency || 'USD';
-            const priceStr = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
-            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
-            const cleanPhone = (v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
-
-            const card = document.createElement('div');
-            card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
-            card.innerHTML = `
-                <div>
-                    <!-- Image -->
-                    <div class="car-image-container relative">
-                        <img src="${carImg}" alt="${v.title}" />
-                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#090e1a] text-white shadow-md">
-                                ${v.condition || 'Usado'}
-                            </span>
-                            <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
-                                <i class="fas fa-check-circle me-1"></i> Verificado
-                            </span>
-                        </div>
-                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
-                            <strong class="text-base font-black text-[#15803d] font-mono">${priceStr}</strong>
-                        </div>
-                    </div>
-
-                    <!-- Body -->
-                    <div class="p-5">
-                        <h4 class="text-lg font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
-                        <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
-                            <i class="fas fa-location-dot text-[#1d4ed8] text-[11px]"></i>
-                            <span>${v.province || v.city || 'República Dominicana'}</span>
-                            <span class="mx-1">•</span>
-                            <span class="text-slate-400 font-semibold">${v.sellerType === 'dealer' ? 'Dealer' : 'Particular'}</span>
-                        </p>
-                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2 mb-4">
-                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span><strong>${v.engine || '2.0L'}</strong></div>
-                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Millas / Km</span><strong>${(v.mileage || 45000).toLocaleString()}</strong></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <a href="/vehiculos" class="py-2.5 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
-                                Ficha Técnica
-                            </a>
-                            <a href="https://wa.me/${cleanPhone}?text=Hola,%20me%20interesa%20comprar%20su%20${encodeURIComponent(v.title)}%20anunciado%20en%20TuCarroYMás.com" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 luxury-btn">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            dealerGrid.appendChild(card);
-        });
-    });
-</script>

@@ -1,97 +1,87 @@
 ---
+import { TRANSPORT_TYPES } from "../lib/carDealerData";
 ---
 
-<footer class="bg-[#040711] text-slate-400 py-14 border-t border-slate-800/80 mt-auto">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-            <!-- Col 1: Marca y Propósito -->
-            <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-[#1d4ed8] text-white flex items-center justify-center font-bold text-lg shadow-sm" style="border-radius: 0px !important;">
-                        <i class="fas fa-shield-halved"></i>
-                    </div>
-                    <div>
-                        <span class="font-black text-lg tracking-tight text-white uppercase font-['Outfit',sans-serif] leading-tight block">
-                            TUCARRO<span class="text-[#38bdf8]">YMÁS</span>
-                        </span>
-                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold block">
-                            DEALER DIGITAL MULTI-CATEGORÍA
-                        </span>
-                    </div>
-                </div>
-                <p class="text-xs leading-relaxed text-slate-400">
-                    El dealer digital líder para compra y venta de carros, camionetas, SUVs, motocicletas, botes y transporte pesado con trato directo y sin comisiones.
-                </p>
-                <div class="flex items-center gap-2 pt-1">
-                    <a href="https://wa.me/18499154010" target="_blank" rel="noopener noreferrer" class="w-9 h-9 bg-[#15803d] hover:bg-[#166534] text-white flex items-center justify-center text-sm luxury-btn shadow-sm" aria-label="WhatsApp" style="border-radius: 0px !important;">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="tel:+18499154010" class="w-9 h-9 bg-[#1d4ed8] hover:bg-[#1e40af] text-white flex items-center justify-center text-sm luxury-btn shadow-sm" aria-label="Teléfono" style="border-radius: 0px !important;">
-                        <i class="fas fa-phone"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Col 2: Categorías de Transporte -->
-            <div>
-                <h4 class="text-white text-xs font-black uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-                    Categorías en Venta
-                </h4>
-                <ul class="space-y-2 text-xs">
-                    <li><a href="/vehiculos?categoria=carros" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-car-side text-[10px] text-[#38bdf8]"></i> Carros & Sedanes</a></li>
-                    <li><a href="/vehiculos?categoria=suvs" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-car text-[10px] text-[#38bdf8]"></i> SUVs & Jeepetas 4x4</a></li>
-                    <li><a href="/vehiculos?categoria=camionetas" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-truck-pickup text-[10px] text-[#38bdf8]"></i> Camionetas & Pickups</a></li>
-                    <li><a href="/vehiculos?categoria=motores" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-motorcycle text-[10px] text-[#38bdf8]"></i> Motocicletas & Scooters</a></li>
-                    <li><a href="/vehiculos?categoria=botes" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-ship text-[10px] text-[#38bdf8]"></i> Botes & Embarcaciones</a></li>
-                    <li><a href="/vehiculos?categoria=pesados" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fas fa-truck text-[10px] text-[#38bdf8]"></i> Camiones & Pesados</a></li>
-                </ul>
-            </div>
-
-            <!-- Col 3: Enlaces Rápidos -->
-            <div>
-                <h4 class="text-white text-xs font-black uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-                    Plataforma Dealer
-                </h4>
-                <ul class="space-y-2 text-xs">
-                    <li><a href="/vehiculos" class="hover:text-white transition-colors">Explorar Todo el Inventario</a></li>
-                    <li><a href="/publicar" class="hover:text-white transition-colors font-bold text-emerald-400">Publicar Mi Unidad Gratis</a></li>
-                    <li><a href="/panel" class="hover:text-white transition-colors">Panel de Concesionarios & Vendedores</a></li>
-                    <li><a href="/nosotros" class="hover:text-white transition-colors">Sobre TuCarroYMás</a></li>
-                    <li><a href="/contacto" class="hover:text-white transition-colors">Contacto & Soporte</a></li>
-                </ul>
-            </div>
-
-            <!-- Col 4: Contacto y Soporte -->
-            <div>
-                <h4 class="text-white text-xs font-black uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-                    Atención al Cliente
-                </h4>
-                <ul class="space-y-2.5 text-xs text-slate-400">
-                    <li class="flex items-start gap-2">
-                        <i class="fas fa-location-dot text-[#38bdf8] mt-0.5"></i>
-                        <span>República Dominicana y Cobertura Internacional.</span>
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <i class="fas fa-phone text-[#38bdf8]"></i>
-                        <a href="tel:+18499154010" class="hover:text-white font-mono">+1 (849) 915-4010</a>
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <i class="fab fa-whatsapp text-emerald-400"></i>
-                        <a href="https://wa.me/18499154010" target="_blank" rel="noopener noreferrer" class="hover:text-white font-mono">+1 (849) 915-4010 (WhatsApp)</a>
-                    </li>
-                </ul>
-            </div>
+<footer class="bg-[#040711] border-t border-white/10 text-white pt-14 pb-8 px-4 sm:px-8">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
+    
+    <!-- Col 1 & 2: Brand Information -->
+    <div class="lg:col-span-2 space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center font-black text-lg text-white shadow-lg">
+          TC
         </div>
-
-        <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <p>&copy; {new Date().getFullYear()} TuCarroYMás.com — El Dealer Digital Global de Vehículos, Motos, Botes y Pesados.</p>
-            <div class="flex items-center gap-4 text-[11px]">
-                <a href="/nosotros" class="hover:text-white transition-colors">Nosotros</a>
-                <span>•</span>
-                <a href="/contacto" class="hover:text-white transition-colors">Contacto</a>
-                <span>•</span>
-                <span class="text-emerald-400 font-semibold"><i class="fas fa-bolt me-1"></i> 0ms Cloudflare Pages Engine</span>
-            </div>
+        <div class="flex flex-col">
+          <span class="text-lg font-black tracking-wider uppercase text-white">
+            TuCarro<span class="text-blue-500">YMás</span>
+          </span>
+          <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold -mt-1">
+            Car Dealer & Marketplace
+          </span>
         </div>
+      </div>
+      <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+        Plataforma automotriz y de transporte en República Dominicana inspirada en la arquitectura digital de Crocoblock Car Dealer New. Conectamos compradores con vendedores particulares y concesionarios autorizados en todo el país.
+      </p>
+      <div class="pt-2 text-xs text-slate-400 flex flex-col gap-1.5 font-mono">
+        <div>📞 Contacto: +1 (829) 555-0199</div>
+        <div>📍 Cobertura: Santo Domingo, Santiago, Punta Cana y las 32 provincias</div>
+      </div>
     </div>
+
+    <!-- Col 3: Tipos de Transporte -->
+    <div>
+      <h3 class="text-xs font-black uppercase tracking-wider text-blue-400 mb-3.5">
+        Tipos de Transporte
+      </h3>
+      <ul class="space-y-2 text-xs text-slate-400">
+        {TRANSPORT_TYPES.map(cat => (
+          <li>
+            <a href={`/vehiculos?type=${cat.id}`} class="hover:text-white transition-colors">
+              {cat.nameEs}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Col 4: Enlaces Rápidos -->
+    <div>
+      <h3 class="text-xs font-black uppercase tracking-wider text-blue-400 mb-3.5">
+        Navegación
+      </h3>
+      <ul class="space-y-2 text-xs text-slate-400">
+        <li><a href="/" class="hover:text-white transition-colors">Inicio</a></li>
+        <li><a href="/vehiculos" class="hover:text-white transition-colors">Inventario General</a></li>
+        <li><a href="/publicar" class="hover:text-white transition-colors">Publicar Anuncio (Gratis)</a></li>
+        <li><a href="/nosotros" class="hover:text-white transition-colors">Acerca de TuCarroYMás</a></li>
+        <li><a href="/contacto" class="hover:text-white transition-colors">Atención al Cliente</a></li>
+        <li><a href="/auth" class="hover:text-white transition-colors">Acceso Concesionarios</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 5: Garantía y Seguridad -->
+    <div>
+      <h3 class="text-xs font-black uppercase tracking-wider text-blue-400 mb-3.5">
+        Seguridad Dealer
+      </h3>
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Todas las publicaciones son revisadas para garantizar la legitimidad de las unidades y evitar duplicados o fraudes.
+      </p>
+      <div class="mt-4 p-3 bg-white/5 border border-white/5 text-[11px] text-slate-300">
+        <span class="text-emerald-400 font-bold block mb-1">✓ Trato Directo 100%</span>
+        Negociación sin intermediarios mediante WhatsApp o llamada telefónica.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+    <div>
+      &copy; {new Date().getFullYear()} TuCarroYMás.com — Todos los derechos reservados.
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-slate-400 font-medium">Inspirado en Crocoblock Car Dealer New</span>
+    </div>
+  </div>
 </footer>
