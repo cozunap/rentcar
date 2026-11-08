@@ -2,179 +2,134 @@
 import Layout from "../layouts/Layout.astro";
 import { TRANSPORT_TYPES } from "../lib/carDealerData";
 import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
+import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
 
-// 6 Recent Ads matching demo
+// 6 Anuncios Recientes
 const recentAds = DEMO_VEHICLES_SEED.slice(0, 6);
 
-// 3 VIP Ads matching the dark carousel section in demo
+// 3 Anuncios VIP (Sección oscura)
 const vipAds = [
-  DEMO_VEHICLES_SEED[2], // Toyota RAV4 / White SUV
-  DEMO_VEHICLES_SEED[0], // Toyota Camry / Red coupe/sedan look
-  DEMO_VEHICLES_SEED[1]  // Tesla / Sports car look
+  DEMO_VEHICLES_SEED[2], // Toyota RAV4
+  DEMO_VEHICLES_SEED[0], // Toyota Camry
+  DEMO_VEHICLES_SEED[1]  // Tesla Model 3
 ];
 
-// Popular Car Brands from screenshot
-const popularBrands = [
-  { name: "Ford", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg" },
-  { name: "Toyota", logo: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Toyota_logo_%282020%29.svg" },
-  { name: "Suzuki", logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Suzuki_logo_2.svg" },
-  { name: "Lexus", logo: "https://upload.wikimedia.org/wikipedia/commons/4/47/Lexus_division_emblem.svg" },
-  { name: "Nissan", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Nissan_2020_logo.svg" },
-  { name: "Porsche", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Porsche_Wappen.png" },
-  { name: "Peugeot", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Peugeot_Logo.svg" },
-  { name: "Mitsubishi", logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Mitsubishi_logo.svg" },
-  { name: "Mercedes", logo: "https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" },
-  { name: "BMW", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" },
-  { name: "Mazda", logo: "https://upload.wikimedia.org/wikipedia/commons/9/94/Mazda_Logo.svg" },
-  { name: "Kia", logo: "https://upload.wikimedia.org/wikipedia/commons/4/47/Kia_logo.svg" },
-  { name: "Hyundai", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg" },
-  { name: "GMC", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b5/GMC_logo.svg" },
-  { name: "Honda", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda_Logo.svg" },
-  { name: "Audi", logo: "https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg" }
-];
-
-// Latest News items from demo
-const newsItems = [
-  {
-    title: "Brand New Mercedes S-Class will be an Electric Sedan",
-    date: "Jan 12, 2026",
-    img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    title: "Tax Service Proposes to Change Car Insurance Rules",
-    date: "Jan 08, 2026",
-    img: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    title: "From 2026 They Will Collect Tax for Luxury Cars",
-    date: "Dec 28, 2025",
-    img: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    title: "Perfect for Parking: Mini Pagemaker with Stylish Look in the Same Time",
-    date: "Dec 15, 2025",
-    img: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=300&q=80"
-  }
-];
+// Marcas populares en portada (16 marcas principales de RD)
+const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
 ---
 
-<Layout title="Car Dealer New | Buy. Sell. Trade">
+<Layout title="TuCarroYM | Compra. Vende. Intercambia Vehículos en República Dominicana">
   
-  <!-- 1. HERO SECTION: "Buy. Sell. Trade" with dashboard background & exact 4-select + 3-slider search bar -->
+  <!-- 1. HERO SECTION: "Compra. Vende. Intercambia" con buscador Crocoblock exacto en español -->
   <section class="relative min-h-[440px] flex items-center justify-center py-16 px-4 bg-slate-900 overflow-hidden">
     <!-- Hero Car Dashboard Background -->
     <div class="absolute inset-0 z-0">
       <img 
         src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80" 
-        alt="Car Dashboard Background" 
+        alt="Tablero de Vehículo" 
         class="w-full h-full object-cover opacity-60"
       />
       <div class="absolute inset-0 bg-slate-950/40"></div>
     </div>
 
     <div class="relative z-10 max-w-6xl mx-auto w-full">
-      <!-- Title exactly as demo -->
+      <!-- Title 100% Spanish -->
       <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-8">
-        Buy. Sell. Trade
+        Compra. Vende. Intercambia
       </h1>
 
-      <!-- The exact CarDealer Form Bar: 4 top dropdowns + 3 bottom range sliders + green Search button -->
+      <!-- Barra de Filtros CarDealer: 4 selectores superiores + 3 sliders inferiores + Botón verde "Buscar" -->
       <div class="bg-slate-900/70 backdrop-blur-md p-6 border border-white/10 rounded-sm shadow-2xl">
         <form action="/vehiculos" method="GET">
-          <!-- Row 1: 4 Select Inputs (Types of Transport, Make, Model, Body) -->
+          <!-- Fila 1: 4 Selectores (Tipo de Transporte, Marca, Modelo, Carrocería) -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div>
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
-                Types of Transport
+                Tipo de Transporte
               </label>
               <select name="type" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
-                <option value="">Any</option>
+                <option value="">Todos</option>
                 {TRANSPORT_TYPES.map(t => (
-                  <option value={t.id}>{t.name}</option>
+                  <option value={t.id}>{t.nameEs}</option>
                 ))}
               </select>
             </div>
 
             <div>
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
-                Make
+                Marca
               </label>
               <select name="make" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
-                <option value="">Any</option>
-                <option value="Toyota">Toyota</option>
-                <option value="Tesla">Tesla</option>
-                <option value="Freightliner">Freightliner</option>
-                <option value="Caterpillar">Caterpillar</option>
-                <option value="Sea Ray">Sea Ray</option>
-                <option value="Yamaha">Yamaha</option>
-                <option value="John Deere">John Deere</option>
+                <option value="">Todas</option>
+                {ALL_DOMINICAN_BRANDS.map(b => (
+                  <option value={b.name}>{b.name}</option>
+                ))}
               </select>
             </div>
 
             <div>
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
-                Model
+                Modelo
               </label>
-              <select name="model" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
-                <option value="">Any</option>
-                <option value="Camry">Camry</option>
-                <option value="Model 3">Model 3</option>
-                <option value="RAV4">RAV4</option>
-                <option value="Cascadia">Cascadia</option>
-                <option value="320D">320D</option>
-              </select>
+              <input 
+                type="text" 
+                name="model" 
+                placeholder="Ej. Camry, RAV4, Cascadia..."
+                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]"
+              />
             </div>
 
             <div>
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
-                Body
+                Carrocería
               </label>
               <select name="body" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
-                <option value="">Any</option>
-                <option value="sedan">Sedan</option>
-                <option value="suv">SUV</option>
-                <option value="truck">Truck</option>
-                <option value="coupe">Coupe</option>
+                <option value="">Cualquiera</option>
+                <option value="sedan">Sedán</option>
+                <option value="suv">SUV / Jeepeta</option>
+                <option value="camioneta">Camioneta / Pickup</option>
+                <option value="pesado">Cabezote / 18-Wheeler</option>
+                <option value="deportivo">Coupé / Deportivo</option>
               </select>
             </div>
           </div>
 
-          <!-- Row 2: 3 Range Sliders (Price, Issue Year, Engine Volume) + Green "Search" Button -->
+          <!-- Fila 2: 3 Sliders (Precio, Año, Cilindrada) + Botón Verde "Buscar" -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
-            <!-- Price Slider -->
+            <!-- Slider Precio -->
             <div>
               <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
-                <span>Price</span>
+                <span>Precio (USD)</span>
                 <span class="text-white font-mono">$10,000 - $150,000</span>
               </div>
-              <input type="range" min="10000" max="150000" value="150000" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
+              <input type="range" name="maxPrice" min="10000" max="150000" value="150000" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
             </div>
 
-            <!-- Issue Year Slider -->
+            <!-- Slider Año -->
             <div>
               <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
-                <span>Issue Year</span>
+                <span>Año de Fabricación</span>
                 <span class="text-white font-mono">1990 - 2026</span>
               </div>
               <input type="range" min="1990" max="2026" value="2026" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
             </div>
 
-            <!-- Engine Volume / Mileage Slider -->
+            <!-- Slider Cilindrada -->
             <div>
               <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
-                <span>Engine Volume</span>
+                <span>Cilindrada / Motor</span>
                 <span class="text-white font-mono">0.6 - 15.0 L</span>
               </div>
               <input type="range" min="6" max="150" value="150" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
             </div>
 
-            <!-- Exact Green Search Button like demo -->
+            <!-- Botón Buscar Verde -->
             <div>
               <button 
                 type="submit" 
-                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-4 rounded-sm tracking-wider shadow transition-all flex items-center justify-center gap-1.5"
+                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-4 rounded-sm tracking-wider shadow transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                Search
+                Buscar
               </button>
             </div>
           </div>
@@ -184,11 +139,11 @@ const newsItems = [
     </div>
   </section>
 
-  <!-- 2. TYPES OF TRANSPORT SECTION (Exact 6 category icons in a single horizontal row on white background) -->
+  <!-- 2. TIPOS DE TRANSPORTE (Fila horizontal de 6 iconos sobre fondo blanco) -->
   <section class="py-12 px-4 bg-white border-b border-slate-100">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-xl font-black text-slate-900 mb-6">
-        Types of Transport
+        Tipos de Transporte
       </h2>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -218,7 +173,7 @@ const newsItems = [
               )}
             </div>
             <span class="text-xs font-semibold text-slate-800 group-hover:text-[#00c982] transition-colors">
-              {cat.name}
+              {cat.nameEs}
             </span>
           </a>
         ))}
@@ -226,24 +181,23 @@ const newsItems = [
     </div>
   </section>
 
-  <!-- 3. RECENT ADS SECTION (White cards, green price, spec icons, full-width green "View more" button) -->
+  <!-- 3. ANUNCIOS RECIENTES (Tarjetas blancas con precio verde e iconos de especificaciones) -->
   <section class="py-12 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-xl font-black text-slate-900">
-          Recent Ads
+          Anuncios Recientes
         </h2>
         <a href="/vehiculos" class="text-xs font-bold text-blue-500 hover:text-blue-600 flex items-center gap-1">
-          View more &rarr;
+          Ver más &rarr;
         </a>
       </div>
 
-      <!-- 3x2 Grid matching screenshot (Tractor, Harvester, Boat, etc.) -->
+      <!-- Grid 3x2 -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {recentAds.map(item => (
           <div class="bg-white border border-slate-200 rounded-sm overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group">
             <div>
-              <!-- Image with top-right square zoom/gallery icon -->
               <div class="relative h-44 overflow-hidden bg-slate-100">
                 <img 
                   src={item.imageUrl} 
@@ -255,18 +209,15 @@ const newsItems = [
                 </button>
               </div>
 
-              <!-- Content identical to Car Dealer card -->
               <div class="p-4">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 truncate">
                   {item.title}
                 </h3>
                 
-                <!-- Emerald Green Price exactly like demo -->
                 <div class="mt-1 text-base font-black text-[#00c982]">
-                  ${item.price.toLocaleString()}
+                  ${item.price.toLocaleString()} <span class="text-xs font-normal text-slate-400">USD</span>
                 </div>
 
-                <!-- 3 Spec Icons in a horizontal row (Transmission, Fuel, Mileage) -->
                 <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
                   <span class="flex items-center gap-1">
                     <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
@@ -284,13 +235,12 @@ const newsItems = [
               </div>
             </div>
 
-            <!-- Full-width green "View more" button -->
             <div class="p-4 pt-0">
               <a 
-                href="/vehiculos"
-                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center"
+                href={`/vehiculos?make=${encodeURIComponent(item.make)}`}
+                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
               >
-                View more
+                Ver más
               </a>
             </div>
           </div>
@@ -299,43 +249,32 @@ const newsItems = [
     </div>
   </section>
 
-  <!-- 4. VIP ADS SECTION (Exact dark navy background #141c2e with VIP cards, yellow badge, left/right arrows & dots) -->
+  <!-- 4. ANUNCIOS VIP (Sección oscura en #141c2e con badge VIP amarillo) -->
   <section class="py-14 px-4 bg-[#141c2e] text-white">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-xl font-black text-white">
-          VIP Ads
+          Anuncios VIP
         </h2>
         <a href="/vehiculos" class="text-xs font-bold text-blue-400 hover:text-blue-300 flex items-center gap-1">
-          View more &rarr;
+          Ver más &rarr;
         </a>
       </div>
 
-      <!-- Carousel Track with Left/Right arrow controls -->
       <div class="relative">
-        <!-- Left Arrow -->
-        <button class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700 hidden md:flex shadow">
-          &larr;
-        </button>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {vipAds.map(item => (
             <div class="bg-[#1b253c] border border-slate-700/60 rounded-sm overflow-hidden flex flex-col justify-between group">
               <div>
-                <!-- Image with Yellow "VIP" badge & top right icon -->
                 <div class="relative h-44 overflow-hidden bg-slate-900">
                   <img 
                     src={item.imageUrl} 
                     alt={item.title} 
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <!-- Yellow VIP badge identical to screenshot -->
                   <div class="absolute top-2.5 left-2.5 bg-[#f59e0b] text-slate-950 font-black text-[10px] uppercase px-2 py-0.5 rounded-sm flex items-center gap-1 shadow-sm">
                     <span>★</span> VIP
                   </div>
-                  <button type="button" class="absolute top-2.5 right-2.5 w-7 h-7 bg-black/60 rounded-sm flex items-center justify-center text-white">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
-                  </button>
                 </div>
 
                 <div class="p-4">
@@ -343,78 +282,65 @@ const newsItems = [
                     {item.title}
                   </h3>
                   
-                  <!-- Yellow Price in VIP section -->
                   <div class="mt-1 text-base font-black text-[#f59e0b]">
-                    ${item.price.toLocaleString()}
+                    ${item.price.toLocaleString()} <span class="text-xs font-normal text-slate-400">USD</span>
                   </div>
 
-                  <!-- 3 Spec Icons -->
                   <div class="mt-3 pt-3 border-t border-slate-700/50 flex items-center justify-between text-[11px] text-slate-400">
-                    <span class="flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                      {item.transmission.split(" ")[0]}
-                    </span>
-                    <span class="flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                      {item.fuelType}
-                    </span>
-                    <span class="flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                      {item.mileageOrHours.split(" ")[0]}
-                    </span>
+                    <span class="flex items-center gap-1">{item.transmission.split(" ")[0]}</span>
+                    <span class="flex items-center gap-1">{item.fuelType}</span>
+                    <span class="flex items-center gap-1">{item.mileageOrHours.split(" ")[0]}</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Green button on VIP cards -->
               <div class="p-4 pt-0">
                 <a 
-                  href="/vehiculos"
-                  class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center"
+                  href={`/vehiculos?make=${encodeURIComponent(item.make)}`}
+                  class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
                 >
-                  View more
+                  Ver más
                 </a>
               </div>
             </div>
           ))}
         </div>
-
-        <!-- Right Arrow -->
-        <button class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700 hidden md:flex shadow">
-          &rarr;
-        </button>
-      </div>
-
-      <!-- Carousel Pagination Dots -->
-      <div class="mt-8 flex justify-center items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-[#00c982]"></span>
-        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
-        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
-        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
-        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
       </div>
     </div>
   </section>
 
-  <!-- 5. POPULAR CAR BRANDS (2 rows of 8 brand logos with brand name below) -->
+  <!-- 5. MARCAS POPULARES DE VEHÍCULOS (Con logos SVG nítidos y enlace a /brands) -->
   <section class="py-14 px-4 bg-white border-b border-slate-100">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-xl font-black text-slate-900">
-          Popular Car Brands
-        </h2>
-        <a href="/vehiculos" class="text-xs font-bold text-blue-500 hover:text-blue-600 flex items-center gap-1">
-          View more &rarr;
+        <div>
+          <h2 class="text-xl font-black text-slate-900">
+            Marcas Populares de Vehículos
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Marcas líderes con presencia oficial y repuestos en República Dominicana.</p>
+        </div>
+        <!-- Enlace que lleva a la página completa de marcas /brands -->
+        <a href="/brands" class="text-xs font-bold text-blue-500 hover:text-blue-600 flex items-center gap-1">
+          Ver todas las marcas &rarr;
         </a>
       </div>
 
+      <!-- 2 filas de 8 logos SVG nítidos -->
       <div class="grid grid-cols-4 sm:grid-cols-8 gap-4 sm:gap-6 text-center">
-        {popularBrands.map(b => (
-          <a href={`/vehiculos?make=${b.name}`} class="flex flex-col items-center p-3 border border-slate-100 hover:border-slate-300 hover:shadow-sm rounded-sm transition-all group">
+        {popularBrandsHomepage.map(b => (
+          <a 
+            href={`/vehiculos?make=${encodeURIComponent(b.name)}`} 
+            class="flex flex-col items-center p-3 border border-slate-200 hover:border-[#00c982] hover:shadow-md rounded-sm transition-all group bg-white"
+          >
             <div class="w-10 h-10 flex items-center justify-center mb-2">
-              <img src={b.logo} alt={b.name} class="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all" />
+              <img 
+                src={b.logo} 
+                alt={b.name} 
+                class="max-w-[28px] max-h-[28px] object-contain opacity-70 group-hover:opacity-100 transition-opacity" 
+                loading="lazy"
+              />
             </div>
-            <span class="text-[11px] font-semibold text-slate-700 group-hover:text-[#00c982] transition-colors">
+            <span class="text-[11px] font-semibold text-slate-700 group-hover:text-[#00c982] transition-colors leading-tight">
               {b.name}
             </span>
           </a>
@@ -423,96 +349,28 @@ const newsItems = [
     </div>
   </section>
 
-  <!-- 6. LAST NEWS & TEST DRIVE (Two equal columns matching screenshot) -->
-  <section class="py-14 px-4 bg-[#f8fafc]">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-      
-      <!-- Left Column: Last News -->
-      <div>
-        <h2 class="text-xl font-black text-slate-900 mb-6">
-          Last News
-        </h2>
-        
-        <div class="space-y-4">
-          {newsItems.map(item => (
-            <div class="flex items-center gap-4 bg-white p-3 border border-slate-200 rounded-sm hover:shadow-sm transition-all">
-              <img src={item.img} alt={item.title} class="w-20 h-16 object-cover rounded-sm shrink-0" />
-              <div>
-                <span class="text-[10px] text-slate-400 font-semibold">{item.date}</span>
-                <h3 class="text-xs font-bold text-slate-800 hover:text-[#00c982] cursor-pointer leading-snug mt-0.5 line-clamp-2">
-                  {item.title}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <a href="/contacto" class="inline-block mt-4 text-xs font-bold text-blue-500 hover:text-blue-600">
-          View more &rarr;
-        </a>
-      </div>
-
-      <!-- Right Column: Test Drive Featured Cards -->
-      <div>
-        <h2 class="text-xl font-black text-slate-900 mb-6">
-          Test Drive
-        </h2>
-
-        <!-- Top Big Card -->
-        <div class="relative h-48 rounded-sm overflow-hidden mb-4 group shadow-sm">
-          <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=80" alt="Test Drive Car" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-          <div class="absolute bottom-3 left-3 right-3 text-white">
-            <span class="inline-block px-2 py-0.5 bg-[#00c982] text-[10px] font-bold rounded-sm mb-1">Review</span>
-            <h4 class="text-sm font-bold leading-tight">Test drive review: High performance on track and mountain roads</h4>
-          </div>
-        </div>
-
-        <!-- 2 Side-by-side smaller cards -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="relative h-28 rounded-sm overflow-hidden group shadow-sm">
-            <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=400&q=80" alt="Speedometer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute inset-0 bg-black/60"></div>
-            <div class="absolute bottom-2 left-2 right-2 text-white">
-              <h5 class="text-[11px] font-bold leading-snug">0 to 100 km/h acceleration tests</h5>
-            </div>
-          </div>
-
-          <div class="relative h-28 rounded-sm overflow-hidden group shadow-sm">
-            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=400&q=80" alt="Steering Wheel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute inset-0 bg-black/60"></div>
-            <div class="absolute bottom-2 left-2 right-2 text-white">
-              <h5 class="text-[11px] font-bold leading-snug">Cockpit steering & handling safety</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 7. NEWSLETTER SECTION: "Don't miss our news!" in dark navy background with input + green "Subscribe" button -->
+  <!-- 6. BOLETÍN DE NOVEDADES (Sección azul marino oscuro con campo y botón verde) -->
   <section class="py-14 px-4 bg-[#0d1424] text-white text-center">
     <div class="max-w-xl mx-auto">
       <h2 class="text-2xl font-black mb-1">
-        Don't miss our news!
+        ¡No te pierdas nuestras novedades!
       </h2>
       <p class="text-xs text-slate-400 mb-6">
-        Get the latest automotive updates, market pricing and verified seller offers directly in your inbox.
+        Recibe las últimas publicaciones de vehículos, precios actualizados del mercado y ofertas de concesionarios directamente en tu correo.
       </p>
 
       <form class="flex flex-col sm:flex-row items-center gap-2 max-w-md mx-auto">
         <input 
           type="email" 
-          placeholder="Enter email" 
+          placeholder="Ingresa tu correo electrónico" 
           class="w-full bg-white text-slate-800 text-xs py-2.5 px-4 rounded-sm focus:outline-none"
           required
         />
         <button 
           type="submit" 
-          class="w-full sm:w-auto bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-6 rounded-sm whitespace-nowrap shadow transition-all"
+          class="w-full sm:w-auto bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-6 rounded-sm whitespace-nowrap shadow transition-all cursor-pointer"
         >
-          Subscribe
+          Suscribirme
         </button>
       </form>
     </div>

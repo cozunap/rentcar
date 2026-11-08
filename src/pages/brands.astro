@@ -1,0 +1,113 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
+---
+
+<Layout title="Marcas de Vehículos y Transporte en República Dominicana | TuCarroYM">
+  <div class="bg-white min-h-screen py-10 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Breadcrumbs & Title matching Crocoblock /brands/ -->
+      <div class="mb-8">
+        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+          <a href="/" class="hover:text-[#00c982]">Inicio</a>
+          <span>/</span>
+          <span class="text-slate-800">Marcas de Vehículos</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          Marcas Disponibles en República Dominicana
+        </h1>
+        <p class="text-sm text-slate-500 mt-1 max-w-2xl">
+          Explora todas las marcas de vehículos, camionetas, camiones pesados 18-wheelers, motocicletas y maquinaria comercializadas en el país. Haz clic en cualquier marca para ver los modelos disponibles.
+        </p>
+      </div>
+
+      <!-- Quick Filter Pills -->
+      <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-xs font-bold">
+        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-[#00c982] text-white" data-filter="all">
+          Todas ({ALL_DOMINICAN_BRANDS.length})
+        </button>
+        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="autos">
+          Autos & SUVs
+        </button>
+        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="pesados">
+          Camiones & Pesados
+        </button>
+        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="maquinaria">
+          Maquinaria Especial
+        </button>
+        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="motos">
+          Motocicletas
+        </button>
+      </div>
+
+      <!-- Grid of all Dominican Brands -->
+      <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        {ALL_DOMINICAN_BRANDS.map(brand => (
+          <a 
+            href={`/vehiculos?make=${encodeURIComponent(brand.name)}`}
+            data-category={brand.category}
+            class="brand-card flex flex-col items-center justify-center p-4 border border-slate-200 rounded-sm hover:border-[#00c982] hover:shadow-lg transition-all group bg-white text-center"
+          >
+            <!-- SVG Logo Container -->
+            <div class="w-12 h-12 flex items-center justify-center mb-3">
+              <img 
+                src={brand.logo} 
+                alt={`Logo ${brand.name}`} 
+                class="max-w-[36px] max-h-[36px] object-contain opacity-75 group-hover:opacity-100 transition-opacity" 
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Brand Name -->
+            <span class="text-xs font-bold text-slate-800 group-hover:text-[#00c982] transition-colors leading-tight">
+              {brand.name}
+            </span>
+
+            <!-- Country badge -->
+            <span class="text-[10px] text-slate-400 mt-1">
+              {brand.country}
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <!-- Bottom help block -->
+      <div class="mt-14 p-6 bg-slate-50 border border-slate-200 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 class="text-sm font-bold text-slate-900">¿No encuentras una marca o deseas registrar tu concesionario?</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Publica tus vehículos gratuitamente con ficha técnica completa y contacto a WhatsApp.</p>
+        </div>
+        <a href="/publicar" class="bg-[#00c982] hover:bg-[#00b072] text-white text-xs font-bold uppercase tracking-wider py-2.5 px-5 rounded-full whitespace-nowrap shadow-sm">
+          Publicar Anuncio
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".brand-filter-btn");
+  const cards = document.querySelectorAll<HTMLElement>(".brand-card");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+      buttons.forEach(b => {
+        b.classList.remove("bg-[#00c982]", "text-white");
+        b.classList.add("bg-slate-100", "text-slate-700");
+      });
+      btn.classList.add("bg-[#00c982]", "text-white");
+      btn.classList.remove("bg-slate-100", "text-slate-700");
+
+      cards.forEach(card => {
+        if (filter === "all" || card.getAttribute("data-category") === filter) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    });
+  });
+</script>
