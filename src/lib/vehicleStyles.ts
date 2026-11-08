@@ -1,4 +1,3 @@
-
 export interface VehicleStyleItem {
   id: string;
   name: string;
@@ -14,6 +13,12 @@ export const VEHICLE_STYLES: VehicleStyleItem[] = [
     "image": "/styles/sedans.svg"
   },
   {
+    "id": "suvs",
+    "name": "SUVs & Crossovers",
+    "nameEs": "SUVs & Crossovers",
+    "image": "/styles/suvs.svg"
+  },
+  {
     "id": "trucks",
     "name": "Trucks",
     "nameEs": "Camionetas / Pick-ups",
@@ -26,10 +31,10 @@ export const VEHICLE_STYLES: VehicleStyleItem[] = [
     "image": "/styles/commercial.svg"
   },
   {
-    "id": "suvs",
-    "name": "SUVs & Crossovers",
-    "nameEs": "SUVs & Crossovers",
-    "image": "/styles/suvs.svg"
+    "id": "boats",
+    "name": "Boats & Marine",
+    "nameEs": "Botes & Embarcaciones",
+    "image": "/styles/boats.svg"
   },
   {
     "id": "coupes",

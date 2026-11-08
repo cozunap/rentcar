@@ -48,7 +48,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
                 Tipo de Transporte
               </label>
               <select name="type" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
-                <option value="">Todos</option>
+                <option value="">Todos (Autos, Botes, Camiones...)</option>
                 {TRANSPORT_TYPES.map(t => (
                   <option value={t.id}>{t.nameEs}</option>
                 ))}
@@ -81,13 +81,14 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
 
             <div>
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
-                Carrocería
+                Carrocería / Estilo
               </label>
               <select name="body" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
                 <option value="">Cualquiera</option>
                 <option value="sedan">Sedán</option>
                 <option value="suv">SUV / Jeepeta</option>
                 <option value="camioneta">Camioneta / Pickup</option>
+                <option value="boats">Bote / Lancha Marina</option>
                 <option value="pesado">Cabezote / 18-Wheeler</option>
                 <option value="deportivo">Coupé / Deportivo</option>
               </select>
@@ -150,11 +151,11 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
         </a>
       </div>
 
-      <!-- AutoTrader exact 12 styles in two clean rows of 6 items -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-4">
+      <!-- AutoTrader exact styles in clean grid (including Boats & Marine) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 sm:gap-4">
         {VEHICLE_STYLES.map(style => (
           <a 
-            href={`/vehiculos?body=${style.id}`}
+            href={style.id === "boats" ? "/vehiculos?type=water-transport" : `/vehiculos?body=${style.id}`}
             class="flex flex-col items-center justify-between p-3 rounded-sm hover:shadow-md hover:border-[#00c982] border border-transparent transition-all group text-center cursor-pointer"
           >
             <!-- Real Vehicle Profile Graphic with Soft Blue Backdrop Circle (Matching AutoTrader screenshot) -->
