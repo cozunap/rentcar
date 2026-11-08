@@ -2,38 +2,44 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Nosotros | Tu Carro y Más Rent A Car">
+<Layout 
+    title="Sobre Nosotros | Tu Carro y Más Rent A Car Santo Domingo"
+    description="Conoce Tu Carro y Más: la plataforma de alquiler de vehículos y SUVs premium en Santo Domingo Este con atención personalizada y sin intermediarios."
+>
     <!-- Header Banner -->
-    <div class="bg-[#212529] text-white py-16 text-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl sm:text-4xl font-bold mb-3">Sobre Tu Carro y Más</h1>
-            <p class="text-gray-400 text-base max-w-2xl mx-auto">
-                Haciendo tu viaje cómodo, seguro y memorable en toda la República Dominicana.
+    <div class="bg-[#0f172a] text-white py-16 text-center border-b border-slate-800">
+        <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] mb-2 block">Nuestra Identidad</span>
+            <h1 class="text-3xl sm:text-5xl font-black mb-3 uppercase font-['Outfit',sans-serif] tracking-tight">Sobre Tu Carro y Más</h1>
+            <p class="text-slate-300 text-sm max-w-2xl mx-auto">
+                Haciendo tu viaje cómodo, seguro y memorable en Santo Domingo y en toda la República Dominicana.
             </p>
         </div>
     </div>
 
     <!-- Main About Content -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-[#f8fafc]">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-[#0d6efd] mb-2 block">Nuestra Misión</span>
-                    <h2 class="text-3xl font-bold text-[#212529] mb-4">La Mejor Opción de Alquiler en Santo Domingo Este</h2>
-                    <p class="text-gray-600 leading-relaxed mb-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] mb-2 block">Nuestra Misión</span>
+                    <h2 class="text-3xl font-black text-[#0f172a] mb-4 uppercase font-['Outfit',sans-serif] tracking-tight">
+                        La Opción Más Confiable de Alquiler en Santo Domingo Este
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed mb-4 text-sm">
                         En <strong>Tu Carro y Más Rent A Car</strong> nos especializamos en ofrecer vehículos confiables, limpios y completamente asegurados para que disfrutes de tu estadía en el país sin complicaciones.
                     </p>
-                    <p class="text-gray-600 leading-relaxed mb-6">
+                    <p class="text-slate-600 leading-relaxed mb-6 text-sm">
                         Conectamos a clientes directamente con propietarios verificados a través de WhatsApp, eliminando burocracias y permitiendo una comunicación fluida, transparente y humana.
                     </p>
-                    <a href="https://wa.me/18499154010" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#198754] hover:bg-[#157347] text-white font-semibold text-sm transition-colors">
+                    <a href="https://wa.me/18499154010" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider luxury-btn shadow-sm">
                         <i class="fab fa-whatsapp text-lg"></i>
                         <span>Contactar por WhatsApp (849) 915-4010</span>
                     </a>
                 </div>
 
-                <div class="rounded-xl overflow-hidden shadow-lg border border-gray-100">
+                <div class="overflow-hidden border border-slate-200 luxury-card shadow-sm">
                     <img 
                         src="https://images.unsplash.com/photo-1570737543098-0983d88f796d?q=80&w=1286&auto=format&fit=crop" 
                         alt="República Dominicana Carretera" 
@@ -43,25 +49,25 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <!-- Features Highlights -->
-            <div class="pt-10 border-t border-gray-100">
+            <div class="pt-10 border-t border-slate-200">
                 <div class="text-center mb-10">
-                    <h3 class="text-2xl font-bold text-[#212529]">Nuestros Pilares</h3>
+                    <h3 class="text-2xl font-black text-[#0f172a] uppercase font-['Outfit',sans-serif] tracking-tight">Nuestros Pilares</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <div class="p-6 rounded-lg bg-[#f8f9fa] border border-gray-100">
-                        <i class="fas fa-calendar-check text-4xl text-[#0d6efd] mb-3"></i>
-                        <h4 class="font-bold text-lg text-[#212529] mb-2">Reserva Fácil</h4>
-                        <p class="text-gray-500 text-sm">Reserva en minutos directo al WhatsApp del dueño.</p>
+                    <div class="p-8 bg-white border border-slate-200 luxury-card shadow-xs">
+                        <i class="fas fa-calendar-check text-4xl text-[#1d4ed8] mb-3"></i>
+                        <h4 class="font-bold text-base text-[#0f172a] mb-2 uppercase">Reserva Fácil</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Reserva en minutos directo al WhatsApp del dueño sin burocracia.</p>
                     </div>
-                    <div class="p-6 rounded-lg bg-[#f8f9fa] border border-gray-100">
-                        <i class="fas fa-shield-alt text-4xl text-[#0d6efd] mb-3"></i>
-                        <h4 class="font-bold text-lg text-[#212529] mb-2">Seguro Completo</h4>
-                        <p class="text-gray-500 text-sm">Cobertura y asistencia vial en cada kilómetro.</p>
+                    <div class="p-8 bg-white border border-slate-200 luxury-card shadow-xs">
+                        <i class="fas fa-shield-alt text-4xl text-[#1d4ed8] mb-3"></i>
+                        <h4 class="font-bold text-base text-[#0f172a] mb-2 uppercase">Seguro Completo</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Cobertura de ley y asistencia vial en cada kilómetro.</p>
                     </div>
-                    <div class="p-6 rounded-lg bg-[#f8f9fa] border border-gray-100">
-                        <i class="fas fa-headset text-4xl text-[#0d6efd] mb-3"></i>
-                        <h4 class="font-bold text-lg text-[#212529] mb-2">Soporte 24/7</h4>
-                        <p class="text-gray-500 text-sm">Atención continua ante cualquier emergencia o duda.</p>
+                    <div class="p-8 bg-white border border-slate-200 luxury-card shadow-xs">
+                        <i class="fas fa-headset text-4xl text-[#1d4ed8] mb-3"></i>
+                        <h4 class="font-bold text-base text-[#0f172a] mb-2 uppercase">Soporte 24/7</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Atención continua ante cualquier emergencia o duda durante tu viaje.</p>
                     </div>
                 </div>
             </div>

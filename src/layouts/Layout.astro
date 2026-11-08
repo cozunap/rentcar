@@ -7,11 +7,15 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  canonical?: string;
 }
 
+const currentPath = Astro.url.pathname;
+const canonicalURL = Astro.props.canonical || new URL(currentPath, 'https://tucarroymas.com').href;
+
 const { 
-  title = "Tu Carro y Más | Marketplace Automotriz y Alquiler en República Dominicana", 
-  description = "Plataforma automotriz de alta gama: Alquiler de vehículos verificados y directorio de negocios automotrices (talleres, repuestos, detailing) en República Dominicana.",
+  title = "Tu Carro y Más | Alquiler de Autos en Santo Domingo Este", 
+  description = "Alquiler de vehículos y renta de SUVs en Santo Domingo Este sin intermediarios. Reserva directa por WhatsApp, flota verificada y asistencia 24/7.",
   ogImage = "https://tucarroymas.com/Jeep.webp"
 } = Astro.props;
 ---
@@ -23,14 +27,71 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href="https://tucarroymas.com/" />
+    <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph -->
+    <!-- Multi-regional & Language targeting (Dominican Republic & Diaspora) -->
+    <link rel="alternate" hreflang="es-DO" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tucarroymas.com/" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_DO" />
+    <meta property="og:site_name" content="Tu Carro y Más Rent A Car" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured Data: AutoRental & LocalBusiness Schema (Rich Snippets & AEO) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "AutoRental",
+      "name": "Tu Carro y Más Rent A Car",
+      "alternateName": "Tu Carro y Más",
+      "image": "https://tucarroymas.com/Jeep.webp",
+      "@id": "https://tucarroymas.com/#autorental",
+      "url": "https://tucarroymas.com",
+      "telephone": "+18499154010",
+      "priceRange": "$$",
+      "currenciesAccepted": "USD, DOP",
+      "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+      "areaServed": [
+        "Santo Domingo Este",
+        "Santo Domingo",
+        "Aeropuerto Internacional Las Américas (SDQ)",
+        "Boca Chica",
+        "Distrito Nacional"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Santo Domingo Este",
+        "addressLocality": "Santo Domingo Este",
+        "addressRegion": "Santo Domingo",
+        "postalCode": "11500",
+        "addressCountry": "DO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 18.4861,
+        "longitude": -69.8569
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://wa.me/18499154010"
+      ]
+    })} />
 
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 640 512%22><path fill=%22%231d4ed8%22 d=%22M544 192h-16c-8.8 0-16-7.2-16-16V88c0-4.4-3.6-8-8-8h-80c-4.4 0-8 3.6-8 8v64c0 8.8-7.2 16-16 16h-160c-8.8 0-16-7.2-16-16V88c0-4.4-3.6-8-8-8H112c-4.4 0-8 3.6-8 8v88c0 8.8-7.2 16-16 16H72c-22.1 0-40 17.9-40 40v64c0 17.7 14.3 32 32 32h12.8c-1.5 6.5-2.8 13.2-2.8 20 0 66.3 53.7 120 120 120s120-53.7 120-120c0-6.8-1.3-13.5-2.8-20h197.6c-1.5 6.5-2.8 13.2-2.8 20 0 66.3 53.7 120 120 120s120-53.7 120-120c0-6.8-1.3-13.5-2.8-20H568c22.1 0 40-14.3 40-32v-64c0-22.1-17.9-40-40-40zM194 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z%22/></svg>" />

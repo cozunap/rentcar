@@ -1,0 +1,21 @@
+# Robots.txt for Tu Carro y Más Rent A Car Santo Domingo
+User-agent: *
+Allow: /
+Disallow: /panel/
+Disallow: /admin/
+Disallow: /auth/
+
+# Allow AI search engines and answer engines (AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://tucarroymas.com/sitemap.xml
