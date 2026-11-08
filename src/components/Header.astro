@@ -31,39 +31,43 @@ import { VEHICLE_STYLES } from "../lib/vehicleStyles";
     <!-- RIGHT-ALIGNED NAVIGATION (Exact AutoTrader Items in 100% Spanish) -->
     <div class="flex items-center gap-5">
       
-      <nav class="hidden lg:flex items-center gap-5">
+      <nav class="hidden lg:flex items-center gap-5 h-full">
         <!-- 1. Carros Usados -->
-        <a href="/vehiculos?condition=usado" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap">
+        <a href="/vehiculos?condition=usado" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap py-3">
           Carros Usados
         </a>
 
         <!-- 2. Carros Nuevos -->
-        <a href="/vehiculos?condition=nuevo" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap">
+        <a href="/vehiculos?condition=nuevo" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap py-3">
           Carros Nuevos
         </a>
 
         <!-- 3. Vende Mi Carro -->
-        <a href="/publicar" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap">
+        <a href="/publicar" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap py-3">
           Vende Mi Carro
         </a>
 
         <!-- 4. Contacto -->
-        <a href="/contacto" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap">
+        <a href="/contacto" class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] transition-colors whitespace-nowrap py-3">
           Contacto
         </a>
 
         <!-- 5. FULL-WIDTH MEGA MENU: Investigación -->
-        <div class="group">
+        <div id="megamenu-container" class="relative py-3">
           <button 
+            id="megamenu-btn"
             type="button" 
-            class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] flex items-center gap-1 transition-colors py-2 whitespace-nowrap"
+            class="text-[11px] font-normal leading-[15px] tracking-[0.6px] uppercase text-slate-700 hover:text-[#D54000] flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer"
           >
             <span>Investigación</span>
-            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg id="megamenu-chevron" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
 
-          <!-- FULL-WIDTH MEGA MENU DROPDOWN (Ocupa todo el ancho de la ventana/contenedor) -->
-          <div class="absolute left-0 right-0 top-full bg-white border-b border-slate-200 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+          <!-- FULL-WIDTH MEGA MENU DROPDOWN (Conexión física directa con el header sin gaps) -->
+          <div 
+            id="megamenu-dropdown"
+            class="hidden fixed left-0 right-0 top-[57px] bg-white border-b border-slate-200 shadow-2xl z-50 transition-all duration-150"
+          >
             <div class="max-w-7xl mx-auto px-8 py-8">
               
               <!-- Top 3 Columns matching AutoTrader screenshot -->
@@ -189,7 +193,37 @@ import { VEHICLE_STYLES } from "../lib/vehicleStyles";
 </header>
 
 <script>
-  const btn = document.getElementById("mobile-menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  btn?.addEventListener("click", () => menu?.classList.toggle("hidden"));
+  const mobileBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  mobileBtn?.addEventListener("click", () => mobileMenu?.classList.toggle("hidden"));
+
+  // Lógica robusta del Mega Menú con tolerancia de movimiento de mouse (Mouse Bridge & Hover Intent)
+  const container = document.getElementById("megamenu-container");
+  const dropdown = document.getElementById("megamenu-dropdown");
+  const chevron = document.getElementById("megamenu-chevron");
+
+  if (container && dropdown) {
+    let closeTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const openMenu = () => {
+      if (closeTimeout) {
+        clearTimeout(closeTimeout);
+        closeTimeout = null;
+      }
+      dropdown.classList.remove("hidden");
+      chevron?.classList.add("rotate-180");
+    };
+
+    const closeMenu = () => {
+      closeTimeout = setTimeout(() => {
+        dropdown.classList.add("hidden");
+        chevron?.classList.remove("rotate-180");
+      }, 180); // 180ms de gracia para que el mouse transite suavemente sin cerrarse
+    };
+
+    container.addEventListener("mouseenter", openMenu);
+    container.addEventListener("mouseleave", closeMenu);
+    dropdown.addEventListener("mouseenter", openMenu);
+    dropdown.addEventListener("mouseleave", closeMenu);
+  }
 </script>
