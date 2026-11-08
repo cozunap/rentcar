@@ -17,6 +17,9 @@ const vipAds = [
 
 // Marcas populares en portada (16 marcas principales de RD)
 const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
+
+// Duplicamos los estilos para un loop infinito suave sin saltos
+const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
 ---
 
 <Layout title="TuCarroYMas | Compra. Vende. Intercambia Vehículos en República Dominicana">
@@ -136,7 +139,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
     </div>
   </section>
 
-  <!-- 2. EXPLORAR POR ESTILO / TIPO DE VEHÍCULO (Carrusel Horizontal Interactivo) -->
+  <!-- 2. EXPLORAR POR ESTILO / TIPO DE VEHÍCULO (Carrusel Sin Bordes / Borde Eliminado con Autoplay Infinito y Pausa on Hover) -->
   <section class="py-12 px-4 bg-white border-b border-slate-100 relative">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center justify-between mb-6">
@@ -147,12 +150,12 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
           <p class="text-xs text-slate-500 mt-0.5">Encuentra el vehículo perfecto según su tipo de carrocería, botes y tracción.</p>
         </div>
         <div class="flex items-center gap-2">
-          <!-- Controles del Carrusel (Flechas izquierda / derecha) -->
+          <!-- Controles manuales opcionales -->
           <button 
             id="styles-prev-btn" 
             type="button" 
             aria-label="Anterior estilo"
-            class="w-8 h-8 rounded-full border border-slate-300 hover:border-[#D54000] hover:text-white hover:bg-[#D54000] text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
+            class="w-8 h-8 rounded-full border border-slate-200 hover:border-[#D54000] hover:text-white hover:bg-[#D54000] text-slate-600 flex items-center justify-center transition-all cursor-pointer shadow-sm"
           >
             &larr;
           </button>
@@ -160,36 +163,36 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
             id="styles-next-btn" 
             type="button" 
             aria-label="Siguiente estilo"
-            class="w-8 h-8 rounded-full border border-slate-300 hover:border-[#D54000] hover:text-white hover:bg-[#D54000] text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
+            class="w-8 h-8 rounded-full border border-slate-200 hover:border-[#D54000] hover:text-white hover:bg-[#D54000] text-slate-600 flex items-center justify-center transition-all cursor-pointer shadow-sm"
           >
             &rarr;
           </button>
         </div>
       </div>
 
-      <!-- Carrusel Horizontal Track (Scroll suave y snap) -->
+      <!-- Carrusel Track: SIN BORDER/STROKE EN LAS TARJETAS (Completamente limpio) -->
       <div 
         id="styles-carousel-track" 
-        class="flex items-stretch gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1 no-scrollbar"
+        class="flex items-stretch gap-6 overflow-x-auto pb-4 pt-1 no-scrollbar select-none"
         style="scrollbar-width: none; -ms-overflow-style: none;"
       >
-        {VEHICLE_STYLES.map(style => (
+        {loopedVehicleStyles.map(style => (
           <a 
             href={style.id === "boats" ? "/vehiculos?type=water-transport" : `/vehiculos?body=${style.id}`}
-            class="snap-start shrink-0 w-[180px] sm:w-[200px] flex flex-col items-center justify-between p-3.5 rounded-sm hover:shadow-lg hover:border-[#D54000] border border-slate-200 transition-all group text-center cursor-pointer bg-white"
+            class="style-card shrink-0 w-[180px] sm:w-[200px] flex flex-col items-center justify-between p-2 rounded-sm transition-transform duration-200 hover:-translate-y-1 text-center cursor-pointer bg-transparent border-0"
           >
-            <!-- Graphic Image (SVGs exactos con círculo azul claro detrás) -->
+            <!-- Graphic Image (SVGs exactos con círculo azul claro detrás, sin bordes en el cuadro) -->
             <div class="w-full h-24 flex items-center justify-center mb-2">
               <img 
                 src={style.image} 
                 alt={style.nameEs} 
-                class="w-full max-h-20 object-contain group-hover:scale-105 transition-transform duration-200" 
+                class="w-full max-h-20 object-contain hover:scale-105 transition-transform duration-200 pointer-events-none" 
                 loading="lazy"
               />
             </div>
             
             <div class="mt-1 w-full">
-              <span class="block text-xs font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight truncate">
+              <span class="block text-xs font-bold text-slate-800 hover:text-[#D54000] transition-colors leading-tight truncate">
                 {style.nameEs}
               </span>
               <span class="text-[10px] text-slate-400 font-medium truncate block">
@@ -399,20 +402,53 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
 </Layout>
 
 <script>
-  // Carrusel interactivo para estilos de vehículos
+  // Carrusel Infinito Continuo con Autoplay y Pausa on Hover
   const track = document.getElementById("styles-carousel-track");
   const prevBtn = document.getElementById("styles-prev-btn") as HTMLButtonElement;
   const nextBtn = document.getElementById("styles-next-btn") as HTMLButtonElement;
 
-  if (track && prevBtn && nextBtn) {
-    const scrollAmount = 380;
+  if (track) {
+    let isPaused = false;
+    const speed = 1.2; // Velocidad suave continua para lectura cómoda
 
-    prevBtn.addEventListener("click", () => {
-      track.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    // Intervalo de auto-scroll continuo (loop infinito)
+    const timer = setInterval(() => {
+      if (!isPaused) {
+        track.scrollLeft += speed;
+        // Cuando llega a la mitad del contenido duplicado, reinicia suavemente a 0
+        if (track.scrollLeft >= track.scrollWidth / 2) {
+          track.scrollLeft = 0;
+        }
+      }
+    }, 25); // ~40 FPS para fluidez total
+
+    // Pausa inmediata en Mouse Over y reanudación en Mouse Leave
+    track.addEventListener("mouseenter", () => {
+      isPaused = true;
     });
 
-    nextBtn.addEventListener("click", () => {
-      track.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    track.addEventListener("mouseleave", () => {
+      isPaused = false;
     });
+
+    // Soporte táctil en móvil: pausar al tocar
+    track.addEventListener("touchstart", () => {
+      isPaused = true;
+    }, { passive: true });
+
+    track.addEventListener("touchend", () => {
+      setTimeout(() => { isPaused = false; }, 2000);
+    });
+
+    // Controles manuales por si el usuario desea avanzar/retroceder manualmente
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", () => {
+        track.scrollBy({ left: -260, behavior: "smooth" });
+      });
+
+      nextBtn.addEventListener("click", () => {
+        track.scrollBy({ left: 260, behavior: "smooth" });
+      });
+    }
   }
 </script>
