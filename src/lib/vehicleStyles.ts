@@ -16,7 +16,7 @@ export const VEHICLE_STYLES: VehicleStyleItem[] = [
     "id": "suvs",
     "name": "SUVs & Crossovers",
     "nameEs": "SUVs & Crossovers",
-    "image": "/styles/suvs.svg"
+    "image": "/styles/suvs-crossovers.svg"
   },
   {
     "id": "trucks",
@@ -28,7 +28,7 @@ export const VEHICLE_STYLES: VehicleStyleItem[] = [
     "id": "commercial",
     "name": "Commercial",
     "nameEs": "Comerciales & Vans",
-    "image": "/styles/commercial.svg"
+    "image": "/styles/d-commercial.svg"
   },
   {
     "id": "boats",
@@ -52,7 +52,7 @@ export const VEHICLE_STYLES: VehicleStyleItem[] = [
     "id": "vans",
     "name": "Vans & Minivans",
     "nameEs": "Vans & Minivans",
-    "image": "/styles/vans.svg"
+    "image": "/styles/vans-minivans.svg"
   },
   {
     "id": "convertibles",
@@ -70,18 +70,18 @@ export const VEHICLE_STYLES: VehicleStyleItem[] = [
     "id": "4wds",
     "name": "AWDs & 4WDs",
     "nameEs": "4x4s & Todo Terreno",
-    "image": "/styles/4wds.svg"
+    "image": "/styles/d-awd.svg"
   },
   {
     "id": "hybrids",
     "name": "Hybrids",
     "nameEs": "Híbridos (Gas / Elec)",
-    "image": "/styles/hybrids.svg"
+    "image": "/styles/d-hybrid.svg"
   },
   {
     "id": "electrics",
     "name": "Electrics",
     "nameEs": "100% Eléctricos (EV)",
-    "image": "/styles/electrics.svg"
+    "image": "/styles/d-electric.svg"
   }
 ];

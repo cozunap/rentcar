@@ -47,7 +47,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
                 Tipo de Transporte
               </label>
-              <select name="type" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
+              <select name="type" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]">
                 <option value="">Todos (Autos, Botes, Camiones...)</option>
                 {TRANSPORT_TYPES.map(t => (
                   <option value={t.id}>{t.nameEs}</option>
@@ -59,7 +59,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
                 Marca
               </label>
-              <select name="make" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
+              <select name="make" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]">
                 <option value="">Todas</option>
                 {ALL_DOMINICAN_BRANDS.map(b => (
                   <option value={b.name}>{b.name}</option>
@@ -75,7 +75,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
                 type="text" 
                 name="model" 
                 placeholder="Ej. Camry, RAV4, Cascadia..."
-                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]"
+                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]"
               />
             </div>
 
@@ -83,7 +83,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
                 Carrocería / Estilo
               </label>
-              <select name="body" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
+              <select name="body" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]">
                 <option value="">Cualquiera</option>
                 <option value="sedan">Sedán</option>
                 <option value="suv">SUV / Jeepeta</option>
@@ -102,7 +102,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
                 <span>Precio (USD)</span>
                 <span class="text-white font-mono">$10,000 - $150,000</span>
               </div>
-              <input type="range" name="maxPrice" min="10000" max="150000" value="150000" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
+              <input type="range" name="maxPrice" min="10000" max="150000" value="150000" class="w-full accent-[#D54000] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
             </div>
 
             <div>
@@ -110,7 +110,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
                 <span>Año de Fabricación</span>
                 <span class="text-white font-mono">1990 - 2026</span>
               </div>
-              <input type="range" min="1990" max="2026" value="2026" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
+              <input type="range" min="1990" max="2026" value="2026" class="w-full accent-[#D54000] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
             </div>
 
             <div>
@@ -118,13 +118,13 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
                 <span>Cilindrada / Motor</span>
                 <span class="text-white font-mono">0.6 - 15.0 L</span>
               </div>
-              <input type="range" min="6" max="150" value="150" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
+              <input type="range" min="6" max="150" value="150" class="w-full accent-[#D54000] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
             </div>
 
             <div>
               <button 
                 type="submit" 
-                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-4 rounded-sm tracking-wider shadow transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                class="w-full bg-[#D54000] hover:bg-[#b83600] text-white font-bold text-xs uppercase py-2.5 px-4 rounded-sm tracking-wider shadow transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 Buscar
               </button>
@@ -156,7 +156,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
         {VEHICLE_STYLES.map(style => (
           <a 
             href={style.id === "boats" ? "/vehiculos?type=water-transport" : `/vehiculos?body=${style.id}`}
-            class="flex flex-col items-center justify-between p-3 rounded-sm hover:shadow-md hover:border-[#00c982] border border-transparent transition-all group text-center cursor-pointer"
+            class="flex flex-col items-center justify-between p-3 rounded-sm hover:shadow-md hover:border-[#D54000] border border-transparent transition-all group text-center cursor-pointer"
           >
             <!-- Real Vehicle Profile Graphic with Soft Blue Backdrop Circle (Matching AutoTrader screenshot) -->
             <div class="w-full h-24 flex items-center justify-center mb-2">
@@ -170,7 +170,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
             
             <!-- Vehicle Style Name in Spanish + English -->
             <div class="mt-1">
-              <span class="block text-xs font-bold text-slate-800 group-hover:text-[#00c982] transition-colors leading-tight">
+              <span class="block text-xs font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight">
                 {style.nameEs}
               </span>
               <span class="text-[10px] text-slate-400 font-medium">
@@ -216,7 +216,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
                   {item.title}
                 </h3>
                 
-                <div class="mt-1 text-base font-black text-[#00c982]">
+                <div class="mt-1 text-base font-black text-[#D54000]">
                   ${item.price.toLocaleString()} <span class="text-xs font-normal text-slate-400">USD</span>
                 </div>
 
@@ -240,7 +240,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
             <div class="p-4 pt-0">
               <a 
                 href={`/vehiculos?make=${encodeURIComponent(item.make)}`}
-                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
+                class="w-full bg-[#D54000] hover:bg-[#b83600] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
               >
                 Ver más
               </a>
@@ -299,7 +299,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
               <div class="p-4 pt-0">
                 <a 
                   href={`/vehiculos?make=${encodeURIComponent(item.make)}`}
-                  class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
+                  class="w-full bg-[#D54000] hover:bg-[#b83600] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center cursor-pointer"
                 >
                   Ver más
                 </a>
@@ -331,7 +331,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
         {popularBrandsHomepage.map(b => (
           <a 
             href={`/vehiculos?make=${encodeURIComponent(b.name)}`} 
-            class="flex flex-col items-center p-3 border border-slate-200 hover:border-[#00c982] hover:shadow-md rounded-sm transition-all group bg-white"
+            class="flex flex-col items-center p-3 border border-slate-200 hover:border-[#D54000] hover:shadow-md rounded-sm transition-all group bg-white"
           >
             <div class="w-10 h-10 flex items-center justify-center mb-2">
               <img 
@@ -341,7 +341,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
                 loading="lazy"
               />
             </div>
-            <span class="text-[11px] font-semibold text-slate-700 group-hover:text-[#00c982] transition-colors leading-tight">
+            <span class="text-[11px] font-semibold text-slate-700 group-hover:text-[#D54000] transition-colors leading-tight">
               {b.name}
             </span>
           </a>
@@ -369,7 +369,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
         />
         <button 
           type="submit" 
-          class="w-full sm:w-auto bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-6 rounded-sm whitespace-nowrap shadow transition-all cursor-pointer"
+          class="w-full sm:w-auto bg-[#D54000] hover:bg-[#b83600] text-white font-bold text-xs uppercase py-2.5 px-6 rounded-sm whitespace-nowrap shadow transition-all cursor-pointer"
         >
           Suscribirme
         </button>

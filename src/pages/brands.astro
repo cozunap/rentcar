@@ -10,7 +10,7 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
       <!-- Breadcrumbs & Title matching Crocoblock /brands/ -->
       <div class="mb-8">
         <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-          <a href="/" class="hover:text-[#00c982]">Inicio</a>
+          <a href="/" class="hover:text-[#D54000]">Inicio</a>
           <span>/</span>
           <span class="text-slate-800">Marcas de Vehículos</span>
         </div>
@@ -24,7 +24,7 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
 
       <!-- Quick Filter Pills: Incluye filtro especial para Marcas Chinas -->
       <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-xs font-bold">
-        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-[#00c982] text-white shadow-sm" data-filter="all">
+        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-[#D54000] text-white shadow-sm" data-filter="all">
           Todas ({ALL_DOMINICAN_BRANDS.length})
         </button>
         <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="chinas">
@@ -50,7 +50,7 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
           <a 
             href={`/vehiculos?make=${encodeURIComponent(brand.name)}`}
             data-category={brand.category}
-            class="brand-card flex flex-col items-center justify-center p-4 border border-slate-200 rounded-sm hover:border-[#00c982] hover:shadow-lg transition-all group bg-white text-center cursor-pointer"
+            class="brand-card flex flex-col items-center justify-center p-4 border border-slate-200 rounded-sm hover:border-[#D54000] hover:shadow-lg transition-all group bg-white text-center cursor-pointer"
           >
             <!-- SVG Logo Container (Cargado localmente desde /brands/*.svg) -->
             <div class="w-12 h-12 flex items-center justify-center mb-3">
@@ -63,7 +63,7 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
             </div>
 
             <!-- Brand Name -->
-            <span class="text-xs font-bold text-slate-800 group-hover:text-[#00c982] transition-colors leading-tight">
+            <span class="text-xs font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight">
               {brand.name}
             </span>
 
@@ -81,7 +81,7 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
           <h3 class="text-sm font-bold text-slate-900">¿No encuentras una marca o deseas registrar tu concesionario?</h3>
           <p class="text-xs text-slate-500 mt-0.5">Publica tus vehículos gratuitamente con ficha técnica completa y contacto a WhatsApp.</p>
         </div>
-        <a href="/publicar" class="bg-[#00c982] hover:bg-[#00b072] text-white text-xs font-bold uppercase tracking-wider py-2.5 px-5 rounded-full whitespace-nowrap shadow-sm">
+        <a href="/publicar" class="bg-[#D54000] hover:bg-[#b83600] text-white text-xs font-bold uppercase tracking-wider py-2.5 px-5 rounded-full whitespace-nowrap shadow-sm">
           Publicar Anuncio
         </a>
       </div>
@@ -98,10 +98,10 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
     btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
       buttons.forEach(b => {
-        b.classList.remove("bg-[#00c982]", "text-white");
+        b.classList.remove("bg-[#D54000]", "text-white");
         b.classList.add("bg-slate-100", "text-slate-700");
       });
-      btn.classList.add("bg-[#00c982]", "text-white");
+      btn.classList.add("bg-[#D54000]", "text-white");
       btn.classList.remove("bg-slate-100", "text-slate-700");
 
       cards.forEach(card => {
