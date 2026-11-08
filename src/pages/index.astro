@@ -1,289 +1,296 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TRANSPORT_TYPES, DOMINICAN_PROVINCES } from "../lib/carDealerData";
+import { TRANSPORT_TYPES } from "../lib/carDealerData";
 import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
-const featuredItems = DEMO_VEHICLES_SEED.slice(0, 6);
+// 6 Recent Ads matching demo
+const recentAds = DEMO_VEHICLES_SEED.slice(0, 6);
+
+// 3 VIP Ads matching the dark carousel section in demo
+const vipAds = [
+  DEMO_VEHICLES_SEED[2], // Toyota RAV4 / White SUV
+  DEMO_VEHICLES_SEED[0], // Toyota Camry / Red coupe/sedan look
+  DEMO_VEHICLES_SEED[1]  // Tesla / Sports car look
+];
+
+// Popular Car Brands from screenshot
+const popularBrands = [
+  { name: "Ford", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg" },
+  { name: "Toyota", logo: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Toyota_logo_%282020%29.svg" },
+  { name: "Suzuki", logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Suzuki_logo_2.svg" },
+  { name: "Lexus", logo: "https://upload.wikimedia.org/wikipedia/commons/4/47/Lexus_division_emblem.svg" },
+  { name: "Nissan", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Nissan_2020_logo.svg" },
+  { name: "Porsche", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Porsche_Wappen.png" },
+  { name: "Peugeot", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Peugeot_Logo.svg" },
+  { name: "Mitsubishi", logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Mitsubishi_logo.svg" },
+  { name: "Mercedes", logo: "https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" },
+  { name: "BMW", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" },
+  { name: "Mazda", logo: "https://upload.wikimedia.org/wikipedia/commons/9/94/Mazda_Logo.svg" },
+  { name: "Kia", logo: "https://upload.wikimedia.org/wikipedia/commons/4/47/Kia_logo.svg" },
+  { name: "Hyundai", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg" },
+  { name: "GMC", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b5/GMC_logo.svg" },
+  { name: "Honda", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda_Logo.svg" },
+  { name: "Audi", logo: "https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg" }
+];
+
+// Latest News items from demo
+const newsItems = [
+  {
+    title: "Brand New Mercedes S-Class will be an Electric Sedan",
+    date: "Jan 12, 2026",
+    img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    title: "Tax Service Proposes to Change Car Insurance Rules",
+    date: "Jan 08, 2026",
+    img: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    title: "From 2026 They Will Collect Tax for Luxury Cars",
+    date: "Dec 28, 2025",
+    img: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    title: "Perfect for Parking: Mini Pagemaker with Stylish Look in the Same Time",
+    date: "Dec 15, 2025",
+    img: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=300&q=80"
+  }
+];
 ---
 
-<Layout title="TuCarroYMás | Car Dealer & Marketplace Multicategoría República Dominicana">
-  <!-- HERO BANNER (Crocoblock Car Dealer New Pattern - Clean White / Light Professional) -->
-  <section class="relative min-h-[580px] flex items-center justify-center bg-slate-900 py-16 px-4 overflow-hidden">
-    <!-- Background Image with Gradient Overlay -->
+<Layout title="Car Dealer New | Buy. Sell. Trade">
+  
+  <!-- 1. HERO SECTION: "Buy. Sell. Trade" with dashboard background & exact 4-select + 3-slider search bar -->
+  <section class="relative min-h-[440px] flex items-center justify-center py-16 px-4 bg-slate-900 overflow-hidden">
+    <!-- Hero Car Dashboard Background -->
     <div class="absolute inset-0 z-0">
       <img 
         src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80" 
-        alt="Car Dealer Hero" 
-        class="w-full h-full object-cover opacity-35"
+        alt="Car Dashboard Background" 
+        class="w-full h-full object-cover opacity-60"
       />
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+      <div class="absolute inset-0 bg-slate-950/40"></div>
     </div>
 
-    <div class="relative z-10 max-w-6xl mx-auto w-full text-center">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs uppercase tracking-widest font-bold mb-6">
-        <span class="text-blue-400">●</span> Crocoblock Car Dealer New Architecture
-      </div>
-
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight uppercase max-w-4xl mx-auto leading-tight">
-        El Portal Líder de <span class="text-blue-400">Vehículos y Transporte</span> en RD
+    <div class="relative z-10 max-w-6xl mx-auto w-full">
+      <!-- Title exactly as demo -->
+      <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-8">
+        Buy. Sell. Trade
       </h1>
-      <p class="mt-4 text-base sm:text-lg text-slate-200 max-w-2xl mx-auto font-medium">
-        Compra y venta directa sin intermediarios. Automóviles, camiones pesados 18-wheelers, transporte acuático, motocicletas y maquinaria especializada en todas las provincias.
-      </p>
 
-      <!-- MASTER SEARCH & FILTERS BOX (Light Crisp White Container) -->
-      <div class="mt-10 bg-white border border-slate-200 p-5 sm:p-7 shadow-2xl text-left max-w-5xl mx-auto">
-        <form action="/vehiculos" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 items-end">
-          
-          <!-- Filter 1: Transport Type (Crocoblock Types of Transport) -->
-          <div>
-            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5 tracking-wider">
-              Tipo de Transporte
-            </label>
-            <select 
-              name="type" 
-              class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 cursor-pointer font-medium"
-            >
-              <option value="">Todos los Transportes</option>
-              {TRANSPORT_TYPES.map(t => (
-                <option value={t.id}>{t.nameEs}</option>
-              ))}
-            </select>
+      <!-- The exact CarDealer Form Bar: 4 top dropdowns + 3 bottom range sliders + green Search button -->
+      <div class="bg-slate-900/70 backdrop-blur-md p-6 border border-white/10 rounded-sm shadow-2xl">
+        <form action="/vehiculos" method="GET">
+          <!-- Row 1: 4 Select Inputs (Types of Transport, Make, Model, Body) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div>
+              <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
+                Types of Transport
+              </label>
+              <select name="type" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
+                <option value="">Any</option>
+                {TRANSPORT_TYPES.map(t => (
+                  <option value={t.id}>{t.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
+                Make
+              </label>
+              <select name="make" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
+                <option value="">Any</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Tesla">Tesla</option>
+                <option value="Freightliner">Freightliner</option>
+                <option value="Caterpillar">Caterpillar</option>
+                <option value="Sea Ray">Sea Ray</option>
+                <option value="Yamaha">Yamaha</option>
+                <option value="John Deere">John Deere</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
+                Model
+              </label>
+              <select name="model" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
+                <option value="">Any</option>
+                <option value="Camry">Camry</option>
+                <option value="Model 3">Model 3</option>
+                <option value="RAV4">RAV4</option>
+                <option value="Cascadia">Cascadia</option>
+                <option value="320D">320D</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
+                Body
+              </label>
+              <select name="body" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#00c982]">
+                <option value="">Any</option>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="truck">Truck</option>
+                <option value="coupe">Coupe</option>
+              </select>
+            </div>
           </div>
 
-          <!-- Filter 2: Make / Brand -->
-          <div>
-            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5 tracking-wider">
-              Marca
-            </label>
-            <input 
-              type="text" 
-              name="make" 
-              placeholder="Ej. Toyota, Freightliner, Cat..."
-              class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium placeholder:text-slate-400"
-            />
-          </div>
+          <!-- Row 2: 3 Range Sliders (Price, Issue Year, Engine Volume) + Green "Search" Button -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+            <!-- Price Slider -->
+            <div>
+              <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
+                <span>Price</span>
+                <span class="text-white font-mono">$10,000 - $150,000</span>
+              </div>
+              <input type="range" min="10000" max="150000" value="150000" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
+            </div>
 
-          <!-- Filter 3: Dominican Province / Location -->
-          <div>
-            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5 tracking-wider">
-              Provincia
-            </label>
-            <select 
-              name="location" 
-              class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 cursor-pointer font-medium"
-            >
-              <option value="">Toda República Dominicana</option>
-              {DOMINICAN_PROVINCES.map(p => (
-                <option value={p}>{p}</option>
-              ))}
-            </select>
-          </div>
+            <!-- Issue Year Slider -->
+            <div>
+              <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
+                <span>Issue Year</span>
+                <span class="text-white font-mono">1990 - 2026</span>
+              </div>
+              <input type="range" min="1990" max="2026" value="2026" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
+            </div>
 
-          <!-- Filter 4: Max Price (USD) -->
-          <div>
-            <label class="block text-xs uppercase font-bold text-slate-700 mb-1.5 tracking-wider">
-              Precio Máximo (USD)
-            </label>
-            <select 
-              name="maxPrice" 
-              class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 cursor-pointer font-medium"
-            >
-              <option value="">Cualquier Precio</option>
-              <option value="15000">Hasta $15,000 USD</option>
-              <option value="30000">Hasta $30,000 USD</option>
-              <option value="50000">Hasta $50,000 USD</option>
-              <option value="100000">Hasta $100,000 USD</option>
-              <option value="200000">Más de $100,000 USD</option>
-            </select>
-          </div>
+            <!-- Engine Volume / Mileage Slider -->
+            <div>
+              <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
+                <span>Engine Volume</span>
+                <span class="text-white font-mono">0.6 - 15.0 L</span>
+              </div>
+              <input type="range" min="6" max="150" value="150" class="w-full accent-[#00c982] h-1.5 bg-slate-700 rounded-lg cursor-pointer" />
+            </div>
 
-          <!-- Search Button -->
-          <div>
-            <button 
-              type="submit" 
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs uppercase py-3 px-4 tracking-wider flex items-center justify-center gap-2 shadow-md shadow-blue-600/30 transition-all cursor-pointer"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-              Filtrar
-            </button>
+            <!-- Exact Green Search Button like demo -->
+            <div>
+              <button 
+                type="submit" 
+                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-4 rounded-sm tracking-wider shadow transition-all flex items-center justify-center gap-1.5"
+              >
+                Search
+              </button>
+            </div>
           </div>
         </form>
-
-        <!-- Quick Search Pills -->
-        <div class="mt-4 pt-3 border-t border-slate-200 flex flex-wrap items-center gap-2 text-xs text-slate-600">
-          <span class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Búsquedas Populares:</span>
-          <a href="/vehiculos?type=cars" class="hover:text-blue-600 hover:border-blue-300 bg-slate-50 px-2.5 py-1 border border-slate-200 transition-colors">Sedanes y Eléctricos</a>
-          <a href="/vehiculos?type=trucks-buses" class="hover:text-blue-600 hover:border-blue-300 bg-slate-50 px-2.5 py-1 border border-slate-200 transition-colors">18-Wheelers y Pesados</a>
-          <a href="/vehiculos?type=water-transport" class="hover:text-blue-600 hover:border-blue-300 bg-slate-50 px-2.5 py-1 border border-slate-200 transition-colors">Lanchas Deportivas</a>
-          <a href="/vehiculos?type=special-machinery" class="hover:text-blue-600 hover:border-blue-300 bg-slate-50 px-2.5 py-1 border border-slate-200 transition-colors">Excavadoras y Maquinaria</a>
-          <a href="/vehiculos?type=mototechnics" class="hover:text-blue-600 hover:border-blue-300 bg-slate-50 px-2.5 py-1 border border-slate-200 transition-colors">SuperBikes Yamaha</a>
-        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- TYPES OF TRANSPORT SECTION (Crocoblock Car Dealer Demo Taxonomy Grid - Crisp White) -->
-  <section class="py-16 px-4 bg-white border-b border-slate-200">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
-        <div>
-          <span class="text-blue-600 font-bold uppercase tracking-widest text-xs">Directorio Completo</span>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight mt-1">
-            Explora por Tipo de Transporte
-          </h2>
-        </div>
-        <a href="/vehiculos" class="mt-4 sm:mt-0 text-xs font-bold uppercase tracking-wider text-blue-600 hover:text-blue-800 flex items-center gap-1">
-          Ver Catálogo Completo
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </a>
-      </div>
+  <!-- 2. TYPES OF TRANSPORT SECTION (Exact 6 category icons in a single horizontal row on white background) -->
+  <section class="py-12 px-4 bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-xl font-black text-slate-900 mb-6">
+        Types of Transport
+      </h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {TRANSPORT_TYPES.map(cat => (
           <a 
             href={`/vehiculos?type=${cat.id}`}
-            class="group bg-slate-50 border border-slate-200 p-6 hover:border-blue-500 hover:bg-white transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 shadow-sm hover:shadow-xl"
+            class="flex flex-col items-center justify-center p-4 border border-slate-200 hover:border-[#00c982] hover:shadow-md transition-all rounded-sm group text-center"
           >
-            <div>
-              <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200 mb-4">
-                {cat.id === "cars" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M3 11h18v6H3v-6z"></path></svg>}
-                {cat.id === "trucks-buses" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10M13 16h8l2-4V9a1 1 0 00-1-1h-9M13 16H9m-4 0H3"></path></svg>}
-                {cat.id === "special-machinery" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>}
-                {cat.id === "water-transport" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>}
-                {cat.id === "mototechnics" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
-                {cat.id === "machinery" && <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>}
-              </div>
-
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-black text-slate-900 group-hover:text-blue-600 transition-colors uppercase">
-                  {cat.nameEs}
-                </h3>
-                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-white px-2 py-0.5 border border-slate-200">
-                  {cat.name}
-                </span>
-              </div>
-
-              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                {cat.description}
-              </p>
+            <div class="w-10 h-10 flex items-center justify-center text-slate-600 group-hover:text-[#00c982] transition-colors mb-2">
+              {cat.id === "water-transport" && (
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 13.5l3-3m0 0l3 3m-3-3v10.5M21 16.5l-3-3m0 0l-3 3m3-3v7.5M3 7.5l9-4.5 9 4.5M4 10h16v3a8 8 0 01-16 0v-3z"></path></svg>
+              )}
+              {cat.id === "trucks-buses" && (
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM4 17h1M11 17h4M19 17h1M3 6h11a1 1 0 011 1v10H3V6zm11 3h4.5a1 1 0 01.8.4l2.5 3.33a1 1 0 01.2.6V17h-8V9z"></path></svg>
+              )}
+              {cat.id === "special-machinery" && (
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              )}
+              {cat.id === "mototechnics" && (
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+              )}
+              {cat.id === "machinery" && (
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+              )}
+              {cat.id === "cars" && (
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M3 11h18v6H3v-6z"></path></svg>
+              )}
             </div>
-
-            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-slate-700 group-hover:text-blue-600">
-              <span>Explorar Inventario</span>
-              <span class="text-blue-600 group-hover:translate-x-1 transition-transform">→</span>
-            </div>
+            <span class="text-xs font-semibold text-slate-800 group-hover:text-[#00c982] transition-colors">
+              {cat.name}
+            </span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- FEATURED CAR DEALER LISTINGS (Clean Light JetEngine Listing Grid Pattern) -->
-  <section class="py-16 px-4 bg-[#f8fafc]">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
-        <div>
-          <span class="text-blue-600 font-bold uppercase tracking-widest text-xs">Inventario Destacado</span>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight mt-1">
-            Unidades Certificadas Disponibles
-          </h2>
-        </div>
-        <a href="/vehiculos" class="mt-4 sm:mt-0 text-xs font-bold uppercase tracking-wider text-blue-600 hover:text-blue-800 flex items-center gap-1">
-          Ver las 8 Unidades Demo
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+  <!-- 3. RECENT ADS SECTION (White cards, green price, spec icons, full-width green "View more" button) -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-xl font-black text-slate-900">
+          Recent Ads
+        </h2>
+        <a href="/vehiculos" class="text-xs font-bold text-blue-500 hover:text-blue-600 flex items-center gap-1">
+          View more &rarr;
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredItems.map(item => (
-          <div class="group bg-white border border-slate-200 hover:border-blue-500 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
+      <!-- 3x2 Grid matching screenshot (Tractor, Harvester, Boat, etc.) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentAds.map(item => (
+          <div class="bg-white border border-slate-200 rounded-sm overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group">
             <div>
-              <!-- Vehicle Image with Badges -->
-              <div class="relative h-56 overflow-hidden bg-slate-100">
+              <!-- Image with top-right square zoom/gallery icon -->
+              <div class="relative h-44 overflow-hidden bg-slate-100">
                 <img 
                   src={item.imageUrl} 
                   alt={item.title} 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div class="absolute top-3 left-3 flex flex-col gap-1.5">
-                  <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-blue-600 text-white shadow-sm">
-                    {item.transportType.replace("-", " ").toUpperCase()}
-                  </span>
-                  <span class="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-white/95 text-emerald-700 border border-emerald-300 shadow-sm">
-                    {item.condition.toUpperCase()}
-                  </span>
-                </div>
-                <div class="absolute bottom-3 right-3 bg-white/95 px-2.5 py-1 text-xs font-mono font-bold text-slate-800 border border-slate-200 shadow-sm">
-                  {item.location}
-                </div>
+                <button type="button" class="absolute top-2.5 right-2.5 w-7 h-7 bg-white/90 rounded-sm flex items-center justify-center text-slate-700 shadow-sm hover:bg-white">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                </button>
               </div>
 
-              <!-- Content Area -->
-              <div class="p-5">
-                <div class="flex items-start justify-between gap-3">
-                  <h3 class="text-base font-black text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
-                    {item.title}
-                  </h3>
+              <!-- Content identical to Car Dealer card -->
+              <div class="p-4">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 truncate">
+                  {item.title}
+                </h3>
+                
+                <!-- Emerald Green Price exactly like demo -->
+                <div class="mt-1 text-base font-black text-[#00c982]">
+                  ${item.price.toLocaleString()}
                 </div>
 
-                <!-- Price Tag -->
-                <div class="mt-2 flex items-baseline gap-2">
-                  <span class="text-2xl font-black text-slate-900">
-                    ${item.price.toLocaleString()} <span class="text-xs text-blue-600 font-bold">{item.currency}</span>
+                <!-- 3 Spec Icons in a horizontal row (Transmission, Fuel, Mileage) -->
+                <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    {item.transmission.split(" ")[0]}
                   </span>
-                  <span class="text-xs text-slate-500">
-                    (≈ RD$ {(item.price * 60).toLocaleString()})
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    {item.fuelType}
                   </span>
-                </div>
-
-                <!-- Key Specs Grid (Car Dealer Pattern) -->
-                <div class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-700 py-3 border-y border-slate-200 bg-slate-50 px-2.5">
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span class="text-slate-500 font-medium">Uso:</span>
-                    <span class="font-bold text-slate-900">{item.mileageOrHours}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span class="text-slate-500 font-medium">Trans.:</span>
-                    <span class="font-bold text-slate-900">{item.transmission.split(" ")[0]}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span class="text-slate-500 font-medium">Motor:</span>
-                    <span class="font-bold text-slate-900 truncate">{item.engine.split("(")[0]}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span class="text-slate-500 font-medium">Comb.:</span>
-                    <span class="font-bold text-slate-900">{item.fuelType}</span>
-                  </div>
-                </div>
-
-                <!-- Dealer Badge -->
-                <div class="mt-4 flex items-center justify-between text-xs text-slate-600">
-                  <span class="flex items-center gap-1 text-slate-800 font-semibold truncate">
-                    <svg class="w-3.5 h-3.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    {item.seller.name}
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    {item.mileageOrHours.split(" ")[0]}
                   </span>
-                  <span class="text-[10px] text-emerald-700 font-bold uppercase">{item.seller.dealerType}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="p-5 pt-0 grid grid-cols-2 gap-2">
+            <!-- Full-width green "View more" button -->
+            <div class="p-4 pt-0">
               <a 
-                href={`https://wa.me/${item.seller.whatsapp}?text=Hola,%20estoy%20interesado%20en%20el%20vehículo:%20${encodeURIComponent(item.title)}%20(Precio:%20$${item.price}%20USD)%20en%20TuCarroYMás.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase py-2.5 px-3 flex items-center justify-center gap-1.5 transition-all text-center"
+                href="/vehiculos"
+                class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center"
               >
-                WhatsApp
-              </a>
-              <a 
-                href={`/vehiculos?type=${item.transportType}`}
-                class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs uppercase py-2.5 px-3 flex items-center justify-center transition-all text-center"
-              >
-                Ver Ficha
+                View more
               </a>
             </div>
           </div>
@@ -292,24 +299,223 @@ const featuredItems = DEMO_VEHICLES_SEED.slice(0, 6);
     </div>
   </section>
 
-  <!-- CTA BANNER: SUBMISSION (JetFormBuilder Pattern - Clean Blue) -->
-  <section class="py-16 px-4 bg-blue-600 text-white border-t border-slate-200">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-      <div>
-        <span class="text-blue-100 font-black uppercase tracking-widest text-xs">Publicación Gratuita para Usuarios y Concesionarios</span>
-        <h2 class="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight mt-1">
-          ¿Tienes un vehículo o maquinaria para vender?
+  <!-- 4. VIP ADS SECTION (Exact dark navy background #141c2e with VIP cards, yellow badge, left/right arrows & dots) -->
+  <section class="py-14 px-4 bg-[#141c2e] text-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-xl font-black text-white">
+          VIP Ads
         </h2>
-        <p class="text-sm text-blue-50 mt-2 max-w-xl font-medium">
-          Sube tus fotos con optimización automática 1500x1500px WebP, añade tus especificaciones técnicas y recibe contactos directos a tu WhatsApp al instante.
-        </p>
+        <a href="/vehiculos" class="text-xs font-bold text-blue-400 hover:text-blue-300 flex items-center gap-1">
+          View more &rarr;
+        </a>
       </div>
-      <a 
-        href="/publicar" 
-        class="bg-white hover:bg-slate-100 text-blue-700 font-black text-xs uppercase py-4 px-8 tracking-widest shadow-xl shrink-0 transition-all hover:scale-105 cursor-pointer"
-      >
-        Publicar Anuncio Ahora
-      </a>
+
+      <!-- Carousel Track with Left/Right arrow controls -->
+      <div class="relative">
+        <!-- Left Arrow -->
+        <button class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700 hidden md:flex shadow">
+          &larr;
+        </button>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {vipAds.map(item => (
+            <div class="bg-[#1b253c] border border-slate-700/60 rounded-sm overflow-hidden flex flex-col justify-between group">
+              <div>
+                <!-- Image with Yellow "VIP" badge & top right icon -->
+                <div class="relative h-44 overflow-hidden bg-slate-900">
+                  <img 
+                    src={item.imageUrl} 
+                    alt={item.title} 
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <!-- Yellow VIP badge identical to screenshot -->
+                  <div class="absolute top-2.5 left-2.5 bg-[#f59e0b] text-slate-950 font-black text-[10px] uppercase px-2 py-0.5 rounded-sm flex items-center gap-1 shadow-sm">
+                    <span>★</span> VIP
+                  </div>
+                  <button type="button" class="absolute top-2.5 right-2.5 w-7 h-7 bg-black/60 rounded-sm flex items-center justify-center text-white">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                  </button>
+                </div>
+
+                <div class="p-4">
+                  <h3 class="text-xs font-bold uppercase tracking-wider text-white truncate">
+                    {item.title}
+                  </h3>
+                  
+                  <!-- Yellow Price in VIP section -->
+                  <div class="mt-1 text-base font-black text-[#f59e0b]">
+                    ${item.price.toLocaleString()}
+                  </div>
+
+                  <!-- 3 Spec Icons -->
+                  <div class="mt-3 pt-3 border-t border-slate-700/50 flex items-center justify-between text-[11px] text-slate-400">
+                    <span class="flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                      {item.transmission.split(" ")[0]}
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                      {item.fuelType}
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                      {item.mileageOrHours.split(" ")[0]}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Green button on VIP cards -->
+              <div class="p-4 pt-0">
+                <a 
+                  href="/vehiculos"
+                  class="w-full bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs py-2 px-3 rounded-sm flex items-center justify-center transition-colors text-center"
+                >
+                  View more
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Right Arrow -->
+        <button class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700 hidden md:flex shadow">
+          &rarr;
+        </button>
+      </div>
+
+      <!-- Carousel Pagination Dots -->
+      <div class="mt-8 flex justify-center items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#00c982]"></span>
+        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
+        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
+        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
+        <span class="w-2 h-2 rounded-full bg-slate-600"></span>
+      </div>
     </div>
   </section>
+
+  <!-- 5. POPULAR CAR BRANDS (2 rows of 8 brand logos with brand name below) -->
+  <section class="py-14 px-4 bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-xl font-black text-slate-900">
+          Popular Car Brands
+        </h2>
+        <a href="/vehiculos" class="text-xs font-bold text-blue-500 hover:text-blue-600 flex items-center gap-1">
+          View more &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-4 sm:grid-cols-8 gap-4 sm:gap-6 text-center">
+        {popularBrands.map(b => (
+          <a href={`/vehiculos?make=${b.name}`} class="flex flex-col items-center p-3 border border-slate-100 hover:border-slate-300 hover:shadow-sm rounded-sm transition-all group">
+            <div class="w-10 h-10 flex items-center justify-center mb-2">
+              <img src={b.logo} alt={b.name} class="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all" />
+            </div>
+            <span class="text-[11px] font-semibold text-slate-700 group-hover:text-[#00c982] transition-colors">
+              {b.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. LAST NEWS & TEST DRIVE (Two equal columns matching screenshot) -->
+  <section class="py-14 px-4 bg-[#f8fafc]">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+      
+      <!-- Left Column: Last News -->
+      <div>
+        <h2 class="text-xl font-black text-slate-900 mb-6">
+          Last News
+        </h2>
+        
+        <div class="space-y-4">
+          {newsItems.map(item => (
+            <div class="flex items-center gap-4 bg-white p-3 border border-slate-200 rounded-sm hover:shadow-sm transition-all">
+              <img src={item.img} alt={item.title} class="w-20 h-16 object-cover rounded-sm shrink-0" />
+              <div>
+                <span class="text-[10px] text-slate-400 font-semibold">{item.date}</span>
+                <h3 class="text-xs font-bold text-slate-800 hover:text-[#00c982] cursor-pointer leading-snug mt-0.5 line-clamp-2">
+                  {item.title}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <a href="/contacto" class="inline-block mt-4 text-xs font-bold text-blue-500 hover:text-blue-600">
+          View more &rarr;
+        </a>
+      </div>
+
+      <!-- Right Column: Test Drive Featured Cards -->
+      <div>
+        <h2 class="text-xl font-black text-slate-900 mb-6">
+          Test Drive
+        </h2>
+
+        <!-- Top Big Card -->
+        <div class="relative h-48 rounded-sm overflow-hidden mb-4 group shadow-sm">
+          <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=80" alt="Test Drive Car" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          <div class="absolute bottom-3 left-3 right-3 text-white">
+            <span class="inline-block px-2 py-0.5 bg-[#00c982] text-[10px] font-bold rounded-sm mb-1">Review</span>
+            <h4 class="text-sm font-bold leading-tight">Test drive review: High performance on track and mountain roads</h4>
+          </div>
+        </div>
+
+        <!-- 2 Side-by-side smaller cards -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="relative h-28 rounded-sm overflow-hidden group shadow-sm">
+            <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=400&q=80" alt="Speedometer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="absolute bottom-2 left-2 right-2 text-white">
+              <h5 class="text-[11px] font-bold leading-snug">0 to 100 km/h acceleration tests</h5>
+            </div>
+          </div>
+
+          <div class="relative h-28 rounded-sm overflow-hidden group shadow-sm">
+            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=400&q=80" alt="Steering Wheel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="absolute bottom-2 left-2 right-2 text-white">
+              <h5 class="text-[11px] font-bold leading-snug">Cockpit steering & handling safety</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. NEWSLETTER SECTION: "Don't miss our news!" in dark navy background with input + green "Subscribe" button -->
+  <section class="py-14 px-4 bg-[#0d1424] text-white text-center">
+    <div class="max-w-xl mx-auto">
+      <h2 class="text-2xl font-black mb-1">
+        Don't miss our news!
+      </h2>
+      <p class="text-xs text-slate-400 mb-6">
+        Get the latest automotive updates, market pricing and verified seller offers directly in your inbox.
+      </p>
+
+      <form class="flex flex-col sm:flex-row items-center gap-2 max-w-md mx-auto">
+        <input 
+          type="email" 
+          placeholder="Enter email" 
+          class="w-full bg-white text-slate-800 text-xs py-2.5 px-4 rounded-sm focus:outline-none"
+          required
+        />
+        <button 
+          type="submit" 
+          class="w-full sm:w-auto bg-[#00c982] hover:bg-[#00b072] text-white font-bold text-xs uppercase py-2.5 px-6 rounded-sm whitespace-nowrap shadow transition-all"
+        >
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+
 </Layout>

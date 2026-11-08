@@ -1,87 +1,95 @@
 ---
-import { TRANSPORT_TYPES } from "../lib/carDealerData";
+// Footer matching exact Crocoblock Car Dealer New demo bottom structure
 ---
 
-<footer class="bg-white border-t border-slate-200 text-slate-700 pt-14 pb-8 px-4 sm:px-8 shadow-inner">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-200">
+<footer class="bg-[#080d19] text-slate-400 text-xs pt-12 pb-8 px-4 sm:px-8 border-t border-slate-800">
+  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 pb-10 border-b border-slate-800/80">
     
-    <!-- Col 1 & 2: Brand Information -->
-    <div class="lg:col-span-2 space-y-4">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-blue-600 flex items-center justify-center font-black text-lg text-white shadow-md">
-          TC
-        </div>
-        <div class="flex flex-col">
-          <span class="text-lg font-black tracking-wider uppercase text-slate-900">
-            TuCarro<span class="text-blue-600">YMás</span>
-          </span>
-          <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold -mt-1">
-            Car Dealer & Marketplace
-          </span>
-        </div>
-      </div>
-      <p class="text-xs text-slate-600 max-w-sm leading-relaxed">
-        Plataforma automotriz y de transporte en República Dominicana inspirada en la arquitectura digital de Crocoblock Car Dealer New. Conectamos compradores con vendedores particulares y concesionarios autorizados en todo el país.
-      </p>
-      <div class="pt-2 text-xs text-slate-600 flex flex-col gap-1.5 font-mono">
-        <div>📞 Contacto: +1 (829) 555-0199</div>
-        <div>📍 Cobertura: Santo Domingo, Santiago, Punta Cana y las 32 provincias</div>
-      </div>
-    </div>
-
-    <!-- Col 3: Tipos de Transporte -->
+    <!-- Col 1: Templates -->
     <div>
-      <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 mb-3.5">
-        Tipos de Transporte
-      </h3>
-      <ul class="space-y-2 text-xs text-slate-600">
-        {TRANSPORT_TYPES.map(cat => (
-          <li>
-            <a href={`/vehiculos?type=${cat.id}`} class="hover:text-blue-600 transition-colors">
-              {cat.nameEs}
-            </a>
-          </li>
-        ))}
+      <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Templates</h4>
+      <ul class="space-y-2 text-[11px]">
+        <li><a href="/vehiculos" class="hover:text-[#00c982]">Personal Account</a></li>
+        <li><a href="/publicar" class="hover:text-[#00c982]">Single Product</a></li>
+        <li><a href="/vehiculos" class="hover:text-[#00c982]">Product Archive</a></li>
       </ul>
     </div>
 
-    <!-- Col 4: Enlaces Rápidos -->
+    <!-- Col 2: Support -->
     <div>
-      <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 mb-3.5">
-        Navegación
-      </h3>
-      <ul class="space-y-2 text-xs text-slate-600">
-        <li><a href="/" class="hover:text-blue-600 transition-colors">Inicio</a></li>
-        <li><a href="/vehiculos" class="hover:text-blue-600 transition-colors">Inventario General</a></li>
-        <li><a href="/publicar" class="hover:text-blue-600 transition-colors">Publicar Anuncio (Gratis)</a></li>
-        <li><a href="/nosotros" class="hover:text-blue-600 transition-colors">Acerca de TuCarroYMás</a></li>
-        <li><a href="/contacto" class="hover:text-blue-600 transition-colors">Atención al Cliente</a></li>
-        <li><a href="/auth" class="hover:text-blue-600 transition-colors">Acceso Concesionarios</a></li>
+      <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Support</h4>
+      <ul class="space-y-2 text-[11px]">
+        <li><a href="/contacto" class="hover:text-[#00c982]">Help Center</a></li>
+        <li><a href="/contacto" class="hover:text-[#00c982]">Help Community</a></li>
+        <li><a href="/contacto" class="hover:text-[#00c982]">FAQ</a></li>
       </ul>
     </div>
 
-    <!-- Col 5: Garantía y Seguridad -->
+    <!-- Col 3: Links -->
     <div>
-      <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 mb-3.5">
-        Seguridad Dealer
-      </h3>
-      <p class="text-xs text-slate-600 leading-relaxed">
-        Todas las publicaciones son revisadas para garantizar la legitimidad de las unidades y evitar duplicados o fraudes.
-      </p>
-      <div class="mt-4 p-3 bg-slate-50 border border-slate-200 text-[11px] text-slate-700">
-        <span class="text-emerald-700 font-bold block mb-1">✓ Trato Directo 100%</span>
-        Negociación sin intermediarios mediante WhatsApp o llamada telefónica.
+      <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Links</h4>
+      <ul class="space-y-2 text-[11px]">
+        <li><a href="/contacto" class="hover:text-[#00c982]">Blog</a></li>
+        <li><a href="/nosotros" class="hover:text-[#00c982]">About Company</a></li>
+        <li><a href="/contacto" class="hover:text-[#00c982]">Terms and Conditions</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Solutions -->
+    <div>
+      <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Solutions</h4>
+      <ul class="space-y-2 text-[11px]">
+        <li><a href="/vehiculos" class="hover:text-[#00c982]">Service / Features</a></li>
+        <li><a href="/vehiculos" class="hover:text-[#00c982]">Promotional Elements</a></li>
+        <li><a href="/publicar" class="hover:text-[#00c982]">Visual Appeal Elements</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 5: Socials -->
+    <div>
+      <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Socials</h4>
+      <div class="flex items-center gap-3 text-slate-300">
+        <a href="#" class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#00c982] hover:text-white transition-colors">
+          <i class="fa-brands fa-youtube text-[11px]"></i>
+        </a>
+        <a href="#" class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#00c982] hover:text-white transition-colors">
+          <i class="fa-brands fa-facebook-f text-[11px]"></i>
+        </a>
+        <a href="#" class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#00c982] hover:text-white transition-colors">
+          <i class="fa-brands fa-twitter text-[11px]"></i>
+        </a>
+        <a href="#" class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#00c982] hover:text-white transition-colors">
+          <i class="fa-brands fa-linkedin-in text-[11px]"></i>
+        </a>
       </div>
     </div>
 
   </div>
 
-  <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-    <div>
-      &copy; {new Date().getFullYear()} TuCarroYMás.com — Todos los derechos reservados.
+  <!-- Bottom Brand Row with Logo + Bottom floating banner simulation -->
+  <div class="max-w-6xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-full bg-[#00c982] flex items-center justify-center text-white font-black text-xs">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M3 11h18v6H3v-6z"></path></svg>
+      </div>
+      <span class="text-white font-bold uppercase tracking-wider text-xs">
+        CAR<span class="text-[#00c982]">DEALER</span>
+      </span>
+      <span class="ml-2">&copy; {new Date().getFullYear()} TuCarroYMás.com — Todos los derechos reservados.</span>
     </div>
-    <div class="flex items-center gap-4">
-      <span class="text-slate-600 font-medium">Inspirado en Crocoblock Car Dealer New</span>
+
+    <div class="text-slate-400">
+      Desarrollado con arquitectura JetEngine y Crocoblock
     </div>
   </div>
 </footer>
+
+<!-- Bottom floating banner as in Crocoblock live demo -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-[#0b1329] text-white py-2 px-4 border-t border-white/10 hidden sm:flex items-center justify-between text-xs">
+  <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
+    <span>¿Quieres vender tu vehículo o maquinaria en República Dominicana? Publica tu anuncio gratis.</span>
+    <a href="/publicar" class="bg-[#00c982] hover:bg-[#00b072] text-white font-bold px-3 py-1 text-xs rounded-sm transition-colors">
+      Publicar Ahora
+    </a>
+  </div>
+</div>
