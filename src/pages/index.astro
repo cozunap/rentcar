@@ -18,6 +18,11 @@ const vipAds = [
 // Marcas más populares de RD y del mundo (Toyota, Honda, Hyundai, Kia, Nissan, Mercedes-Benz, BMW, Ford, Chevrolet, Jeep, Lexus, Audi, Volkswagen, Tesla, BYD)
 const popularBrandsHomepage = TOP_POPULAR_BRANDS_HOME;
 
+// Lista completa de marcas ordenadas alfabéticamente (A-Z) para el selector
+const allBrandsSortedAlphabetical = [...ALL_DOMINICAN_BRANDS].sort((a, b) => 
+  a.name.localeCompare(b.name, "es", { sensitivity: "base" })
+);
+
 // Duplicamos los estilos para un loop infinito suave sin saltos
 const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
 ---
@@ -72,7 +77,7 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
                 class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000] cursor-pointer"
               >
                 <option value="">Todas las Marcas</option>
-                {ALL_DOMINICAN_BRANDS.map(b => (
+                {allBrandsSortedAlphabetical.map(b => (
                   <option value={b.name}>{b.name}</option>
                 ))}
               </select>
@@ -532,19 +537,24 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
 
     const meta = BRAND_CATALOG_DATABASE[selectedMake];
 
-    // Llenar modelos específicos de la marca (ej: Nissan -> Sentra, Altima, Rogue, Pathfinder...)
+    // Llenar modelos específicos de la marca ordenados estrictamente de A a Z
     modelSelect.innerHTML = '<option value="">Todos los Modelos de ' + selectedMake + '</option>';
-    meta.models.forEach(model => {
+    const sortedModels = [...meta.models].sort((a, b) => 
+      a.localeCompare(b, "es", { sensitivity: "base" })
+    );
+    sortedModels.forEach(model => {
       const opt = document.createElement("option");
       opt.value = model;
       opt.textContent = model;
       modelSelect.appendChild(opt);
     });
 
-    // Llenar carrocerías válidas para esa marca
-    // Si es Nissan, solo tendrá Sedán, SUV, Camioneta, Hatchback, Deportivo, Van. (NADA de botes ni cabezotes)
+    // Llenar carrocerías válidas para esa marca ordenadas de A a Z
     bodySelect.innerHTML = '<option value="">Cualquier Carrocería de ' + selectedMake + '</option>';
-    meta.bodyStyles.forEach(body => {
+    const sortedBodies = [...meta.bodyStyles].sort((a, b) => 
+      a.name.localeCompare(b.name, "es", { sensitivity: "base" })
+    );
+    sortedBodies.forEach(body => {
       const opt = document.createElement("option");
       opt.value = body.id;
       opt.textContent = body.name;
