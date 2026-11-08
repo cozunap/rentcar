@@ -1,366 +1,307 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import VehicleSidebar from '../components/VehicleSidebar.astro';
+import { VEHICLE_BRANDS, DOMINICAN_PROVINCES, VEHICLE_BODY_TYPES } from '../lib/constants';
 import BookingModal from '../components/BookingModal.astro';
 ---
 
-<Layout title="Tu Carro y Más Rent A Car | Alquiler de Autos en Santo Domingo">
+<Layout 
+    title="TuCarroYMás.com | Compra, Venta y Renta de Vehículos en República Dominicana"
+    description="El marketplace automotriz líder en República Dominicana. Encuentra carros usados y nuevos, publica gratis y alquila vehículos con confirmación directa por WhatsApp."
+>
+    <!-- HERO MARKETPLACE SECTION (Estilo SuperCarros + Crocoblock CarDealer Modernizado) -->
+    <section class="relative bg-[#070d1e] text-white pt-10 pb-20 border-b border-slate-800 overflow-hidden">
+        
+        <!-- Subtle Glow Background -->
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-    <!-- HERO CAROUSEL SECTION (100vh with carousel slide) -->
-    <section class="relative p-0 overflow-hidden bg-black">
-        <div class="relative w-full h-[90vh] min-h-[520px]">
+        <div class="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Slides Container -->
-            <div id="hero-slider" class="relative w-full h-full">
-                <!-- Slide 1 -->
-                <div class="hero-item absolute inset-0 transition-opacity duration-700 opacity-100">
-                    <img 
-                        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80" 
-                        alt="Carretera libre para viajar" 
-                        class="w-full h-full object-cover filter brightness-[0.45]"
-                    />
-                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-                        <span class="px-3.5 py-1 bg-[#1d4ed8] text-white text-[10px] font-black uppercase tracking-widest mb-4 shadow-sm">
-                            TuCarroYMás • Plataforma Automotriz RD
-                        </span>
-                        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black mb-4 drop-shadow-md leading-tight max-w-4xl font-['Outfit',sans-serif] uppercase tracking-tight">
-                            Compra, Vende y Renta Autos en República Dominicana
-                        </h1>
-                        <p class="text-base sm:text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed drop-shadow font-light text-gray-100">
-                            Vende tu vehículo gratis, encuentra el carro de tus sueños o alquila con confirmación inmediata vía WhatsApp en todo el país.
-                        </p>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <a href="/vehiculos" class="px-7 py-3.5 bg-[#15803d] hover:bg-[#166534] text-white text-xs font-black uppercase tracking-wider luxury-btn shadow-md">
-                                <i class="fas fa-tag me-1.5"></i> Comprar Carros
-                            </a>
-                            <a href="#fleet" class="px-7 py-3.5 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-md">
-                                <i class="fas fa-key me-1.5"></i> Rent A Car
-                            </a>
-                            <a href="/publicar?tipo=venta" class="px-7 py-3.5 bg-white/20 hover:bg-white/30 border border-white/50 text-white text-xs font-bold uppercase tracking-wider luxury-btn backdrop-blur-sm">
-                                <i class="fas fa-plus me-1.5"></i> Publicar Mi Auto Gratis
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="hero-item absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none">
-                    <img 
-                        src="https://images.unsplash.com/photo-1570737543098-0983d88f796d?q=80&w=1286&auto=format&fit=crop" 
-                        alt="Carretera tropical en República Dominicana" 
-                        class="w-full h-full object-cover filter brightness-[0.45]"
-                    />
-                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-                        <span class="px-3.5 py-1 bg-white/10 border border-white/20 text-white text-xs font-semibold uppercase tracking-widest mb-4 backdrop-blur-sm">
-                            Alquiler Seguro y Sin Intermediarios
-                        </span>
-                        <h2 class="text-3xl sm:text-5xl md:text-6xl font-black mb-4 drop-shadow-md leading-tight max-w-4xl font-['Outfit',sans-serif] uppercase tracking-tight">
-                            Tu Viaje Comienza Aquí
-                        </h2>
-                        <p class="text-base sm:text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed drop-shadow font-light text-gray-100">
-                            Libertad para moverte por República Dominicana con comodidad, cobertura total y soporte 24/7.
-                        </p>
-                        <div>
-                            <a href="#fleet" class="px-7 py-3.5 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-md">
-                                Reservar Ahora
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="hero-item absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none">
-                    <img 
-                        src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=1920&q=80" 
-                        alt="Auto de lujo interior" 
-                        class="w-full h-full object-cover filter brightness-[0.45]"
-                    />
-                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-                        <span class="px-3.5 py-1 bg-white/10 border border-white/20 text-white text-xs font-semibold uppercase tracking-widest mb-4 backdrop-blur-sm">
-                            Conexión Directa por WhatsApp
-                        </span>
-                        <h2 class="text-3xl sm:text-5xl md:text-6xl font-black mb-4 drop-shadow-md leading-tight max-w-4xl font-['Outfit',sans-serif] uppercase tracking-tight">
-                            Elegancia y Confort en Cada Kilómetro
-                        </h2>
-                        <p class="text-base sm:text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed drop-shadow font-light text-gray-100">
-                            SUVs y Jeepetas seleccionadas para quienes exigen excelencia, limpieza y puntualidad.
-                        </p>
-                        <div>
-                            <a href="#fleet" class="px-7 py-3.5 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-md">
-                                Ver Flota
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <!-- Hero Title & Value Proposition -->
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/80 border border-blue-500/30 text-[#38bdf8] text-[11px] font-black uppercase tracking-widest mb-4">
+                    <i class="fas fa-certificate text-emerald-400"></i> Marketplace Automotriz Dominicano
+                </span>
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Outfit',sans-serif] leading-tight">
+                    Encuentra tu próximo carro en <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#38bdf8] to-[#60a5fa]">República Dominicana</span>
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
+                    Miles de ofertas verificadas de dealers y particulares. Compra, vende gratis o renta directo por WhatsApp sin intermediarios.
+                </p>
             </div>
 
-            <!-- Left & Right Arrow Navigation -->
-            <button id="slider-prev" type="button" aria-label="Anterior" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
-                <i class="fas fa-chevron-left text-base"></i>
-            </button>
-            <button id="slider-next" type="button" aria-label="Siguiente" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
-                <i class="fas fa-chevron-right text-base"></i>
-            </button>
-
-            <!-- Bottom Slide Indicators -->
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                <button class="slide-dot w-8 h-1 bg-white transition-all duration-300" data-idx="0"></button>
-                <button class="slide-dot w-3 h-1 bg-white/50 transition-all duration-300" data-idx="1"></button>
-                <button class="slide-dot w-3 h-1 bg-white/50 transition-all duration-300" data-idx="2"></button>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- SECTION: BUSCADOR DINÁMICO DE RENTA (Estilo JetBooking) -->
-    <div class="relative z-30 max-w-[1240px] mx-auto px-4 -mt-16 mb-6">
-        <div class="bg-white border-2 border-slate-900 shadow-2xl p-6 sm:p-8 luxury-card">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
-                <!-- Location Field -->
-                <div>
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-2" for="search-location">
-                        <i class="fas fa-map-marker-alt text-[#1d4ed8] me-1"></i> Lugar de Entrega
-                    </label>
-                    <select id="search-location" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                        <option value="all">Cualquier Zona (Santo Domingo)</option>
-                        <option value="sde">Santo Domingo Este</option>
-                        <option value="sdq">Aeropuerto Las Américas (SDQ)</option>
-                        <option value="dn">Distrito Nacional</option>
-                    </select>
-                </div>
-
-                <!-- Pick-up Date -->
-                <div>
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-2" for="search-date-start">
-                        <i class="fas fa-calendar-alt text-[#1d4ed8] me-1"></i> Fecha de Entrega
-                    </label>
-                    <input 
-                        type="date" 
-                        id="search-date-start" 
-                        class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]"
-                    />
-                </div>
-
-                <!-- Drop-off Date -->
-                <div>
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-2" for="search-date-end">
-                        <i class="fas fa-calendar-check text-[#1d4ed8] me-1"></i> Devolución
-                    </label>
-                    <input 
-                        type="date" 
-                        id="search-date-end" 
-                        class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]"
-                    />
-                </div>
-
-                <!-- Action CTA -->
-                <div>
+            <!-- THE SUPERCARROS SEARCH BOX (Buscador Maestro de Compra y Renta) -->
+            <div class="max-w-5xl mx-auto bg-white border-2 border-slate-900 shadow-2xl overflow-hidden" style="border-radius: 0px !important;">
+                
+                <!-- Intent Tabs: Comprar Carro / Rent A Car -->
+                <div class="flex border-b border-slate-200 bg-slate-100">
                     <button 
-                        type="button" 
-                        id="search-submit-btn" 
-                        class="w-full py-4 px-6 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-bold text-xs uppercase tracking-wider luxury-btn shadow-md flex items-center justify-center gap-2"
+                      type="button" 
+                      id="tab-buy" 
+                      class="flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-white text-[#1d4ed8] border-b-2 border-[#1d4ed8]"
                     >
-                        <i class="fas fa-search"></i>
-                        <span>Buscar Autos</span>
+                        <i class="fas fa-car text-base"></i>
+                        <span>Comprar Vehículo</span>
+                    </button>
+                    <button 
+                      type="button" 
+                      id="tab-rent" 
+                      class="flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    >
+                        <i class="fas fa-key text-base"></i>
+                        <span>Alquilar (Rent A Car)</span>
                     </button>
                 </div>
+
+                <!-- Form Panel 1: Comprar Vehículo (Estilo SuperCarros) -->
+                <div id="panel-buy" class="p-6 sm:p-8 space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Marca -->
+                        <div>
+                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-brand">
+                                Marca
+                            </label>
+                            <select id="h-brand" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                                <option value="all">Todas las Marcas</option>
+                                {VEHICLE_BRANDS.map(b => <option value={b}>{b}</option>)}
+                            </select>
+                        </div>
+
+                        <!-- Tipo de Vehículo -->
+                        <div>
+                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-body">
+                                Tipo de Carrocería
+                            </label>
+                            <select id="h-body" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                                <option value="all">Cualquier Carrocería</option>
+                                {VEHICLE_BODY_TYPES.map(t => <option value={t}>{t}</option>)}
+                            </select>
+                        </div>
+
+                        <!-- Provincia -->
+                        <div>
+                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-province">
+                                Provincia (RD)
+                            </label>
+                            <select id="h-province" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                                <option value="all">Toda República Dominicana</option>
+                                {DOMINICAN_PROVINCES.map(p => <option value={p.name}>{p.name}</option>)}
+                            </select>
+                        </div>
+
+                        <!-- Presupuesto Máximo -->
+                        <div>
+                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-price">
+                                Precio Máximo
+                            </label>
+                            <select id="h-price" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                                <option value="all">Cualquier Precio</option>
+                                <option value="10000">Hasta $10,000 USD</option>
+                                <option value="20000">Hasta $20,000 USD</option>
+                                <option value="35000">Hasta $35,000 USD</option>
+                                <option value="50000">Hasta $50,000 USD</option>
+                                <option value="100000">Más de $50,000 USD (Alta Gama)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-2 text-xs text-slate-500">
+                            <i class="fas fa-bolt text-[#1d4ed8]"></i>
+                            <span>Búsqueda instantánea en vivo sin recargas</span>
+                        </div>
+                        <button 
+                          type="button" 
+                          id="btn-search-buy" 
+                          class="w-full sm:w-auto px-10 py-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-md flex items-center justify-center gap-2"
+                          style="border-radius: 0px !important;"
+                        >
+                            <i class="fas fa-search"></i>
+                            <span>Buscar Vehículos</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Panel 2: Rent A Car (JetBooking) -->
+                <div id="panel-rent" class="hidden p-6 sm:p-8 space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="r-city">
+                                Lugar de Entrega
+                            </label>
+                            <select id="r-city" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                                <option value="all">Cualquier Zona (Santo Domingo)</option>
+                                <option value="Santo Domingo Este">Santo Domingo Este</option>
+                                <option value="Aeropuerto SDQ">Aeropuerto Las Américas (SDQ)</option>
+                                <option value="Distrito Nacional">Distrito Nacional</option>
+                                <option value="Santiago">Santiago de los Caballeros</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="r-date-start">
+                                Fecha de Entrega
+                            </label>
+                            <input type="date" id="r-date-start" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="r-date-end">
+                                Fecha de Retorno
+                            </label>
+                            <input type="date" id="r-date-end" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex justify-end">
+                        <button 
+                          type="button" 
+                          id="btn-search-rent" 
+                          class="w-full sm:w-auto px-10 py-4 bg-[#15803d] hover:bg-[#166534] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-md flex items-center justify-center gap-2"
+                          style="border-radius: 0px !important;"
+                        >
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Ver Autos de Renta Disponibles</span>
+                        </button>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </div>
 
-    <!-- SECTION: ¿POR QUÉ ELEGIRNOS? -->
-    <section id="features" class="py-16 bg-[#f8fafc] border-b border-slate-200">
-        <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] mb-2 block">Ventajas de Nuestra Plataforma</span>
-            <h2 class="text-3xl font-bold text-[#0f172a] mb-12 uppercase font-['Outfit',sans-serif]">¿Por Qué Elegirnos?</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-white p-8 border border-slate-200 shadow-xs hover:border-[#1d4ed8] transition-colors text-center luxury-card">
-                    <i class="fas fa-calendar-check text-4xl text-[#1d4ed8] mb-4"></i>
-                    <h3 class="text-lg font-bold text-[#0f172a] mb-2 uppercase">Reserva Fácil</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed">Reserva tu auto en segundos comunicándote de forma directa con el dueño por WhatsApp.</p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-white p-8 border border-slate-200 shadow-xs hover:border-[#1d4ed8] transition-colors text-center luxury-card">
-                    <i class="fas fa-shield-alt text-4xl text-[#1d4ed8] mb-4"></i>
-                    <h3 class="text-lg font-bold text-[#0f172a] mb-2 uppercase">Seguro Completo</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed">Nuestros vehículos cuentan con cobertura incluida para viajar seguro por todo el país.</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-white p-8 border border-slate-200 shadow-xs hover:border-[#1d4ed8] transition-colors text-center luxury-card">
-                    <i class="fas fa-headset text-4xl text-[#1d4ed8] mb-4"></i>
-                    <h3 class="text-lg font-bold text-[#0f172a] mb-2 uppercase">Soporte 24/7</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed">Asistencia continua y apoyo local en Santo Domingo Este ante cualquier emergencia.</p>
-                </div>
+            <!-- Quick Browse Vehicle Categories Pills -->
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider">
+                <span class="text-slate-400 text-[11px] mr-2">Explorar rápido:</span>
+                <a href="/vehiculos?tipo=SUV" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
+                    <i class="fas fa-car me-1 text-[#38bdf8]"></i> SUVs & Jeepetas
+                </a>
+                <a href="/vehiculos?tipo=Sedan" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
+                    <i class="fas fa-car-side me-1 text-[#38bdf8]"></i> Sedanes
+                </a>
+                <a href="/vehiculos?tipo=Camioneta" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
+                    <i class="fas fa-truck-pickup me-1 text-[#38bdf8]"></i> Camionetas 4x4
+                </a>
+                <a href="/vehiculos?provincia=Santiago" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
+                    <i class="fas fa-location-dot me-1 text-[#38bdf8]"></i> Santiago
+                </a>
+                <a href="/vehiculos?provincia=Distrito Nacional" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
+                    <i class="fas fa-city me-1 text-[#38bdf8]"></i> Distrito Nacional
+                </a>
             </div>
+
         </div>
     </section>
 
-    <!-- SECTION: NUESTRA FLOTA PREMIUM (Realtime Firestore Grid) -->
-    <section id="fleet" class="py-16 bg-white">
-        <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] mb-1 block">Vehículos Verificados</span>
-                <h2 class="text-3xl font-bold text-[#0f172a] mb-2 uppercase font-['Outfit',sans-serif]">Nuestra Flota Premium</h2>
-                <p class="text-slate-500 text-sm">Las mejores SUVs y Jeepetas en Santo Domingo.</p>
+    <!-- SECTION: ÚLTIMOS VEHÍCULOS PUBLICADOS EN VENTA (Estilo SuperCarros) -->
+    <section class="py-16 bg-[#f8fafc]">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] block mb-1">
+                        Inventario Fresco RD
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-[#0f172a] uppercase font-['Outfit',sans-serif] tracking-tight">
+                        Vehículos Destacados en Venta
+                    </h2>
+                </div>
+                <a href="/vehiculos" class="text-xs font-black uppercase tracking-wider text-[#1d4ed8] hover:text-[#1e40af] flex items-center gap-1.5 border-b border-[#1d4ed8] pb-0.5">
+                    <span>Ver Todos los Carros en Venta</span>
+                    <i class="fas fa-arrow-right text-[11px]"></i>
+                </a>
             </div>
 
-            <!-- FILTROS FACETADOS ESTILO JETSMARTFILTERS -->
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 pb-4 border-b border-slate-100">
-                <!-- Category Tabs -->
-                <div class="flex flex-wrap gap-2" id="filter-category-container">
-                    <button type="button" class="filter-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-[#0f172a] text-white luxury-btn" data-category="all">
-                        Todos
-                    </button>
-                    <button type="button" class="filter-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 luxury-btn" data-category="SUV">
-                        SUVs / Jeepetas
-                    </button>
-                    <button type="button" class="filter-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 luxury-btn" data-category="Premium">
-                        Alta Gama
-                    </button>
-                </div>
-
-                <!-- Sort Dropdown -->
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Ordenar:</span>
-                    <select id="filter-sort" class="text-xs font-semibold p-2 bg-slate-50 border border-slate-200 text-slate-700 focus:outline-none focus:border-[#1d4ed8]">
-                        <option value="recent">Más recientes</option>
-                        <option value="price-asc">Precio: Menor a Mayor</option>
-                        <option value="price-desc">Precio: Mayor a Menor</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Vehicles Dynamic Grid (Realtime from Firestore) -->
-            <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                <!-- Loading Skeletons -->
+            <!-- Dynamic Sale Grid from Firestore -->
+            <div id="home-sale-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
                     <div class="h-64 bg-slate-100"></div>
                     <div class="h-6 bg-slate-100 w-1/2"></div>
-                    <div class="h-4 bg-slate-100 w-1/3"></div>
                 </div>
                 <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
                     <div class="h-64 bg-slate-100"></div>
                     <div class="h-6 bg-slate-100 w-1/2"></div>
-                    <div class="h-4 bg-slate-100 w-1/3"></div>
                 </div>
-            </div>
-
-            <!-- Action buttons -->
-            <div class="text-center mt-12 flex flex-wrap justify-center gap-4">
-                <a href="/flota" class="px-7 py-3.5 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-sm">
-                    <i class="fas fa-car me-1.5"></i> Ver Toda la Flota
-                </a>
-                <a href="/publicar" class="px-7 py-3.5 border border-slate-300 text-slate-700 hover:text-[#1d4ed8] hover:border-[#1d4ed8] text-xs font-bold uppercase tracking-wider luxury-btn">
-                    <i class="fas fa-plus me-1.5"></i> Publicar Mi Auto
-                </a>
+                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
+                    <div class="h-64 bg-slate-100"></div>
+                    <div class="h-6 bg-slate-100 w-1/2"></div>
+                </div>
             </div>
 
         </div>
     </section>
 
-    <!-- SECTION: PREGUNTAS FRECUENTES (FAQ & AEO Structured Engine) -->
-    <section class="py-16 bg-[#f8fafc] border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] mb-1 block">Claridad Total</span>
-                <h2 class="text-3xl font-black text-[#0f172a] uppercase font-['Outfit',sans-serif] tracking-tight">Preguntas Frecuentes</h2>
-                <p class="text-slate-500 text-sm mt-2">Todo lo que necesitas saber antes de rentar tu vehículo con nosotros.</p>
+    <!-- SECTION: RENT A CAR SHOWCASE -->
+    <section class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 block mb-1">
+                        Alquiler sin Comisiones
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-[#0f172a] uppercase font-['Outfit',sans-serif] tracking-tight">
+                        Flota de Renta con Confirmación Inmediata
+                    </h2>
+                </div>
+                <a href="/flota" class="text-xs font-black uppercase tracking-wider text-[#15803d] hover:text-[#166534] flex items-center gap-1.5 border-b border-[#15803d] pb-0.5">
+                    <span>Ver Flota de Renta Completa</span>
+                    <i class="fas fa-arrow-right text-[11px]"></i>
+                </a>
             </div>
 
-            <div class="space-y-4">
-                <!-- FAQ 1 -->
-                <div class="bg-white border border-slate-200 p-6 shadow-xs">
-                    <h3 class="font-bold text-base text-[#0f172a] flex items-center gap-3">
-                        <i class="fas fa-id-card text-[#1d4ed8]"></i>
-                        ¿Cuáles son los requisitos para alquilar un vehículo?
-                    </h3>
-                    <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                        Solo necesitas tu licencia de conducir vigente (nacional o de tu país de origen), documento de identidad o pasaporte, y ser mayor de 21 años. El proceso de verificación es rápido y sin papeleos engorrosos.
-                    </p>
-                </div>
-
-                <!-- FAQ 2 -->
-                <div class="bg-white border border-slate-200 p-6 shadow-xs">
-                    <h3 class="font-bold text-base text-[#0f172a] flex items-center gap-3">
-                        <i class="fas fa-plane-arrival text-[#1d4ed8]"></i>
-                        ¿Hacen entregas en el Aeropuerto Internacional Las Américas (SDQ)?
-                    </h3>
-                    <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                        Sí. Coordinamos la entrega y recepción directamente en el aeropuerto SDQ o en cualquier punto de Santo Domingo Este para que tengas tu vehículo listo en cuanto aterrices.
-                    </p>
-                </div>
-
-                <!-- FAQ 3 -->
-                <div class="bg-white border border-slate-200 p-6 shadow-xs">
-                    <h3 class="font-bold text-base text-[#0f172a] flex items-center gap-3">
-                        <i class="fab fa-whatsapp text-[#15803d]"></i>
-                        ¿Cómo funciona la reserva y confirmación por WhatsApp?
-                    </h3>
-                    <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                        Al seleccionar el vehículo en nuestra plataforma y presionar el botón de WhatsApp, te comunicarás de forma directa con el propietario o administrador. Acuerdan las fechas, tarifas y entrega al instante sin comisiones ocultas.
-                    </p>
-                </div>
-
-                <!-- FAQ 4 -->
-                <div class="bg-white border border-slate-200 p-6 shadow-xs">
-                    <h3 class="font-bold text-base text-[#0f172a] flex items-center gap-3">
-                        <i class="fas fa-shield-alt text-[#1d4ed8]"></i>
-                        ¿El alquiler incluye seguro y asistencia vial?
-                    </h3>
-                    <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                        Todos nuestros vehículos cuentan con seguro de cobertura de ley al día y asistencia de soporte 24/7 en Santo Domingo y carreteras dominicanas.
-                    </p>
-                </div>
+            <div id="home-rent-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Dynamically rendered -->
             </div>
-
-            <!-- FAQ Schema JSON-LD for Search Engines and AI answers -->
-            <script type="application/ld+json" set:html={JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
-                {
-                  "@type": "Question",
-                  "name": "¿Cuáles son los requisitos para alquilar un vehículo?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Licencia de conducir vigente, documento de identidad o pasaporte, y ser mayor de 21 años. El proceso de verificación es directo y sin burocracia."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "¿Hacen entregas en el Aeropuerto Internacional Las Américas (SDQ)?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Sí, coordinamos entregas y recepciones directas en el Aeropuerto Internacional Las Américas (SDQ) y en todo Santo Domingo Este."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "¿Cómo funciona la reserva y confirmación por WhatsApp?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Al presionar el botón de WhatsApp de cada vehículo te comunicas directamente con el dueño para convenir fechas y entrega al instante."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "¿El alquiler incluye seguro y asistencia vial?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Todos los autos cuentan con seguro de cobertura de ley y soporte local 24/7."
-                  }
-                }
-              ]
-            })} />
         </div>
     </section>
 
-    <!-- Interactive Sidebar Drawer & RentGo Modal Pop-up -->
-    <VehicleSidebar />
+    <!-- SECTION: SERVICIOS Y TALLERES (Directorio RD) -->
+    <section class="py-16 bg-[#0f172a] text-white">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#38bdf8] block mb-1">
+                    Red de Talleres por Provincias
+                </span>
+                <h2 class="text-3xl font-black uppercase font-['Outfit',sans-serif] tracking-tight">
+                    ¿Buscas Repuestos o Taller Mecánico en tu Zona?
+                </h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-2">
+                    Conectamos a dueños de vehículos con los mejores talleres mecánicos, de pintura y tiendas de repuestos en Santo Domingo, Santiago y toda RD.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <a href="/talleres?categoria=mecanica" class="bg-slate-800/80 border border-slate-700 p-6 hover:border-[#38bdf8] transition-all group">
+                    <div class="w-12 h-12 bg-blue-600 text-white flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Mecánica General</h3>
+                    <p class="text-xs text-slate-400">Transmisiones, frenos, cambio de aceite y mantenimiento preventivo en tu provincia.</p>
+                </a>
+
+                <a href="/talleres?categoria=repuestos" class="bg-slate-800/80 border border-slate-700 p-6 hover:border-[#38bdf8] transition-all group">
+                    <div class="w-12 h-12 bg-emerald-600 text-white flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-gears"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Repuestos & Autopartes</h3>
+                    <p class="text-xs text-slate-400">Piezas nuevas y usadas para marcas japonesas, americanas y europeas con envíos nacionales.</p>
+                </a>
+
+                <a href="/talleres?categoria=desabolladura" class="bg-slate-800/80 border border-slate-700 p-6 hover:border-[#38bdf8] transition-all group">
+                    <div class="w-12 h-12 bg-purple-600 text-white flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Desabolladura & Pintura</h3>
+                    <p class="text-xs text-slate-400">Body shops con cabina al horno, igualación computarizada y reparación de choques.</p>
+                </a>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="/talleres" class="px-8 py-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-black uppercase tracking-wider luxury-btn">
+                    Explorar Directorio Completo de Talleres RD
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
     <BookingModal />
 
 </Layout>
@@ -369,518 +310,174 @@ import BookingModal from '../components/BookingModal.astro';
     import { collection, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
     import { db } from "../lib/firebase/client";
 
-    // CAROUSEL LOGIC
-    const slides = document.querySelectorAll<HTMLElement>('.hero-item');
-    const dots = document.querySelectorAll<HTMLElement>('.slide-dot');
-    const prevBtn = document.getElementById('slider-prev');
-    const nextBtn = document.getElementById('slider-next');
-    let currentIdx = 0;
+    // Tab switcher between Buy & Rent
+    const tabBuy = document.getElementById('tab-buy');
+    const tabRent = document.getElementById('tab-rent');
+    const panelBuy = document.getElementById('panel-buy');
+    const panelRent = document.getElementById('panel-rent');
 
-    function goToSlide(idx: number) {
-        slides.forEach((s, i) => {
-            if (i === idx) {
-                s.classList.remove('opacity-0', 'pointer-events-none');
-                s.classList.add('opacity-100');
-            } else {
-                s.classList.remove('opacity-100');
-                s.classList.add('opacity-0', 'pointer-events-none');
-            }
-        });
-        dots.forEach((d, i) => {
-            if (i === idx) {
-                d.classList.remove('w-3', 'bg-white/50');
-                d.classList.add('w-8', 'bg-white');
-            } else {
-                d.classList.remove('w-8', 'bg-white');
-                d.classList.add('w-3', 'bg-white/50');
-            }
-        });
-        currentIdx = idx;
-    }
-
-    prevBtn?.addEventListener('click', () => {
-        goToSlide((currentIdx - 1 + slides.length) % slides.length);
-    });
-    nextBtn?.addEventListener('click', () => {
-        goToSlide((currentIdx + 1) % slides.length);
-    });
-    dots.forEach((dot) => {
-        dot.addEventListener('click', () => {
-            const i = parseInt(dot.getAttribute('data-idx') || '0', 10);
-            goToSlide(i);
-        });
+    tabBuy?.addEventListener('click', () => {
+        tabBuy.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-white text-[#1d4ed8] border-b-2 border-[#1d4ed8]";
+        tabRent!.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-600 hover:bg-slate-200";
+        panelBuy?.classList.remove('hidden');
+        panelRent?.classList.add('hidden');
     });
 
-    setInterval(() => {
-        goToSlide((currentIdx + 1) % slides.length);
-    }, 3800);
+    tabRent?.addEventListener('click', () => {
+        tabRent.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-white text-[#15803d] border-b-2 border-[#15803d]";
+        tabBuy!.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-600 hover:bg-slate-200";
+        panelRent?.classList.remove('hidden');
+        panelBuy?.classList.add('hidden');
+    });
 
-    // RENTGO MODAL REFERENCES (JetPopup Pattern)
-    const rentgoModal = document.getElementById('rentgo-booking-modal');
-    const rentgoBackdrop = document.getElementById('rentgo-modal-backdrop');
-    const rentgoCard = document.getElementById('rentgo-modal-card');
-    const rentgoClose = document.getElementById('rentgo-modal-close');
-
-    const mImg = document.getElementById('rentgo-modal-img') as HTMLImageElement;
-    const mCategory = document.getElementById('rentgo-modal-category');
-    const mTitle = document.getElementById('rentgo-modal-title');
-    const mCity = document.getElementById('rentgo-modal-city');
-    const mRate = document.getElementById('rentgo-modal-rate');
-    const mSeats = document.getElementById('rentgo-modal-seats');
-    const mLuggage = document.getElementById('rentgo-modal-luggage');
-    const mTrans = document.getElementById('rentgo-modal-trans');
-    const mFuel = document.getElementById('rentgo-modal-fuel');
-
-    const mDateStart = document.getElementById('rentgo-date-start') as HTMLInputElement;
-    const mDateEnd = document.getElementById('rentgo-date-end') as HTMLInputElement;
-    const mDaysBadge = document.getElementById('rentgo-modal-days-badge');
-    const mCalcText = document.getElementById('rentgo-modal-calc-text');
-    const mTotal = document.getElementById('rentgo-modal-total');
-    const mWhatsappBtn = document.getElementById('rentgo-modal-whatsapp-btn') as HTMLAnchorElement;
-    const mBtnLabel = document.getElementById('rentgo-modal-btn-label');
-
-    let activeModalPrice = 50;
-    let activeModalTitle = 'Vehículo';
-    let activeModalCleanPhone = '18499154010';
-
-    function updateModalQuote() {
-        if (!mDateStart || !mDateEnd || !mDaysBadge || !mCalcText || !mTotal || !mWhatsappBtn) return;
-        const start = new Date(mDateStart.value);
-        const end = new Date(mDateEnd.value);
-
-        let diffDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
-        if (isNaN(diffDays) || diffDays < 1) diffDays = 1;
-
-        const total = diffDays * activeModalPrice;
-        mDaysBadge.textContent = `${diffDays} día${diffDays > 1 ? 's' : ''}`;
-        mCalcText.textContent = `$${activeModalPrice} USD x ${diffDays} día${diffDays > 1 ? 's' : ''}`;
-        mTotal.textContent = `$${total} USD`;
-
-        const datesFormatted = `desde ${mDateStart.value} hasta ${mDateEnd.value}`;
-        const calculatedMsg = encodeURIComponent(
-            `Hola Rent A Car, me interesa reservar la ${activeModalTitle} ${datesFormatted} (${diffDays} días). Total estimado: $${total} USD. ¿Tienen disponibilidad inmediata para entrega?`
-        );
-        mWhatsappBtn.href = `https://wa.me/${activeModalCleanPhone}?text=${calculatedMsg}`;
-        if (mBtnLabel) mBtnLabel.textContent = `Confirmar Reserva (${diffDays} días: $${total} USD)`;
-    }
-
-    function openRentgoModal(vehicle: any, owner: any) {
-        if (!rentgoModal || !rentgoBackdrop || !rentgoCard) return;
-
-        activeModalPrice = vehicle.pricePerDay || vehicle.price || 50;
-        activeModalTitle = vehicle.title;
-
-        const rawPhone = owner?.whatsapp || owner?.phone || vehicle.ownerWhatsapp || '18499154010';
-        activeModalCleanPhone = rawPhone.replace(/\D/g, '');
-
-        if (mCategory) mCategory.textContent = vehicle.category || 'SUV';
-        if (mImg) mImg.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : (vehicle.mainImage || "/Honda.webp");
-        if (mTitle) mTitle.textContent = vehicle.title;
-        if (mCity) mCity.querySelector('span')!.textContent = vehicle.city || 'Santo Domingo Este, República Dominicana';
-        if (mRate) mRate.textContent = `$${activeModalPrice}`;
-        if (mSeats) mSeats.textContent = `${vehicle.seats || 5} Plazas`;
-        if (mLuggage) mLuggage.textContent = vehicle.luggage || (vehicle.seats > 5 ? '4-5 Maletas' : '3-4 Maletas');
-        if (mTrans) mTrans.textContent = vehicle.transmission === 'manual' ? 'Manual' : 'Automática';
-        if (mFuel) mFuel.textContent = vehicle.fuelType || 'Gasolina';
-
-        if (mDateStart && searchStart) mDateStart.value = searchStart.value || formatInputDate(today);
-        if (mDateEnd && searchEnd) mDateEnd.value = searchEnd.value || formatInputDate(futureDate);
-
-        updateModalQuote();
-
-        rentgoModal.classList.remove('pointer-events-none', 'opacity-0');
-        rentgoModal.classList.add('pointer-events-auto', 'opacity-100');
-        rentgoBackdrop.classList.remove('opacity-0');
-        rentgoBackdrop.classList.add('opacity-100');
-        rentgoCard.classList.remove('scale-95');
-        rentgoCard.classList.add('scale-100');
-        document.body.classList.add('overflow-hidden');
-    }
-
-    function closeRentgoModal() {
-        if (!rentgoModal || !rentgoBackdrop || !rentgoCard) return;
-        rentgoCard.classList.remove('scale-100');
-        rentgoCard.classList.add('scale-95');
-        rentgoBackdrop.classList.remove('opacity-100');
-        rentgoBackdrop.classList.add('opacity-0');
-        setTimeout(() => {
-            rentgoModal.classList.remove('pointer-events-auto', 'opacity-100');
-            rentgoModal.classList.add('pointer-events-none', 'opacity-0');
-            document.body.classList.remove('overflow-hidden');
-        }, 250);
-    }
-
-    mDateStart?.addEventListener('change', updateModalQuote);
-    mDateEnd?.addEventListener('change', updateModalQuote);
-    rentgoClose?.addEventListener('click', closeRentgoModal);
-    rentgoBackdrop?.addEventListener('click', closeRentgoModal);
-
-    // SIDEBAR REFERENCES
-    const fleetGrid = document.getElementById('fleet-grid');
-    const offcanvas = document.getElementById('vehicle-offcanvas');
-    const backdrop = document.getElementById('offcanvas-backdrop');
-    const panel = document.getElementById('offcanvas-panel');
-    const closeBtn = document.getElementById('close-offcanvas-btn');
-
-    const sCategory = document.getElementById('sidebar-category');
-    const sMainImg = document.getElementById('sidebar-main-img') as HTMLImageElement;
-    const sGalleryThumbs = document.getElementById('sidebar-gallery-thumbs');
-    const sTitle = document.getElementById('sidebar-title');
-    const sLocation = document.getElementById('sidebar-location');
-    const sPrice = document.getElementById('sidebar-price');
-    const sSeats = document.getElementById('sidebar-seats');
-    const sLuggage = document.getElementById('sidebar-luggage');
-    const sTransmission = document.getElementById('sidebar-transmission');
-    const sFuel = document.getElementById('sidebar-fuel');
-    const sDescription = document.getElementById('sidebar-description');
-    const sOwnerName = document.getElementById('sidebar-owner-name');
-    const sOwnerPhone = document.getElementById('sidebar-owner-phone');
-    const sWhatsappBtn = document.getElementById('sidebar-whatsapp-btn') as HTMLAnchorElement;
-
-    // Stream vehicles from Firestore & Filter Engine
-    let allVehicles: any[] = [];
-    let currentCategory = 'all';
-    let currentSort = 'recent';
-
-    // Date calculations state
+    // Date calculations for Rent
     const today = new Date();
     const futureDate = new Date();
     futureDate.setDate(today.getDate() + 3);
-
     const formatInputDate = (d: Date) => d.toISOString().split('T')[0];
 
-    const searchStart = document.getElementById('search-date-start') as HTMLInputElement;
-    const searchEnd = document.getElementById('search-date-end') as HTMLInputElement;
-    const searchSubmit = document.getElementById('search-submit-btn');
-
-    // Hero Date Picker Logic & Direct Sync with Booking Engine
-    const todayStr = formatInputDate(today);
-    const futureDateStr = formatInputDate(futureDate);
-
-    if (searchStart && searchEnd) {
-        searchStart.min = todayStr;
-        searchStart.value = todayStr;
-
-        searchEnd.min = todayStr;
-        searchEnd.value = futureDateStr;
-
-        searchStart.addEventListener('change', () => {
-            if (searchStart.value) {
-                // Ensure drop-off cannot be before pick-up
-                searchEnd.min = searchStart.value;
-                if (searchEnd.value && searchEnd.value <= searchStart.value) {
-                    const nextDay = new Date(searchStart.value);
-                    nextDay.setDate(nextDay.getDate() + 1);
-                    searchEnd.value = formatInputDate(nextDay);
-                }
-            }
-        });
+    const rDateStart = document.getElementById('r-date-start') as HTMLInputElement;
+    const rDateEnd = document.getElementById('r-date-end') as HTMLInputElement;
+    if (rDateStart && rDateEnd) {
+        rDateStart.min = formatInputDate(today);
+        rDateStart.value = formatInputDate(today);
+        rDateEnd.min = formatInputDate(today);
+        rDateEnd.value = formatInputDate(futureDate);
     }
 
-    searchSubmit?.addEventListener('click', () => {
-        // Open the booking modal immediately for the first vehicle or scroll to fleet
-        if (allVehicles.length > 0) {
-            const firstCar = allVehicles[0];
-            openRentgoModal(firstCar.v, firstCar.ownerData);
-        } else {
-            const fleetSec = document.getElementById('fleet');
-            fleetSec?.scrollIntoView({ behavior: 'smooth' });
-        }
+    // Search Actions
+    const btnSearchBuy = document.getElementById('btn-search-buy');
+    btnSearchBuy?.addEventListener('click', () => {
+        const brand = (document.getElementById('h-brand') as HTMLSelectElement).value;
+        const body = (document.getElementById('h-body') as HTMLSelectElement).value;
+        const prov = (document.getElementById('h-province') as HTMLSelectElement).value;
+        const price = (document.getElementById('h-price') as HTMLSelectElement).value;
+
+        const params = new URLSearchParams();
+        if (brand !== 'all') params.append('marca', brand);
+        if (body !== 'all') params.append('tipo', body);
+        if (prov !== 'all') params.append('provincia', prov);
+        if (price !== 'all') params.append('precio', price);
+
+        window.location.href = `/vehiculos?${params.toString()}`;
     });
 
-    // Calculator inputs inside Sidebar
-    const sDateStart = document.getElementById('sidebar-date-start') as HTMLInputElement;
-    const sDateEnd = document.getElementById('sidebar-date-end') as HTMLInputElement;
-    const sDaysCount = document.getElementById('sidebar-days-count');
-    const sRateBreakdown = document.getElementById('sidebar-rate-breakdown');
-    const sTotalEstimate = document.getElementById('sidebar-total-estimate');
-
-    let activeVehiclePrice = 50;
-    let activeVehicleTitle = 'SUV';
-
-    function updateRentalCalculation(cleanPhone: string) {
-        if (!sDateStart || !sDateEnd || !sDaysCount || !sRateBreakdown || !sTotalEstimate) return;
-        const start = new Date(sDateStart.value);
-        const end = new Date(sDateEnd.value);
-
-        let diffDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
-        if (isNaN(diffDays) || diffDays < 1) diffDays = 1;
-
-        const total = diffDays * activeVehiclePrice;
-        sDaysCount.textContent = `${diffDays} día${diffDays > 1 ? 's' : ''}`;
-        sRateBreakdown.textContent = `$${activeVehiclePrice} x ${diffDays} día${diffDays > 1 ? 's' : ''}`;
-        sTotalEstimate.textContent = `$${total} USD`;
-
-        const datesFormatted = `desde ${sDateStart.value} hasta ${sDateEnd.value}`;
-        const calculatedMsg = encodeURIComponent(
-            `Hola, me interesa reservar la ${activeVehicleTitle} ${datesFormatted} (${diffDays} días). Total estimado: $${total} USD. ¿Tienen disponibilidad?`
-        );
-        if (sWhatsappBtn) {
-            sWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${calculatedMsg}`;
-            sWhatsappBtn.querySelector('span')!.textContent = `Reservar (${diffDays} días: $${total} USD)`;
-        }
-    }
-
-    function openSidebar(vehicle: any, owner: any) {
-        if (!offcanvas || !panel || !backdrop) return;
-
-        activeVehiclePrice = vehicle.pricePerDay || vehicle.price || 50;
-        activeVehicleTitle = vehicle.title;
-
-        if (sCategory) sCategory.textContent = vehicle.category || 'SUV';
-        if (sMainImg) sMainImg.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : vehicle.mainImage;
-        if (sTitle) sTitle.textContent = vehicle.title;
-        if (sLocation) sLocation.querySelector('span')!.textContent = vehicle.city || 'Santo Domingo Este';
-        if (sPrice) sPrice.textContent = `$${activeVehiclePrice}`;
-        if (sSeats) sSeats.textContent = `${vehicle.seats || 5} Asientos`;
-        if (sLuggage) sLuggage.textContent = vehicle.luggage || (vehicle.seats > 5 ? '4-5 Maletas' : '3-4 Maletas');
-        if (sTransmission) sTransmission.textContent = vehicle.transmission === 'manual' ? 'Manual' : 'Automática';
-        if (sFuel) sFuel.textContent = vehicle.fuelType || 'Gasolina';
-        if (sDescription) sDescription.textContent = vehicle.description || `Vehículo ${vehicle.title} disponible para renta en Santo Domingo.`;
-
-        const ownerName = owner?.fullName || vehicle.ownerName || 'Tu Carro y Más';
-        const rawPhone = owner?.whatsapp || owner?.phone || vehicle.ownerWhatsapp || '18499154010';
-        const cleanPhone = rawPhone.replace(/\D/g, '');
-
-        if (sOwnerName) sOwnerName.textContent = ownerName;
-        if (sOwnerPhone) sOwnerPhone.textContent = `+${cleanPhone}`;
-
-        // Sync with Hero dates if present
-        if (sDateStart && searchStart) sDateStart.value = searchStart.value || formatInputDate(today);
-        if (sDateEnd && searchEnd) sDateEnd.value = searchEnd.value || formatInputDate(futureDate);
-
-        updateRentalCalculation(cleanPhone);
-
-        sDateStart?.addEventListener('change', () => updateRentalCalculation(cleanPhone));
-        sDateEnd?.addEventListener('change', () => updateRentalCalculation(cleanPhone));
-
-        // Thumbnails (SQUARE 1:1)
-        if (sGalleryThumbs) {
-            sGalleryThumbs.innerHTML = '';
-            const imgs = vehicle.images && vehicle.images.length > 0 ? vehicle.images : [vehicle.mainImage];
-            imgs.forEach((imgUrl: string) => {
-                const thumb = document.createElement('img');
-                thumb.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : imgUrl;
-                thumb.className = 'w-16 h-16 object-contain bg-white border border-slate-200 hover:border-[#1d4ed8] cursor-pointer shrink-0';
-                thumb.addEventListener('click', () => { if (sMainImg) sMainImg.src = thumb.src; });
-                sGalleryThumbs.appendChild(thumb);
-            });
-        }
-
-        offcanvas.classList.remove('pointer-events-none', 'opacity-0');
-        offcanvas.classList.add('pointer-events-auto', 'opacity-100');
-        backdrop.classList.remove('opacity-0');
-        backdrop.classList.add('opacity-100');
-        panel.classList.remove('translate-x-full');
-        document.body.classList.add('overflow-hidden');
-    }
-
-    function renderFleet() {
-        if (!fleetGrid) return;
-        fleetGrid.innerHTML = '';
-
-        let filtered = [...allVehicles];
-
-        // Filter by category
-        if (currentCategory !== 'all') {
-            filtered = filtered.filter(v => (v.category || '').toLowerCase() === currentCategory.toLowerCase());
-        }
-
-        // Sort
-        if (currentSort === 'price-asc') {
-            filtered.sort((a, b) => (a.pricePerDay || a.price || 0) - (b.pricePerDay || b.price || 0));
-        } else if (currentSort === 'price-desc') {
-            filtered.sort((a, b) => (b.pricePerDay || b.price || 0) - (a.pricePerDay || a.price || 0));
-        }
-
-        if (filtered.length === 0) {
-            fleetGrid.innerHTML = `
-                <div class="col-span-full text-center py-12 bg-slate-50 border border-slate-200 p-8">
-                    <i class="fas fa-car text-3xl text-slate-300 mb-3"></i>
-                    <p class="text-sm font-bold text-slate-700 uppercase">No hay vehículos en esta categoría</p>
-                    <p class="text-xs text-slate-500 mt-1">Prueba seleccionando "Todos" para ver todas las unidades disponibles.</p>
-                </div>
-            `;
-            return;
-        }
-
-        filtered.forEach(({ v, ownerData }) => {
-            const cleanPhone = (ownerData?.whatsapp || v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
-            const msg = encodeURIComponent(`Hola, me interesa reservar la ${v.title}`);
-            const badgeColor = v.category === 'Premium' ? 'bg-[#0f172a] text-white' : 'bg-[#1d4ed8] text-white';
-            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
-            const price = v.pricePerDay || v.price || 50;
-
-            const card = document.createElement('div');
-            card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
-            card.innerHTML = `
-                <div>
-                    <!-- Car Image Container with Agency Badges -->
-                    <div class="car-image-container relative">
-                        <img src="${carImg}" alt="${v.title}" />
-                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${badgeColor} shadow-md">
-                                ${v.category || 'SUV'}
-                            </span>
-                            <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
-                                <i class="fas fa-bolt me-1"></i> Reserva Inmediata
-                            </span>
-                        </div>
-                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
-                            <span class="text-xs font-bold text-slate-400">DESDE</span>
-                            <strong class="text-base font-black text-[#1d4ed8] font-mono">$${price}</strong>
-                            <span class="text-[10px] font-bold text-slate-500 uppercase">/día</span>
-                        </div>
-                    </div>
-
-                    <!-- Card Body -->
-                    <div class="p-5 sm:p-6">
-                        <div class="flex justify-between items-start mb-1.5">
-                            <h4 class="text-xl font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors">${v.title}</h4>
-                        </div>
-                        <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
-                            <i class="fas fa-map-marker-alt text-[#1d4ed8] text-[11px]"></i>
-                            <span>${v.city || 'Santo Domingo Este'}</span>
-                            <span class="mx-1">•</span>
-                            <span class="text-emerald-700 font-semibold"><i class="fas fa-check-circle text-[10px]"></i> Verificado</span>
-                        </p>
-                        <p class="text-slate-500 text-xs mb-4 line-clamp-2 leading-relaxed">
-                            ${v.description || 'Color ' + (v.color || 'Elegante') + '. Confort para familia o negocios.'}
-                        </p>
-
-                        <!-- RentGo Specs 4-Pill Row -->
-                        <div class="grid grid-cols-4 gap-1.5 text-center text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2.5 mb-5">
-                            <div title="Capacidad de Pasajeros">
-                                <i class="fas fa-user-friends text-[#1d4ed8] text-xs block mb-0.5"></i>
-                                <span class="text-[10px] font-bold text-slate-800">${v.seats || 5}</span>
-                            </div>
-                            <div title="Espacio de Maletas">
-                                <i class="fas fa-suitcase-rolling text-[#1d4ed8] text-xs block mb-0.5"></i>
-                                <span class="text-[10px] font-bold text-slate-800">${v.seats > 5 ? '4-5' : '3-4'}</span>
-                            </div>
-                            <div title="Transmisión">
-                                <i class="fas fa-cogs text-[#1d4ed8] text-xs block mb-0.5"></i>
-                                <span class="text-[10px] font-bold text-slate-800">${(v.transmission || 'auto').slice(0, 4).toUpperCase()}</span>
-                            </div>
-                            <div title="Combustible">
-                                <i class="fas fa-gas-pump text-[#1d4ed8] text-xs block mb-0.5"></i>
-                                <span class="text-[10px] font-bold text-slate-800">${(v.fuelType || 'Gas').slice(0, 4)}</span>
-                            </div>
-                        </div>
-
-                        <!-- CTA Actions (Double CTA: RentGo Booking Pop-up & Fast WhatsApp) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                            <button 
-                              type="button" 
-                              class="open-modal-btn w-full py-3 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 luxury-btn shadow-sm"
-                              style="border-radius: 0px !important;"
-                            >
-                                <i class="fas fa-calendar-check text-sm"></i>
-                                <span>Cotizar / Reservar</span>
-                            </button>
-                            <a 
-                              href="https://wa.me/${cleanPhone}?text=${msg}" 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              class="whatsapp-btn w-full py-3 px-3 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors luxury-btn"
-                              style="border-radius: 0px !important;"
-                            >
-                                <i class="fab fa-whatsapp text-base"></i>
-                                <span>WhatsApp</span>
-                            </a>
-                        </div>
-                        <button 
-                          type="button" 
-                          class="view-sidebar-btn w-full mt-2 py-1.5 text-[11px] text-slate-400 hover:text-slate-700 font-semibold text-center uppercase tracking-wider"
-                        >
-                            <i class="fas fa-info-circle me-1"></i> Ver Ficha Completa
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            // CTA Handlers
-            const modalBtn = card.querySelector('.open-modal-btn');
-            modalBtn?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openRentgoModal(v, ownerData);
-            });
-
-            const sidebarBtn = card.querySelector('.view-sidebar-btn');
-            sidebarBtn?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openSidebar(v, ownerData);
-            });
-
-            card.addEventListener('click', (e) => {
-                const target = e.target as HTMLElement;
-                if (target.closest('.whatsapp-btn') || target.closest('.open-modal-btn') || target.closest('.view-sidebar-btn')) return;
-                openRentgoModal(v, ownerData);
-            });
-
-            fleetGrid.appendChild(card);
-        });
-    }
-
-    // Category button clicks (JetSmartFilters UI)
-    const catButtons = document.querySelectorAll<HTMLButtonElement>('.filter-cat-btn');
-    catButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            catButtons.forEach(b => {
-                b.classList.remove('bg-[#0f172a]', 'text-white');
-                b.classList.add('bg-slate-100', 'text-slate-700');
-            });
-            btn.classList.remove('bg-slate-100', 'text-slate-700');
-            btn.classList.add('bg-[#0f172a]', 'text-white');
-            currentCategory = btn.getAttribute('data-category') || 'all';
-            renderFleet();
-        });
+    const btnSearchRent = document.getElementById('btn-search-rent');
+    btnSearchRent?.addEventListener('click', () => {
+        window.location.href = "/flota";
     });
-
-    // Sort changes
-    const sortSelect = document.getElementById('filter-sort') as HTMLSelectElement;
-    sortSelect?.addEventListener('change', () => {
-        currentSort = sortSelect.value;
-        renderFleet();
-    });
-
-    function closeSidebar() {
-        if (!offcanvas || !panel || !backdrop) return;
-        panel.classList.add('translate-x-full');
-        backdrop.classList.remove('opacity-100');
-        backdrop.classList.add('opacity-0');
-        setTimeout(() => {
-            offcanvas.classList.remove('pointer-events-auto', 'opacity-100');
-            offcanvas.classList.add('pointer-events-none', 'opacity-0');
-            document.body.classList.remove('overflow-hidden');
-        }, 300);
-    }
-
-    closeBtn?.addEventListener('click', closeSidebar);
-    backdrop?.addEventListener('click', closeSidebar);
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
 
     // Stream vehicles from Firestore
-    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
-    onSnapshot(q, async (snap) => {
-        allVehicles = [];
+    const homeSaleGrid = document.getElementById('home-sale-grid');
+    const homeRentGrid = document.getElementById('home-rent-grid');
 
-        for (const docSnap of snap.docs) {
+    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
+    onSnapshot(q, (snap) => {
+        const saleCars: any[] = [];
+        const rentCars: any[] = [];
+
+        snap.docs.forEach(docSnap => {
             const v = docSnap.data();
             v.id = docSnap.id;
-
-            let ownerData: any = null;
-            if (v.ownerId) {
-                try {
-                    const uSnap = await getDoc(doc(db, "users", v.ownerId));
-                    if (uSnap.exists()) ownerData = uSnap.data();
-                } catch (e) {
-                    console.warn(e);
-                }
+            if (v.listingType === 'rent') {
+                rentCars.push(v);
+            } else {
+                saleCars.push(v);
             }
-            allVehicles.push({ v, ownerData });
+        });
+
+        // Render Sale Cards (SuperCarros Pattern)
+        if (homeSaleGrid) {
+            homeSaleGrid.innerHTML = '';
+            saleCars.slice(0, 6).forEach(v => {
+                const price = v.price || v.pricePerDay || 25000;
+                const currency = v.currency || 'USD';
+                const priceStr = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
+                const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
+                const cleanPhone = (v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
+
+                const card = document.createElement('div');
+                card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
+                card.innerHTML = `
+                    <div>
+                        <div class="car-image-container relative">
+                            <img src="${carImg}" alt="${v.title}" />
+                            <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                                <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#0f172a] text-white shadow-md">
+                                    ${v.condition || 'Usado'}
+                                </span>
+                            </div>
+                            <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
+                                <strong class="text-base font-black text-[#15803d] font-mono">${priceStr}</strong>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="text-lg font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
+                            <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
+                                <i class="fas fa-location-dot text-[#1d4ed8] text-[11px]"></i>
+                                <span>${v.province || v.city || 'República Dominicana'}</span>
+                            </p>
+                            <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2 mb-4">
+                                <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span><strong>${v.engine || '2.0L'}</strong></div>
+                                <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Millas</span><strong>${(v.mileage || 45000).toLocaleString()}</strong></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <a href="/vehiculos" class="py-2.5 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
+                                    Detalles
+                                </a>
+                                <a href="https://wa.me/${cleanPhone}?text=Hola,%20me%20interesa%20su%20${encodeURIComponent(v.title)}" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 luxury-btn">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                homeSaleGrid.appendChild(card);
+            });
         }
 
-        renderFleet();
+        // Render Rent Cards (JetBooking Pattern)
+        if (homeRentGrid) {
+            homeRentGrid.innerHTML = '';
+            const rentShowcase = rentCars.length > 0 ? rentCars : saleCars;
+            rentShowcase.slice(0, 2).forEach(v => {
+                const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
+                const price = v.pricePerDay || 50;
+                const cleanPhone = (v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
+
+                const card = document.createElement('div');
+                card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
+                card.innerHTML = `
+                    <div>
+                        <div class="car-image-container relative">
+                            <img src="${carImg}" alt="${v.title}" />
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#1d4ed8] text-white shadow-md">
+                                    Rent A Car
+                                </span>
+                            </div>
+                            <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
+                                <span class="text-xs text-slate-400 font-bold">DESDE</span>
+                                <strong class="text-base font-black text-[#1d4ed8] font-mono">$${price}</strong>
+                                <span class="text-[10px] font-bold text-slate-500 uppercase">/día</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-[#0f172a] mb-1">${v.title}</h4>
+                            <p class="text-xs text-slate-500 mb-4">Entrega en Aeropuerto SDQ y Santo Domingo Este.</p>
+                            <div class="flex gap-2">
+                                <a href="/flota" class="flex-1 py-3 px-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
+                                    Cotizar Renta
+                                </a>
+                                <a href="https://wa.me/${cleanPhone}?text=Hola,%20deseo%20rentar%20la%20${encodeURIComponent(v.title)}" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 luxury-btn">
+                                    <i class="fab fa-whatsapp"></i> Reservar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                homeRentGrid.appendChild(card);
+            });
+        }
     });
 </script>

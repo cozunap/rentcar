@@ -1,227 +1,152 @@
 ---
-import { DOMINICAN_PROVINCES, WORKSHOP_CATEGORIES } from '../lib/constants';
+import { VEHICLE_BRANDS, DOMINICAN_PROVINCES } from '../lib/constants';
 
 const pathname = Astro.url.pathname;
 const isCurrent = (path: string) => pathname === path || (path !== '/' && pathname.startsWith(path));
 ---
 
-<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        <!-- Brand Logo (Marketplace TuCarroYMás RD) -->
-        <a href="/" class="flex items-center gap-3 group">
-            <div class="w-11 h-11 bg-[#0f172a] text-white flex items-center justify-center border border-slate-800 shadow-sm transition-colors group-hover:bg-[#1d4ed8]">
-                <i class="fas fa-car-side text-lg"></i>
-            </div>
-            <div class="flex flex-col justify-center">
-                <span class="font-black text-[1.45rem] tracking-tight text-[#0f172a] uppercase font-['Outfit',sans-serif] leading-tight" style="font-weight: 900;">
-                    TU CARRO <span class="text-[#1d4ed8]" style="font-weight: 900;">Y MÁS</span>
+<header class="sticky top-0 z-50 bg-[#0b1329] border-b border-slate-800 shadow-2xl transition-all">
+    <!-- Top Utility Bar: SuperCarros / Cars.com Standard -->
+    <div class="bg-[#060b18] border-b border-slate-800/80 text-[11px] text-slate-400 py-1.5 hidden md:block">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <span class="text-slate-300 font-semibold flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Portal Automotriz Líder en República Dominicana
                 </span>
-                <span class="text-[9px] uppercase tracking-[0.18em] text-slate-500 font-bold block">
-                    MARKETPLACE & SERVICIOS RD
+                <span class="text-slate-700">|</span>
+                <span class="text-slate-400">Publica tu vehículo 100% gratis</span>
+            </div>
+            <div class="flex items-center gap-5 text-slate-300">
+                <a href="https://wa.me/18499154010" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 flex items-center gap-1.5 transition-colors">
+                    <i class="fab fa-whatsapp text-emerald-400"></i> WhatsApp: (849) 915-4010
+                </a>
+                <span class="text-slate-700">•</span>
+                <span class="text-slate-400"><i class="fas fa-shield-alt text-[#2563eb] me-1"></i> Trato directo sin comisiones</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
+        
+        <!-- Brand Logo (Modern SuperCarros Style) -->
+        <a href="/" class="flex items-center gap-3 shrink-0 group">
+            <div class="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#1d4ed8] text-white flex items-center justify-center font-black text-xl shadow-lg border border-blue-400/30 group-hover:scale-105 transition-transform" style="border-radius: 0px !important;">
+                <i class="fas fa-car-side text-xl"></i>
+            </div>
+            <div class="flex flex-col">
+                <div class="flex items-baseline gap-1">
+                    <span class="font-black text-2xl tracking-tight text-white uppercase font-['Outfit',sans-serif] leading-none">
+                        TUCARRO<span class="text-[#38bdf8]">YMÁS</span>
+                    </span>
+                    <span class="text-[9px] font-black uppercase text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-1 py-0.2">.com</span>
+                </div>
+                <span class="text-[9.5px] uppercase tracking-[0.22em] text-slate-400 font-bold block mt-1">
+                    COMPRA • VENTA • RENTA RD
                 </span>
             </div>
         </a>
 
-        <!-- Desktop Navigation Bar con Mega Menús (Estilo Crocoblock JetMenu) -->
-        <nav class="hidden lg:flex items-center gap-7">
-            <!-- 1. COMPRA Y VENTA (MEGA MENÚ) -->
-            <div class="relative group py-6">
-                <a 
-                  href="/vehiculos" 
-                  class={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${isCurrent('/vehiculos') ? 'text-[#1d4ed8]' : 'text-slate-700 hover:text-[#1d4ed8]'}`}
-                >
-                    <span>Comprar Carro</span>
-                    <i class="fas fa-chevron-down text-[10px] text-slate-400 group-hover:rotate-180 transition-transform"></i>
-                </a>
-
-                <!-- Mega Dropdown 1: Comprar -->
-                <div class="absolute top-full left-0 w-[520px] bg-white border-2 border-slate-900 shadow-2xl p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 grid grid-cols-2 gap-6" style="border-radius: 0px !important;">
-                    <div>
-                        <span class="text-[10px] font-black uppercase tracking-widest text-[#1d4ed8] block mb-3 border-b border-slate-100 pb-1">
-                            <i class="fas fa-car me-1"></i> Por Tipo de Vehículo
-                        </span>
-                        <ul class="space-y-2 text-xs">
-                            <li><a href="/vehiculos?tipo=SUV" class="text-slate-600 hover:text-[#1d4ed8] font-semibold flex items-center justify-between">SUVs y Jeepetas <span class="text-[10px] text-slate-400">Popular</span></a></li>
-                            <li><a href="/vehiculos?tipo=Sedan" class="text-slate-600 hover:text-[#1d4ed8] font-semibold">Sedanes Ejecutivos</a></li>
-                            <li><a href="/vehiculos?tipo=Camioneta" class="text-slate-600 hover:text-[#1d4ed8] font-semibold">Camionetas y Pickups 4x4</a></li>
-                            <li><a href="/vehiculos?tipo=Premium" class="text-slate-600 hover:text-[#1d4ed8] font-semibold">Alta Gama & Deportivos</a></li>
-                            <li><a href="/vehiculos?tipo=Economico" class="text-slate-600 hover:text-[#1d4ed8] font-semibold">Económicos & Diarios</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-slate-50 p-4 border border-slate-200">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-700 block mb-2">
-                            <i class="fas fa-tag text-emerald-600 me-1"></i> Publica Gratis en RD
-                        </span>
-                        <p class="text-[11px] text-slate-500 mb-3 leading-relaxed">
-                            Vende tu vehículo sin intermediarios ni comisiones. Publicación 100% gratuita para particulares y dealers.
-                        </p>
-                        <a href="/publicar?tipo=venta" class="w-full py-2 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 luxury-btn">
-                            <i class="fas fa-plus"></i> Publicar Mi Auto Gratis
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. RENT A CAR -->
+        <!-- Desktop Navigation Links (Clean, Spacious, Automotive Typography) -->
+        <nav class="hidden lg:flex items-center gap-8 text-[13px] font-bold uppercase tracking-wider">
             <a 
-              href="/flota" 
-              class={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${isCurrent('/flota') ? 'text-[#1d4ed8]' : 'text-slate-700 hover:text-[#1d4ed8]'}`}
+              href="/vehiculos" 
+              class={`py-2 transition-colors flex items-center gap-1.5 ${isCurrent('/vehiculos') ? 'text-[#38bdf8] border-b-2 border-[#38bdf8]' : 'text-slate-200 hover:text-[#38bdf8]'}`}
             >
-                <i class="fas fa-key text-[#1d4ed8] text-xs"></i>
-                <span>Rent A Car</span>
-                <span class="px-1.5 py-0.2 text-[9px] font-black bg-blue-100 text-[#1d4ed8]">RD</span>
+                <i class="fas fa-car text-xs text-[#38bdf8]"></i>
+                <span>Comprar Carros</span>
             </a>
 
-            <!-- 3. TALLERES Y REPUESTOS (MEGA MENÚ) -->
-            <div class="relative group py-6">
-                <a 
-                  href="/talleres" 
-                  class={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${isCurrent('/talleres') ? 'text-[#1d4ed8]' : 'text-slate-700 hover:text-[#1d4ed8]'}`}
-                >
-                    <span>Talleres & Repuestos</span>
-                    <i class="fas fa-chevron-down text-[10px] text-slate-400 group-hover:rotate-180 transition-transform"></i>
-                </a>
+            <a 
+              href="/flota" 
+              class={`py-2 transition-colors flex items-center gap-1.5 ${isCurrent('/flota') ? 'text-[#38bdf8] border-b-2 border-[#38bdf8]' : 'text-slate-200 hover:text-[#38bdf8]'}`}
+            >
+                <i class="fas fa-key text-xs text-[#38bdf8]"></i>
+                <span>Rent A Car</span>
+            </a>
 
-                <!-- Mega Dropdown 2: Servicios -->
-                <div class="absolute top-full left-0 w-[560px] bg-white border-2 border-slate-900 shadow-2xl p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50" style="border-radius: 0px !important;">
-                    <div class="grid grid-cols-2 gap-4">
-                        {WORKSHOP_CATEGORIES.map((cat) => (
-                            <a href={`/talleres?categoria=${cat.id}`} class="p-3 bg-slate-50 hover:bg-blue-50/50 border border-slate-200 hover:border-[#1d4ed8] transition-all flex items-start gap-3 group/item">
-                                <div class="w-8 h-8 bg-white border border-slate-200 flex items-center justify-center text-[#1d4ed8] text-sm shrink-0 group-hover/item:bg-[#1d4ed8] group-hover/item:text-white transition-colors">
-                                    <i class={`fas ${cat.icon}`}></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xs font-bold text-slate-800 leading-tight">{cat.label}</h4>
-                                    <span class="text-[10px] text-slate-400 mt-0.5 block">Ver talleres en tu zona</span>
-                                </div>
-                            </a>
-                        ))}
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                        <span class="text-slate-500 font-medium text-[11px]">¿Tienes un taller o tienda de repuestos?</span>
-                        <a href="/publicar?tipo=negocio" class="text-[#1d4ed8] font-bold hover:underline text-[11px] uppercase tracking-wider">
-                            <i class="fas fa-plus-circle me-1"></i> Registrar Mi Taller
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <a 
+              href="/talleres" 
+              class={`py-2 transition-colors flex items-center gap-1.5 ${isCurrent('/talleres') ? 'text-[#38bdf8] border-b-2 border-[#38bdf8]' : 'text-slate-200 hover:text-[#38bdf8]'}`}
+            >
+                <i class="fas fa-wrench text-xs text-[#38bdf8]"></i>
+                <span>Talleres & Repuestos</span>
+            </a>
 
-            <!-- 4. SELECTOR POR PROVINCIAS (RD COMPLETO) -->
-            <div class="relative group py-6">
-                <button type="button" class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#1d4ed8] transition-colors">
-                    <i class="fas fa-map-marker-alt text-[#1d4ed8] text-xs"></i>
-                    <span>Provincias RD</span>
-                    <i class="fas fa-chevron-down text-[10px] text-slate-400 group-hover:rotate-180 transition-transform"></i>
-                </button>
-
-                <!-- Mega Dropdown 3: Provincias -->
-                <div class="absolute top-full -left-20 w-[640px] bg-white border-2 border-slate-900 shadow-2xl p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50" style="border-radius: 0px !important;">
-                    <div class="border-b border-slate-100 pb-2 mb-4 flex items-center justify-between">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-[#0f172a]">
-                            Explora Vehículos y Talleres por Región
-                        </span>
-                        <span class="text-[10px] text-slate-400 font-semibold">Toda República Dominicana</span>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-4 text-xs">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-[#1d4ed8] block mb-2">Metropolitana</span>
-                            <ul class="space-y-1.5">
-                                <li><a href="/vehiculos?provincia=Distrito Nacional" class="text-slate-600 hover:text-[#1d4ed8]">Distrito Nacional</a></li>
-                                <li><a href="/vehiculos?provincia=Santo Domingo Este" class="text-slate-600 hover:text-[#1d4ed8]">Santo Domingo Este</a></li>
-                                <li><a href="/vehiculos?provincia=Santo Domingo Oeste" class="text-slate-600 hover:text-[#1d4ed8]">Santo Domingo Oeste</a></li>
-                                <li><a href="/vehiculos?provincia=Santo Domingo Norte" class="text-slate-600 hover:text-[#1d4ed8]">Santo Domingo Norte</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-[#1d4ed8] block mb-2">Cibao / Norte</span>
-                            <ul class="space-y-1.5">
-                                <li><a href="/vehiculos?provincia=Santiago" class="text-slate-600 hover:text-[#1d4ed8] font-bold">Santiago</a></li>
-                                <li><a href="/vehiculos?provincia=La Vega" class="text-slate-600 hover:text-[#1d4ed8]">La Vega</a></li>
-                                <li><a href="/vehiculos?provincia=Puerto Plata" class="text-slate-600 hover:text-[#1d4ed8]">Puerto Plata</a></li>
-                                <li><a href="/vehiculos?provincia=Duarte" class="text-slate-600 hover:text-[#1d4ed8]">San Fco. de Macorís</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-[#1d4ed8] block mb-2">Este y Sur</span>
-                            <ul class="space-y-1.5">
-                                <li><a href="/vehiculos?provincia=La Altagracia" class="text-slate-600 hover:text-[#1d4ed8] font-bold">Punta Cana / Higüey</a></li>
-                                <li><a href="/vehiculos?provincia=La Romana" class="text-slate-600 hover:text-[#1d4ed8]">La Romana</a></li>
-                                <li><a href="/vehiculos?provincia=San Cristobal" class="text-slate-600 hover:text-[#1d4ed8]">San Cristóbal</a></li>
-                                <li><a href="/vehiculos?provincia=Peravia" class="text-slate-600 hover:text-[#1d4ed8]">Baní (Peravia)</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Nosotros / Contacto -->
-            <a href="/nosotros" class={`text-xs font-bold uppercase tracking-wider transition-colors ${isCurrent('/nosotros') ? 'text-[#1d4ed8]' : 'text-slate-600 hover:text-[#1d4ed8]'}`}>
+            <a 
+              href="/nosotros" 
+              class={`py-2 transition-colors ${isCurrent('/nosotros') ? 'text-[#38bdf8] border-b-2 border-[#38bdf8]' : 'text-slate-200 hover:text-[#38bdf8]'}`}
+            >
                 Nosotros
+            </a>
+
+            <a 
+              href="/contacto" 
+              class={`py-2 transition-colors ${isCurrent('/contacto') ? 'text-[#38bdf8] border-b-2 border-[#38bdf8]' : 'text-slate-200 hover:text-[#38bdf8]'}`}
+            >
+                Contacto
             </a>
         </nav>
 
-        <!-- Right Side Corporate Actions (Vender Gratis + Auth) -->
-        <div class="hidden sm:flex items-center gap-3">
-            <!-- Vender Carro (Gratis) -->
+        <!-- Right Side CTA: SuperCarros Gold/Green Sell Button + Auth -->
+        <div class="hidden sm:flex items-center gap-3 shrink-0">
+            <!-- Vender Mi Carro (Primary Action) -->
             <a 
-              href="/publicar" 
-              class="px-4 py-2.5 text-xs font-black uppercase tracking-wider bg-[#15803d] hover:bg-[#166534] text-white flex items-center gap-1.5 luxury-btn shadow-md"
+              href="/publicar?tipo=venta" 
+              class="px-5 py-3 text-xs font-black uppercase tracking-wider bg-[#15803d] hover:bg-[#166534] text-white flex items-center gap-2 luxury-btn shadow-lg"
               style="border-radius: 0px !important;"
             >
-                <i class="fas fa-tag"></i>
+                <i class="fas fa-plus-circle text-sm"></i>
                 <span>Vender Mi Carro</span>
-                <span class="bg-white/20 text-white text-[9px] px-1 py-0.2">GRATIS</span>
+                <span class="bg-black/30 text-emerald-300 text-[9px] px-1.5 py-0.5 font-black">GRATIS</span>
             </a>
 
-            <!-- Auth Slot -->
+            <!-- User Auth -->
             <div id="auth-header-btn">
-                <a href="/auth" class="px-4 py-2.5 bg-[#0f172a] hover:bg-[#1d4ed8] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-sm" style="border-radius: 0px !important;">
-                    Ingresar
+                <a 
+                  href="/auth" 
+                  class="px-4 py-3 bg-[#1e293b] hover:bg-[#334155] text-white text-xs font-bold uppercase tracking-wider border border-slate-700 luxury-btn"
+                  style="border-radius: 0px !important;"
+                >
+                    <i class="fas fa-user-circle me-1.5 text-slate-400"></i> Ingresar
                 </a>
             </div>
         </div>
 
         <!-- Mobile Menu Toggle Button -->
         <div class="flex items-center gap-2 lg:hidden">
-            <a href="/publicar" class="px-3 py-1.5 text-xs font-bold bg-[#15803d] text-white" style="border-radius: 0px !important;">
+            <a href="/publicar?tipo=venta" class="px-3 py-1.5 text-xs font-black bg-[#15803d] text-white" style="border-radius: 0px !important;">
                 Vender
             </a>
-            <button id="mobile-menu-btn" type="button" aria-label="Abrir menú" class="w-10 h-10 flex items-center justify-center text-slate-800 border border-slate-200 hover:bg-slate-50 transition-colors" style="border-radius: 0px !important;">
+            <button id="mobile-menu-btn" type="button" aria-label="Abrir menú" class="w-10 h-10 flex items-center justify-center text-white bg-slate-800 border border-slate-700" style="border-radius: 0px !important;">
                 <i class="fas fa-bars text-base" id="menu-icon"></i>
             </button>
         </div>
 
     </div>
 
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 py-6 space-y-3 shadow-xl">
-        <a href="/" class="block py-2 text-sm font-bold text-slate-900 border-b border-slate-100">
-            <i class="fas fa-home me-2 text-[#1d4ed8]"></i> Inicio
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-[#0b1329] px-4 py-6 space-y-3 shadow-2xl">
+        <a href="/" class="block py-2.5 text-sm font-bold text-white border-b border-slate-800">
+            <i class="fas fa-home me-2 text-[#38bdf8]"></i> Inicio
         </a>
-        <a href="/vehiculos" class="block py-2 text-sm font-bold text-slate-900 border-b border-slate-100">
-            <i class="fas fa-car me-2 text-[#1d4ed8]"></i> Comprar Carro (Catálogo Venta)
+        <a href="/vehiculos" class="block py-2.5 text-sm font-bold text-white border-b border-slate-800">
+            <i class="fas fa-car me-2 text-[#38bdf8]"></i> Comprar Carros en Venta
         </a>
-        <a href="/flota" class="block py-2 text-sm font-bold text-slate-900 border-b border-slate-100">
-            <i class="fas fa-key me-2 text-[#1d4ed8]"></i> Rent A Car (Alquiler)
+        <a href="/flota" class="block py-2.5 text-sm font-bold text-white border-b border-slate-800">
+            <i class="fas fa-key me-2 text-[#38bdf8]"></i> Rent A Car (Alquiler)
         </a>
-        <a href="/talleres" class="block py-2 text-sm font-bold text-slate-900 border-b border-slate-100">
-            <i class="fas fa-wrench me-2 text-[#1d4ed8]"></i> Talleres y Repuestos por Zona
+        <a href="/talleres" class="block py-2.5 text-sm font-bold text-white border-b border-slate-800">
+            <i class="fas fa-wrench me-2 text-[#38bdf8]"></i> Talleres y Repuestos
         </a>
-        <a href="/publicar" class="block py-3 px-4 text-sm font-black uppercase tracking-wider bg-[#15803d] text-white text-center">
-            <i class="fas fa-tag me-1"></i> Publicar Mi Carro (Gratis)
+        <a href="/publicar?tipo=venta" class="block py-3 px-4 text-sm font-black uppercase tracking-wider bg-[#15803d] text-white text-center">
+            <i class="fas fa-plus-circle me-1"></i> Publicar Mi Carro (Gratis)
         </a>
-        <a href="/nosotros" class="block py-2 text-sm font-semibold text-slate-700">Nosotros</a>
-        <a href="/contacto" class="block py-2 text-sm font-semibold text-slate-700">Contacto</a>
-        
-        <div class="pt-4 border-t border-slate-100 flex flex-col gap-2">
-            <div id="mobile-auth-slot">
-                <a href="/auth" class="w-full block py-2.5 text-center text-xs font-bold uppercase tracking-wider bg-[#0f172a] text-white">
-                    Iniciar Sesión / Registro
-                </a>
-            </div>
+        <div class="pt-4 border-t border-slate-800 flex flex-col gap-2" id="mobile-auth-slot">
+            <a href="/auth" class="w-full block py-2.5 text-center text-xs font-bold uppercase tracking-wider bg-slate-800 text-white">
+                Iniciar Sesión / Registro
+            </a>
         </div>
     </div>
 </header>
@@ -253,20 +178,20 @@ const isCurrent = (path: string) => pathname === path || (path !== '/' && pathna
             const name = user.displayName || user.email?.split('@')[0] || 'Mi Panel';
             const desktopContent = `
                 <div class="flex items-center gap-2">
-                    <a href="/panel" class="px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 luxury-btn" style="border-radius: 0px !important;">
-                        <i class="fas fa-gauge text-[#1d4ed8] me-1"></i> ${name}
+                    <a href="/panel" class="px-3.5 py-3 text-xs font-bold uppercase tracking-wider text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 luxury-btn" style="border-radius: 0px !important;">
+                        <i class="fas fa-gauge text-[#38bdf8] me-1"></i> ${name}
                     </a>
-                    <button id="logout-btn" title="Salir" class="text-slate-400 hover:text-red-600 p-2 text-xs">
+                    <button id="logout-btn" title="Salir" class="text-slate-400 hover:text-red-400 p-2 text-xs">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </div>
             `;
             const mobileContent = `
                 <div class="flex gap-2">
-                    <a href="/panel" class="flex-1 py-2.5 text-center text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-200">
+                    <a href="/panel" class="flex-1 py-2.5 text-center text-xs font-bold uppercase tracking-wider bg-slate-800 text-white border border-slate-700">
                         Mi Panel (${name})
                     </a>
-                    <button id="mobile-logout" class="px-3 py-2.5 text-red-600 bg-red-50 text-xs">
+                    <button id="mobile-logout" class="px-3 py-2.5 text-red-400 bg-red-950/50 text-xs">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </div>
