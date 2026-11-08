@@ -412,10 +412,66 @@ for (let y = currentYear + 1; y >= 1970; y--) {
 </Layout>
 
 <script>
+  import { onAuthStateChanged } from "firebase/auth";
+  import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+  import { auth, db } from "../lib/firebase/client";
   import { BRAND_CATALOG_DATABASE } from "../lib/catalogTaxonomy";
   import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
   import { convertToSquareWebP } from "../lib/imageOptimizer";
   import { saveUserVehicle, saveDealerProfile } from "../lib/userListingsStore";
+
+  // Verificación estricta de Autenticación: Redirigir a /auth si no tiene sesión iniciada
+  let currentUser: any = null;
+  let currentUserProfile: any = null;
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "/auth?redirect=/publicar";
+      return;
+    }
+    currentUser = user;
+
+    // Cargar perfil del usuario desde Firestore
+    try {
+      const uSnap = await getDoc(doc(db, "users", user.uid));
+      if (uSnap.exists()) {
+        currentUserProfile = uSnap.data();
+        applyUserProfile(currentUserProfile);
+      } else {
+        // Fallback básico con datos de Firebase Auth
+        if (sellerNameInput) sellerNameInput.value = user.displayName || "";
+      }
+    } catch (e) {
+      console.error("Error cargando perfil:", e);
+    }
+  });
+
+  function applyUserProfile(profile: any) {
+    if (!profile) return;
+    if (sellerNameInput && profile.fullName) sellerNameInput.value = profile.fullName;
+    const waInput = document.getElementById("pub-seller-whatsapp") as HTMLInputElement;
+    if (waInput && (profile.whatsapp || profile.phone)) {
+      waInput.value = (profile.whatsapp || profile.phone).replace(/[^0-9]/g, "");
+    }
+
+    // Si el usuario es Dealer o Particular en su cuenta, pre-seleccionar y bloquear acorde
+    if (profile.role === "dealer" || profile.isDealer) {
+      if (dealerRadio) dealerRadio.checked = true;
+      if (privateRadio) privateRadio.disabled = true;
+      toggleSellerMode();
+      if (dealerSlugInput && profile.dealerSlug) {
+        dealerSlugInput.value = profile.dealerSlug;
+      }
+      const specialtyInput = document.getElementById("dealer-specialty") as HTMLInputElement;
+      if (specialtyInput && profile.dealerSpecialty) {
+        specialtyInput.value = profile.dealerSpecialty;
+      }
+    } else {
+      if (privateRadio) privateRadio.checked = true;
+      if (dealerRadio) dealerRadio.disabled = true;
+      toggleSellerMode();
+    }
+  }
 
   // Elementos DOM
   const form = document.getElementById("publish-form") as HTMLFormElement;
@@ -639,6 +695,7 @@ for (let y = currentYear + 1; y >= 1970; y--) {
       id,
       title,
       slug: id,
+      ownerId: currentUser?.uid || "anonymous",
       transportType: selectedTransport,
       category: selectedTransport === "cars" ? "sedans" : selectedTransport === "water-transport" ? "boats" : selectedTransport === "trucks-buses" ? "commercial" : "machinery",
       make,
@@ -669,12 +726,46 @@ for (let y = currentYear + 1; y >= 1970; y--) {
         name: sellerName,
         phone: sellerWhatsapp,
         whatsapp: sellerWhatsapp,
-        dealerType: isDealer ? "Concesionario Dealer Oficial" : "Vendedor Particular",
+        dealerType: isDealer ? (currentUserProfile?.dealerSpecialty || "Concesionario Dealer Oficial") : "Vendedor Particular",
         isDealer: isDealer,
         dealerSlug: dealerSlug || undefined
       }
     };
 
+    // 1. Guardar en Firestore si el usuario está autenticado
+    if (currentUser?.uid) {
+      try {
+        setDoc(doc(db, "vehicles", id), {
+          ownerId: currentUser.uid,
+          ownerWhatsapp: sellerWhatsapp,
+          title,
+          brand: make,
+          model,
+          year,
+          condition,
+          pricePerDay: price,
+          price: price,
+          mainImage: finalImageUrl,
+          images: finalGallery,
+          description,
+          category: selectedTransport,
+          transmission: "Automática",
+          seats: 5,
+          fuelType: "Gasolina",
+          city: location,
+          isAvailable: true,
+          status: "available",
+          featured: true,
+          isDealer: isDealer,
+          dealerSlug: dealerSlug || null,
+          createdAt: serverTimestamp()
+        });
+      } catch (err) {
+        console.error("Firestore sync error:", err);
+      }
+    }
+
+    // 2. Guardar en el store del cliente para renderizado 0ms en todo el frontend
     saveUserVehicle(newVehicleListing as any);
 
     if (formAlert) {

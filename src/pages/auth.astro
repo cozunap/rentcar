@@ -2,33 +2,35 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Iniciar Sesión y Registro | Tu Carro y Más Rent A Car">
-    <div class="min-h-[calc(100vh-160px)] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div class="max-w-md w-full bg-white border border-slate-200 shadow-xl border border-slate-200/80 p-8 sm:p-10 relative overflow-hidden">
+<Layout title="Iniciar Sesión y Registro | TuCarroYMas República Dominicana">
+    <div class="min-h-[calc(100vh-160px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <div class="max-w-md w-full bg-white border border-slate-200 shadow-xl p-8 sm:p-10 relative overflow-hidden rounded-sm">
             
             <!-- Brand Badge -->
             <div class="text-center mb-8">
-                <a href="/" class="inline-flex items-center gap-2 mb-3">
-                    <div class="w-10 h-10  bg-[#0d6efd] text-white flex items-center justify-center shadow-md">
-                        <i class="fas fa-car-side text-lg"></i>
+                <a href="/" class="inline-flex items-center gap-2 mb-2">
+                    <div class="w-9 h-9 rounded-full bg-[#D54000] text-white flex items-center justify-center shadow-md font-black text-sm">
+                        <i class="fa-solid fa-car-side"></i>
                     </div>
-                    <span class="font-extrabold text-2xl text-[#0d1f3c] tracking-tight">Tu Carro <span class="text-[#0d6efd]">y Más</span></span>
+                    <span class="font-black text-2xl text-[#0d1727] tracking-tight uppercase">TUCARRO<span class="text-[#D54000]">YMAS</span></span>
                 </a>
-                <p class="text-xs text-slate-500 font-medium">Plataforma de Alquiler de Autos • República Dominicana</p>
+                <p id="auth-subtitle" class="text-xs text-slate-500 font-medium">
+                    Ingresa o regístrate para publicar y administrar tus vehículos
+                </p>
             </div>
 
             <!-- Tab Switcher (Login / Sign Up) -->
-            <div class="flex  bg-slate-100 p-1 mb-8">
-                <button id="tab-login" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider  transition-all shadow-sm bg-white text-[#0d1f3c]">
+            <div class="flex bg-slate-100 p-1 mb-6 rounded-xs">
+                <button id="tab-login" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider transition-all shadow-xs bg-white text-[#D54000] rounded-xs cursor-pointer">
                     Iniciar Sesión
                 </button>
-                <button id="tab-register" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider  transition-all text-slate-500 hover:text-[#0d1f3c]">
+                <button id="tab-register" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider transition-all text-slate-500 hover:text-slate-800 rounded-xs cursor-pointer">
                     Crear Cuenta
                 </button>
             </div>
 
             <!-- Alert Box -->
-            <div id="auth-alert" class="hidden mb-6 p-4  text-xs font-medium border text-center"></div>
+            <div id="auth-alert" class="hidden mb-6 p-4 text-xs font-medium border text-center rounded-xs"></div>
 
             <!-- FORM 1: LOGIN -->
             <form id="form-login" class="space-y-4">
@@ -37,13 +39,13 @@ import Layout from '../layouts/Layout.astro';
                         Correo Electrónico
                     </label>
                     <div class="relative">
-                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         <input 
                             type="email" 
                             id="login-email" 
                             required 
                             placeholder="tu@correo.com" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] focus:bg-white rounded-xs transition-all font-medium"
                         />
                     </div>
                 </div>
@@ -53,18 +55,18 @@ import Layout from '../layouts/Layout.astro';
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-700" for="login-password">
                             Contraseña
                         </label>
-                        <a href="#" id="forgot-password" class="text-xs text-[#0d6efd] hover:underline font-medium">
-                            ¿Olvidaste?
+                        <a href="#" id="forgot-password" class="text-[11px] text-[#D54000] hover:underline font-semibold">
+                            ¿Olvidaste tu clave?
                         </a>
                     </div>
                     <div class="relative">
-                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         <input 
                             type="password" 
                             id="login-password" 
                             required 
                             placeholder="••••••••" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] focus:bg-white rounded-xs transition-all font-medium"
                         />
                     </div>
                 </div>
@@ -72,77 +74,133 @@ import Layout from '../layouts/Layout.astro';
                 <button 
                     type="submit" 
                     id="btn-login-submit" 
-                    class="w-full py-3.5 px-4  bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
+                    class="w-full py-3.5 px-4 bg-[#D54000] hover:bg-[#b83600] text-white font-extrabold text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 mt-2 rounded-xs cursor-pointer"
                 >
                     <span id="btn-login-text">Entrar a Mi Cuenta</span>
-                    <i id="btn-login-spinner" class="fas fa-circle-notch fa-spin hidden"></i>
+                    <i id="btn-login-spinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
                 </button>
             </form>
 
-            <!-- FORM 2: REGISTER -->
+            <!-- FORM 2: REGISTER WITH ACCOUNT TYPE (Particular vs Dealer) -->
             <form id="form-register" class="space-y-4 hidden">
+                
+                <!-- Selector de Rol: Privado vs Dealer -->
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-name">
-                        Nombre Completo o Empresa
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                        Tipo de Cuenta *
+                    </label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="border-2 p-3 flex flex-col justify-between cursor-pointer rounded-xs transition-all has-[:checked]:border-[#D54000] has-[:checked]:bg-orange-50/40 border-slate-200">
+                            <input type="radio" name="accountRole" value="privado" checked class="sr-only" id="reg-role-privado" />
+                            <div>
+                                <span class="text-xs font-black uppercase text-slate-900 block">Particular</span>
+                                <span class="text-[10px] text-slate-500 mt-0.5 block leading-tight">1 vehículo activo personal a la vez</span>
+                            </div>
+                        </label>
+                        <label class="border-2 p-3 flex flex-col justify-between cursor-pointer rounded-xs transition-all has-[:checked]:border-[#D54000] has-[:checked]:bg-orange-50/40 border-slate-200">
+                            <input type="radio" name="accountRole" value="dealer" class="sr-only" id="reg-role-dealer" />
+                            <div>
+                                <span class="text-xs font-black uppercase text-slate-900 flex items-center gap-1">
+                                    Dealer
+                                    <span class="bg-[#D54000] text-white text-[8px] font-black px-1 rounded-2xs">WEB PROPIA</span>
+                                </span>
+                                <span class="text-[10px] text-slate-500 mt-0.5 block leading-tight">Inventario ilimitado y landing page</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-name" id="reg-label-name">
+                        Nombre Completo *
                     </label>
                     <div class="relative">
-                        <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <i class="fa-solid fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         <input 
                             type="text" 
                             id="reg-name" 
                             required 
-                            placeholder="Ej: Carlos Ozuna / Tu Carro Rent" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            placeholder="Ej: Carlos Martínez" 
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] focus:bg-white rounded-xs transition-all font-medium"
+                        />
+                    </div>
+                </div>
+
+                <!-- Dealer Specific Fields (Optional, dynamically shown if Dealer selected) -->
+                <div id="dealer-extra-fields" class="hidden space-y-3 p-3.5 bg-orange-50/70 border border-orange-200 rounded-xs">
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1" for="reg-dealer-slug">
+                            Nombre en URL (Landing Page Propia) *
+                        </label>
+                        <div class="flex items-center">
+                            <span class="text-[10px] font-mono text-slate-500 bg-slate-100 border border-r-0 border-slate-300 px-2 py-2 rounded-l-xs">tucarroymas.com/dealer/</span>
+                            <input 
+                                type="text" 
+                                id="reg-dealer-slug" 
+                                placeholder="mi-concesionario" 
+                                class="w-full py-2 px-2.5 bg-white border border-slate-300 text-xs text-slate-900 font-mono font-bold focus:outline-none focus:border-[#D54000] rounded-r-xs"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1" for="reg-dealer-specialty">
+                            Especialidad o Tipo de Dealer
+                        </label>
+                        <input 
+                            type="text" 
+                            id="reg-dealer-specialty" 
+                            placeholder="Ej. Autos Seminuevos de Lujo / Dealer Multimarca" 
+                            class="w-full py-2 px-2.5 bg-white border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#D54000] rounded-xs font-medium"
                         />
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-whatsapp">
-                        Número de WhatsApp (Contacto Directo)
+                        Número de WhatsApp (Venta Directa) *
                     </label>
                     <div class="relative">
-                        <i class="fab fa-whatsapp absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500 text-base"></i>
+                        <i class="fa-brands fa-whatsapp absolute left-3.5 top-1/2 -translate-y-1/2 text-[#25D366] text-sm"></i>
                         <input 
                             type="tel" 
                             id="reg-whatsapp" 
                             required 
-                            placeholder="8499154010" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            placeholder="8295550199 (10 dígitos sin guiones)" 
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] focus:bg-white rounded-xs transition-all font-medium"
                         />
                     </div>
-                    <p class="text-[10px] text-slate-400 mt-1">Este número será el botón de WhatsApp independiente que verán los clientes en tus autos.</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Recibirás los mensajes directos de clientes interesados a este número.</p>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-email">
-                        Correo Electrónico
+                        Correo Electrónico *
                     </label>
                     <div class="relative">
-                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         <input 
                             type="email" 
                             id="reg-email" 
                             required 
                             placeholder="tu@correo.com" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] focus:bg-white rounded-xs transition-all font-medium"
                         />
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5" for="reg-password">
-                        Contraseña (mínimo 6 caracteres)
+                        Contraseña Segura (mínimo 6 caracteres) *
                     </label>
                     <div class="relative">
-                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         <input 
                             type="password" 
                             id="reg-password" 
                             required 
                             minlength="6" 
                             placeholder="••••••••" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#D54000] focus:ring-1 focus:ring-[#D54000] focus:bg-white rounded-xs transition-all font-medium"
                         />
                     </div>
                 </div>
@@ -150,15 +208,15 @@ import Layout from '../layouts/Layout.astro';
                 <button 
                     type="submit" 
                     id="btn-reg-submit" 
-                    class="w-full py-3.5 px-4  bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
+                    class="w-full py-3.5 px-4 bg-[#D54000] hover:bg-[#b83600] text-white font-extrabold text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 mt-2 rounded-xs cursor-pointer"
                 >
-                    <span id="btn-reg-text">Crear Mi Cuenta Gratis</span>
-                    <i id="btn-reg-spinner" class="fas fa-circle-notch fa-spin hidden"></i>
+                    <span id="btn-reg-text">Crear Cuenta y Continuar</span>
+                    <i id="btn-reg-spinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
                 </button>
             </form>
 
             <div class="mt-8 pt-6 border-t border-slate-100 text-center text-xs text-slate-500">
-                <p>Al registrarte aceptas las condiciones de servicio de <br /><strong class="text-slate-700">Tu Carro y Más Rent A Car Santo Domingo Este</strong>.</p>
+                <p>Al registrarte aceptas las condiciones de servicio de <br /><strong class="text-slate-700">TuCarroYMas República Dominicana</strong>.</p>
             </div>
 
         </div>
@@ -174,11 +232,21 @@ import Layout from '../layouts/Layout.astro';
     } from "firebase/auth";
     import { doc, setDoc, serverTimestamp } from "firebase/firestore";
     import { auth, db } from "../lib/firebase/client";
+    import { saveDealerProfile } from "../lib/userListingsStore";
+
+    // Revisar si venía redirigido desde /publicar
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectTarget = urlParams.get("redirect") || "/panel";
+    const authSubtitle = document.getElementById("auth-subtitle");
+
+    if (redirectTarget.includes("publicar") && authSubtitle) {
+        authSubtitle.innerHTML = '<span class="text-[#D54000] font-bold">Inicia sesión o crea tu cuenta gratuita</span> para publicar tu vehículo o activar tu landing page.';
+    }
 
     // Redirect if already logged in
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            window.location.href = '/panel';
+            window.location.href = redirectTarget;
         }
     });
 
@@ -188,6 +256,39 @@ import Layout from '../layouts/Layout.astro';
     const formLogin = document.getElementById('form-login');
     const formRegister = document.getElementById('form-register');
     const authAlert = document.getElementById('auth-alert');
+
+    // Role switcher logic in register form
+    const rolePrivado = document.getElementById('reg-role-privado') as HTMLInputElement;
+    const roleDealer = document.getElementById('reg-role-dealer') as HTMLInputElement;
+    const dealerExtraFields = document.getElementById('dealer-extra-fields');
+    const regLabelName = document.getElementById('reg-label-name');
+    const regNameInput = document.getElementById('reg-name') as HTMLInputElement;
+    const regSlugInput = document.getElementById('reg-dealer-slug') as HTMLInputElement;
+
+    function handleRoleChange() {
+        if (roleDealer?.checked) {
+            dealerExtraFields?.classList.remove('hidden');
+            if (regLabelName) regLabelName.innerText = "Nombre Oficial del Concesionario / Dealer *";
+            if (regNameInput) regNameInput.placeholder = "Ej: Auto Dealer Santiago";
+        } else {
+            dealerExtraFields?.classList.add('hidden');
+            if (regLabelName) regLabelName.innerText = "Nombre Completo del Particular *";
+            if (regNameInput) regNameInput.placeholder = "Ej: Carlos Martínez";
+        }
+    }
+
+    rolePrivado?.addEventListener('change', handleRoleChange);
+    roleDealer?.addEventListener('change', handleRoleChange);
+
+    regNameInput?.addEventListener('input', () => {
+        if (roleDealer?.checked && regSlugInput) {
+            regSlugInput.value = regNameInput.value
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+    });
 
     function showAlert(message: string, isError = true) {
         if (!authAlert) return;
@@ -201,9 +302,9 @@ import Layout from '../layouts/Layout.astro';
     }
 
     tabLogin?.addEventListener('click', () => {
-        tabLogin.classList.add('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabLogin.classList.add('bg-white', 'text-[#D54000]', 'shadow-xs');
         tabLogin.classList.remove('text-slate-500');
-        tabRegister?.classList.remove('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabRegister?.classList.remove('bg-white', 'text-[#D54000]', 'shadow-xs');
         tabRegister?.classList.add('text-slate-500');
         formLogin?.classList.remove('hidden');
         formRegister?.classList.add('hidden');
@@ -211,9 +312,9 @@ import Layout from '../layouts/Layout.astro';
     });
 
     tabRegister?.addEventListener('click', () => {
-        tabRegister.classList.add('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabRegister.classList.add('bg-white', 'text-[#D54000]', 'shadow-xs');
         tabRegister.classList.remove('text-slate-500');
-        tabLogin?.classList.remove('bg-white', 'text-[#0d1f3c]', 'shadow-sm');
+        tabLogin?.classList.remove('bg-white', 'text-[#D54000]', 'shadow-xs');
         tabLogin?.classList.add('text-slate-500');
         formRegister?.classList.remove('hidden');
         formLogin?.classList.add('hidden');
@@ -235,7 +336,7 @@ import Layout from '../layouts/Layout.astro';
         try {
             await signInWithEmailAndPassword(auth, email, password);
             showAlert('¡Ingreso exitoso! Redirigiendo...', false);
-            setTimeout(() => { window.location.href = '/panel'; }, 500);
+            setTimeout(() => { window.location.href = redirectTarget; }, 500);
         } catch (err: any) {
             btnText?.classList.remove('hidden');
             spinner?.classList.add('hidden');
@@ -252,14 +353,18 @@ import Layout from '../layouts/Layout.astro';
     // REGISTER ACTION
     formRegister?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name = (document.getElementById('reg-name') as HTMLInputElement).value.trim();
+        const isDealer = roleDealer.checked;
+        const name = regNameInput.value.trim();
         let whatsapp = (document.getElementById('reg-whatsapp') as HTMLInputElement).value.trim();
         const email = (document.getElementById('reg-email') as HTMLInputElement).value.trim();
         const password = (document.getElementById('reg-password') as HTMLInputElement).value;
 
-        // Clean whatsapp number (ensure digits only or + prefix)
+        // Clean whatsapp number
         const digits = whatsapp.replace(/\D/g, '');
         const cleanWhatsapp = digits.startsWith('1') ? `+${digits}` : `+1${digits}`;
+
+        const dealerSlug = isDealer ? (regSlugInput.value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g, '-')) : null;
+        const dealerSpecialty = isDealer ? ((document.getElementById('reg-dealer-specialty') as HTMLInputElement).value.trim() || 'Concesionario Autorizado') : null;
 
         const btnText = document.getElementById('btn-reg-text');
         const spinner = document.getElementById('btn-reg-spinner');
@@ -272,24 +377,43 @@ import Layout from '../layouts/Layout.astro';
             const cred = await createUserWithEmailAndPassword(auth, email, password);
             const user = cred.user;
 
-            // Set displayName in Auth
             await updateProfile(user, { displayName: name });
 
-            // Create User Document in Firestore
+            // Create User Profile in Firestore
             const userDoc = {
                 uid: user.uid,
                 fullName: name,
                 phone: cleanWhatsapp,
                 whatsapp: cleanWhatsapp,
                 email: email,
-                role: "owner",
+                role: isDealer ? "dealer" : "privado",
+                isDealer: isDealer,
+                dealerSlug: dealerSlug,
+                dealerSpecialty: dealerSpecialty,
                 createdAt: serverTimestamp()
             };
 
             await setDoc(doc(db, "users", user.uid), userDoc);
 
-            showAlert('¡Cuenta creada con éxito! Bienvenido.', false);
-            setTimeout(() => { window.location.href = '/panel'; }, 600);
+            // Si es dealer, registrar su perfil de dealer para que su landing funcione de inmediato
+            if (isDealer && dealerSlug) {
+                saveDealerProfile({
+                    slug: dealerSlug,
+                    name: name,
+                    dealerType: dealerSpecialty || "Concesionario Dealer Oficial",
+                    phone: cleanWhatsapp,
+                    whatsapp: cleanWhatsapp,
+                    location: "Santo Domingo",
+                    bio: `Concesionario oficial registrado en TuCarroYMas. Amplio inventario con garantía y financiamiento disponible.`,
+                    logoUrl: "/brands/toyota.svg",
+                    bannerUrl: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1600&q=80",
+                    verified: true,
+                    createdAt: new Date().toISOString()
+                });
+            }
+
+            showAlert('¡Cuenta creada con éxito! Bienvenido a TuCarroYMas.', false);
+            setTimeout(() => { window.location.href = redirectTarget; }, 600);
         } catch (err: any) {
             btnText?.classList.remove('hidden');
             spinner?.classList.add('hidden');
