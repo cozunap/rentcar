@@ -96,7 +96,7 @@ import Layout from '../layouts/Layout.astro';
 
 <script>
     import { onAuthStateChanged, signOut } from "firebase/auth";
-    import { doc, getDoc, collection, query, where, onSnapshot, deleteDoc } from "firebase/firestore";
+    import { doc, getDoc, collection, query, where, onSnapshot, deleteDoc, updateDoc } from "firebase/firestore";
     import { auth, db } from "../lib/firebase/client";
 
     const userNameEl = document.getElementById('panel-user-name');
@@ -169,33 +169,56 @@ import Layout from '../layouts/Layout.astro';
             snapshot.forEach((docSnap) => {
                 const v = docSnap.data();
                 const card = document.createElement('div');
-                card.className = "bg-white  border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between";
+                card.className = "luxury-card bg-white border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between";
+                const isAvailable = v.status !== 'rented';
+                const statusBadge = isAvailable
+                    ? `<span class="text-[11px] text-emerald-600 font-bold flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 animate-pulse"></span> Disponible</span>`
+                    : `<span class="text-[11px] text-amber-600 font-bold flex items-center gap-1.5"><span class="w-2 h-2 bg-amber-500"></span> Alquilado</span>`;
+
                 card.innerHTML = `
                     <div>
                         <div class="relative h-44 bg-slate-100">
                             <img src="${v.mainImage}" alt="${v.title}" class="w-full h-full object-cover" />
-                            <span class="absolute top-2 left-2 px-2 py-0.5 bg-black/60 text-white  text-[10px] font-bold uppercase backdrop-blur-sm">
+                            <span class="absolute top-2 left-2 px-2 py-0.5 bg-black/75 text-white text-[10px] font-bold uppercase backdrop-blur-sm">
                                 ${v.category || 'SUV'}
                             </span>
-                            <span class="absolute bottom-2 right-2 px-2.5 py-1 bg-[#0d6efd] text-white  text-xs font-black shadow">
+                            <span class="absolute bottom-2 right-2 px-2.5 py-1 bg-[#1d4ed8] text-white text-xs font-black shadow luxury-btn">
                                 $${v.pricePerDay || v.price}/día
                             </span>
                         </div>
                         <div class="p-5">
-                            <h3 class="font-bold text-slate-900 text-base leading-snug">${v.title}</h3>
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="font-bold text-slate-900 text-base leading-snug">${v.title}</h3>
+                                ${statusBadge}
+                            </div>
                             <p class="text-xs text-slate-400 mt-1">${v.city || 'Santo Domingo'} • ${v.transmission || 'Automática'}</p>
                             <p class="text-xs text-slate-500 mt-2 line-clamp-2">${v.description || ''}</p>
                         </div>
                     </div>
                     <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
-                        <span class="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
-                            <i class="fas fa-circle text-[8px]"></i> En Catálogo
-                        </span>
-                        <button class="delete-btn text-xs text-red-500 hover:text-red-700 font-semibold px-2 py-1  hover:bg-red-50 transition-colors" data-id="${docSnap.id}">
+                        <button class="toggle-status-btn text-xs font-bold text-slate-700 hover:text-[#1d4ed8] px-3 py-1.5 bg-white border border-slate-300 luxury-btn" data-id="${docSnap.id}" data-status="${v.status || 'available'}">
+                            <i class="fas fa-toggle-on me-1"></i> ${isAvailable ? 'Marcar Alquilado' : 'Marcar Disponible'}
+                        </button>
+                        <button class="delete-btn text-xs text-red-600 hover:text-red-700 font-bold px-3 py-1.5 bg-red-50 border border-red-200 luxury-btn" data-id="${docSnap.id}">
                             <i class="fas fa-trash-alt me-1"></i> Eliminar
                         </button>
                     </div>
                 `;
+
+                // Toggle availability status
+                card.querySelector('.toggle-status-btn')?.addEventListener('click', async (e) => {
+                    const btn = e.currentTarget as HTMLButtonElement;
+                    const id = btn.getAttribute('data-id');
+                    const curr = btn.getAttribute('data-status');
+                    if (id) {
+                        try {
+                            const newStatus = curr === 'rented' ? 'available' : 'rented';
+                            await updateDoc(doc(db, "vehicles", id), { status: newStatus });
+                        } catch (err: any) {
+                            alert("Error al actualizar estado: " + err.message);
+                        }
+                    }
+                });
 
                 // Delete action
                 card.querySelector('.delete-btn')?.addEventListener('click', async (e) => {

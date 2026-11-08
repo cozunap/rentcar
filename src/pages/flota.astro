@@ -22,6 +22,46 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
     <section class="py-16 bg-[#f8fafc]">
         <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
             
+            <!-- FILTROS FACETADOS ESTILO JETSMARTFILTERS (Flota Completa) -->
+            <div class="bg-white border border-slate-200 p-6 mb-8 shadow-xs luxury-card space-y-4">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                    <!-- Categorías -->
+                    <div class="flex flex-wrap gap-2" id="flota-cat-filter-container">
+                        <button type="button" class="flota-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-[#0f172a] text-white luxury-btn" data-cat="all">
+                            Todos
+                        </button>
+                        <button type="button" class="flota-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 luxury-btn" data-cat="SUV">
+                            SUVs / Jeepetas
+                        </button>
+                        <button type="button" class="flota-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 luxury-btn" data-cat="Premium">
+                            Alta Gama
+                        </button>
+                        <button type="button" class="flota-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 luxury-btn" data-cat="Sedán">
+                            Sedanes
+                        </button>
+                    </div>
+
+                    <!-- Buscador por texto y orden -->
+                    <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full lg:w-auto">
+                        <div class="relative flex-1 sm:w-64">
+                            <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input 
+                                type="text" 
+                                id="flota-search-input" 
+                                placeholder="Buscar marca, modelo..." 
+                                class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-[#1d4ed8]"
+                            />
+                        </div>
+
+                        <select id="flota-sort" class="text-xs font-semibold p-2 bg-slate-50 border border-slate-200 text-slate-700 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="recent">Más recientes</option>
+                            <option value="price-asc">Precio: Menor a Mayor</option>
+                            <option value="price-desc">Precio: Mayor a Menor</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 border-b border-slate-200 pb-4">
                 <span id="flota-total-count" class="text-xs font-bold uppercase tracking-wider text-slate-500">
                     Cargando vehículos disponibles...
@@ -81,16 +121,56 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
     const sOwnerPhone = document.getElementById('sidebar-owner-phone');
     const sWhatsappBtn = document.getElementById('sidebar-whatsapp-btn') as HTMLAnchorElement;
 
+    // Calculator inputs inside Sidebar (JetBooking Pattern)
+    const sDateStart = document.getElementById('sidebar-date-start') as HTMLInputElement;
+    const sDateEnd = document.getElementById('sidebar-date-end') as HTMLInputElement;
+    const sDaysCount = document.getElementById('sidebar-days-count');
+    const sRateBreakdown = document.getElementById('sidebar-rate-breakdown');
+    const sTotalEstimate = document.getElementById('sidebar-total-estimate');
+
+    const today = new Date();
+    const futureDate = new Date();
+    futureDate.setDate(today.getDate() + 3);
+    const formatInputDate = (d: Date) => d.toISOString().split('T')[0];
+
+    let activePrice = 50;
+    let activeTitle = 'SUV';
+
+    function updateRentalQuote(cleanPhone: string) {
+        if (!sDateStart || !sDateEnd || !sDaysCount || !sRateBreakdown || !sTotalEstimate) return;
+        const start = new Date(sDateStart.value);
+        const end = new Date(sDateEnd.value);
+
+        let diffDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
+        if (isNaN(diffDays) || diffDays < 1) diffDays = 1;
+
+        const total = diffDays * activePrice;
+        sDaysCount.textContent = `${diffDays} día${diffDays > 1 ? 's' : ''}`;
+        sRateBreakdown.textContent = `$${activePrice} x ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+        sTotalEstimate.textContent = `$${total} USD`;
+
+        const msg = encodeURIComponent(
+            `Hola, me interesa rentar la ${activeTitle} desde ${sDateStart.value} hasta ${sDateEnd.value} (${diffDays} días). Total estimado: $${total} USD. ¿Tienen disponibilidad?`
+        );
+        if (sWhatsappBtn) {
+            sWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
+            sWhatsappBtn.querySelector('span')!.textContent = `Reservar (${diffDays} días: $${total} USD)`;
+        }
+    }
+
     function openSidebar(vehicle: any, owner: any) {
         if (!offcanvas || !panel || !backdrop) return;
 
+        activePrice = vehicle.pricePerDay || vehicle.price || 50;
+        activeTitle = vehicle.title;
+
         if (sCategory) sCategory.textContent = vehicle.category || 'SUV';
-        if (sMainImg) sMainImg.src = vehicle.mainImage || '/Honda.webp';
+        if (sMainImg) sMainImg.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : vehicle.mainImage;
         if (sTitle) sTitle.textContent = vehicle.title;
         if (sLocation) sLocation.querySelector('span')!.textContent = vehicle.city || 'Santo Domingo Este';
-        if (sPrice) sPrice.textContent = `$${vehicle.pricePerDay || vehicle.price || 0}`;
-        if (sSeats) sSeats.textContent = `${vehicle.seats || 5} Pasajeros`;
-        if (sLuggage) sLuggage.textContent = vehicle.luggage || '3-4 Maletas';
+        if (sPrice) sPrice.textContent = `$${activePrice}`;
+        if (sSeats) sSeats.textContent = `${vehicle.seats || 5} Asientos`;
+        if (sLuggage) sLuggage.textContent = vehicle.luggage || (vehicle.seats > 5 ? '4-5 Maletas' : '3-4 Maletas');
         if (sTransmission) sTransmission.textContent = vehicle.transmission === 'manual' ? 'Manual' : 'Automática';
         if (sFuel) sFuel.textContent = vehicle.fuelType || 'Gasolina';
         if (sDescription) sDescription.textContent = vehicle.description || `Vehículo ${vehicle.title} disponible para renta en Santo Domingo.`;
@@ -98,17 +178,17 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
         const ownerName = owner?.fullName || vehicle.ownerName || 'Tu Carro y Más';
         const rawPhone = owner?.whatsapp || owner?.phone || vehicle.ownerWhatsapp || '18499154010';
         const cleanPhone = rawPhone.replace(/\D/g, '');
-        const photoUrl = owner?.photoUrl || vehicle.ownerPhoto || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80';
 
         if (sOwnerName) sOwnerName.textContent = ownerName;
         if (sOwnerPhone) sOwnerPhone.textContent = `+${cleanPhone}`;
-        if (sOwnerPhoto) sOwnerPhoto.src = photoUrl;
 
-        const defaultMsg = encodeURIComponent(`Hola, me interesa reservar la ${vehicle.title}`);
-        if (sWhatsappBtn) {
-            sWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${defaultMsg}`;
-            sWhatsappBtn.querySelector('span')!.textContent = `Reservar por WhatsApp`;
-        }
+        if (sDateStart) sDateStart.value = formatInputDate(today);
+        if (sDateEnd) sDateEnd.value = formatInputDate(futureDate);
+
+        updateRentalQuote(cleanPhone);
+
+        sDateStart?.addEventListener('change', () => updateRentalQuote(cleanPhone));
+        sDateEnd?.addEventListener('change', () => updateRentalQuote(cleanPhone));
 
         // Thumbnails
         if (sGalleryThumbs) {
@@ -116,9 +196,9 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
             const imgs = vehicle.images && vehicle.images.length > 0 ? vehicle.images : [vehicle.mainImage];
             imgs.forEach((imgUrl: string) => {
                 const thumb = document.createElement('img');
-                thumb.src = imgUrl;
-                thumb.className = 'w-16 h-12 object-cover border border-gray-200 hover:border-[#1d4ed8] cursor-pointer shrink-0 luxury-btn';
-                thumb.addEventListener('click', () => { if (sMainImg) sMainImg.src = imgUrl; });
+                thumb.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : imgUrl;
+                thumb.className = 'w-16 h-16 object-contain bg-white border border-slate-200 hover:border-[#1d4ed8] cursor-pointer shrink-0 luxury-btn';
+                thumb.addEventListener('click', () => { if (sMainImg) sMainImg.src = thumb.src; });
                 sGalleryThumbs.appendChild(thumb);
             });
         }
@@ -145,35 +225,66 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
 
     closeBtn?.addEventListener('click', closeSidebar);
     backdrop?.addEventListener('click', closeSidebar);
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
 
-    // Stream
-    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
-    onSnapshot(q, async (snap) => {
+    // Stream & Faceted Filter Engine (JetSmartFilters Pattern)
+    let allFlotaVehicles: any[] = [];
+    let activeFlotaCat = 'all';
+    let activeFlotaSort = 'recent';
+    let activeSearchTerm = '';
+
+    function renderFlotaCatalog() {
         if (!flotaGrid) return;
-        if (totalCount) totalCount.textContent = `${snap.size} Vehículos Disponibles para Renta`;
         flotaGrid.innerHTML = '';
 
-        for (const docSnap of snap.docs) {
-            const v = docSnap.data();
-            v.id = docSnap.id;
+        let results = [...allFlotaVehicles];
 
-            let ownerData: any = null;
-            if (v.ownerId) {
-                try {
-                    const uSnap = await getDoc(doc(db, "users", v.ownerId));
-                    if (uSnap.exists()) ownerData = uSnap.data();
-                } catch (e) {
-                    console.warn(e);
-                }
-            }
+        // Filter category
+        if (activeFlotaCat !== 'all') {
+            results = results.filter(item => (item.v.category || '').toLowerCase().includes(activeFlotaCat.toLowerCase()));
+        }
 
+        // Filter search term
+        if (activeSearchTerm.trim() !== '') {
+            const term = activeSearchTerm.toLowerCase();
+            results = results.filter(item => 
+                (item.v.title || '').toLowerCase().includes(term) ||
+                (item.v.brand || '').toLowerCase().includes(term) ||
+                (item.v.model || '').toLowerCase().includes(term) ||
+                (item.v.city || '').toLowerCase().includes(term)
+            );
+        }
+
+        // Sort
+        if (activeFlotaSort === 'price-asc') {
+            results.sort((a, b) => (a.v.pricePerDay || a.v.price || 0) - (b.v.pricePerDay || b.v.price || 0));
+        } else if (activeFlotaSort === 'price-desc') {
+            results.sort((a, b) => (b.v.pricePerDay || b.v.price || 0) - (a.v.pricePerDay || a.v.price || 0));
+        }
+
+        if (totalCount) {
+            totalCount.textContent = `${results.length} Vehículo${results.length === 1 ? '' : 's'} Disponible${results.length === 1 ? '' : 's'}`;
+        }
+
+        if (results.length === 0) {
+            flotaGrid.innerHTML = `
+                <div class="col-span-full text-center py-16 bg-white border border-slate-200 p-8">
+                    <i class="fas fa-car-side text-4xl text-slate-300 mb-3"></i>
+                    <p class="text-sm font-bold text-slate-700 uppercase">No se encontraron vehículos coincidentes</p>
+                    <p class="text-xs text-slate-500 mt-1">Prueba cambiando los filtros o el término de búsqueda.</p>
+                </div>
+            `;
+            return;
+        }
+
+        results.forEach(({ v, ownerData }) => {
             const cleanPhone = (ownerData?.whatsapp || v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
             const msg = encodeURIComponent(`Hola, me interesa reservar la ${v.title}`);
-            const badgeColor = v.category === 'Premium' ? 'bg-[#212529] text-white' : 'bg-[#0d6efd] text-white';
+            const badgeColor = v.category === 'Premium' ? 'bg-[#0f172a] text-white' : 'bg-[#1d4ed8] text-white';
+            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
 
             const card = document.createElement('div');
             card.className = "luxury-card flex flex-col justify-between overflow-hidden cursor-pointer";
-            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
             card.innerHTML = `
                 <div>
                     <div class="car-image-container">
@@ -203,7 +314,7 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
                                 <span>Reservar ${v.model || v.title}</span>
                             </a>
                             <button type="button" class="view-btn w-full py-2 text-xs text-slate-500 hover:text-[#1d4ed8] font-semibold text-center uppercase tracking-wider">
-                                <i class="fas fa-sliders me-1"></i> Ver Ficha Técnica y Contacto
+                                <i class="fas fa-calculator me-1"></i> Cotizar Fechas y Contacto
                             </button>
                         </div>
                     </div>
@@ -217,6 +328,57 @@ import VehicleSidebar from '../components/VehicleSidebar.astro';
             });
 
             flotaGrid.appendChild(card);
+        });
+    }
+
+    // Filter Listeners
+    const catBtns = document.querySelectorAll<HTMLButtonElement>('.flota-cat-btn');
+    catBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            catBtns.forEach(b => {
+                b.classList.remove('bg-[#0f172a]', 'text-white');
+                b.classList.add('bg-slate-100', 'text-slate-700');
+            });
+            btn.classList.remove('bg-slate-100', 'text-slate-700');
+            btn.classList.add('bg-[#0f172a]', 'text-white');
+            activeFlotaCat = btn.getAttribute('data-cat') || 'all';
+            renderFlotaCatalog();
+        });
+    });
+
+    const searchInput = document.getElementById('flota-search-input') as HTMLInputElement;
+    searchInput?.addEventListener('input', () => {
+        activeSearchTerm = searchInput.value;
+        renderFlotaCatalog();
+    });
+
+    const sortFlotaSelect = document.getElementById('flota-sort') as HTMLSelectElement;
+    sortFlotaSelect?.addEventListener('change', () => {
+        activeFlotaSort = sortFlotaSelect.value;
+        renderFlotaCatalog();
+    });
+
+    // Stream
+    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
+    onSnapshot(q, async (snap) => {
+        allFlotaVehicles = [];
+
+        for (const docSnap of snap.docs) {
+            const v = docSnap.data();
+            v.id = docSnap.id;
+
+            let ownerData: any = null;
+            if (v.ownerId) {
+                try {
+                    const uSnap = await getDoc(doc(db, "users", v.ownerId));
+                    if (uSnap.exists()) ownerData = uSnap.data();
+                } catch (e) {
+                    console.warn(e);
+                }
+            }
+            allFlotaVehicles.push({ v, ownerData });
         }
+
+        renderFlotaCatalog();
     });
 </script>
