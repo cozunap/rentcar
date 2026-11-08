@@ -38,7 +38,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
         Compra. Vende. Intercambia
       </h1>
 
-      <!-- Barra de Filtros CarDealer: 4 selectores superiores + 3 sliders inferiores + Botón verde "Buscar" -->
+      <!-- Barra de Filtros CarDealer: 4 selectores superiores + 3 sliders inferiores + Botón naranja "Buscar" -->
       <div class="bg-slate-900/70 backdrop-blur-md p-6 border border-white/10 rounded-sm shadow-2xl">
         <form action="/vehiculos" method="GET">
           <!-- Fila 1: 4 Selectores (Tipo de Transporte, Marca, Modelo, Carrocería) -->
@@ -95,7 +95,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
             </div>
           </div>
 
-          <!-- Fila 2: 3 Sliders (Precio, Año, Cilindrada) + Botón Verde "Buscar" -->
+          <!-- Fila 2: 3 Sliders (Precio, Año, Cilindrada) + Botón Naranja "Buscar" -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
             <div>
               <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
@@ -136,29 +136,49 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
     </div>
   </section>
 
-  <!-- 2. EXPLORAR POR ESTILO / TIPO DE VEHÍCULO (Exact 12 AutoTrader Styles with Real Vehicle Profiles & Soft-Blue Circles) -->
-  <section class="py-12 px-4 bg-white border-b border-slate-100">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex items-center justify-between mb-8">
+  <!-- 2. EXPLORAR POR ESTILO / TIPO DE VEHÍCULO (Carrusel Horizontal Interactivo) -->
+  <section class="py-12 px-4 bg-white border-b border-slate-100 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center justify-between mb-6">
         <div>
           <h2 class="text-xl font-black text-slate-900">
             Explorar Vehículos por Estilo
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">Encuentra el vehículo perfecto según su tipo de carrocería y tracción.</p>
+          <p class="text-xs text-slate-500 mt-0.5">Encuentra el vehículo perfecto según su tipo de carrocería, botes y tracción.</p>
         </div>
-        <a href="/vehiculos" class="text-xs font-bold text-blue-500 hover:text-blue-600 flex items-center gap-1">
-          Ver Todos los Estilos &rarr;
-        </a>
+        <div class="flex items-center gap-2">
+          <!-- Controles del Carrusel (Flechas izquierda / derecha) -->
+          <button 
+            id="styles-prev-btn" 
+            type="button" 
+            aria-label="Anterior estilo"
+            class="w-8 h-8 rounded-full border border-slate-300 hover:border-[#D54000] hover:text-white hover:bg-[#D54000] text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            &larr;
+          </button>
+          <button 
+            id="styles-next-btn" 
+            type="button" 
+            aria-label="Siguiente estilo"
+            class="w-8 h-8 rounded-full border border-slate-300 hover:border-[#D54000] hover:text-white hover:bg-[#D54000] text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            &rarr;
+          </button>
+        </div>
       </div>
 
-      <!-- AutoTrader exact styles in clean grid (including Boats & Marine) -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 sm:gap-4">
+      <!-- Carrusel Horizontal Track (Scroll suave y snap) -->
+      <div 
+        id="styles-carousel-track" 
+        class="flex items-stretch gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-1 no-scrollbar"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+      >
         {VEHICLE_STYLES.map(style => (
           <a 
             href={style.id === "boats" ? "/vehiculos?type=water-transport" : `/vehiculos?body=${style.id}`}
-            class="flex flex-col items-center justify-between p-3 rounded-sm hover:shadow-md hover:border-[#D54000] border border-transparent transition-all group text-center cursor-pointer"
+            class="snap-start shrink-0 w-[180px] sm:w-[200px] flex flex-col items-center justify-between p-3.5 rounded-sm hover:shadow-lg hover:border-[#D54000] border border-slate-200 transition-all group text-center cursor-pointer bg-white"
           >
-            <!-- Real Vehicle Profile Graphic with Soft Blue Backdrop Circle (Matching AutoTrader screenshot) -->
+            <!-- Graphic Image (SVGs exactos con círculo azul claro detrás) -->
             <div class="w-full h-24 flex items-center justify-center mb-2">
               <img 
                 src={style.image} 
@@ -168,12 +188,11 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
               />
             </div>
             
-            <!-- Vehicle Style Name in Spanish + English -->
-            <div class="mt-1">
-              <span class="block text-xs font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight">
+            <div class="mt-1 w-full">
+              <span class="block text-xs font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight truncate">
                 {style.nameEs}
               </span>
-              <span class="text-[10px] text-slate-400 font-medium">
+              <span class="text-[10px] text-slate-400 font-medium truncate block">
                 {style.name}
               </span>
             </div>
@@ -183,7 +202,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
     </div>
   </section>
 
-  <!-- 3. ANUNCIOS RECIENTES (Tarjetas blancas con precio verde e iconos de especificaciones) -->
+  <!-- 3. ANUNCIOS RECIENTES (Tarjetas blancas con precio naranja e iconos de especificaciones) -->
   <section class="py-12 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-center justify-between mb-8">
@@ -350,7 +369,7 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
     </div>
   </section>
 
-  <!-- 6. BOLETÍN DE NOVEDADES (Sección azul marino oscuro con campo y botón verde) -->
+  <!-- 6. BOLETÍN DE NOVEDADES (Sección azul marino oscuro con campo y botón naranja) -->
   <section class="py-14 px-4 bg-[#0d1424] text-white text-center">
     <div class="max-w-xl mx-auto">
       <h2 class="text-2xl font-black mb-1">
@@ -378,3 +397,22 @@ const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
   </section>
 
 </Layout>
+
+<script>
+  // Carrusel interactivo para estilos de vehículos
+  const track = document.getElementById("styles-carousel-track");
+  const prevBtn = document.getElementById("styles-prev-btn") as HTMLButtonElement;
+  const nextBtn = document.getElementById("styles-next-btn") as HTMLButtonElement;
+
+  if (track && prevBtn && nextBtn) {
+    const scrollAmount = 380;
+
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+  }
+</script>
