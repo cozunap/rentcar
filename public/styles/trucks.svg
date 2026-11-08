@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+      <circle cx="95" cy="46" r="42" fill="#edf4fd"/>
+      <!-- Truck Body -->
+      <path d="M18 56 L95 56 L95 40 L135 40 L165 48 L184 56 L184 72 L18 72 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Cabin Windows -->
+      <path d="M100 42 L132 42 L132 54 L100 54 Z" fill="#0f172a" opacity="0.8"/>
+      <path d="M136 42 L158 48 L158 54 L136 54 Z" fill="#0f172a" opacity="0.8"/>
+      <!-- Headlights & Bed Line -->
+      <line x1="95" y1="56" x2="95" y2="72" stroke="#94a3b8" stroke-width="1.5"/>
+      <path d="M180 54 L184 58 L178 60 Z" fill="#38bdf8"/>
+      <path d="M18 58 L22 58 L22 64 L18 64 Z" fill="#ef4444"/>
+      <!-- Wheels (Bigger Truck Tires) -->
+      <circle cx="52" cy="72" r="15" fill="#1e293b"/>
+      <circle cx="52" cy="72" r="8" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+      <circle cx="152" cy="72" r="15" fill="#1e293b"/>
+      <circle cx="152" cy="72" r="8" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+    </svg>

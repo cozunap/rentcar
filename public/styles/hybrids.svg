@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+      <circle cx="85" cy="48" r="42" fill="#edf4fd"/>
+      <!-- Small Eco Leaf Badge -->
+      <circle cx="38" cy="32" r="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+      <path d="M35 35 Q40 27 43 32 Q38 36 35 35 Z" fill="#16a34a"/>
+      <!-- Aerodynamic Hybrid (Prius style) -->
+      <path d="M20 62 L32 50 L80 44 L125 44 L158 54 L180 62 L180 72 L20 72 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+      <path d="M40 50 L80 46 L102 46 L102 56 L42 56 Z" fill="#0f172a" opacity="0.8"/>
+      <path d="M106 46 L124 46 L150 54 L106 56 Z" fill="#0f172a" opacity="0.8"/>
+      <!-- Aero Wheels -->
+      <circle cx="52" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="52" cy="72" r="8" fill="#cbd5e1" stroke="#00c982" stroke-width="2"/>
+      <circle cx="150" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="150" cy="72" r="8" fill="#cbd5e1" stroke="#00c982" stroke-width="2"/>
+    </svg>

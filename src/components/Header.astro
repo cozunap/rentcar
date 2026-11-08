@@ -1,6 +1,8 @@
 ---
-// Header matching exact Crocoblock Car Dealer New demo - 100% Spanish with menu justified to the right
-import { TRANSPORT_TYPES } from "../lib/carDealerData";
+// Header matching exact AutoTrader architecture & Crocoblock Car Dealer New
+// 100% Spanish, Full-width mega menu container, items:
+// Carros Usados | Nuevos Carros | Vendedores Privados | Vende Mi Carro | Oferta Inmediata | Investigación & Herramientas (Mega Menú full-width)
+import { VEHICLE_STYLES } from "../lib/vehicleStyles";
 ---
 
 <!-- Top Demo notice banner en español -->
@@ -8,7 +10,7 @@ import { TRANSPORT_TYPES } from "../lib/carDealerData";
   <span>Plataforma Oficial de Concesionarios y Venta de Vehículos en República Dominicana — TuCarroYMas</span>
 </div>
 
-<header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+<header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between">
     
     <!-- Logo with emerald green circle like CARDEALER demo, named TuCarroYMas -->
@@ -26,44 +28,135 @@ import { TRANSPORT_TYPES } from "../lib/carDealerData";
       </div>
     </a>
 
-    <!-- RIGHT-ALIGNED NAVIGATION & CTA BUTTON (Justificado a la derecha al lado de Publicar) -->
-    <div class="flex items-center gap-6">
+    <!-- RIGHT-ALIGNED NAVIGATION (Exact AutoTrader Items in 100% Spanish) -->
+    <div class="flex items-center gap-5">
       
-      <!-- Desktop Navigation (100% Español, Blog eliminado, justificado a la derecha) -->
-      <nav class="hidden lg:flex items-center gap-6">
-        <a href="/vehiculos" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors">
-          Listado de Autos
+      <nav class="hidden lg:flex items-center gap-5">
+        <!-- 1. Carros Usados -->
+        <a href="/vehiculos?condition=usado" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors whitespace-nowrap">
+          Carros Usados
         </a>
 
-        <!-- Dropdown Categorías de Transporte -->
-        <div class="relative group">
-          <button type="button" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] flex items-center gap-1 transition-colors">
-            <span>Comprar & Vender</span>
+        <!-- 2. Nuevos Carros -->
+        <a href="/vehiculos?condition=nuevo" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors whitespace-nowrap">
+          Nuevos Carros
+        </a>
+
+        <!-- 3. Vendedores Privados -->
+        <a href="/vehiculos" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors whitespace-nowrap">
+          Vendedores Privados
+        </a>
+
+        <!-- 4. Vende Mi Carro -->
+        <a href="/publicar" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors whitespace-nowrap">
+          Vende Mi Carro
+        </a>
+
+        <!-- 5. Oferta Inmediata (Instant Cash Offer) -->
+        <a href="/contacto" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors whitespace-nowrap">
+          Oferta Inmediata
+        </a>
+
+        <!-- 6. FULL-WIDTH MEGA MENU: Investigación & Herramientas (Research & Tools) -->
+        <div class="group">
+          <button 
+            type="button" 
+            class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] flex items-center gap-1 transition-colors py-2 whitespace-nowrap"
+          >
+            <span>Investigación & Herramientas</span>
             <svg class="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
-          <div class="absolute right-0 top-full pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all w-64 z-50">
-            <div class="bg-white border border-slate-200 shadow-xl py-2">
-              {TRANSPORT_TYPES.map(cat => (
-                <a href={`/vehiculos?type=${cat.id}`} class="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#00c982]">
-                  {cat.nameEs}
-                </a>
-              ))}
+
+          <!-- FULL-WIDTH MEGA MENU DROPDOWN (Ocupa todo el ancho de la ventana/contenedor) -->
+          <div class="absolute left-0 right-0 top-full bg-white border-b border-slate-200 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+            <div class="max-w-7xl mx-auto px-8 py-8">
+              
+              <!-- Top 3 Columns matching AutoTrader screenshot -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-100">
+                
+                <!-- Col 1: Enlaces Útiles (Helpful Links) -->
+                <div>
+                  <h4 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 text-[#00c982]">
+                    Enlaces Útiles
+                  </h4>
+                  <ul class="space-y-2.5 text-xs text-slate-600 font-medium">
+                    <li><a href="/nosotros" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Buscar Concesionarios Locales</a></li>
+                    <li><a href="/vehiculos?maxPrice=15000" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Mejores Ofertas de Autos</a></li>
+                    <li><a href="/vehiculos?body=camioneta" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Mejores Ofertas en Camionetas & Pick-ups</a></li>
+                    <li><a href="/vehiculos?body=suv" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Mejores Ofertas en Jeepetas & SUVs</a></li>
+                    <li><a href="/vehiculos" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Comprar Vehículos 100% en Línea</a></li>
+                  </ul>
+                </div>
+
+                <!-- Col 2: Investigación & Modelos (Car Research & News) -->
+                <div>
+                  <h4 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 text-[#00c982]">
+                    Investigación & Modelos
+                  </h4>
+                  <ul class="space-y-2.5 text-xs text-slate-600 font-medium">
+                    <li><a href="/brands" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Directorio Completo de Marcas en RD</a></li>
+                    <li><a href="/brands" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Marcas Chinas en Auge (BYD, Changan, Geely)</a></li>
+                    <li><a href="/vehiculos?type=cars" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Modelos Nuevos & Futuros 2026</a></li>
+                    <li><a href="/vehiculos" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Comparativas de Versiones y Equipamiento</a></li>
+                    <li><a href="/vehiculos?fuelType=Eléctrico" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Guía de Vehículos Eléctricos e Híbridos</a></li>
+                  </ul>
+                </div>
+
+                <!-- Col 3: Herramientas de Compra (Car Buying Tools) -->
+                <div>
+                  <h4 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 text-[#00c982]">
+                    Herramientas de Compra
+                  </h4>
+                  <ul class="space-y-2.5 text-xs text-slate-600 font-medium">
+                    <li><a href="/contacto" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Consejos para Comprar y Vender Seguro</a></li>
+                    <li><a href="/contacto" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Calculadora de Cuotas y Financiamiento</a></li>
+                    <li><a href="/contacto" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Calculadora de Capacidad de Pago</a></li>
+                    <li><a href="/contacto" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Asesoría de Seguro Vehicular en RD</a></li>
+                    <li><a href="/publicar" class="hover:text-[#00c982] hover:translate-x-1 transition-transform inline-block">Valuación Gratuita de tu Vehículo Actual</a></li>
+                  </ul>
+                </div>
+
+              </div>
+
+              <!-- Bottom 3 Highlight Cards matching AutoTrader banner row -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                
+                <div class="flex items-center gap-3.5 p-3 rounded-sm bg-slate-50 border border-slate-200">
+                  <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-800">Seguros & Cobertura en RD</h5>
+                    <p class="text-[11px] text-slate-500">Compara cotizaciones de pólizas de ley y full.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3.5 p-3 rounded-sm bg-slate-50 border border-slate-200">
+                  <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-800">Oferta en Efectivo Inmediata</h5>
+                    <p class="text-[11px] text-slate-500">Vende tu auto el mismo día con pago verificado.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3.5 p-3 rounded-sm bg-slate-50 border border-slate-200">
+                  <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-800">Historial Carfax / AutoCheck</h5>
+                    <p class="text-[11px] text-slate-500">Verifica antecedentes de importación y millaje.</p>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
           </div>
         </div>
 
-        <a href="/brands" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors">
-          Marcas
-        </a>
-        <a href="/panel" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors">
-          Mis Anuncios
-        </a>
-        <a href="/nosotros" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors">
-          Concesionarios
-        </a>
-        <a href="/vehiculos" class="text-xs uppercase tracking-wider font-bold text-slate-700 hover:text-[#00c982] transition-colors">
-          Favoritos
-        </a>
       </nav>
 
       <!-- Botón Verde Publicar Anuncio -->
@@ -91,21 +184,13 @@ import { TRANSPORT_TYPES } from "../lib/carDealerData";
 
   <!-- Mobile Drawer -->
   <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 py-5 space-y-3">
-    <a href="/vehiculos" class="block py-1.5 text-sm font-semibold text-slate-800">Listado de Autos</a>
-    <div class="py-1">
-      <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Tipos de Transporte</span>
-      <div class="pl-3 space-y-1 border-l-2 border-[#00c982]">
-        {TRANSPORT_TYPES.map(cat => (
-          <a href={`/vehiculos?type=${cat.id}`} class="block py-1 text-xs text-slate-600 hover:text-[#00c982]">
-            {cat.nameEs}
-          </a>
-        ))}
-      </div>
-    </div>
-    <a href="/brands" class="block py-1.5 text-sm font-semibold text-slate-800">Marcas de Vehículos</a>
-    <a href="/panel" class="block py-1.5 text-sm font-semibold text-slate-800">Mis Anuncios</a>
+    <a href="/vehiculos?condition=usado" class="block py-1.5 text-sm font-semibold text-slate-800">Carros Usados</a>
+    <a href="/vehiculos?condition=nuevo" class="block py-1.5 text-sm font-semibold text-slate-800">Nuevos Carros</a>
+    <a href="/vehiculos" class="block py-1.5 text-sm font-semibold text-slate-800">Vendedores Privados</a>
+    <a href="/publicar" class="block py-1.5 text-sm font-semibold text-slate-800">Vende Mi Carro</a>
+    <a href="/contacto" class="block py-1.5 text-sm font-semibold text-slate-800">Oferta Inmediata</a>
+    <a href="/brands" class="block py-1.5 text-sm font-semibold text-slate-800">Directorio de Marcas</a>
     <a href="/nosotros" class="block py-1.5 text-sm font-semibold text-slate-800">Concesionarios</a>
-    <a href="/contacto" class="block py-1.5 text-sm font-semibold text-slate-800">Contacto</a>
   </div>
 </header>
 

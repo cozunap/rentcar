@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+      <circle cx="85" cy="48" r="42" fill="#edf4fd"/>
+      <!-- Fastback Low Sports Coupe -->
+      <path d="M20 62 L40 58 L70 46 L120 46 L160 56 L184 62 L184 72 L20 72 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+      <path d="M72 48 L116 48 L142 56 L70 56 Z" fill="#0f172a" opacity="0.8"/>
+      <path d="M180 60 L184 64 L176 64 Z" fill="#38bdf8"/>
+      <!-- Low Profile Wheels -->
+      <circle cx="52" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="52" cy="72" r="8" fill="#cbd5e1" stroke="#334155" stroke-width="2.5"/>
+      <circle cx="152" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="152" cy="72" r="8" fill="#cbd5e1" stroke="#334155" stroke-width="2.5"/>
+    </svg>

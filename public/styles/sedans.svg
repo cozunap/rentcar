@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+      <circle cx="85" cy="48" r="42" fill="#edf4fd"/>
+      <!-- Sedan Body -->
+      <path d="M20 62 L35 62 L48 52 L82 45 L130 45 L158 54 L175 58 L182 66 L182 72 L18 72 L18 66 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+      <path d="M52 52 L82 46 L105 46 L105 56 L50 56 Z" fill="#0f172a" opacity="0.8"/>
+      <path d="M110 46 L130 46 L152 54 L110 56 Z" fill="#0f172a" opacity="0.8"/>
+      <!-- Headlights & Taillights -->
+      <path d="M178 58 L182 62 L175 63 Z" fill="#38bdf8"/>
+      <path d="M18 64 L24 64 L22 68 L18 68 Z" fill="#ef4444"/>
+      <!-- Wheels -->
+      <circle cx="52" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="52" cy="72" r="7" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+      <circle cx="150" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="150" cy="72" r="7" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+    </svg>

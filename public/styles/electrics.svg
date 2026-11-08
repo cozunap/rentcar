@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+      <circle cx="85" cy="48" r="42" fill="#edf4fd"/>
+      <!-- Small Electric Bolt Badge -->
+      <circle cx="38" cy="32" r="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <polygon points="38,26 34,32 38,32 36,38 42,30 38,30" fill="#2563eb"/>
+      <!-- Sleek EV Sedan (Model 3 style) -->
+      <path d="M22 62 L36 54 L75 44 L124 44 L156 52 L180 60 L180 72 L22 72 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+      <path d="M42 52 L76 46 L104 46 L104 56 L42 56 Z" fill="#0f172a" opacity="0.85"/>
+      <path d="M108 46 L124 46 L148 52 L108 56 Z" fill="#0f172a" opacity="0.85"/>
+      <!-- Sleek Aero Wheels -->
+      <circle cx="52" cy="72" r="13" fill="#0f172a"/>
+      <circle cx="52" cy="72" r="8" fill="#e2e8f0" stroke="#3b82f6" stroke-width="2"/>
+      <circle cx="150" cy="72" r="13" fill="#0f172a"/>
+      <circle cx="150" cy="72" r="8" fill="#e2e8f0" stroke="#3b82f6" stroke-width="2"/>
+    </svg>

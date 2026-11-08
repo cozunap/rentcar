@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+      <circle cx="90" cy="46" r="42" fill="#edf4fd"/>
+      <!-- Minivan Body -->
+      <path d="M18 52 L30 42 L130 42 L165 52 L182 60 L182 72 L18 72 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+      <path d="M34 44 L74 44 L74 54 L36 54 Z" fill="#0f172a" opacity="0.8"/>
+      <path d="M78 44 L126 44 L126 54 L78 54 Z" fill="#0f172a" opacity="0.8"/>
+      <path d="M130 44 L158 52 L158 54 L130 54 Z" fill="#0f172a" opacity="0.8"/>
+      <!-- Wheels -->
+      <circle cx="52" cy="72" r="14" fill="#1e293b"/>
+      <circle cx="52" cy="72" r="7" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+      <circle cx="152" cy="72" r="14" fill="#1e293b"/>
+      <circle cx="152" cy="72" r="7" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+    </svg>

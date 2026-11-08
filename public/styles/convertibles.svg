@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+      <circle cx="85" cy="48" r="42" fill="#edf4fd"/>
+      <!-- Open Top Convertible -->
+      <path d="M20 62 L40 60 L75 60 L100 52 L140 52 L162 60 L184 64 L184 72 L20 72 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Windshield only -->
+      <path d="M102 52 L120 40 L136 52 Z" fill="#0f172a" opacity="0.6"/>
+      <!-- Seats visible -->
+      <rect x="78" y="52" width="10" height="8" rx="2" fill="#334155"/>
+      <rect x="92" y="50" width="10" height="10" rx="2" fill="#334155"/>
+      <!-- Wheels -->
+      <circle cx="52" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="52" cy="72" r="8" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+      <circle cx="152" cy="72" r="13" fill="#1e293b"/>
+      <circle cx="152" cy="72" r="8" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+    </svg>
