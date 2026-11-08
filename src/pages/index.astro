@@ -44,14 +44,18 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
       <!-- Barra de Filtros CarDealer: 4 selectores superiores + 3 sliders inferiores + Botón naranja "Buscar" -->
       <div class="bg-slate-900/70 backdrop-blur-md p-6 border border-white/10 rounded-sm shadow-2xl">
         <form action="/vehiculos" method="GET">
-          <!-- Fila 1: 4 Selectores (Tipo de Transporte, Marca, Modelo, Carrocería) -->
+          <!-- Fila 1: 4 Selectores (Tipo de Transporte, Marca, Modelo, Carrocería) en Cascada Dinámica -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div>
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
                 Tipo de Transporte
               </label>
-              <select name="type" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]">
-                <option value="">Todos (Autos, Botes, Camiones...)</option>
+              <select 
+                id="search-transport" 
+                name="type" 
+                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000] cursor-pointer"
+              >
+                <option value="">Todos los Transportes</option>
                 {TRANSPORT_TYPES.map(t => (
                   <option value={t.id}>{t.nameEs}</option>
                 ))}
@@ -62,8 +66,12 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
                 Marca
               </label>
-              <select name="make" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]">
-                <option value="">Todas</option>
+              <select 
+                id="search-make" 
+                name="make" 
+                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000] cursor-pointer"
+              >
+                <option value="">Todas las Marcas</option>
                 {ALL_DOMINICAN_BRANDS.map(b => (
                   <option value={b.name}>{b.name}</option>
                 ))}
@@ -74,26 +82,35 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
                 Modelo
               </label>
-              <input 
-                type="text" 
+              <select 
+                id="search-model" 
                 name="model" 
-                placeholder="Ej. Camry, RAV4, Cascadia..."
-                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]"
-              />
+                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000] cursor-pointer"
+              >
+                <option value="">Todos los Modelos</option>
+              </select>
             </div>
 
             <div>
               <label class="block text-[11px] uppercase tracking-wider font-bold text-slate-300 mb-1.5">
                 Carrocería / Estilo
               </label>
-              <select name="body" class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000]">
-                <option value="">Cualquiera</option>
+              <select 
+                id="search-body" 
+                name="body" 
+                class="w-full bg-white text-slate-800 text-xs py-2 px-3 rounded-sm border-0 focus:ring-2 focus:ring-[#D54000] cursor-pointer"
+              >
+                <option value="">Cualquier Carrocería</option>
                 <option value="sedan">Sedán</option>
                 <option value="suv">SUV / Jeepeta</option>
                 <option value="camioneta">Camioneta / Pickup</option>
-                <option value="boats">Bote / Lancha Marina</option>
-                <option value="pesado">Cabezote / 18-Wheeler</option>
+                <option value="hatchback">Hatchback</option>
                 <option value="deportivo">Coupé / Deportivo</option>
+                <option value="van">Van / Minivan</option>
+                <option value="pesado">Cabezote / 18-Wheeler</option>
+                <option value="boats">Bote / Embarcación</option>
+                <option value="tractor">Maquinaria / Tractor</option>
+                <option value="motos">Motocicleta</option>
               </select>
             </div>
           </div>
@@ -402,27 +419,27 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
 </Layout>
 
 <script>
-  // Carrusel Infinito Continuo con Autoplay y Pausa on Hover
+  import { BRAND_CATALOG_DATABASE } from "../lib/catalogTaxonomy";
+  import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
+
+  // 1. Carrusel Infinito Continuo con Autoplay y Pausa on Hover
   const track = document.getElementById("styles-carousel-track");
   const prevBtn = document.getElementById("styles-prev-btn") as HTMLButtonElement;
   const nextBtn = document.getElementById("styles-next-btn") as HTMLButtonElement;
 
   if (track) {
     let isPaused = false;
-    const speed = 1.2; // Velocidad suave continua para lectura cómoda
+    const speed = 1.2;
 
-    // Intervalo de auto-scroll continuo (loop infinito)
     const timer = setInterval(() => {
       if (!isPaused) {
         track.scrollLeft += speed;
-        // Cuando llega a la mitad del contenido duplicado, reinicia suavemente a 0
         if (track.scrollLeft >= track.scrollWidth / 2) {
           track.scrollLeft = 0;
         }
       }
-    }, 25); // ~40 FPS para fluidez total
+    }, 25);
 
-    // Pausa inmediata en Mouse Over y reanudación en Mouse Leave
     track.addEventListener("mouseenter", () => {
       isPaused = true;
     });
@@ -431,7 +448,6 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
       isPaused = false;
     });
 
-    // Soporte táctil en móvil: pausar al tocar
     track.addEventListener("touchstart", () => {
       isPaused = true;
     }, { passive: true });
@@ -440,7 +456,6 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
       setTimeout(() => { isPaused = false; }, 2000);
     });
 
-    // Controles manuales por si el usuario desea avanzar/retroceder manualmente
     if (prevBtn && nextBtn) {
       prevBtn.addEventListener("click", () => {
         track.scrollBy({ left: -260, behavior: "smooth" });
@@ -450,5 +465,98 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
         track.scrollBy({ left: 260, behavior: "smooth" });
       });
     }
+  }
+
+  // 2. Filtro en Cascada Inteligente: Tipo de Transporte -> Marca -> Modelo -> Carrocería
+  const transportSelect = document.getElementById("search-transport") as HTMLSelectElement;
+  const makeSelect = document.getElementById("search-make") as HTMLSelectElement;
+  const modelSelect = document.getElementById("search-model") as HTMLSelectElement;
+  const bodySelect = document.getElementById("search-body") as HTMLSelectElement;
+
+  // Lista ordenada alfabéticamente de todas las marcas
+  const allBrandsSorted = [...ALL_DOMINICAN_BRANDS].sort((a, b) => 
+    a.name.localeCompare(b.name, "es", { sensitivity: "base" })
+  );
+
+  function updateMakes() {
+    const selectedTransport = transportSelect?.value || "";
+    const currentMake = makeSelect?.value || "";
+
+    if (!makeSelect) return;
+
+    // Filtrar marcas según el tipo de transporte seleccionado
+    const filteredBrands = allBrandsSorted.filter(brand => {
+      if (!selectedTransport) return true;
+      const meta = BRAND_CATALOG_DATABASE[brand.name];
+      if (!meta) return true;
+      return meta.transportTypes.includes(selectedTransport);
+    });
+
+    makeSelect.innerHTML = '<option value="">Todas las Marcas</option>';
+    filteredBrands.forEach(brand => {
+      const opt = document.createElement("option");
+      opt.value = brand.name;
+      opt.textContent = brand.name;
+      if (brand.name === currentMake) {
+        opt.selected = true;
+      }
+      makeSelect.appendChild(opt);
+    });
+
+    updateModelsAndBodies();
+  }
+
+  function updateModelsAndBodies() {
+    const selectedMake = makeSelect?.value || "";
+
+    if (!modelSelect || !bodySelect) return;
+
+    if (!selectedMake || !BRAND_CATALOG_DATABASE[selectedMake]) {
+      // Sin marca seleccionada: modelo en blanco y opciones generales de carrocería
+      modelSelect.innerHTML = '<option value="">Todos los Modelos</option>';
+      bodySelect.innerHTML = `
+        <option value="">Cualquier Carrocería</option>
+        <option value="sedan">Sedán</option>
+        <option value="suv">SUV / Jeepeta</option>
+        <option value="camioneta">Camioneta / Pickup</option>
+        <option value="hatchback">Hatchback</option>
+        <option value="deportivo">Coupé / Deportivo</option>
+        <option value="van">Van / Minivan</option>
+        <option value="pesado">Cabezote / 18-Wheeler</option>
+        <option value="boats">Bote / Embarcación</option>
+        <option value="tractor">Maquinaria / Tractor</option>
+        <option value="motos">Motocicleta</option>
+      `;
+      return;
+    }
+
+    const meta = BRAND_CATALOG_DATABASE[selectedMake];
+
+    // Llenar modelos específicos de la marca (ej: Nissan -> Sentra, Altima, Rogue, Pathfinder...)
+    modelSelect.innerHTML = '<option value="">Todos los Modelos de ' + selectedMake + '</option>';
+    meta.models.forEach(model => {
+      const opt = document.createElement("option");
+      opt.value = model;
+      opt.textContent = model;
+      modelSelect.appendChild(opt);
+    });
+
+    // Llenar carrocerías válidas para esa marca
+    // Si es Nissan, solo tendrá Sedán, SUV, Camioneta, Hatchback, Deportivo, Van. (NADA de botes ni cabezotes)
+    bodySelect.innerHTML = '<option value="">Cualquier Carrocería de ' + selectedMake + '</option>';
+    meta.bodyStyles.forEach(body => {
+      const opt = document.createElement("option");
+      opt.value = body.id;
+      opt.textContent = body.name;
+      bodySelect.appendChild(opt);
+    });
+  }
+
+  if (transportSelect) {
+    transportSelect.addEventListener("change", updateMakes);
+  }
+
+  if (makeSelect) {
+    makeSelect.addEventListener("change", updateModelsAndBodies);
   }
 </script>

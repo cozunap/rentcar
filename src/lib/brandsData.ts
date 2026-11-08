@@ -5,7 +5,7 @@ export interface BrandItem {
   id: string;
   name: string;
   country: string;
-  category: "autos" | "pesados" | "maquinaria" | "motos" | "chinas";
+  category: "autos" | "pesados" | "maquinaria" | "motos" | "chinas" | "botes";
   logo: string;
 }
 
@@ -360,14 +360,14 @@ export const ALL_DOMINICAN_BRANDS: BrandItem[] = [
     name: "Freightliner",
     country: "Estados Unidos",
     category: "pesados",
-    logo: "/brands/mercedes.svg"
+    logo: "/brands/freightliner.svg"
   },
   {
     id: "mack",
     name: "Mack",
     country: "Estados Unidos",
     category: "pesados",
-    logo: "/brands/volvo.svg"
+    logo: "/brands/mack.svg"
   },
   {
     id: "scania",
@@ -453,6 +453,24 @@ export const ALL_DOMINICAN_BRANDS: BrandItem[] = [
     country: "Alemania",
     category: "motos",
     logo: "/brands/bmw.svg"
+  },
+
+  // ==========================================
+  // 9. TRANSPORTE ACUÁTICO & BOTES (Botes, Yates y Lanchas Deportivas)
+  // ==========================================
+  {
+    id: "sea-ray",
+    name: "Sea Ray",
+    country: "Estados Unidos",
+    category: "botes",
+    logo: "/brands/searay.svg"
+  },
+  {
+    id: "boston-whaler",
+    name: "Boston Whaler",
+    country: "Estados Unidos",
+    category: "botes",
+    logo: "/brands/bostonwhaler.svg"
   }
 ];
 

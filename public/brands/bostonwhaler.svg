@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <circle cx="50" cy="50" r="46" fill="#800000" stroke="#ffffff" stroke-width="2"/>
+  <path d="M22 55L50 35L78 55L50 63L22 55Z" fill="#ffffff"/>
+  <text x="50" y="78" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-weight="900" font-size="8.5" letter-spacing="0.5">BOSTON WHALER</text>
+</svg>
