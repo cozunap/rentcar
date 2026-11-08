@@ -87,5 +87,9 @@ export async function convertToSquareWebP(
   });
 }
 
-// Backward-compatible alias
+// Backward-compatible aliases
 export const convertToWebP = convertToSquareWebP;
+export const optimizeToSquareWebp = async (file: File, targetDimension = 1500, quality = 0.88): Promise<Blob> => {
+  const result = await convertToSquareWebP(file, targetDimension, quality);
+  return result.blob;
+};

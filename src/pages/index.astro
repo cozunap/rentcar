@@ -20,21 +20,24 @@ import BookingModal from '../components/BookingModal.astro';
                         class="w-full h-full object-cover filter brightness-[0.45]"
                     />
                     <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-                        <span class="px-3.5 py-1 bg-white/10 border border-white/20 text-white text-xs font-semibold uppercase tracking-widest mb-4 backdrop-blur-sm">
-                            Tu Carro y Más • Santo Domingo Este
+                        <span class="px-3.5 py-1 bg-[#1d4ed8] text-white text-[10px] font-black uppercase tracking-widest mb-4 shadow-sm">
+                            TuCarroYMás • Plataforma Automotriz RD
                         </span>
                         <h1 class="text-3xl sm:text-5xl md:text-6xl font-black mb-4 drop-shadow-md leading-tight max-w-4xl font-['Outfit',sans-serif] uppercase tracking-tight">
-                            Alquiler de Autos y SUVs en Santo Domingo
+                            Compra, Vende y Renta Autos en República Dominicana
                         </h1>
                         <p class="text-base sm:text-xl md:text-2xl max-w-3xl mb-8 leading-relaxed drop-shadow font-light text-gray-100">
-                            Experimenta la emoción de viajar seguro con nuestra flota premium verificada y reserva directa por WhatsApp.
+                            Vende tu vehículo gratis, encuentra el carro de tus sueños o alquila con confirmación inmediata vía WhatsApp en todo el país.
                         </p>
                         <div class="flex flex-wrap justify-center gap-3">
-                            <a href="#fleet" class="px-7 py-3.5 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-md">
-                                Ver Autos en Renta
+                            <a href="/vehiculos" class="px-7 py-3.5 bg-[#15803d] hover:bg-[#166534] text-white text-xs font-black uppercase tracking-wider luxury-btn shadow-md">
+                                <i class="fas fa-tag me-1.5"></i> Comprar Carros
                             </a>
-                            <a href="/publicar" class="px-7 py-3.5 bg-white/15 hover:bg-white/25 border border-white/40 text-white text-xs font-bold uppercase tracking-wider luxury-btn backdrop-blur-sm">
-                                Publicar Mi Auto
+                            <a href="#fleet" class="px-7 py-3.5 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-bold uppercase tracking-wider luxury-btn shadow-md">
+                                <i class="fas fa-key me-1.5"></i> Rent A Car
+                            </a>
+                            <a href="/publicar?tipo=venta" class="px-7 py-3.5 bg-white/20 hover:bg-white/30 border border-white/50 text-white text-xs font-bold uppercase tracking-wider luxury-btn backdrop-blur-sm">
+                                <i class="fas fa-plus me-1.5"></i> Publicar Mi Auto Gratis
                             </a>
                         </div>
                     </div>
@@ -550,14 +553,39 @@ import BookingModal from '../components/BookingModal.astro';
     const searchEnd = document.getElementById('search-date-end') as HTMLInputElement;
     const searchSubmit = document.getElementById('search-submit-btn');
 
+    // Hero Date Picker Logic & Direct Sync with Booking Engine
+    const todayStr = formatInputDate(today);
+    const futureDateStr = formatInputDate(futureDate);
+
     if (searchStart && searchEnd) {
-        searchStart.value = formatInputDate(today);
-        searchEnd.value = formatInputDate(futureDate);
+        searchStart.min = todayStr;
+        searchStart.value = todayStr;
+
+        searchEnd.min = todayStr;
+        searchEnd.value = futureDateStr;
+
+        searchStart.addEventListener('change', () => {
+            if (searchStart.value) {
+                // Ensure drop-off cannot be before pick-up
+                searchEnd.min = searchStart.value;
+                if (searchEnd.value && searchEnd.value <= searchStart.value) {
+                    const nextDay = new Date(searchStart.value);
+                    nextDay.setDate(nextDay.getDate() + 1);
+                    searchEnd.value = formatInputDate(nextDay);
+                }
+            }
+        });
     }
 
     searchSubmit?.addEventListener('click', () => {
-        const fleetSec = document.getElementById('fleet');
-        fleetSec?.scrollIntoView({ behavior: 'smooth' });
+        // Open the booking modal immediately for the first vehicle or scroll to fleet
+        if (allVehicles.length > 0) {
+            const firstCar = allVehicles[0];
+            openRentgoModal(firstCar.v, firstCar.ownerData);
+        } else {
+            const fleetSec = document.getElementById('fleet');
+            fleetSec?.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 
     // Calculator inputs inside Sidebar

@@ -1,0 +1,314 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { DOMINICAN_PROVINCES, WORKSHOP_CATEGORIES } from '../lib/constants';
+---
+
+<Layout 
+    title="Talleres Mecánicos y Repuestos en República Dominicana | TuCarroYMás RD"
+    description="Directorio de talleres de mecánica, desabolladura y pintura, repuestos y diagnóstico automotriz en Santo Domingo, Santiago y todas las provincias de RD."
+>
+    <!-- Header Hero Banner -->
+    <div class="bg-[#0f172a] text-white py-14 text-center border-b border-slate-800">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="px-3 py-1 bg-[#1d4ed8] text-white text-[10px] font-black uppercase tracking-widest mb-3 inline-block">
+                Directorio Automotriz Nacional RD
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-black mb-3 uppercase font-['Outfit',sans-serif] tracking-tight">
+                Talleres Mecánicos, Repuestos y Servicios
+            </h1>
+            <p class="text-slate-300 text-sm max-w-2xl mx-auto">
+                Encuentra el taller mecánico de confianza, repuestos nuevos y usados, y servicios automotrices especializados en tu provincia.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content & Province Filtering -->
+    <section class="py-12 bg-[#f8fafc]">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- BARRA DE FILTRADO DE TALLERES (Por Provincia y Categoría) -->
+            <div class="bg-white border-2 border-slate-900 shadow-xl p-5 mb-8 space-y-4" style="border-radius: 0px !important;">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                    <!-- Búsqueda por Nombre o Servicio -->
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="t-search">
+                            <i class="fas fa-search text-[#1d4ed8] me-1"></i> Buscar Taller o Repuesto
+                        </label>
+                        <input 
+                            type="text" 
+                            id="t-search" 
+                            placeholder="Ej: Frenos, Radiadores, Transmisiones, Toyota..." 
+                            class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]"
+                        />
+                    </div>
+
+                    <!-- Filtro por Provincia -->
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="t-province">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8] me-1"></i> Provincia
+                        </label>
+                        <select id="t-province" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Todas las Provincias (RD)</option>
+                            {DOMINICAN_PROVINCES.map(p => <option value={p.name}>{p.name}</option>)}
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Especialidad -->
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="t-category">
+                            <i class="fas fa-wrench text-[#1d4ed8] me-1"></i> Categoría del Servicio
+                        </label>
+                        <select id="t-category" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Todas las Especialidades</option>
+                            {WORKSHOP_CATEGORIES.map(c => <option value={c.id}>{c.label}</option>)}
+                        </select>
+                    </div>
+
+                    <!-- Botón para Registrar Taller -->
+                    <div>
+                        <a href="https://wa.me/18499154010?text=Hola,%20deseo%20registrar%20mi%20taller%20o%20tienda%20de%20repuestos%20en%20TuCarroYMás.com" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 luxury-btn shadow-md" style="border-radius: 0px !important;">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Registrar Mi Taller</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Info Badges -->
+                <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+                    <span id="t-count" class="font-bold text-slate-700">Mostrando 6 talleres destacados en RD</span>
+                    <span class="text-emerald-700 font-semibold"><i class="fas fa-shield-halved me-1"></i> Talleres y Negocios Verificados por TuCarroYMás</span>
+                </div>
+
+            </div>
+
+            <!-- Grid de Talleres y Centros de Repuesto -->
+            <div id="workshops-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Taller 1: Santiago -->
+                <div class="luxury-card p-6 flex flex-col justify-between" data-province="Santiago de los Caballeros" data-category="mecanica" style="border-radius: 0px !important;">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-blue-100 text-[#1d4ed8]">
+                                Mecánica General & Transmisiones
+                            </span>
+                            <span class="text-xs text-amber-500 font-bold"><i class="fas fa-star me-1"></i> 4.9</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0f172a] tracking-tight">AutoTech Cibao Especialistas</h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
+                            <span>Av. Bartolomé Colón, Santiago de los Caballeros</span>
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Mantenimiento preventivo, reparación de transmisiones automáticas y CVT, diagnóstico computarizado para Toyota, Honda, Hyundai y Kia.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Frenos ABS</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Escáner OBD2</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Alineación 3D</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/18499154010?text=Hola,%20vi%20su%20taller%20AutoTech%20Cibao%20en%20TuCarroYMás.com%20y%20deseo%20una%20consulta" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 luxury-btn shadow-sm" style="border-radius: 0px !important;">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Contactar por WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Taller 2: Santo Domingo Este -->
+                <div class="luxury-card p-6 flex flex-col justify-between" data-province="Santo Domingo Este" data-category="repuestos" style="border-radius: 0px !important;">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800">
+                                Repuestos & Autopartes
+                            </span>
+                            <span class="text-xs text-amber-500 font-bold"><i class="fas fa-star me-1"></i> 5.0</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0f172a] tracking-tight">Repuestos Oriental Las Américas</h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
+                            <span>Autopista Las Américas Km 10, Santo Domingo Este</span>
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Venta de repuestos genuinos y de reemplazo americano y japonés: bombas de agua, radiadores, amortiguadores, bujías y bandas de freno.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Carrocería</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Suspensión</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Envío a Todo el País</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/18499154010?text=Hola,%20vi%20Repuestos%20Oriental%20en%20TuCarroYMás.com%20y%20necesito%20cotizar%20un%20repuesto" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 luxury-btn shadow-sm" style="border-radius: 0px !important;">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Cotizar Pieza por WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Taller 3: Distrito Nacional -->
+                <div class="luxury-card p-6 flex flex-col justify-between" data-province="Distrito Nacional" data-category="desabolladura" style="border-radius: 0px !important;">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-purple-100 text-purple-800">
+                                Desabolladura & Pintura (Body Shop)
+                            </span>
+                            <span class="text-xs text-amber-500 font-bold"><i class="fas fa-star me-1"></i> 4.8</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0f172a] tracking-tight">Master Color Paint & Body Shop</h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
+                            <span>Av. Luperón, Distrito Nacional</span>
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Cabina de pintura al horno, desabolladura computarizada de chasis, igualación computarizada de pintura PPG y reparación de choques con garantía.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Horno de Pintura</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Seguros Aceptados</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Cerámica / Detailing</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/18499154010?text=Hola,%20vi%20Master%20Color%20en%20TuCarroYMás.com%20y%20deseo%20cotizar%20pintura" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 luxury-btn shadow-sm" style="border-radius: 0px !important;">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Cotizar Pintura / Choque</span>
+                    </a>
+                </div>
+
+                <!-- Taller 4: La Vega -->
+                <div class="luxury-card p-6 flex flex-col justify-between" data-province="La Vega" data-category="electricidad" style="border-radius: 0px !important;">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-800">
+                                Diagnóstico & Electricidad
+                            </span>
+                            <span class="text-xs text-amber-500 font-bold"><i class="fas fa-star me-1"></i> 4.9</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0f172a] tracking-tight">ElectroAuto La Vega</h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
+                            <span>Av. Pedro A. Rivera, La Vega</span>
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Especialistas en módulos electrónicos (ECU/ECM), alternadores, motores de arranque, programación de llaves con chip y borrado de códigos Check Engine.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Programación Llaves</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Reparación Computadoras</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/18499154010?text=Hola,%20vi%20ElectroAuto%20La%20Vega%20en%20TuCarroYMás.com%20y%20necesito%20diagnóstico" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 luxury-btn shadow-sm" style="border-radius: 0px !important;">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Contactar por WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Taller 5: La Altagracia (Punta Cana) -->
+                <div class="luxury-card p-6 flex flex-col justify-between" data-province="La Altagracia (Punta Cana / Higüey)" data-category="aire-acondicionado" style="border-radius: 0px !important;">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-cyan-100 text-cyan-800">
+                                Climatización Automotriz
+                            </span>
+                            <span class="text-xs text-amber-500 font-bold"><i class="fas fa-star me-1"></i> 5.0</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0f172a] tracking-tight">Punta Cana Clima Auto Service</h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
+                            <span>Bulevar Turístico del Este, Bávaro / Punta Cana</span>
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Servicio rápido de aire acondicionado para vehículos de renta y particulares en la zona turística. Detección electrónica de fugas, compresores y carga de gas ecológico.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Carga de Gas</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Compresores</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Servicio Express</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/18499154010?text=Hola,%20vi%20Punta%20Cana%20Clima%20Auto%20en%20TuCarroYMás.com%20y%20necesito%20revisar%20mi%20aire" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 luxury-btn shadow-sm" style="border-radius: 0px !important;">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Contactar por WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Taller 6: San Cristóbal -->
+                <div class="luxury-card p-6 flex flex-col justify-between" data-province="San Cristóbal" data-category="mecanica" style="border-radius: 0px !important;">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-blue-100 text-[#1d4ed8]">
+                                Mecánica Pesada & Camionetas 4x4
+                            </span>
+                            <span class="text-xs text-amber-500 font-bold"><i class="fas fa-star me-1"></i> 4.7</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0f172a] tracking-tight">Centro Diesel San Cristóbal</h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
+                            <span>Carretera Sánchez Km 4, San Cristóbal</span>
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Especialistas en motores diésel Common Rail, turbos, inyectores diésel de camionetas Hilux, D-Max, Frontier y camiones ligeros.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Motores Diesel</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 font-semibold">Laboratorio Inyección</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/18499154010?text=Hola,%20vi%20Centro%20Diesel%20San%20Cristóbal%20en%20TuCarroYMás.com" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 luxury-btn shadow-sm" style="border-radius: 0px !important;">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Contactar por WhatsApp</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</Layout>
+
+<script>
+    const searchInput = document.getElementById('t-search') as HTMLInputElement;
+    const provinceSelect = document.getElementById('t-province') as HTMLSelectElement;
+    const categorySelect = document.getElementById('t-category') as HTMLSelectElement;
+    const countEl = document.getElementById('t-count');
+    const cards = document.querySelectorAll<HTMLElement>('#workshops-grid > div');
+
+    // Leer URL si viene de menú (?categoria=mecanica)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('categoria') && categorySelect) {
+        categorySelect.value = urlParams.get('categoria')!;
+    }
+
+    function filterWorkshops() {
+        const kw = searchInput?.value.toLowerCase().trim() || '';
+        const prov = provinceSelect?.value || 'all';
+        const cat = categorySelect?.value || 'all';
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const text = card.textContent?.toLowerCase() || '';
+            const cProv = card.getAttribute('data-province') || '';
+            const cCat = card.getAttribute('data-category') || '';
+
+            const matchKw = !kw || text.includes(kw);
+            const matchProv = prov === 'all' || cProv.toLowerCase().includes(prov.toLowerCase());
+            const matchCat = cat === 'all' || cCat === cat;
+
+            if (matchKw && matchProv && matchCat) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (countEl) {
+            countEl.textContent = `Mostrando ${visibleCount} taller${visibleCount === 1 ? '' : 'es'} en RD`;
+        }
+    }
+
+    searchInput?.addEventListener('input', filterWorkshops);
+    provinceSelect?.addEventListener('change', filterWorkshops);
+    categorySelect?.addEventListener('change', filterWorkshops);
+
+    // Initial run
+    filterWorkshops();
+</script>

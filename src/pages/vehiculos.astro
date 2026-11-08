@@ -1,0 +1,471 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/constants';
+---
+
+<Layout 
+    title="Comprar Carros en República Dominicana | TuCarroYMás RD"
+    description="Encuentra vehículos en venta en toda la República Dominicana. Filtros en vivo por provincia, marca, año, precio y tipo de carrocería. Contacto directo con el vendedor sin comisiones."
+>
+    <!-- Header Hero Banner (Marketplace Venta) -->
+    <div class="bg-[#0f172a] text-white py-14 text-center border-b border-slate-800">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1d4ed8] text-white text-[10px] font-black uppercase tracking-widest mb-3">
+                <i class="fas fa-tag"></i> Catálogo de Venta Gratuito RD
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-black mb-3 uppercase font-['Outfit',sans-serif] tracking-tight">
+                Vehículos en Venta en República Dominicana
+            </h1>
+            <p class="text-slate-300 text-sm max-w-2xl mx-auto">
+                Compra y vende tu carro sin intermediarios ni comisiones. Conéctate directamente con propietarios y concesionarios autorizados en todo el país.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content & Faceted Filters (JetSmartFilters Pattern) -->
+    <section class="py-12 bg-[#f8fafc]">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- BARRA DE BÚSQUEDA Y FILTRADO FACETADO EN VIVO (0ms Lag) -->
+            <div class="bg-white border-2 border-slate-900 shadow-xl p-5 mb-8 space-y-4" style="border-radius: 0px !important;">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
+                    <!-- Búsqueda por Texto -->
+                    <div class="lg:col-span-2">
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-keyword">
+                            <i class="fas fa-search text-[#1d4ed8] me-1"></i> Búsqueda por Marca o Modelo
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="v-filter-keyword" 
+                                placeholder="Ej: Toyota RAV4, Honda CR-V, Jeep, Hilux..." 
+                                class="w-full text-xs font-semibold p-3 pl-9 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]"
+                            />
+                            <i class="fas fa-car absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- Filtro por Provincia -->
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-province">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8] me-1"></i> Provincia
+                        </label>
+                        <select id="v-filter-province" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Todas las Provincias</option>
+                            {DOMINICAN_PROVINCES.map(p => <option value={p.name}>{p.name}</option>)}
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Tipo de Carrocería -->
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-body">
+                            <i class="fas fa-shapes text-[#1d4ed8] me-1"></i> Carrocería
+                        </label>
+                        <select id="v-filter-body" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Todos los Tipos</option>
+                            {VEHICLE_BODY_TYPES.map(t => <option value={t}>{t}</option>)}
+                        </select>
+                    </div>
+
+                    <!-- Ordenar -->
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-sort">
+                            <i class="fas fa-arrow-down-short-wide text-[#1d4ed8] me-1"></i> Ordenar
+                        </label>
+                        <select id="v-filter-sort" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="recent">Más Recientes</option>
+                            <option value="price-asc">Precio: Menor a Mayor</option>
+                            <option value="price-desc">Precio: Mayor a Menor</option>
+                            <option value="year-desc">Año: Más Nuevo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Contador de Resultados y Publicar CTA -->
+                <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <span id="vehicles-total-count" class="font-bold text-slate-700">
+                        Cargando inventario...
+                    </span>
+                    <a href="/publicar?tipo=venta" class="text-[#15803d] font-black hover:underline flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
+                        <i class="fas fa-plus-circle text-sm"></i> Publicar Mi Carro en Venta Gratis
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Grid de Vehículos en Venta (Estilo Crocoblock CarDealer) -->
+            <div id="vehicles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skeletons -->
+                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
+                    <div class="h-64 bg-slate-100"></div>
+                    <div class="h-6 bg-slate-100 w-1/2"></div>
+                    <div class="h-4 bg-slate-100 w-1/3"></div>
+                </div>
+                <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
+                    <div class="h-64 bg-slate-100"></div>
+                    <div class="h-6 bg-slate-100 w-1/2"></div>
+                    <div class="h-4 bg-slate-100 w-1/3"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal Detalle Rápido de Compra (JetPopup) -->
+    <div 
+      id="sale-quick-modal" 
+      class="fixed inset-0 z-50 pointer-events-none transition-all duration-300 opacity-0 flex items-center justify-center p-3 sm:p-4 md:p-6" 
+      aria-hidden="true"
+    >
+        <div id="sale-modal-backdrop" class="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-pointer"></div>
+
+        <div id="sale-modal-card" class="relative w-full max-w-2xl bg-white border-2 border-slate-900 shadow-2xl flex flex-col transform scale-95 transition-all duration-300 max-h-[92vh] overflow-hidden z-10" style="border-radius: 0px !important;">
+            <!-- Modal Header -->
+            <div class="px-5 py-3.5 bg-[#0f172a] text-white flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 text-[10px] font-black uppercase tracking-widest bg-[#15803d] text-white">
+                        Venta Directa RD
+                    </span>
+                    <span id="sm-condition-badge" class="text-xs font-semibold text-slate-300">
+                        Usado Importado
+                    </span>
+                </div>
+                <button id="sale-modal-close" type="button" aria-label="Cerrar" class="w-8 h-8 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors luxury-btn">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5">
+                <div class="w-full h-64 sm:h-72 bg-white border border-slate-200 p-2 overflow-hidden flex items-center justify-center">
+                    <img id="sm-main-img" src="" alt="Vehículo" class="w-full h-full object-contain" />
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-start gap-2 border-b border-slate-200 pb-4">
+                    <div>
+                        <h3 id="sm-title" class="text-2xl font-black text-[#0f172a] tracking-tight">Cargando...</h3>
+                        <p id="sm-location" class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
+                            <span>Santo Domingo, República Dominicana</span>
+                        </p>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <span id="sm-price" class="text-3xl font-black text-[#15803d] font-mono">$0 USD</span>
+                        <span id="sm-seller" class="text-[11px] block font-semibold text-slate-400 uppercase mt-0.5">Vendedor Particular</span>
+                    </div>
+                </div>
+
+                <!-- Specs Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                    <div class="p-2.5 bg-slate-50 border border-slate-200">
+                        <i class="fas fa-gears text-[#1d4ed8] text-sm mb-1 block"></i>
+                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Motor</span>
+                        <strong id="sm-engine" class="text-slate-800 font-bold">2.0L Turbo</strong>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 border border-slate-200">
+                        <i class="fas fa-gauge-high text-[#1d4ed8] text-sm mb-1 block"></i>
+                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Kilometraje</span>
+                        <strong id="sm-mileage" class="text-slate-800 font-bold">45,000 mi</strong>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 border border-slate-200">
+                        <i class="fas fa-gear text-[#1d4ed8] text-sm mb-1 block"></i>
+                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Transmisión</span>
+                        <strong id="sm-trans" class="text-slate-800 font-bold">Automática</strong>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 border border-slate-200">
+                        <i class="fas fa-arrows-split-up-and-left text-[#1d4ed8] text-sm mb-1 block"></i>
+                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Tracción</span>
+                        <strong id="sm-drivetrain" class="text-slate-800 font-bold">AWD</strong>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Descripción del Vehículo</h4>
+                    <p id="sm-desc" class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 border border-slate-200"></p>
+                </div>
+            </div>
+
+            <!-- Modal Footer CTA WhatsApp Directo -->
+            <div class="p-4 sm:p-5 border-t border-slate-200 bg-white shadow-lg space-y-2">
+                <a id="sm-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-4 px-6 bg-[#15803d] hover:bg-[#166534] text-white font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all luxury-btn shadow-md" style="border-radius: 0px !important;">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>Contactar al Vendedor por WhatsApp</span>
+                </a>
+                <p class="text-[11px] text-center text-slate-400">
+                    Trato directo y sin comisiones con el propietario o dealer en República Dominicana.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</Layout>
+
+<script>
+    import { collection, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
+    import { db } from "../lib/firebase/client";
+
+    const vGrid = document.getElementById('vehicles-grid');
+    const totalCount = document.getElementById('vehicles-total-count');
+
+    // Modal References
+    const modal = document.getElementById('sale-quick-modal');
+    const backdrop = document.getElementById('sale-modal-backdrop');
+    const card = document.getElementById('sale-modal-card');
+    const closeBtn = document.getElementById('sale-modal-close');
+
+    const mImg = document.getElementById('sm-main-img') as HTMLImageElement;
+    const mTitle = document.getElementById('sm-title');
+    const mLocation = document.getElementById('sm-location');
+    const mPrice = document.getElementById('sm-price');
+    const mSeller = document.getElementById('sm-seller');
+    const mEngine = document.getElementById('sm-engine');
+    const mMileage = document.getElementById('sm-mileage');
+    const mTrans = document.getElementById('sm-trans');
+    const mDrivetrain = document.getElementById('sm-drivetrain');
+    const mDesc = document.getElementById('sm-desc');
+    const mCondBadge = document.getElementById('sm-condition-badge');
+    const mWhatsappBtn = document.getElementById('sm-whatsapp-btn') as HTMLAnchorElement;
+
+    function openModal(vehicle: any, owner: any) {
+        if (!modal || !backdrop || !card) return;
+
+        const price = vehicle.price || vehicle.pricePerDay || 0;
+        const currency = vehicle.currency || 'USD';
+        const formattedPrice = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
+
+        const rawPhone = owner?.whatsapp || owner?.phone || vehicle.ownerWhatsapp || '18499154010';
+        const cleanPhone = rawPhone.replace(/\D/g, '');
+
+        if (mImg) mImg.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : (vehicle.mainImage || "/Honda.webp");
+        if (mTitle) mTitle.textContent = vehicle.title;
+        if (mLocation) mLocation.querySelector('span')!.textContent = `${vehicle.province || vehicle.city || 'Santo Domingo'}, República Dominicana`;
+        if (mPrice) mPrice.textContent = formattedPrice;
+        if (mSeller) mSeller.textContent = vehicle.sellerType === 'dealer' ? 'Dealer Autorizado' : 'Vendedor Particular';
+        if (mCondBadge) mCondBadge.textContent = vehicle.condition || 'Usado Importado';
+        if (mEngine) mEngine.textContent = vehicle.engine || '2.4L 4 Cilindros';
+        if (mMileage) mMileage.textContent = `${(vehicle.mileage || 45000).toLocaleString()} ${vehicle.mileageUnit || 'mi'}`;
+        if (mTrans) mTrans.textContent = vehicle.transmission || 'Automática';
+        if (mDrivetrain) mDrivetrain.textContent = vehicle.drivetrain || 'AWD / 4x4';
+        if (mDesc) mDesc.textContent = vehicle.description || `Vehículo ${vehicle.title} disponible para venta inmediata en ${vehicle.province || 'República Dominicana'}.`;
+
+        const msg = encodeURIComponent(`Hola, vi en TuCarroYMás.com su ${vehicle.title} anunciado en ${formattedPrice}. ¿Aún está disponible para verlo?`);
+        if (mWhatsappBtn) mWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
+
+        modal.classList.remove('pointer-events-none', 'opacity-0');
+        modal.classList.add('pointer-events-auto', 'opacity-100');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeModal() {
+        if (!modal || !backdrop || !card) return;
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        setTimeout(() => {
+            modal.classList.remove('pointer-events-auto', 'opacity-100');
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            document.body.classList.remove('overflow-hidden');
+        }, 250);
+    }
+
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+
+    // Filter Logic
+    let allSaleVehicles: any[] = [];
+    const filterKeyword = document.getElementById('v-filter-keyword') as HTMLInputElement;
+    const filterProvince = document.getElementById('v-filter-province') as HTMLSelectElement;
+    const filterBody = document.getElementById('v-filter-body') as HTMLSelectElement;
+    const filterSort = document.getElementById('v-filter-sort') as HTMLSelectElement;
+
+    // Leer URL params si viene del menú (?provincia=Santiago o ?tipo=SUV)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('provincia') && filterProvince) {
+        filterProvince.value = urlParams.get('provincia')!;
+    }
+    if (urlParams.get('tipo') && filterBody) {
+        const t = urlParams.get('tipo')!;
+        Array.from(filterBody.options).forEach(opt => {
+            if (opt.value.toLowerCase().includes(t.toLowerCase())) filterBody.value = opt.value;
+        });
+    }
+
+    function renderVehicles() {
+        if (!vGrid) return;
+        vGrid.innerHTML = '';
+
+        let results = [...allSaleVehicles];
+
+        // Keyword filter
+        const kw = filterKeyword?.value.toLowerCase().trim() || '';
+        if (kw) {
+            results = results.filter(i => 
+                (i.v.title || '').toLowerCase().includes(kw) ||
+                (i.v.brand || '').toLowerCase().includes(kw) ||
+                (i.v.model || '').toLowerCase().includes(kw) ||
+                (i.v.engine || '').toLowerCase().includes(kw)
+            );
+        }
+
+        // Province filter
+        const prov = filterProvince?.value || 'all';
+        if (prov !== 'all') {
+            results = results.filter(i => 
+                (i.v.province || i.v.city || '').toLowerCase().includes(prov.toLowerCase())
+            );
+        }
+
+        // Body type
+        const body = filterBody?.value || 'all';
+        if (body !== 'all') {
+            results = results.filter(i => 
+                (i.v.category || '').toLowerCase().includes(body.toLowerCase())
+            );
+        }
+
+        // Sort
+        const sortVal = filterSort?.value || 'recent';
+        if (sortVal === 'price-asc') {
+            results.sort((a, b) => (a.v.price || a.v.pricePerDay || 0) - (b.v.price || b.v.pricePerDay || 0));
+        } else if (sortVal === 'price-desc') {
+            results.sort((a, b) => (b.v.price || b.v.pricePerDay || 0) - (a.v.price || a.v.pricePerDay || 0));
+        } else if (sortVal === 'year-desc') {
+            results.sort((a, b) => (b.v.year || 0) - (a.v.year || 0));
+        }
+
+        if (totalCount) {
+            totalCount.textContent = `${results.length} Vehículo${results.length === 1 ? '' : 's'} en Venta Disponible${results.length === 1 ? '' : 's'}`;
+        }
+
+        if (results.length === 0) {
+            vGrid.innerHTML = `
+                <div class="col-span-full text-center py-16 bg-white border border-slate-200 p-8">
+                    <i class="fas fa-car text-4xl text-slate-300 mb-3"></i>
+                    <p class="text-sm font-bold text-slate-700 uppercase">No hay vehículos que coincidan con tu búsqueda</p>
+                    <p class="text-xs text-slate-500 mt-1">Prueba seleccionando "Todas las Provincias" o borrando el término de búsqueda.</p>
+                </div>
+            `;
+            return;
+        }
+
+        results.forEach(({ v, ownerData }) => {
+            const cleanPhone = (ownerData?.whatsapp || v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
+            const price = v.price || v.pricePerDay || 25000;
+            const currency = v.currency || 'USD';
+            const priceStr = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
+            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
+
+            const cardEl = document.createElement('div');
+            cardEl.className = "luxury-card flex flex-col justify-between overflow-hidden group";
+            cardEl.innerHTML = `
+                <div>
+                    <!-- Car Image with Badges -->
+                    <div class="car-image-container relative">
+                        <img src="${carImg}" alt="${v.title}" />
+                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#0f172a] text-white shadow-md">
+                                ${v.condition || 'Usado'}
+                            </span>
+                            <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+                                <i class="fas fa-check-circle me-1"></i> Verificado
+                            </span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
+                            <strong class="text-lg font-black text-[#15803d] font-mono">${priceStr}</strong>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="p-5 sm:p-6">
+                        <h4 class="text-xl font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
+                        <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
+                            <i class="fas fa-map-marker-alt text-[#1d4ed8] text-[11px]"></i>
+                            <span>${v.province || v.city || 'Distrito Nacional'}</span>
+                            <span class="mx-1">•</span>
+                            <span class="text-slate-400 font-semibold">${v.sellerType === 'dealer' ? 'Dealer' : 'Particular'}</span>
+                        </p>
+
+                        <!-- Specs (Motor, Kilometraje, Transmisión, Tracción) -->
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2.5 mb-5">
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span>
+                                <strong class="text-slate-800 text-[11px] font-bold">${v.engine || '2.0L Turbo'}</strong>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Millas / Km</span>
+                                <strong class="text-slate-800 text-[11px] font-bold">${(v.mileage || 45000).toLocaleString()} ${v.mileageUnit || 'mi'}</strong>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Transmisión</span>
+                                <strong class="text-slate-800 text-[11px] font-bold">${(v.transmission || 'Automática').slice(0, 10)}</strong>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Tracción</span>
+                                <strong class="text-slate-800 text-[11px] font-bold">${v.drivetrain || 'AWD / 4WD'}</strong>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <button type="button" class="view-car-btn w-full py-3 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 luxury-btn shadow-sm" style="border-radius: 0px !important;">
+                                <i class="fas fa-eye text-sm"></i> Ver Detalles
+                            </button>
+                            <a href="https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hola, me interesa comprar su ${v.title} anunciado en ${priceStr} en TuCarroYMás.com`)}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn w-full py-3 px-3 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors luxury-btn" style="border-radius: 0px !important;">
+                                <i class="fab fa-whatsapp text-base"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            cardEl.querySelector('.view-car-btn')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(v, ownerData);
+            });
+
+            cardEl.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+                if (target.closest('.whatsapp-btn') || target.closest('.view-car-btn')) return;
+                openModal(v, ownerData);
+            });
+
+            vGrid.appendChild(cardEl);
+        });
+    }
+
+    filterKeyword?.addEventListener('input', renderVehicles);
+    filterProvince?.addEventListener('change', renderVehicles);
+    filterBody?.addEventListener('change', renderVehicles);
+    filterSort?.addEventListener('change', renderVehicles);
+
+    // Stream from Firestore
+    const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
+    onSnapshot(q, async (snap) => {
+        allSaleVehicles = [];
+
+        for (const docSnap of snap.docs) {
+            const v = docSnap.data();
+            v.id = docSnap.id;
+
+            let ownerData: any = null;
+            if (v.ownerId) {
+                try {
+                    const uSnap = await getDoc(doc(db, "users", v.ownerId));
+                    if (uSnap.exists()) ownerData = uSnap.data();
+                } catch (e) {
+                    console.warn(e);
+                }
+            }
+            allSaleVehicles.push({ v, ownerData });
+        }
+
+        renderVehicles();
+    });
+</script>
