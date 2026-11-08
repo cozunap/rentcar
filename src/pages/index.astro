@@ -15,8 +15,8 @@ const vipAds = [
   DEMO_VEHICLES_SEED[1]  // Tesla Model 3
 ];
 
-// Marcas populares en portada (16 marcas principales de RD)
-const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 16);
+// Marcas populares en portada (15 marcas líderes de RD para cuadrícula perfecta de 5 columnas x 3 filas)
+const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 15);
 
 // Duplicamos los estilos para un loop infinito suave sin saltos
 const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
@@ -348,18 +348,18 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
         </a>
       </div>
 
-      <!-- 2 filas de 8 logos SVG nítidos locales (Aumentados al doble de tamaño) -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 sm:gap-6 text-center">
+      <!-- 15 marcas populares en cuadrícula exacta de 5 columnas -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 text-center">
         {popularBrandsHomepage.map(b => (
           <a 
             href={`/vehiculos?make=${encodeURIComponent(b.name)}`} 
-            class="flex flex-col items-center justify-center p-4 sm:p-5 border border-slate-200 hover:border-[#D54000] hover:shadow-lg rounded-sm transition-all group bg-white"
+            class="flex flex-col items-center justify-center p-5 sm:p-6 border border-slate-200 hover:border-[#D54000] hover:shadow-xl rounded-sm transition-all group bg-white"
           >
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center mb-3">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mb-3">
               <img 
                 src={b.logo} 
                 alt={b.name} 
-                class="max-w-[56px] max-h-[56px] sm:max-w-[64px] sm:max-h-[64px] object-contain opacity-85 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
+                class="max-w-[64px] max-h-[64px] sm:max-w-[72px] sm:max-h-[72px] object-contain opacity-85 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
                 loading="lazy"
               />
             </div>

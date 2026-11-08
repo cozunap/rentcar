@@ -44,26 +44,26 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
         </button>
       </div>
 
-      <!-- Grid of all Dominican Brands (100% SVG locales sin fallos) -->
-      <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+      <!-- Grid of all Dominican Brands (5 columnas) -->
+      <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
         {ALL_DOMINICAN_BRANDS.map(brand => (
           <a 
             href={`/vehiculos?make=${encodeURIComponent(brand.name)}`}
             data-category={brand.category}
-            class="brand-card flex flex-col items-center justify-center p-4 border border-slate-200 rounded-sm hover:border-[#D54000] hover:shadow-lg transition-all group bg-white text-center cursor-pointer"
+            class="brand-card flex flex-col items-center justify-center p-5 sm:p-6 border border-slate-200 rounded-sm hover:border-[#D54000] hover:shadow-xl transition-all group bg-white text-center cursor-pointer"
           >
             <!-- SVG Logo Container (Cargado localmente desde /brands/*.svg) -->
-            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center mb-3">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mb-3">
               <img 
                 src={brand.logo} 
                 alt={`Logo ${brand.name}`} 
-                class="max-w-[56px] max-h-[56px] sm:max-w-[64px] sm:max-h-[64px] object-contain opacity-85 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
+                class="max-w-[64px] max-h-[64px] sm:max-w-[72px] sm:max-h-[72px] object-contain opacity-85 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
                 loading="lazy"
               />
             </div>
 
             <!-- Brand Name -->
-            <span class="text-xs font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight">
+            <span class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight">
               {brand.name}
             </span>
 
