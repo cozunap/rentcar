@@ -34,25 +34,107 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Luxury Sharp Border Radius (no bubbly curves) */
-.luxury-btn {
-  border-radius: 2px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+/* ==========================================================================
+   SISTEMA DE BOTONES CUADRADOS 3D Y ANIMACIONES ELEGANTES
+   ========================================================================== */
+
+/* Regla absoluta: TODOS los botones y enlaces de acción son completamente cuadrados (0px radius) */
+button, 
+.btn, 
+.luxury-btn, 
+.whatsapp-btn, 
+a.luxury-btn, 
+input[type="submit"], 
+input[type="button"] {
+  border-radius: 0px !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
 }
 
+/* Efecto de elevación 3D e iluminación en botones (.luxury-btn) */
+.luxury-btn {
+  border-radius: 0px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateZ(0);
+}
+
+/* Shimmer / Brillo 3D dinámico que viaja al hacer hover */
+.luxury-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.luxury-btn:hover {
+  transform: translateY(-3px) translateZ(10px);
+  box-shadow: 0 12px 20px -5px rgba(15, 23, 42, 0.25), 0 6px 8px -4px rgba(15, 23, 42, 0.15);
+}
+
+.luxury-btn:hover::after {
+  left: 150%;
+}
+
+.luxury-btn:active {
+  transform: translateY(-1px) translateZ(0);
+  box-shadow: 0 4px 8px -2px rgba(15, 23, 42, 0.2);
+}
+
+/* Botón de WhatsApp con profundidad 3D verde esmeralda */
+.whatsapp-btn {
+  border-radius: 0px !important;
+  box-shadow: 0 4px 10px rgba(21, 128, 61, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.whatsapp-btn:hover {
+  transform: translateY(-3px) translateZ(10px);
+  box-shadow: 0 12px 24px -4px rgba(21, 128, 61, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* TARJETAS 3D PREMIUM CON PERSPECTIVA */
 .luxury-card {
-  border-radius: 4px;
+  border-radius: 0px !important;
   border: 1px solid #e2e8f0;
   background-color: #ffffff;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 .luxury-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px -10px rgba(15, 23, 42, 0.1);
-  border-color: #cbd5e1;
+  transform: translateY(-8px) rotateX(1.5deg) scale(1.01);
+  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12), 0 10px 15px -5px rgba(15, 23, 42, 0.05);
+  border-color: #94a3b8;
+}
+
+/* Animación sutil de respiración flotante 3D */
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+}
+.animate-float-3d {
+  animation: float3D 6s ease-in-out infinite;
 }
 
 /* Container matching clean corporate grid */

@@ -4,12 +4,12 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Iniciar Sesión y Registro | Tu Carro y Más Rent A Car">
     <div class="min-h-[calc(100vh-160px)] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div class="max-w-md w-full bg-white rounded-3xl shadow-xl border border-slate-200/80 p-8 sm:p-10 relative overflow-hidden">
+        <div class="max-w-md w-full bg-white border border-slate-200 shadow-xl border border-slate-200/80 p-8 sm:p-10 relative overflow-hidden">
             
             <!-- Brand Badge -->
             <div class="text-center mb-8">
                 <a href="/" class="inline-flex items-center gap-2 mb-3">
-                    <div class="w-10 h-10 rounded-xl bg-[#0d6efd] text-white flex items-center justify-center shadow-md">
+                    <div class="w-10 h-10  bg-[#0d6efd] text-white flex items-center justify-center shadow-md">
                         <i class="fas fa-car-side text-lg"></i>
                     </div>
                     <span class="font-extrabold text-2xl text-[#0d1f3c] tracking-tight">Tu Carro <span class="text-[#0d6efd]">y Más</span></span>
@@ -18,17 +18,17 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <!-- Tab Switcher (Login / Sign Up) -->
-            <div class="flex rounded-xl bg-slate-100 p-1 mb-8">
-                <button id="tab-login" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-sm bg-white text-[#0d1f3c]">
+            <div class="flex  bg-slate-100 p-1 mb-8">
+                <button id="tab-login" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider  transition-all shadow-sm bg-white text-[#0d1f3c]">
                     Iniciar Sesión
                 </button>
-                <button id="tab-register" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-slate-500 hover:text-[#0d1f3c]">
+                <button id="tab-register" type="button" class="flex-1 py-2.5 text-xs font-bold uppercase tracking-wider  transition-all text-slate-500 hover:text-[#0d1f3c]">
                     Crear Cuenta
                 </button>
             </div>
 
             <!-- Alert Box -->
-            <div id="auth-alert" class="hidden mb-6 p-4 rounded-xl text-xs font-medium border text-center"></div>
+            <div id="auth-alert" class="hidden mb-6 p-4  text-xs font-medium border text-center"></div>
 
             <!-- FORM 1: LOGIN -->
             <form id="form-login" class="space-y-4">
@@ -43,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
                             id="login-email" 
                             required 
                             placeholder="tu@correo.com" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
                         />
                     </div>
                 </div>
@@ -64,7 +64,7 @@ import Layout from '../layouts/Layout.astro';
                             id="login-password" 
                             required 
                             placeholder="••••••••" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
                         />
                     </div>
                 </div>
@@ -72,7 +72,7 @@ import Layout from '../layouts/Layout.astro';
                 <button 
                     type="submit" 
                     id="btn-login-submit" 
-                    class="w-full py-3.5 px-4 rounded-xl bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
+                    class="w-full py-3.5 px-4  bg-[#0d6efd] hover:bg-[#0b5ed7] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
                 >
                     <span id="btn-login-text">Entrar a Mi Cuenta</span>
                     <i id="btn-login-spinner" class="fas fa-circle-notch fa-spin hidden"></i>
@@ -92,7 +92,7 @@ import Layout from '../layouts/Layout.astro';
                             id="reg-name" 
                             required 
                             placeholder="Ej: Carlos Ozuna / Tu Carro Rent" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
                         />
                     </div>
                 </div>
@@ -108,7 +108,7 @@ import Layout from '../layouts/Layout.astro';
                             id="reg-whatsapp" 
                             required 
                             placeholder="8499154010" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
                         />
                     </div>
                     <p class="text-[10px] text-slate-400 mt-1">Este número será el botón de WhatsApp independiente que verán los clientes en tus autos.</p>
@@ -125,7 +125,7 @@ import Layout from '../layouts/Layout.astro';
                             id="reg-email" 
                             required 
                             placeholder="tu@correo.com" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
                         />
                     </div>
                 </div>
@@ -142,7 +142,7 @@ import Layout from '../layouts/Layout.astro';
                             required 
                             minlength="6" 
                             placeholder="••••••••" 
-                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
+                            class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200  text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0d6efd] focus:bg-white transition-all"
                         />
                     </div>
                 </div>
@@ -150,7 +150,7 @@ import Layout from '../layouts/Layout.astro';
                 <button 
                     type="submit" 
                     id="btn-reg-submit" 
-                    class="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
+                    class="w-full py-3.5 px-4  bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-2"
                 >
                     <span id="btn-reg-text">Crear Mi Cuenta Gratis</span>
                     <i id="btn-reg-spinner" class="fas fa-circle-notch fa-spin hidden"></i>
