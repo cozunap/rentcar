@@ -447,13 +447,6 @@ export const ALL_DOMINICAN_BRANDS: BrandItem[] = [
     category: "motos",
     logo: "/brands/harley-davidson.svg"
   },
-  {
-    id: "bmw-motorrad",
-    name: "BMW Motorrad",
-    country: "Alemania",
-    category: "motos",
-    logo: "/brands/bmw.svg"
-  },
 
   // ==========================================
   // 9. TRANSPORTE ACUÁTICO & BOTES (Botes, Yates y Lanchas Deportivas)

@@ -219,13 +219,14 @@ export const BRAND_CATALOG_DATABASE: Record<string, BrandCatalogMeta> = {
     ]
   },
   BMW: {
-    transportTypes: ["cars"],
-    models: ["Serie 3", "Serie 4", "Serie 5", "Serie 7", "Serie 2", "X1", "X3", "X4", "X5", "X6", "X7", "M2", "M3", "M4", "M5", "Z4", "i4", "iX"],
+    transportTypes: ["cars", "mototechnics"],
+    models: ["Serie 3", "Serie 4", "Serie 5", "Serie 7", "Serie 2", "X1", "X3", "X4", "X5", "X6", "X7", "M2", "M3", "M4", "M5", "Z4", "i4", "iX", "R 1250 GS (Moto)", "R 1300 GS (Moto)", "S 1000 RR (Moto)"],
     bodyStyles: [
       { id: "sedan", name: "Sedán" },
       { id: "suv", name: "SUV / SAV" },
       { id: "deportivo", name: "Coupé Deportivo" },
-      { id: "convertible", name: "Convertible / Cabrio" }
+      { id: "convertible", name: "Convertible / Cabrio" },
+      { id: "motos", name: "Motocicleta BMW" }
     ]
   },
   Audi: {
@@ -587,15 +588,6 @@ export const BRAND_CATALOG_DATABASE: Record<string, BrandCatalogMeta> = {
       { id: "cruiser", name: "Custom / Cruiser" },
       { id: "touring", name: "Touring / Gran Turismo" },
       { id: "trail", name: "Aventura Trail" }
-    ]
-  },
-  "BMW Motorrad": {
-    transportTypes: ["mototechnics"],
-    models: ["R 1250 GS", "R 1300 GS", "S 1000 RR", "M 1000 RR", "F 850 GS", "R nineT", "G 310 R"],
-    bodyStyles: [
-      { id: "trail", name: "Maxi-Trail Adventure" },
-      { id: "deportivo", name: "Superdeportiva" },
-      { id: "motos", name: "Roadster / Naked" }
     ]
   }
 };
