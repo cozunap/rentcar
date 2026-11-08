@@ -1,6 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
+
+// Orden alfabético estricto (A-Z) para todas las marcas
+const sortedBrandsAlphabetical = [...ALL_DOMINICAN_BRANDS].sort((a, b) => 
+  a.name.localeCompare(b.name, "es", { sensitivity: "base" })
+);
 ---
 
 <Layout title="Marcas de Vehículos y Transporte en República Dominicana | TuCarroYMas">
@@ -18,14 +23,14 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
           Marcas Disponibles en República Dominicana
         </h1>
         <p class="text-sm text-slate-500 mt-1 max-w-2xl">
-          Explora todas las marcas líderes de vehículos, marcas chinas en auge, camionetas, camiones 18-wheelers, motocicletas y maquinaria pesada comercializadas en el país. Haz clic en cualquier marca para ver los modelos disponibles.
+          Explora todas las marcas de vehículos ordenadas alfabéticamente (A-Z): autos, todoterrenos, marcas chinas líderes, camionetas, camiones 18-wheelers, maquinaria pesada y motocicletas comercializadas en el país.
         </p>
       </div>
 
       <!-- Quick Filter Pills: Incluye filtro especial para Marcas Chinas -->
       <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-xs font-bold">
         <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-[#D54000] text-white shadow-sm" data-filter="all">
-          Todas ({ALL_DOMINICAN_BRANDS.length})
+          Todas ({sortedBrandsAlphabetical.length})
         </button>
         <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="chinas">
           Marcas Chinas (BYD, Changan, Geely, etc.)
@@ -44,12 +49,13 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
         </button>
       </div>
 
-      <!-- Grid of all Dominican Brands (5 columnas) -->
+      <!-- Grid of all Dominican Brands ordenadas alfabéticamente en 5 columnas -->
       <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
-        {ALL_DOMINICAN_BRANDS.map(brand => (
+        {sortedBrandsAlphabetical.map(brand => (
           <a 
             href={`/vehiculos?make=${encodeURIComponent(brand.name)}`}
             data-category={brand.category}
+            data-name={brand.name}
             class="brand-card flex flex-col items-center justify-center p-5 sm:p-6 border border-slate-200 rounded-sm hover:border-[#D54000] hover:shadow-xl transition-all group bg-white text-center cursor-pointer"
           >
             <!-- SVG Logo Container (Cargado localmente desde /brands/*.svg) -->

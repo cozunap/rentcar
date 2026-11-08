@@ -455,3 +455,26 @@ export const ALL_DOMINICAN_BRANDS: BrandItem[] = [
     logo: "/brands/bmw.svg"
   }
 ];
+
+// Las 15 marcas más populares y vendidas en República Dominicana y a nivel global (Cuadrícula 5 columnas x 3 filas)
+export const TOP_POPULAR_BRANDS_HOME: BrandItem[] = [
+  // Fila 1: Los gigantes líderes del mercado dominicano
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Toyota")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Honda")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Hyundai")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Kia")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Nissan")!,
+  // Fila 2: Lujo y marcas americanas emblemáticas
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Mercedes-Benz")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "BMW")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Ford")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Chevrolet")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Jeep")!,
+  // Fila 3: Alta gama, europeos e innovación eléctrica
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Lexus")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Audi")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Volkswagen")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "Tesla")!,
+  ALL_DOMINICAN_BRANDS.find(b => b.name === "BYD")!,
+];
+

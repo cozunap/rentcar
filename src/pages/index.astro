@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { TRANSPORT_TYPES } from "../lib/carDealerData";
 import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
-import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
+import { ALL_DOMINICAN_BRANDS, TOP_POPULAR_BRANDS_HOME } from "../lib/brandsData";
 import { VEHICLE_STYLES } from "../lib/vehicleStyles";
 
 // 6 Anuncios Recientes
@@ -15,8 +15,8 @@ const vipAds = [
   DEMO_VEHICLES_SEED[1]  // Tesla Model 3
 ];
 
-// Marcas populares en portada (15 marcas líderes de RD para cuadrícula perfecta de 5 columnas x 3 filas)
-const popularBrandsHomepage = ALL_DOMINICAN_BRANDS.slice(0, 15);
+// Marcas más populares de RD y del mundo (Toyota, Honda, Hyundai, Kia, Nissan, Mercedes-Benz, BMW, Ford, Chevrolet, Jeep, Lexus, Audi, Volkswagen, Tesla, BYD)
+const popularBrandsHomepage = TOP_POPULAR_BRANDS_HOME;
 
 // Duplicamos los estilos para un loop infinito suave sin saltos
 const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
