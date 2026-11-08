@@ -26,6 +26,45 @@ export interface DealerProfile {
 // Default Seed Dealers
 export const SEED_DEALERS: DealerProfile[] = [
   {
+    slug: "auto-plaza-premium-motors",
+    name: "Auto Plaza Premium Motors",
+    dealerType: "Concesionario Autorizado Multimarca",
+    phone: "+1 (829) 555-0199",
+    whatsapp: "18295550199",
+    location: "Distrito Nacional",
+    bio: "Más de 15 años de trayectoria ofreciendo vehículos seminuevos certificados en Santo Domingo. Garantía por escrito, financiamiento con todos los bancos y trato premium.",
+    logoUrl: "/brands/toyota.svg",
+    bannerUrl: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1600&q=80",
+    verified: true,
+    createdAt: "2023-11-20"
+  },
+  {
+    slug: "ev-dominicana-concesionario",
+    name: "EV Dominicana Concesionario",
+    dealerType: "Especialistas en Movilidad 100% Eléctrica",
+    phone: "+1 (809) 555-0144",
+    whatsapp: "18095550144",
+    location: "Distrito Nacional",
+    bio: "Pioneros en importación, venta y servicio técnico para vehículos eléctricos Tesla y BYD en República Dominicana con cargadores de alta velocidad.",
+    logoUrl: "/brands/tesla.svg",
+    bannerUrl: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1600&q=80",
+    verified: true,
+    createdAt: "2024-01-10"
+  },
+  {
+    slug: "cibao-motors-concesionario",
+    name: "Cibao Motors Concesionario",
+    dealerType: "Agencia Multimarca Santiago",
+    phone: "+1 (849) 555-0188",
+    whatsapp: "18495550188",
+    location: "Santiago",
+    bio: "El inventario más grande de SUVs y camionetas en la zona norte: Toyota RAV4, Hilux, Honda CR-V y Nissan Frontier con facilidades de intercambio.",
+    logoUrl: "/brands/honda.svg",
+    bannerUrl: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80",
+    verified: true,
+    createdAt: "2023-10-05"
+  },
+  {
     slug: "agroequipos-dominicana",
     name: "AgroEquipos Dominicana",
     dealerType: "Distribuidor Oficial John Deere RD",
@@ -63,6 +102,32 @@ export const SEED_DEALERS: DealerProfile[] = [
     bannerUrl: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1600&q=80",
     verified: true,
     createdAt: "2024-03-01"
+  },
+  {
+    slug: "superbike-rd-concesionario",
+    name: "SuperBike RD Concesionario",
+    dealerType: "Distribuidor Oficial Motocicletas y Cuadras",
+    phone: "+1 (809) 555-7711",
+    whatsapp: "18095557711",
+    location: "Distrito Nacional",
+    bio: "Tu concesionario premier de motocicletas de alta cilindrada Yamaha, Honda y KTM en Santo Domingo. Cascos, indumentaria y financiamiento inmediato.",
+    logoUrl: "/brands/yamaha.svg",
+    bannerUrl: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1600&q=80",
+    verified: true,
+    createdAt: "2024-02-01"
+  },
+  {
+    slug: "maquinaria-dominicana",
+    name: "Maquinaria Dominicana & Equipos",
+    dealerType: "Importador de Maquinaria Pesada",
+    phone: "+1 (809) 555-9922",
+    whatsapp: "18095559922",
+    location: "Santo Domingo Este",
+    bio: "Maquinaria pesada para minería, infraestructura vial y movimiento de tierra. Excavadoras Caterpillar, Komatsu y retroexcavadoras con respaldo de repuestos.",
+    logoUrl: "/brands/caterpillar.svg",
+    bannerUrl: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1600&q=80",
+    verified: true,
+    createdAt: "2024-01-20"
   }
 ];
 

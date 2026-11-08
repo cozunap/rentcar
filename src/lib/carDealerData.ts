@@ -134,6 +134,7 @@ export interface DealershipListing {
     verified: boolean;
     rating?: number;
     dealerType: "Concesionario Oficial" | "Dealer Autorizado" | "Vendedor Particular";
+    dealerSlug?: string;
   };
   createdAt: string;
 }

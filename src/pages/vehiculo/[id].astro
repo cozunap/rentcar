@@ -247,6 +247,17 @@ const whatsappMessage = encodeURIComponent(
                 Llamar: {vehicle.seller.phone}
               </a>
 
+              <!-- Botón Ver Mini Plataforma / Landing Page de este Dealer -->
+              {vehicle.seller?.dealerSlug && (
+                <a 
+                  href={`/dealer/${vehicle.seller.dealerSlug}`}
+                  class="w-full bg-orange-50 hover:bg-[#D54000] text-[#D54000] hover:text-white border-2 border-[#D54000] font-black text-xs uppercase py-3 px-4 rounded-sm flex items-center justify-center gap-2 transition-all text-center cursor-pointer tracking-wider shadow-sm"
+                >
+                  <i class="fa-solid fa-store"></i>
+                  Ver más vehículos de este Dealer
+                </a>
+              )}
+
             </div>
 
             <!-- Resumen Rápido del Vehículo para el Comprador -->

@@ -40,6 +40,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "Auto Plaza Premium Motors",
+      dealerSlug: "auto-plaza-premium-motors",
       phone: "+1 (829) 555-0199",
       whatsapp: "18295550199",
       verified: true,
@@ -86,6 +87,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "EV Dominicana Concesionario",
+      dealerSlug: "ev-dominicana-concesionario",
       phone: "+1 (809) 555-0144",
       whatsapp: "18095550144",
       verified: true,
@@ -132,6 +134,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "Cibao Motors Concesionario",
+      dealerSlug: "cibao-motors-concesionario",
       phone: "+1 (809) 555-0177",
       whatsapp: "18095550177",
       verified: true,
@@ -177,6 +180,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "Flotillas del Caribe SRL",
+      dealerSlug: "transpesados-del-caribe",
       phone: "+1 (809) 555-0188",
       whatsapp: "18095550188",
       verified: true,
@@ -222,6 +226,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "Maquinaria Dominicana & Equipos",
+      dealerSlug: "maquinaria-dominicana",
       phone: "+1 (809) 555-0155",
       whatsapp: "18095550155",
       verified: true,
@@ -267,6 +272,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "Marina & Yates Quisqueya",
+      dealerSlug: "nautica-caribbean-yachts",
       phone: "+1 (809) 555-0122",
       whatsapp: "18095550122",
       verified: true,
@@ -312,6 +318,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "SuperBike RD Concesionario",
+      dealerSlug: "superbike-rd-concesionario",
       phone: "+1 (809) 555-0133",
       whatsapp: "18095550133",
       verified: true,
@@ -357,6 +364,7 @@ export const DEMO_VEHICLES_SEED: DealershipListing[] = [
     },
     seller: {
       name: "AgroEquipos Dominicana",
+      dealerSlug: "agroequipos-dominicana",
       phone: "+1 (809) 555-0111",
       whatsapp: "18095550111",
       verified: true,
