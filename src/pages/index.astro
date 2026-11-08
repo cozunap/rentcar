@@ -1,216 +1,145 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { VEHICLE_BRANDS, DOMINICAN_PROVINCES, VEHICLE_BODY_TYPES } from '../lib/constants';
-import BookingModal from '../components/BookingModal.astro';
+import { VEHICLE_BRANDS, DOMINICAN_PROVINCES, MARKETPLACE_CATEGORIES } from '../lib/constants';
 ---
 
 <Layout 
-    title="TuCarroYMás.com | Compra, Venta y Renta de Vehículos en República Dominicana"
-    description="El marketplace automotriz líder en República Dominicana. Encuentra carros usados y nuevos, publica gratis y alquila vehículos con confirmación directa por WhatsApp."
+    title="TuCarroYMás.com | Dealer Digital de Vehículos, Motos, Botes y Pesados"
+    description="Compra y vende vehículos, camionetas, motos, botes y camiones en República Dominicana y el mundo. Publicación gratuita y trato directo por WhatsApp sin comisiones."
 >
-    <!-- HERO MARKETPLACE SECTION (Estilo SuperCarros + Crocoblock CarDealer Modernizado) -->
-    <section class="relative bg-[#070d1e] text-white pt-10 pb-20 border-b border-slate-800 overflow-hidden">
+    <!-- HERO DEALERSHIP BANNER -->
+    <section class="relative bg-[#070b16] text-white pt-12 pb-20 border-b border-slate-800 overflow-hidden">
         
-        <!-- Subtle Glow Background -->
+        <!-- Background Lighting FX -->
         <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/25 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Hero Title & Value Proposition -->
+            <!-- Value Prop & Title -->
             <div class="text-center max-w-3xl mx-auto mb-10">
-                <span class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/80 border border-blue-500/30 text-[#38bdf8] text-[11px] font-black uppercase tracking-widest mb-4">
-                    <i class="fas fa-certificate text-emerald-400"></i> Marketplace Automotriz Dominicano
+                <span class="inline-flex items-center gap-2 px-3.5 py-1 bg-blue-950/90 border border-blue-500/40 text-[#38bdf8] text-[11px] font-black uppercase tracking-widest mb-4 shadow-sm">
+                    <i class="fas fa-certificate text-emerald-400"></i> Portal Automotriz & Dealer Digital Global
                 </span>
                 <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight font-['Outfit',sans-serif] leading-tight">
-                    Encuentra tu próximo carro en <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#38bdf8] to-[#60a5fa]">República Dominicana</span>
+                    El Dealer Digital de <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#38bdf8] via-blue-400 to-[#60a5fa]">Todo Tipo de Transporte</span>
                 </h1>
                 <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
-                    Miles de ofertas verificadas de dealers y particulares. Compra, vende gratis o renta directo por WhatsApp sin intermediarios.
+                    Carros, Camionetas, SUVs, Motocicletas, Botes y Vehículos Pesados. Publica gratis y contacta directamente al vendedor por WhatsApp.
                 </p>
             </div>
 
-            <!-- THE SUPERCARROS SEARCH BOX (Buscador Maestro de Compra y Renta) -->
-            <div class="max-w-5xl mx-auto bg-white border-2 border-slate-900 shadow-2xl overflow-hidden" style="border-radius: 0px !important;">
+            <!-- UNIFIED SEARCH BOX (Cars.com / SuperCarros Style) -->
+            <div class="max-w-5xl mx-auto bg-white border-2 border-slate-900 shadow-2xl p-6 sm:p-8" style="border-radius: 0px !important;">
                 
-                <!-- Intent Tabs: Comprar Carro / Rent A Car -->
-                <div class="flex border-b border-slate-200 bg-slate-100">
-                    <button 
-                      type="button" 
-                      id="tab-buy" 
-                      class="flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-white text-[#1d4ed8] border-b-2 border-[#1d4ed8]"
-                    >
-                        <i class="fas fa-car text-base"></i>
-                        <span>Comprar Vehículo</span>
-                    </button>
-                    <button 
-                      type="button" 
-                      id="tab-rent" 
-                      class="flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-600 hover:bg-slate-200"
-                    >
-                        <i class="fas fa-key text-base"></i>
-                        <span>Alquilar (Rent A Car)</span>
-                    </button>
-                </div>
-
-                <!-- Form Panel 1: Comprar Vehículo (Estilo SuperCarros) -->
-                <div id="panel-buy" class="p-6 sm:p-8 space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <!-- Marca -->
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-brand">
-                                Marca
-                            </label>
-                            <select id="h-brand" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                                <option value="all">Todas las Marcas</option>
-                                {VEHICLE_BRANDS.map(b => <option value={b}>{b}</option>)}
-                            </select>
-                        </div>
-
-                        <!-- Tipo de Vehículo -->
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-body">
-                                Tipo de Carrocería
-                            </label>
-                            <select id="h-body" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                                <option value="all">Cualquier Carrocería</option>
-                                {VEHICLE_BODY_TYPES.map(t => <option value={t}>{t}</option>)}
-                            </select>
-                        </div>
-
-                        <!-- Provincia -->
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-province">
-                                Provincia (RD)
-                            </label>
-                            <select id="h-province" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                                <option value="all">Toda República Dominicana</option>
-                                {DOMINICAN_PROVINCES.map(p => <option value={p.name}>{p.name}</option>)}
-                            </select>
-                        </div>
-
-                        <!-- Presupuesto Máximo -->
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="h-price">
-                                Precio Máximo
-                            </label>
-                            <select id="h-price" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                                <option value="all">Cualquier Precio</option>
-                                <option value="10000">Hasta $10,000 USD</option>
-                                <option value="20000">Hasta $20,000 USD</option>
-                                <option value="35000">Hasta $35,000 USD</option>
-                                <option value="50000">Hasta $50,000 USD</option>
-                                <option value="100000">Más de $50,000 USD (Alta Gama)</option>
-                            </select>
-                        </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <!-- Categoría de Transporte -->
+                    <div>
+                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-cat">
+                            Categoría de Transporte
+                        </label>
+                        <select id="filter-cat" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Todas las Categorías</option>
+                            {MARKETPLACE_CATEGORIES.map(c => <option value={c.id}>{c.name}</option>)}
+                        </select>
                     </div>
 
-                    <!-- Search Button -->
-                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div class="flex items-center gap-2 text-xs text-slate-500">
-                            <i class="fas fa-bolt text-[#1d4ed8]"></i>
-                            <span>Búsqueda instantánea en vivo sin recargas</span>
-                        </div>
-                        <button 
-                          type="button" 
-                          id="btn-search-buy" 
-                          class="w-full sm:w-auto px-10 py-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-md flex items-center justify-center gap-2"
-                          style="border-radius: 0px !important;"
-                        >
-                            <i class="fas fa-search"></i>
-                            <span>Buscar Vehículos</span>
-                        </button>
+                    <!-- Marca -->
+                    <div>
+                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-brand">
+                            Marca / Fabricante
+                        </label>
+                        <select id="filter-brand" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Todas las Marcas</option>
+                            {VEHICLE_BRANDS.map(b => <option value={b}>{b}</option>)}
+                        </select>
+                    </div>
+
+                    <!-- Ubicación / Provincia -->
+                    <div>
+                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-prov">
+                            Ubicación
+                        </label>
+                        <select id="filter-prov" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Cualquier Ubicación (RD y Global)</option>
+                            {DOMINICAN_PROVINCES.map(p => <option value={p}>{p}</option>)}
+                        </select>
+                    </div>
+
+                    <!-- Presupuesto Máximo -->
+                    <div>
+                        <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="filter-price">
+                            Precio Máximo (USD)
+                        </label>
+                        <select id="filter-price" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Cualquier Precio</option>
+                            <option value="15000">Hasta $15,000 USD</option>
+                            <option value="30000">Hasta $30,000 USD</option>
+                            <option value="50000">Hasta $50,000 USD</option>
+                            <option value="100000">Hasta $100,000 USD</option>
+                            <option value="250000">Más de $100,000 USD</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- Form Panel 2: Rent A Car (JetBooking) -->
-                <div id="panel-rent" class="hidden p-6 sm:p-8 space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="r-city">
-                                Lugar de Entrega
-                            </label>
-                            <select id="r-city" class="w-full text-xs font-semibold p-3.5 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                                <option value="all">Cualquier Zona (Santo Domingo)</option>
-                                <option value="Santo Domingo Este">Santo Domingo Este</option>
-                                <option value="Aeropuerto SDQ">Aeropuerto Las Américas (SDQ)</option>
-                                <option value="Distrito Nacional">Distrito Nacional</option>
-                                <option value="Santiago">Santiago de los Caballeros</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="r-date-start">
-                                Fecha de Entrega
-                            </label>
-                            <input type="date" id="r-date-start" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1" for="r-date-end">
-                                Fecha de Retorno
-                            </label>
-                            <input type="date" id="r-date-end" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]" />
-                        </div>
-                    </div>
-
-                    <div class="pt-2 flex justify-end">
-                        <button 
-                          type="button" 
-                          id="btn-search-rent" 
-                          class="w-full sm:w-auto px-10 py-4 bg-[#15803d] hover:bg-[#166534] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-md flex items-center justify-center gap-2"
-                          style="border-radius: 0px !important;"
-                        >
-                            <i class="fas fa-calendar-check"></i>
-                            <span>Ver Autos de Renta Disponibles</span>
-                        </button>
-                    </div>
+                <!-- Action Button -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-slate-100">
+                    <span class="text-xs text-slate-500 flex items-center gap-2">
+                        <i class="fas fa-bolt text-[#1d4ed8]"></i>
+                        <span>Búsqueda instantánea con actualización en tiempo real</span>
+                    </span>
+                    <button 
+                      type="button" 
+                      id="btn-search-catalog" 
+                      class="w-full sm:w-auto px-10 py-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-md flex items-center justify-center gap-2"
+                      style="border-radius: 0px !important;"
+                    >
+                        <i class="fas fa-search"></i>
+                        <span>Explorar Inventario</span>
+                    </button>
                 </div>
 
             </div>
 
-            <!-- Quick Browse Vehicle Categories Pills -->
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider">
-                <span class="text-slate-400 text-[11px] mr-2">Explorar rápido:</span>
-                <a href="/vehiculos?tipo=SUV" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
-                    <i class="fas fa-car me-1 text-[#38bdf8]"></i> SUVs & Jeepetas
-                </a>
-                <a href="/vehiculos?tipo=Sedan" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
-                    <i class="fas fa-car-side me-1 text-[#38bdf8]"></i> Sedanes
-                </a>
-                <a href="/vehiculos?tipo=Camioneta" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
-                    <i class="fas fa-truck-pickup me-1 text-[#38bdf8]"></i> Camionetas 4x4
-                </a>
-                <a href="/vehiculos?provincia=Santiago" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
-                    <i class="fas fa-location-dot me-1 text-[#38bdf8]"></i> Santiago
-                </a>
-                <a href="/vehiculos?provincia=Distrito Nacional" class="px-4 py-2 bg-slate-900/80 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-colors">
-                    <i class="fas fa-city me-1 text-[#38bdf8]"></i> Distrito Nacional
-                </a>
+            <!-- CATEGORY BADGES GRID (Cars, SUVs, Trucks, Motorcycles, Boats, Heavy) -->
+            <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                {MARKETPLACE_CATEGORIES.map(cat => (
+                    <a 
+                      href={`/vehiculos?categoria=${cat.id}`} 
+                      class="bg-slate-900/80 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 p-4 text-center transition-all group flex flex-col items-center justify-center"
+                      style="border-radius: 0px !important;"
+                    >
+                        <i class={`fas ${cat.icon} text-2xl text-[#38bdf8] group-hover:text-white group-hover:scale-110 transition-all mb-2`}></i>
+                        <strong class="text-xs font-bold text-white uppercase block leading-tight">{cat.name}</strong>
+                    </a>
+                ))}
             </div>
 
         </div>
     </section>
 
-    <!-- SECTION: ÚLTIMOS VEHÍCULOS PUBLICADOS EN VENTA (Estilo SuperCarros) -->
+    <!-- SECTION: INVENTARIO DESTACADO -->
     <section class="py-16 bg-[#f8fafc]">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-widest text-[#1d4ed8] block mb-1">
-                        Inventario Fresco RD
+                        Inventario Verificado
                     </span>
                     <h2 class="text-2xl sm:text-4xl font-black text-[#0f172a] uppercase font-['Outfit',sans-serif] tracking-tight">
-                        Vehículos Destacados en Venta
+                        Unidades Destacadas en el Dealer
                     </h2>
                 </div>
                 <a href="/vehiculos" class="text-xs font-black uppercase tracking-wider text-[#1d4ed8] hover:text-[#1e40af] flex items-center gap-1.5 border-b border-[#1d4ed8] pb-0.5">
-                    <span>Ver Todos los Carros en Venta</span>
+                    <span>Ver Todo el Inventario</span>
                     <i class="fas fa-arrow-right text-[11px]"></i>
                 </a>
             </div>
 
-            <!-- Dynamic Sale Grid from Firestore -->
-            <div id="home-sale-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic Grid from Firestore -->
+            <div id="dealer-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
                     <div class="h-64 bg-slate-100"></div>
                     <div class="h-6 bg-slate-100 w-1/2"></div>
@@ -228,256 +157,126 @@ import BookingModal from '../components/BookingModal.astro';
         </div>
     </section>
 
-    <!-- SECTION: RENT A CAR SHOWCASE -->
-    <section class="py-16 bg-white border-t border-slate-200">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 block mb-1">
-                        Alquiler sin Comisiones
-                    </span>
-                    <h2 class="text-2xl sm:text-4xl font-black text-[#0f172a] uppercase font-['Outfit',sans-serif] tracking-tight">
-                        Flota de Renta con Confirmación Inmediata
-                    </h2>
-                </div>
-                <a href="/flota" class="text-xs font-black uppercase tracking-wider text-[#15803d] hover:text-[#166534] flex items-center gap-1.5 border-b border-[#15803d] pb-0.5">
-                    <span>Ver Flota de Renta Completa</span>
-                    <i class="fas fa-arrow-right text-[11px]"></i>
-                </a>
-            </div>
-
-            <div id="home-rent-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Dynamically rendered -->
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: SERVICIOS Y TALLERES (Directorio RD) -->
-    <section class="py-16 bg-[#0f172a] text-white">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#38bdf8] block mb-1">
-                    Red de Talleres por Provincias
-                </span>
-                <h2 class="text-3xl font-black uppercase font-['Outfit',sans-serif] tracking-tight">
-                    ¿Buscas Repuestos o Taller Mecánico en tu Zona?
-                </h2>
-                <p class="text-slate-400 text-xs sm:text-sm mt-2">
-                    Conectamos a dueños de vehículos con los mejores talleres mecánicos, de pintura y tiendas de repuestos en Santo Domingo, Santiago y toda RD.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <a href="/talleres?categoria=mecanica" class="bg-slate-800/80 border border-slate-700 p-6 hover:border-[#38bdf8] transition-all group">
-                    <div class="w-12 h-12 bg-blue-600 text-white flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-wrench"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Mecánica General</h3>
-                    <p class="text-xs text-slate-400">Transmisiones, frenos, cambio de aceite y mantenimiento preventivo en tu provincia.</p>
-                </a>
-
-                <a href="/talleres?categoria=repuestos" class="bg-slate-800/80 border border-slate-700 p-6 hover:border-[#38bdf8] transition-all group">
-                    <div class="w-12 h-12 bg-emerald-600 text-white flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-gears"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Repuestos & Autopartes</h3>
-                    <p class="text-xs text-slate-400">Piezas nuevas y usadas para marcas japonesas, americanas y europeas con envíos nacionales.</p>
-                </a>
-
-                <a href="/talleres?categoria=desabolladura" class="bg-slate-800/80 border border-slate-700 p-6 hover:border-[#38bdf8] transition-all group">
-                    <div class="w-12 h-12 bg-purple-600 text-white flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-spray-can"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Desabolladura & Pintura</h3>
-                    <p class="text-xs text-slate-400">Body shops con cabina al horno, igualación computarizada y reparación de choques.</p>
-                </a>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="/talleres" class="px-8 py-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-black uppercase tracking-wider luxury-btn">
-                    Explorar Directorio Completo de Talleres RD
+    <!-- SECTION: SELL CTA HERO -->
+    <section class="py-16 bg-[#090e1a] text-white border-t border-slate-800">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <span class="px-3.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-black uppercase tracking-widest inline-block">
+                Publicación 100% Gratuita • Sin Comisiones
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black uppercase font-['Outfit',sans-serif] tracking-tight max-w-3xl mx-auto">
+                ¿Tienes un Carro, Moto, Camioneta o Bote para Vender?
+            </h2>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">
+                Publica tu unidad en minutos con fotos cuadradas automáticas en alta resolución. Los compradores te contactarán de forma directa e inmediata a tu WhatsApp.
+            </p>
+            <div class="pt-2">
+                <a 
+                  href="/publicar" 
+                  class="px-10 py-4 bg-[#15803d] hover:bg-[#166534] text-white font-black text-xs uppercase tracking-wider luxury-btn shadow-2xl inline-flex items-center gap-2"
+                  style="border-radius: 0px !important;"
+                >
+                    <i class="fas fa-plus-circle text-base"></i>
+                    <span>Publicar Mi Unidad Gratis Ahora</span>
                 </a>
             </div>
         </div>
     </section>
-
-    <!-- Booking Modal -->
-    <BookingModal />
-
 </Layout>
 
 <script>
-    import { collection, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
+    import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
     import { db } from "../lib/firebase/client";
 
-    // Tab switcher between Buy & Rent
-    const tabBuy = document.getElementById('tab-buy');
-    const tabRent = document.getElementById('tab-rent');
-    const panelBuy = document.getElementById('panel-buy');
-    const panelRent = document.getElementById('panel-rent');
-
-    tabBuy?.addEventListener('click', () => {
-        tabBuy.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-white text-[#1d4ed8] border-b-2 border-[#1d4ed8]";
-        tabRent!.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-600 hover:bg-slate-200";
-        panelBuy?.classList.remove('hidden');
-        panelRent?.classList.add('hidden');
-    });
-
-    tabRent?.addEventListener('click', () => {
-        tabRent.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-white text-[#15803d] border-b-2 border-[#15803d]";
-        tabBuy!.className = "flex-1 py-4 px-6 text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-600 hover:bg-slate-200";
-        panelRent?.classList.remove('hidden');
-        panelBuy?.classList.add('hidden');
-    });
-
-    // Date calculations for Rent
-    const today = new Date();
-    const futureDate = new Date();
-    futureDate.setDate(today.getDate() + 3);
-    const formatInputDate = (d: Date) => d.toISOString().split('T')[0];
-
-    const rDateStart = document.getElementById('r-date-start') as HTMLInputElement;
-    const rDateEnd = document.getElementById('r-date-end') as HTMLInputElement;
-    if (rDateStart && rDateEnd) {
-        rDateStart.min = formatInputDate(today);
-        rDateStart.value = formatInputDate(today);
-        rDateEnd.min = formatInputDate(today);
-        rDateEnd.value = formatInputDate(futureDate);
-    }
-
-    // Search Actions
-    const btnSearchBuy = document.getElementById('btn-search-buy');
-    btnSearchBuy?.addEventListener('click', () => {
-        const brand = (document.getElementById('h-brand') as HTMLSelectElement).value;
-        const body = (document.getElementById('h-body') as HTMLSelectElement).value;
-        const prov = (document.getElementById('h-province') as HTMLSelectElement).value;
-        const price = (document.getElementById('h-price') as HTMLSelectElement).value;
+    const searchBtn = document.getElementById('btn-search-catalog');
+    searchBtn?.addEventListener('click', () => {
+        const cat = (document.getElementById('filter-cat') as HTMLSelectElement).value;
+        const brand = (document.getElementById('filter-brand') as HTMLSelectElement).value;
+        const prov = (document.getElementById('filter-prov') as HTMLSelectElement).value;
+        const price = (document.getElementById('filter-price') as HTMLSelectElement).value;
 
         const params = new URLSearchParams();
+        if (cat !== 'all') params.append('categoria', cat);
         if (brand !== 'all') params.append('marca', brand);
-        if (body !== 'all') params.append('tipo', body);
         if (prov !== 'all') params.append('provincia', prov);
         if (price !== 'all') params.append('precio', price);
 
         window.location.href = `/vehiculos?${params.toString()}`;
     });
 
-    const btnSearchRent = document.getElementById('btn-search-rent');
-    btnSearchRent?.addEventListener('click', () => {
-        window.location.href = "/flota";
-    });
-
-    // Stream vehicles from Firestore
-    const homeSaleGrid = document.getElementById('home-sale-grid');
-    const homeRentGrid = document.getElementById('home-rent-grid');
-
+    // Stream from Firestore
+    const dealerGrid = document.getElementById('dealer-grid');
     const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
+
     onSnapshot(q, (snap) => {
-        const saleCars: any[] = [];
-        const rentCars: any[] = [];
+        if (!dealerGrid) return;
+        dealerGrid.innerHTML = '';
+
+        if (snap.empty) {
+            dealerGrid.innerHTML = `
+                <div class="col-span-full text-center py-12 bg-white border border-slate-200 p-8">
+                    <i class="fas fa-car text-4xl text-slate-300 mb-3"></i>
+                    <p class="text-sm font-bold text-slate-700 uppercase">Aún no hay unidades registradas</p>
+                    <p class="text-xs text-slate-500 mt-1">Sé el primero en publicar tu vehículo gratis.</p>
+                </div>
+            `;
+            return;
+        }
 
         snap.docs.forEach(docSnap => {
             const v = docSnap.data();
             v.id = docSnap.id;
-            if (v.listingType === 'rent') {
-                rentCars.push(v);
-            } else {
-                saleCars.push(v);
-            }
+
+            const price = v.price || v.pricePerDay || 25000;
+            const currency = v.currency || 'USD';
+            const priceStr = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
+            const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
+            const cleanPhone = (v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
+
+            const card = document.createElement('div');
+            card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
+            card.innerHTML = `
+                <div>
+                    <!-- Image -->
+                    <div class="car-image-container relative">
+                        <img src="${carImg}" alt="${v.title}" />
+                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#090e1a] text-white shadow-md">
+                                ${v.condition || 'Usado'}
+                            </span>
+                            <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+                                <i class="fas fa-check-circle me-1"></i> Verificado
+                            </span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
+                            <strong class="text-base font-black text-[#15803d] font-mono">${priceStr}</strong>
+                        </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
+                        <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
+                            <i class="fas fa-location-dot text-[#1d4ed8] text-[11px]"></i>
+                            <span>${v.province || v.city || 'República Dominicana'}</span>
+                            <span class="mx-1">•</span>
+                            <span class="text-slate-400 font-semibold">${v.sellerType === 'dealer' ? 'Dealer' : 'Particular'}</span>
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2 mb-4">
+                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span><strong>${v.engine || '2.0L'}</strong></div>
+                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Millas / Km</span><strong>${(v.mileage || 45000).toLocaleString()}</strong></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="/vehiculos" class="py-2.5 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
+                                Ficha Técnica
+                            </a>
+                            <a href="https://wa.me/${cleanPhone}?text=Hola,%20me%20interesa%20comprar%20su%20${encodeURIComponent(v.title)}%20anunciado%20en%20TuCarroYMás.com" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 luxury-btn">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            dealerGrid.appendChild(card);
         });
-
-        // Render Sale Cards (SuperCarros Pattern)
-        if (homeSaleGrid) {
-            homeSaleGrid.innerHTML = '';
-            saleCars.slice(0, 6).forEach(v => {
-                const price = v.price || v.pricePerDay || 25000;
-                const currency = v.currency || 'USD';
-                const priceStr = currency === 'DOP' ? `RD$ ${price.toLocaleString()}` : `$${price.toLocaleString()} USD`;
-                const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
-                const cleanPhone = (v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
-
-                const card = document.createElement('div');
-                card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
-                card.innerHTML = `
-                    <div>
-                        <div class="car-image-container relative">
-                            <img src="${carImg}" alt="${v.title}" />
-                            <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                                <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#0f172a] text-white shadow-md">
-                                    ${v.condition || 'Usado'}
-                                </span>
-                            </div>
-                            <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
-                                <strong class="text-base font-black text-[#15803d] font-mono">${priceStr}</strong>
-                            </div>
-                        </div>
-                        <div class="p-5">
-                            <h4 class="text-lg font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
-                            <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
-                                <i class="fas fa-location-dot text-[#1d4ed8] text-[11px]"></i>
-                                <span>${v.province || v.city || 'República Dominicana'}</span>
-                            </p>
-                            <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2 mb-4">
-                                <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span><strong>${v.engine || '2.0L'}</strong></div>
-                                <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Millas</span><strong>${(v.mileage || 45000).toLocaleString()}</strong></div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <a href="/vehiculos" class="py-2.5 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
-                                    Detalles
-                                </a>
-                                <a href="https://wa.me/${cleanPhone}?text=Hola,%20me%20interesa%20su%20${encodeURIComponent(v.title)}" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 luxury-btn">
-                                    <i class="fab fa-whatsapp"></i> WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                homeSaleGrid.appendChild(card);
-            });
-        }
-
-        // Render Rent Cards (JetBooking Pattern)
-        if (homeRentGrid) {
-            homeRentGrid.innerHTML = '';
-            const rentShowcase = rentCars.length > 0 ? rentCars : saleCars;
-            rentShowcase.slice(0, 2).forEach(v => {
-                const carImg = v.title.includes("Honda") ? "/Honda.webp" : v.title.includes("Jeep") ? "/Jeep.webp" : (v.mainImage || "/Honda.webp");
-                const price = v.pricePerDay || 50;
-                const cleanPhone = (v.ownerWhatsapp || '18499154010').replace(/\D/g, '');
-
-                const card = document.createElement('div');
-                card.className = "luxury-card flex flex-col justify-between overflow-hidden group";
-                card.innerHTML = `
-                    <div>
-                        <div class="car-image-container relative">
-                            <img src="${carImg}" alt="${v.title}" />
-                            <div class="absolute top-3 left-3">
-                                <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#1d4ed8] text-white shadow-md">
-                                    Rent A Car
-                                </span>
-                            </div>
-                            <div class="absolute bottom-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-200 text-slate-900 shadow-sm">
-                                <span class="text-xs text-slate-400 font-bold">DESDE</span>
-                                <strong class="text-base font-black text-[#1d4ed8] font-mono">$${price}</strong>
-                                <span class="text-[10px] font-bold text-slate-500 uppercase">/día</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h4 class="text-xl font-bold text-[#0f172a] mb-1">${v.title}</h4>
-                            <p class="text-xs text-slate-500 mb-4">Entrega en Aeropuerto SDQ y Santo Domingo Este.</p>
-                            <div class="flex gap-2">
-                                <a href="/flota" class="flex-1 py-3 px-4 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
-                                    Cotizar Renta
-                                </a>
-                                <a href="https://wa.me/${cleanPhone}?text=Hola,%20deseo%20rentar%20la%20${encodeURIComponent(v.title)}" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 px-4 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 luxury-btn">
-                                    <i class="fab fa-whatsapp"></i> Reservar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                homeRentGrid.appendChild(card);
-            });
-        }
     });
 </script>

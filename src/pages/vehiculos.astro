@@ -1,32 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/constants';
+import { VEHICLE_BRANDS, DOMINICAN_PROVINCES, MARKETPLACE_CATEGORIES } from '../lib/constants';
 ---
 
 <Layout 
-    title="Comprar Carros en República Dominicana | TuCarroYMás RD"
-    description="Encuentra vehículos en venta en toda la República Dominicana. Filtros en vivo por provincia, marca, año, precio y tipo de carrocería. Contacto directo con el vendedor sin comisiones."
+    title="Inventario de Vehículos, Motos y Botes | TuCarroYMás.com"
+    description="Explora todo el inventario de carros, camionetas, SUVs, motocicletas, botes y camiones en venta directa. Filtros instantáneos y contacto directo con el vendedor por WhatsApp."
 >
-    <!-- Header Hero Banner (Marketplace Venta) -->
-    <div class="bg-[#0f172a] text-white py-14 text-center border-b border-slate-800">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1d4ed8] text-white text-[10px] font-black uppercase tracking-widest mb-3">
-                <i class="fas fa-tag"></i> Catálogo de Venta Gratuito RD
-            </div>
+    <!-- Header Banner -->
+    <div class="bg-[#070b16] text-white py-12 text-center border-b border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-950/90 border border-blue-500/40 text-[#38bdf8] text-[10px] font-black uppercase tracking-widest mb-3">
+                <i class="fas fa-layer-group"></i> Catálogo Completo de Unidades
+            </span>
             <h1 class="text-3xl sm:text-5xl font-black mb-3 uppercase font-['Outfit',sans-serif] tracking-tight">
-                Vehículos en Venta en República Dominicana
+                Inventario en Venta Directa
             </h1>
             <p class="text-slate-300 text-sm max-w-2xl mx-auto">
-                Compra y vende tu carro sin intermediarios ni comisiones. Conéctate directamente con propietarios y concesionarios autorizados en todo el país.
+                Carros, Camionetas 4x4, SUVs, Motos, Botes y Camiones. Trato directo sin comisiones ni intermediarios.
             </p>
         </div>
     </div>
 
-    <!-- Main Content & Faceted Filters (JetSmartFilters Pattern) -->
+    <!-- Main Content & Live Faceted Filters -->
     <section class="py-12 bg-[#f8fafc]">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- BARRA DE BÚSQUEDA Y FILTRADO FACETADO EN VIVO (0ms Lag) -->
+            <!-- BARRA DE FILTROS FACETADOS EN MEMORIA (0ms Lag) -->
             <div class="bg-white border-2 border-slate-900 shadow-xl p-5 mb-8 space-y-4" style="border-radius: 0px !important;">
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
@@ -39,32 +39,32 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
                             <input 
                                 type="text" 
                                 id="v-filter-keyword" 
-                                placeholder="Ej: Toyota RAV4, Honda CR-V, Jeep, Hilux..." 
+                                placeholder="Ej: Toyota Hilux, Yamaha, Sea Ray, Honda..." 
                                 class="w-full text-xs font-semibold p-3 pl-9 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]"
                             />
-                            <i class="fas fa-car absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <i class="fas fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         </div>
                     </div>
 
-                    <!-- Filtro por Provincia -->
+                    <!-- Categoría de Transporte -->
                     <div>
-                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-province">
-                            <i class="fas fa-map-marker-alt text-[#1d4ed8] me-1"></i> Provincia
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-category">
+                            <i class="fas fa-layer-group text-[#1d4ed8] me-1"></i> Categoría
                         </label>
-                        <select id="v-filter-province" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Todas las Provincias</option>
-                            {DOMINICAN_PROVINCES.map(p => <option value={p.name}>{p.name}</option>)}
+                        <select id="v-filter-category" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Todas las Categorías</option>
+                            {MARKETPLACE_CATEGORIES.map(c => <option value={c.id}>{c.name}</option>)}
                         </select>
                     </div>
 
-                    <!-- Filtro por Tipo de Carrocería -->
+                    <!-- Ubicación / Provincia -->
                     <div>
-                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-body">
-                            <i class="fas fa-shapes text-[#1d4ed8] me-1"></i> Carrocería
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-700 mb-1" for="v-filter-province">
+                            <i class="fas fa-location-dot text-[#1d4ed8] me-1"></i> Ubicación
                         </label>
-                        <select id="v-filter-body" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
-                            <option value="all">Todos los Tipos</option>
-                            {VEHICLE_BODY_TYPES.map(t => <option value={t}>{t}</option>)}
+                        <select id="v-filter-province" class="w-full text-xs font-semibold p-3 bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-[#1d4ed8]">
+                            <option value="all">Cualquier Ubicación</option>
+                            {DOMINICAN_PROVINCES.map(p => <option value={p}>{p}</option>)}
                         </select>
                     </div>
 
@@ -82,30 +82,28 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
                     </div>
                 </div>
 
-                <!-- Contador de Resultados y Publicar CTA -->
+                <!-- Active Filters bar & Count -->
                 <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
                     <span id="vehicles-total-count" class="font-bold text-slate-700">
                         Cargando inventario...
                     </span>
-                    <a href="/publicar?tipo=venta" class="text-[#15803d] font-black hover:underline flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
-                        <i class="fas fa-plus-circle text-sm"></i> Publicar Mi Carro en Venta Gratis
+                    <a href="/publicar" class="text-[#15803d] font-black hover:underline flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
+                        <i class="fas fa-plus-circle text-sm"></i> Publicar Mi Unidad Gratis
                     </a>
                 </div>
 
             </div>
 
-            <!-- Grid de Vehículos en Venta (Estilo Crocoblock CarDealer) -->
+            <!-- Grid de Unidades en Venta -->
             <div id="vehicles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Skeletons -->
                 <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
                     <div class="h-64 bg-slate-100"></div>
                     <div class="h-6 bg-slate-100 w-1/2"></div>
-                    <div class="h-4 bg-slate-100 w-1/3"></div>
                 </div>
                 <div class="bg-white border border-slate-200 p-4 animate-pulse space-y-4">
                     <div class="h-64 bg-slate-100"></div>
                     <div class="h-6 bg-slate-100 w-1/2"></div>
-                    <div class="h-4 bg-slate-100 w-1/3"></div>
                 </div>
             </div>
 
@@ -118,17 +116,17 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
       class="fixed inset-0 z-50 pointer-events-none transition-all duration-300 opacity-0 flex items-center justify-center p-3 sm:p-4 md:p-6" 
       aria-hidden="true"
     >
-        <div id="sale-modal-backdrop" class="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-pointer"></div>
+        <div id="sale-modal-backdrop" class="absolute inset-0 bg-[#070b16]/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-pointer"></div>
 
         <div id="sale-modal-card" class="relative w-full max-w-2xl bg-white border-2 border-slate-900 shadow-2xl flex flex-col transform scale-95 transition-all duration-300 max-h-[92vh] overflow-hidden z-10" style="border-radius: 0px !important;">
             <!-- Modal Header -->
-            <div class="px-5 py-3.5 bg-[#0f172a] text-white flex items-center justify-between border-b border-slate-800">
+            <div class="px-5 py-3.5 bg-[#090e1a] text-white flex items-center justify-between border-b border-slate-800">
                 <div class="flex items-center gap-2">
                     <span class="px-2 py-0.5 text-[10px] font-black uppercase tracking-widest bg-[#15803d] text-white">
-                        Venta Directa RD
+                        Venta Directa
                     </span>
                     <span id="sm-condition-badge" class="text-xs font-semibold text-slate-300">
-                        Usado Importado
+                        Usado
                     </span>
                 </div>
                 <button id="sale-modal-close" type="button" aria-label="Cerrar" class="w-8 h-8 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors luxury-btn">
@@ -146,8 +144,8 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
                     <div>
                         <h3 id="sm-title" class="text-2xl font-black text-[#0f172a] tracking-tight">Cargando...</h3>
                         <p id="sm-location" class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
-                            <i class="fas fa-map-marker-alt text-[#1d4ed8]"></i>
-                            <span>Santo Domingo, República Dominicana</span>
+                            <i class="fas fa-location-dot text-[#1d4ed8]"></i>
+                            <span>República Dominicana</span>
                         </p>
                     </div>
                     <div class="text-left sm:text-right">
@@ -161,11 +159,11 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
                     <div class="p-2.5 bg-slate-50 border border-slate-200">
                         <i class="fas fa-gears text-[#1d4ed8] text-sm mb-1 block"></i>
                         <span class="text-[10px] text-slate-400 uppercase font-bold block">Motor</span>
-                        <strong id="sm-engine" class="text-slate-800 font-bold">2.0L Turbo</strong>
+                        <strong id="sm-engine" class="text-slate-800 font-bold">2.0L</strong>
                     </div>
                     <div class="p-2.5 bg-slate-50 border border-slate-200">
                         <i class="fas fa-gauge-high text-[#1d4ed8] text-sm mb-1 block"></i>
-                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Kilometraje</span>
+                        <span class="text-[10px] text-slate-400 uppercase font-bold block">Uso / Millas</span>
                         <strong id="sm-mileage" class="text-slate-800 font-bold">45,000 mi</strong>
                     </div>
                     <div class="p-2.5 bg-slate-50 border border-slate-200">
@@ -176,13 +174,13 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
                     <div class="p-2.5 bg-slate-50 border border-slate-200">
                         <i class="fas fa-arrows-split-up-and-left text-[#1d4ed8] text-sm mb-1 block"></i>
                         <span class="text-[10px] text-slate-400 uppercase font-bold block">Tracción</span>
-                        <strong id="sm-drivetrain" class="text-slate-800 font-bold">AWD</strong>
+                        <strong id="sm-drivetrain" class="text-slate-800 font-bold">4x4</strong>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Descripción del Vehículo</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Descripción de la Unidad</h4>
                     <p id="sm-desc" class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 border border-slate-200"></p>
                 </div>
             </div>
@@ -194,7 +192,7 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
                     <span>Contactar al Vendedor por WhatsApp</span>
                 </a>
                 <p class="text-[11px] text-center text-slate-400">
-                    Trato directo y sin comisiones con el propietario o dealer en República Dominicana.
+                    Trato directo y sin intermediarios con el propietario o concesionario.
                 </p>
             </div>
         </div>
@@ -240,17 +238,17 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
 
         if (mImg) mImg.src = vehicle.title.includes("Honda") ? "/Honda.webp" : vehicle.title.includes("Jeep") ? "/Jeep.webp" : (vehicle.mainImage || "/Honda.webp");
         if (mTitle) mTitle.textContent = vehicle.title;
-        if (mLocation) mLocation.querySelector('span')!.textContent = `${vehicle.province || vehicle.city || 'Santo Domingo'}, República Dominicana`;
+        if (mLocation) mLocation.querySelector('span')!.textContent = `${vehicle.province || vehicle.city || 'República Dominicana'}`;
         if (mPrice) mPrice.textContent = formattedPrice;
         if (mSeller) mSeller.textContent = vehicle.sellerType === 'dealer' ? 'Dealer Autorizado' : 'Vendedor Particular';
-        if (mCondBadge) mCondBadge.textContent = vehicle.condition || 'Usado Importado';
-        if (mEngine) mEngine.textContent = vehicle.engine || '2.4L 4 Cilindros';
+        if (mCondBadge) mCondBadge.textContent = vehicle.condition || 'Usado';
+        if (mEngine) mEngine.textContent = vehicle.engine || 'Estándar';
         if (mMileage) mMileage.textContent = `${(vehicle.mileage || 45000).toLocaleString()} ${vehicle.mileageUnit || 'mi'}`;
         if (mTrans) mTrans.textContent = vehicle.transmission || 'Automática';
-        if (mDrivetrain) mDrivetrain.textContent = vehicle.drivetrain || 'AWD / 4x4';
-        if (mDesc) mDesc.textContent = vehicle.description || `Vehículo ${vehicle.title} disponible para venta inmediata en ${vehicle.province || 'República Dominicana'}.`;
+        if (mDrivetrain) mDrivetrain.textContent = vehicle.drivetrain || 'Estándar';
+        if (mDesc) mDesc.textContent = vehicle.description || `Unidad ${vehicle.title} disponible para venta directa en ${vehicle.province || 'República Dominicana'}.`;
 
-        const msg = encodeURIComponent(`Hola, vi en TuCarroYMás.com su ${vehicle.title} anunciado en ${formattedPrice}. ¿Aún está disponible para verlo?`);
+        const msg = encodeURIComponent(`Hola, vi en TuCarroYMás.com su ${vehicle.title} anunciado en ${formattedPrice}. ¿Aún está disponible?`);
         if (mWhatsappBtn) mWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
 
         modal.classList.remove('pointer-events-none', 'opacity-0');
@@ -278,30 +276,27 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
     closeBtn?.addEventListener('click', closeModal);
     backdrop?.addEventListener('click', closeModal);
 
-    // Filter Logic
-    let allSaleVehicles: any[] = [];
+    // Filters
+    let allVehicles: any[] = [];
     const filterKeyword = document.getElementById('v-filter-keyword') as HTMLInputElement;
+    const filterCategory = document.getElementById('v-filter-category') as HTMLSelectElement;
     const filterProvince = document.getElementById('v-filter-province') as HTMLSelectElement;
-    const filterBody = document.getElementById('v-filter-body') as HTMLSelectElement;
     const filterSort = document.getElementById('v-filter-sort') as HTMLSelectElement;
 
-    // Leer URL params si viene del menú (?provincia=Santiago o ?tipo=SUV)
+    // Read URL params (?categoria=motos o ?marca=Toyota)
     const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('categoria') && filterCategory) {
+        filterCategory.value = urlParams.get('categoria')!;
+    }
     if (urlParams.get('provincia') && filterProvince) {
         filterProvince.value = urlParams.get('provincia')!;
-    }
-    if (urlParams.get('tipo') && filterBody) {
-        const t = urlParams.get('tipo')!;
-        Array.from(filterBody.options).forEach(opt => {
-            if (opt.value.toLowerCase().includes(t.toLowerCase())) filterBody.value = opt.value;
-        });
     }
 
     function renderVehicles() {
         if (!vGrid) return;
         vGrid.innerHTML = '';
 
-        let results = [...allSaleVehicles];
+        let results = [...allVehicles];
 
         // Keyword filter
         const kw = filterKeyword?.value.toLowerCase().trim() || '';
@@ -314,19 +309,19 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
             );
         }
 
+        // Category filter
+        const cat = filterCategory?.value || 'all';
+        if (cat !== 'all') {
+            results = results.filter(i => 
+                (i.v.category || '').toLowerCase() === cat.toLowerCase()
+            );
+        }
+
         // Province filter
         const prov = filterProvince?.value || 'all';
         if (prov !== 'all') {
             results = results.filter(i => 
                 (i.v.province || i.v.city || '').toLowerCase().includes(prov.toLowerCase())
-            );
-        }
-
-        // Body type
-        const body = filterBody?.value || 'all';
-        if (body !== 'all') {
-            results = results.filter(i => 
-                (i.v.category || '').toLowerCase().includes(body.toLowerCase())
             );
         }
 
@@ -341,15 +336,15 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
         }
 
         if (totalCount) {
-            totalCount.textContent = `${results.length} Vehículo${results.length === 1 ? '' : 's'} en Venta Disponible${results.length === 1 ? '' : 's'}`;
+            totalCount.textContent = `${results.length} Unidad${results.length === 1 ? '' : 'es'} Disponible${results.length === 1 ? '' : 's'}`;
         }
 
         if (results.length === 0) {
             vGrid.innerHTML = `
                 <div class="col-span-full text-center py-16 bg-white border border-slate-200 p-8">
                     <i class="fas fa-car text-4xl text-slate-300 mb-3"></i>
-                    <p class="text-sm font-bold text-slate-700 uppercase">No hay vehículos que coincidan con tu búsqueda</p>
-                    <p class="text-xs text-slate-500 mt-1">Prueba seleccionando "Todas las Provincias" o borrando el término de búsqueda.</p>
+                    <p class="text-sm font-bold text-slate-700 uppercase">No hay unidades que coincidan con tu búsqueda</p>
+                    <p class="text-xs text-slate-500 mt-1">Prueba seleccionando "Todas las Categorías" o borrando el término de búsqueda.</p>
                 </div>
             `;
             return;
@@ -366,11 +361,10 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
             cardEl.className = "luxury-card flex flex-col justify-between overflow-hidden group";
             cardEl.innerHTML = `
                 <div>
-                    <!-- Car Image with Badges -->
                     <div class="car-image-container relative">
                         <img src="${carImg}" alt="${v.title}" />
                         <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#0f172a] text-white shadow-md">
+                            <span class="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-[#090e1a] text-white shadow-md">
                                 ${v.condition || 'Usado'}
                             </span>
                             <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
@@ -382,43 +376,26 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
                         </div>
                     </div>
 
-                    <!-- Card Body -->
-                    <div class="p-5 sm:p-6">
-                        <h4 class="text-xl font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
+                    <div class="p-5">
+                        <h4 class="text-lg font-bold text-[#0f172a] tracking-tight group-hover:text-[#1d4ed8] transition-colors mb-1">${v.title}</h4>
                         <p class="text-xs text-slate-500 flex items-center gap-1 mb-3">
-                            <i class="fas fa-map-marker-alt text-[#1d4ed8] text-[11px]"></i>
-                            <span>${v.province || v.city || 'Distrito Nacional'}</span>
+                            <i class="fas fa-location-dot text-[#1d4ed8] text-[11px]"></i>
+                            <span>${v.province || v.city || 'República Dominicana'}</span>
                             <span class="mx-1">•</span>
                             <span class="text-slate-400 font-semibold">${v.sellerType === 'dealer' ? 'Dealer' : 'Particular'}</span>
                         </p>
 
-                        <!-- Specs (Motor, Kilometraje, Transmisión, Tracción) -->
-                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2.5 mb-5">
-                            <div>
-                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span>
-                                <strong class="text-slate-800 text-[11px] font-bold">${v.engine || '2.0L Turbo'}</strong>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Millas / Km</span>
-                                <strong class="text-slate-800 text-[11px] font-bold">${(v.mileage || 45000).toLocaleString()} ${v.mileageUnit || 'mi'}</strong>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Transmisión</span>
-                                <strong class="text-slate-800 text-[11px] font-bold">${(v.transmission || 'Automática').slice(0, 10)}</strong>
-                            </div>
-                            <div>
-                                <span class="text-[10px] text-slate-400 uppercase block font-bold">Tracción</span>
-                                <strong class="text-slate-800 text-[11px] font-bold">${v.drivetrain || 'AWD / 4WD'}</strong>
-                            </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 p-2 mb-4">
+                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Motor</span><strong>${v.engine || '2.0L'}</strong></div>
+                            <div><span class="text-[10px] text-slate-400 uppercase block font-bold">Millas / Km</span><strong>${(v.mileage || 45000).toLocaleString()}</strong></div>
                         </div>
 
-                        <!-- Actions -->
-                        <div class="grid grid-cols-2 gap-2 pt-1">
-                            <button type="button" class="view-car-btn w-full py-3 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 luxury-btn shadow-sm" style="border-radius: 0px !important;">
-                                <i class="fas fa-eye text-sm"></i> Ver Detalles
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" class="view-car-btn py-2.5 px-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-center text-xs font-bold uppercase tracking-wider luxury-btn">
+                                Ficha Técnica
                             </button>
-                            <a href="https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hola, me interesa comprar su ${v.title} anunciado en ${priceStr} en TuCarroYMás.com`)}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn w-full py-3 px-3 bg-[#15803d] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors luxury-btn" style="border-radius: 0px !important;">
-                                <i class="fab fa-whatsapp text-base"></i> WhatsApp
+                            <a href="https://wa.me/${cleanPhone}?text=Hola,%20me%20interesa%20comprar%20su%20${encodeURIComponent(v.title)}%20anunciado%20en%20TuCarroYMás.com" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 bg-[#15803d] hover:bg-[#166534] text-white text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 luxury-btn">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
                             </a>
                         </div>
                     </div>
@@ -432,7 +409,7 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
 
             cardEl.addEventListener('click', (e) => {
                 const target = e.target as HTMLElement;
-                if (target.closest('.whatsapp-btn') || target.closest('.view-car-btn')) return;
+                if (target.closest('a') || target.closest('.view-car-btn')) return;
                 openModal(v, ownerData);
             });
 
@@ -441,31 +418,19 @@ import { DOMINICAN_PROVINCES, VEHICLE_BRANDS, VEHICLE_BODY_TYPES } from '../lib/
     }
 
     filterKeyword?.addEventListener('input', renderVehicles);
+    filterCategory?.addEventListener('change', renderVehicles);
     filterProvince?.addEventListener('change', renderVehicles);
-    filterBody?.addEventListener('change', renderVehicles);
     filterSort?.addEventListener('change', renderVehicles);
 
-    // Stream from Firestore
+    // Firestore Stream
     const q = query(collection(db, "vehicles"), orderBy("createdAt", "desc"));
     onSnapshot(q, async (snap) => {
-        allSaleVehicles = [];
-
+        allVehicles = [];
         for (const docSnap of snap.docs) {
             const v = docSnap.data();
             v.id = docSnap.id;
-
-            let ownerData: any = null;
-            if (v.ownerId) {
-                try {
-                    const uSnap = await getDoc(doc(db, "users", v.ownerId));
-                    if (uSnap.exists()) ownerData = uSnap.data();
-                } catch (e) {
-                    console.warn(e);
-                }
-            }
-            allSaleVehicles.push({ v, ownerData });
+            allVehicles.push({ v, ownerData: null });
         }
-
         renderVehicles();
     });
 </script>

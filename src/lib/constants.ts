@@ -1,81 +1,52 @@
-export interface DominicanProvince {
+export interface VehicleCategory {
     id: string;
     name: string;
-    region: 'Metropolitana' | 'Norte / Cibao' | 'Sur' | 'Este';
+    icon: string;
+    description: string;
 }
 
-export const DOMINICAN_PROVINCES: DominicanProvince[] = [
-    // Región Metropolitana
-    { id: 'dn', name: 'Distrito Nacional', region: 'Metropolitana' },
-    { id: 'santo-domingo-este', name: 'Santo Domingo Este', region: 'Metropolitana' },
-    { id: 'santo-domingo-oeste', name: 'Santo Domingo Oeste', region: 'Metropolitana' },
-    { id: 'santo-domingo-norte', name: 'Santo Domingo Norte', region: 'Metropolitana' },
-    
-    // Región Norte / Cibao
-    { id: 'santiago', name: 'Santiago de los Caballeros', region: 'Norte / Cibao' },
-    { id: 'la-vega', name: 'La Vega', region: 'Norte / Cibao' },
-    { id: 'puerto-plata', name: 'Puerto Plata', region: 'Norte / Cibao' },
-    { id: 'duarte', name: 'Duarte (San Fco. de Macorís)', region: 'Norte / Cibao' },
-    { id: 'espaillat', name: 'Espaillat (Moca)', region: 'Norte / Cibao' },
-    { id: 'monsenor-nouel', name: 'Monseñor Nouel (Bonao)', region: 'Norte / Cibao' },
-    { id: 'valverde', name: 'Valverde (Mao)', region: 'Norte / Cibao' },
-    { id: 'monte-cristi', name: 'Monte Cristi', region: 'Norte / Cibao' },
-    { id: 'samana', name: 'Samaná', region: 'Norte / Cibao' },
-    { id: 'sanchez-ramirez', name: 'Sánchez Ramírez (Cotui)', region: 'Norte / Cibao' },
-    { id: 'hermanas-mirabal', name: 'Hermanas Mirabal (Salcedo)', region: 'Norte / Cibao' },
-    { id: 'dajabon', name: 'Dajabón', region: 'Norte / Cibao' },
-    { id: 'santiago-rodriguez', name: 'Santiago Rodríguez', region: 'Norte / Cibao' },
-    { id: 'maria-trinidad-sanchez', name: 'María Trinidad Sánchez (Nagua)', region: 'Norte / Cibao' },
-
-    // Región Este
-    { id: 'la-altagracia', name: 'La Altagracia (Punta Cana / Higüey)', region: 'Este' },
-    { id: 'la-romana', name: 'La Romana', region: 'Este' },
-    { id: 'san-pedro-de-macoris', name: 'San Pedro de Macorís', region: 'Este' },
-    { id: 'hato-mayor', name: 'Hato Mayor', region: 'Este' },
-    { id: 'el-seibo', name: 'El Seibo', region: 'Este' },
-    { id: 'monte-plata', name: 'Monte Plata', region: 'Este' },
-
-    // Región Sur
-    { id: 'san-cristobal', name: 'San Cristóbal', region: 'Sur' },
-    { id: 'peravia', name: 'Peravia (Baní)', region: 'Sur' },
-    { id: 'azua', name: 'Azua', region: 'Sur' },
-    { id: 'barahona', name: 'Barahona', region: 'Sur' },
-    { id: 'san-juan', name: 'San Juan de la Maguana', region: 'Sur' },
-    { id: 'san-jose-de-ocoa', name: 'San José de Ocoa', region: 'Sur' },
-    { id: 'baoruco', name: 'Baoruco (Neyba)', region: 'Sur' },
-    { id: 'independencia', name: 'Independencia (Jimaní)', region: 'Sur' },
-    { id: 'pedernales', name: 'Pedernales', region: 'Sur' },
-    { id: 'elias-pina', name: 'Elías Piña', region: 'Sur' }
+export const MARKETPLACE_CATEGORIES: VehicleCategory[] = [
+    { id: 'carros', name: 'Carros & Sedanes', icon: 'fa-car-side', description: 'Sedanes, compactos, hatchbacks y coupés' },
+    { id: 'suvs', name: 'SUVs & Jeepetas', icon: 'fa-car', description: 'Crossovers, SUVs familiares y 4x4' },
+    { id: 'camionetas', name: 'Camionetas / Pickups', icon: 'fa-truck-pickup', description: 'Pickups de trabajo, 4x4 y doble cabina' },
+    { id: 'motores', name: 'Motores & Motocicletas', icon: 'fa-motorcycle', description: 'Motos deportivas, scooters, enduro y de paseo' },
+    { id: 'botes', name: 'Botes & Embarcaciones', icon: 'fa-ship', description: 'Lanchas, yates, botes de pesca y jet skis' },
+    { id: 'pesados', name: 'Camiones & Pesados', icon: 'fa-truck', description: 'Cabezotes, volquetas, furgones y maquinaria pesada' }
 ];
 
 export const VEHICLE_BRANDS = [
-    'Toyota', 'Honda', 'Hyundai', 'Kia', 'Nissan', 'Jeep', 'Ford', 'Chevrolet', 
-    'Mercedes-Benz', 'BMW', 'Audi', 'Lexus', 'Mazda', 'Mitsubishi', 'Volkswagen', 
-    'Subaru', 'Land Rover', 'Porsche', 'Suzuki', 'Isuzu', 'RAM'
+    // Carros y Camionetas
+    'Toyota', 'Honda', 'Hyundai', 'Kia', 'Ford', 'Chevrolet', 'Nissan', 'Jeep', 
+    'Mercedes-Benz', 'BMW', 'Audi', 'Lexus', 'Porsche', 'Mazda', 'Mitsubishi', 
+    'Volkswagen', 'Land Rover', 'Subaru', 'Volvo', 'RAM', 'GMC', 'Dodge',
+    // Motos
+    'Yamaha', 'Honda Motos', 'Kawasaki', 'Suzuki Motos', 'Harley-Davidson', 'Ducati', 'KTM', 'BMW Motorrad',
+    // Embarcaciones
+    'Sea Ray', 'Boston Whaler', 'Yamaha Marine', 'Bayliner', 'Chaparral', 'Grady-White', 'Sunseeker'
 ];
 
-export const VEHICLE_BODY_TYPES = [
-    'SUV / Jeepeta', 'Sedán', 'Camioneta / Pickup 4x4', 'Hatchback', 'Coupe / Deportivo', 
-    'Crossover', 'Van / Minivan', 'Camión / Pesado'
-];
-
-export const FUEL_TYPES = [
-    'Gasolina', 'Diesel / Gasoil', 'Híbrido', 'Eléctrico', 'GLP / Gas'
+export const VEHICLE_CONDITIONS = [
+    'Recién Importado (Limpio de Carfax)',
+    'Usado Local',
+    'Nuevo de Agencia (0 Km)',
+    'Certificado de Dealer'
 ];
 
 export const TRANSMISSION_TYPES = [
-    'Automática', 'Manual', 'CVT', 'Secuencial / Tiptronic'
+    'Automática', 'Manual', 'Secuencial / Tiptronic', 'CVT'
 ];
 
 export const DRIVETRAINS = [
-    '4x4 / 4WD', 'AWD (Tracción Integral)', 'Delantera (FWD)', 'Trasera (RWD)'
+    '4x4 / 4WD', 'AWD (Tracción Total)', 'Delantera (FWD)', 'Trasera (RWD)', 'Propulsión Marina'
 ];
 
-export const WORKSHOP_CATEGORIES = [
-    { id: 'mecanica', label: 'Taller de Mecánica General', icon: 'fa-wrench' },
-    { id: 'repuestos', label: 'Tienda de Repuestos Nuevos y Usados', icon: 'fa-gears' },
-    { id: 'desabolladura', label: 'Desabolladura y Pintura (Body Shop)', icon: 'fa-spray-can' },
-    { id: 'electricidad', label: 'Electricidad y Diagnóstico Computarizado', icon: 'fa-bolt' },
-    { id: 'aire-acondicionado', label: 'Aire Acondicionado Automotriz', icon: 'fa-snowflake' },
-    { id: 'gomas-alineacion', label: 'Gomería, Alineación y Balanceo', icon: 'fa-circle-notch' }
+export const FUEL_TYPES = [
+    'Gasolina', 'Diesel / Gasoil', 'Híbrido', 'Eléctrico (EV)', 'GLP / Gas Natural'
+];
+
+export const DOMINICAN_PROVINCES = [
+    'Distrito Nacional', 'Santo Domingo Este', 'Santo Domingo Oeste', 'Santo Domingo Norte',
+    'Santiago de los Caballeros', 'La Vega', 'Puerto Plata', 'San Cristóbal', 'La Altagracia (Punta Cana / Bávaro)',
+    'La Romana', 'San Pedro de Macorís', 'Duarte (San Fco. de Macorís)', 'Espaillat (Moca)', 'Monseñor Nouel (Bonao)',
+    'Peravia (Baní)', 'Azua', 'Barahona', 'San Juan', 'Samaná', 'Monte Cristi', 'Valverde (Mao)'
 ];
