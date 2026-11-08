@@ -5,28 +5,28 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 ---
 
 <Layout title="Catálogo de Vehículos y Transporte | Crocoblock Car Dealer New">
-  <div class="bg-[#070b16] text-white min-h-screen py-10 px-4 sm:px-8">
+  <div class="bg-[#f8fafc] text-slate-800 min-h-screen py-10 px-4 sm:px-8">
     <div class="max-w-7xl mx-auto">
       
       <!-- Catalog Header -->
-      <div class="border-b border-white/10 pb-6 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div class="border-b border-slate-200 pb-6 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">
             <a href="/" class="hover:underline">Inicio</a>
             <span>/</span>
             <span>Inventario Multicategoría</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
+          <h1 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-slate-900">
             Catálogo de Vehículos & Transporte
           </h1>
-          <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
             Filtros facetados en tiempo real (JetSmartFilters) por categoría de transporte, marca, condición y provincia.
           </p>
         </div>
 
         <div class="flex items-center gap-3">
-          <span class="text-xs text-slate-400">Total listados:</span>
-          <span id="vehicle-count-badge" class="px-3 py-1 bg-blue-600/20 border border-blue-500/40 text-blue-400 font-mono font-bold text-xs">
+          <span class="text-xs text-slate-500 font-medium">Total listados:</span>
+          <span id="vehicle-count-badge" class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 font-mono font-bold text-xs">
             {DEMO_VEHICLES_SEED.length} Unidades
           </span>
         </div>
@@ -35,18 +35,18 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
       <!-- Main Layout: Sidebar Filters + Listings Grid (Crocoblock JetSmartFilters Architecture) -->
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         
-        <!-- SIDEBAR FILTERS (JetSmartFilters Pattern) -->
+        <!-- SIDEBAR FILTERS (JetSmartFilters Clean Light Pattern) -->
         <aside class="lg:col-span-1 space-y-6">
-          <div class="bg-[#0b1329] border border-white/10 p-5 shadow-xl">
-            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
-              <h2 class="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
-                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+          <div class="bg-white border border-slate-200 p-5 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-5">
+              <h2 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                 Filtros JetSmart
               </h2>
               <button 
                 id="reset-filters-btn"
                 type="button" 
-                class="text-[11px] font-bold text-slate-400 hover:text-blue-400 underline uppercase"
+                class="text-[11px] font-bold text-slate-500 hover:text-blue-600 underline uppercase cursor-pointer"
               >
                 Limpiar Todo
               </button>
@@ -54,13 +54,13 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
             <!-- Search Keyword -->
             <div class="mb-5">
-              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Palabra Clave</label>
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-2">Palabra Clave</label>
               <div class="relative">
                 <input 
                   type="text" 
                   id="search-input"
                   placeholder="Modelo, marca, motor..."
-                  class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 pl-8 pr-3 focus:outline-none focus:border-blue-500"
+                  class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 pl-8 pr-3 focus:outline-none focus:border-blue-600 font-medium placeholder:text-slate-400"
                 />
                 <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               </div>
@@ -68,18 +68,18 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
             <!-- Filter: Transport Type (JetSmartFilters Radio / List) -->
             <div class="mb-6">
-              <label class="block text-xs uppercase font-bold text-slate-300 mb-2.5">
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-2.5">
                 Tipo de Transporte
               </label>
-              <div class="space-y-1.5" id="transport-type-filters">
-                <label class="flex items-center justify-between p-2 text-xs text-slate-300 hover:bg-white/5 cursor-pointer border border-transparent hover:border-white/10">
+              <div class="space-y-1" id="transport-type-filters">
+                <label class="flex items-center justify-between p-2 text-xs text-slate-700 hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200">
                   <div class="flex items-center gap-2">
                     <input type="radio" name="transportFilter" value="all" checked class="accent-blue-600" />
-                    <span>Todos los Transportes</span>
+                    <span class="font-semibold">Todos los Transportes</span>
                   </div>
                 </label>
                 {TRANSPORT_TYPES.map(cat => (
-                  <label class="flex items-center justify-between p-2 text-xs text-slate-300 hover:bg-white/5 cursor-pointer border border-transparent hover:border-white/10">
+                  <label class="flex items-center justify-between p-2 text-xs text-slate-700 hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200">
                     <div class="flex items-center gap-2">
                       <input type="radio" name="transportFilter" value={cat.id} class="accent-blue-600" />
                       <span>{cat.nameEs}</span>
@@ -91,10 +91,10 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
             <!-- Filter: Location / Province -->
             <div class="mb-6">
-              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Provincia</label>
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-2">Provincia</label>
               <select 
                 id="location-select" 
-                class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500"
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer"
               >
                 <option value="all">Todas las Provincias</option>
                 {DOMINICAN_PROVINCES.map(p => (
@@ -105,10 +105,10 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
             <!-- Filter: Condition -->
             <div class="mb-6">
-              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Condición</label>
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-2">Condición</label>
               <select 
                 id="condition-select" 
-                class="w-full bg-[#131d38] border border-white/10 text-white text-xs py-2.5 px-3 focus:outline-none focus:border-blue-500"
+                class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs py-2.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer"
               >
                 <option value="all">Todas las Condiciones</option>
                 <option value="nuevo">Nuevo (0 Km)</option>
@@ -118,7 +118,7 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
             <!-- Filter: Price Range -->
             <div>
-              <label class="block text-xs uppercase font-bold text-slate-300 mb-2">Precio Máximo (USD)</label>
+              <label class="block text-xs uppercase font-bold text-slate-700 mb-2">Precio Máximo (USD)</label>
               <input 
                 type="range" 
                 id="price-range" 
@@ -128,29 +128,29 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
                 value="150000" 
                 class="w-full accent-blue-600 cursor-pointer"
               />
-              <div class="flex items-center justify-between text-xs text-slate-400 font-mono mt-1">
+              <div class="flex items-center justify-between text-xs text-slate-500 font-mono mt-1">
                 <span>$10,000</span>
-                <span id="price-range-display" class="font-bold text-blue-400">$150,000 USD</span>
+                <span id="price-range-display" class="font-bold text-blue-600">$150,000 USD</span>
               </div>
             </div>
 
           </div>
         </aside>
 
-        <!-- LISTINGS CONTENT (JetEngine Listing Grid Pattern) -->
+        <!-- LISTINGS CONTENT (JetEngine Listing Grid Pattern - Clean Light) -->
         <main class="lg:col-span-3">
           
           <!-- Top Sort & View Controls -->
-          <div class="bg-[#0b1329] border border-white/10 p-3 sm:px-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-            <div class="text-slate-400">
-              Mostrando <span id="visible-count" class="text-white font-bold">{DEMO_VEHICLES_SEED.length}</span> resultados filtrados
+          <div class="bg-white border border-slate-200 p-3 sm:px-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-sm">
+            <div class="text-slate-600">
+              Mostrando <span id="visible-count" class="text-slate-900 font-bold">{DEMO_VEHICLES_SEED.length}</span> resultados filtrados
             </div>
             
             <div class="flex items-center gap-3">
-              <label class="text-slate-400">Ordenar por:</label>
+              <label class="text-slate-600 font-medium">Ordenar por:</label>
               <select 
                 id="sort-select" 
-                class="bg-[#131d38] border border-white/10 text-white text-xs py-1.5 px-3 focus:outline-none focus:border-blue-500"
+                class="bg-slate-50 border border-slate-300 text-slate-900 text-xs py-1.5 px-3 focus:outline-none focus:border-blue-600 font-medium cursor-pointer"
               >
                 <option value="featured">Destacados Primero</option>
                 <option value="price-asc">Precio: Menor a Mayor</option>
@@ -166,10 +166,10 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
           </div>
 
           <!-- Empty State -->
-          <div id="no-results" class="hidden bg-[#0b1329] border border-white/10 p-12 text-center">
-            <svg class="w-12 h-12 text-slate-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <h3 class="text-base font-bold text-white uppercase">No se encontraron vehículos</h3>
-            <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+          <div id="no-results" class="hidden bg-white border border-slate-200 p-12 text-center shadow-sm">
+            <svg class="w-12 h-12 text-slate-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h3 class="text-base font-bold text-slate-900 uppercase">No se encontraron vehículos</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
               Prueba cambiando o limpiando los filtros para ver otras opciones en nuestro inventario multicategoría.
             </p>
           </div>
@@ -179,12 +179,12 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
     </div>
   </div>
 
-  <!-- QUICK VIEW DETAIL MODAL -->
-  <div id="quick-view-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="bg-[#0b1329] border border-white/10 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+  <!-- QUICK VIEW DETAIL MODAL (Light Clean Surface) -->
+  <div id="quick-view-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
       <button 
         id="modal-close-btn"
-        class="absolute top-4 right-4 z-10 w-8 h-8 bg-black/60 hover:bg-red-600 text-white flex items-center justify-center transition-colors"
+        class="absolute top-4 right-4 z-10 w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center justify-center transition-colors font-bold cursor-pointer"
       >
         ✕
       </button>
@@ -249,45 +249,45 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
 
     items.forEach(v => {
       const card = document.createElement("div");
-      card.className = "group bg-[#0b1329] border border-white/10 hover:border-blue-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between";
+      card.className = "group bg-white border border-slate-200 hover:border-blue-500 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between";
       card.innerHTML = `
         <div>
-          <div class="relative h-48 overflow-hidden bg-black/40">
+          <div class="relative h-48 overflow-hidden bg-slate-100">
             <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute top-2.5 left-2.5 flex flex-col gap-1">
-              <span class="px-2 py-0.5 text-[9px] font-black uppercase tracking-wider bg-blue-600 text-white">
+              <span class="px-2 py-0.5 text-[9px] font-black uppercase tracking-wider bg-blue-600 text-white shadow-sm">
                 ${v.transportType.replace("-", " ").toUpperCase()}
               </span>
-              <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-black/80 text-emerald-400 border border-emerald-500/30">
+              <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-white/95 text-emerald-700 border border-emerald-300 shadow-sm">
                 ${v.condition.toUpperCase()}
               </span>
             </div>
-            <div class="absolute bottom-2.5 right-2.5 bg-black/80 px-2 py-0.5 text-[11px] font-mono text-white border border-white/10">
+            <div class="absolute bottom-2.5 right-2.5 bg-white/95 px-2 py-0.5 text-[11px] font-mono font-bold text-slate-800 border border-slate-200 shadow-sm">
               ${v.location}
             </div>
           </div>
 
           <div class="p-4">
-            <h3 class="text-sm font-black text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+            <h3 class="text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
               ${v.title}
             </h3>
 
             <div class="mt-1.5 flex items-baseline gap-2">
-              <span class="text-xl font-black text-white">
-                $${Number(v.price).toLocaleString()} <span class="text-xs text-blue-400 font-semibold">${v.currency}</span>
+              <span class="text-xl font-black text-slate-900">
+                $${Number(v.price).toLocaleString()} <span class="text-xs text-blue-600 font-bold">${v.currency}</span>
               </span>
             </div>
 
-            <div class="mt-3 grid grid-cols-2 gap-1.5 text-[11px] text-slate-300 py-2 border-y border-white/10 bg-white/[0.02] px-2">
-              <div class="truncate"><span class="text-slate-500">Uso:</span> <span class="font-semibold text-white">${v.mileageOrHours}</span></div>
-              <div class="truncate"><span class="text-slate-500">Trans:</span> <span class="font-semibold text-white">${v.transmission.split(" ")[0]}</span></div>
-              <div class="truncate"><span class="text-slate-500">Comb:</span> <span class="font-semibold text-white">${v.fuelType}</span></div>
-              <div class="truncate"><span class="text-slate-500">Año:</span> <span class="font-semibold text-white">${v.year}</span></div>
+            <div class="mt-3 grid grid-cols-2 gap-1.5 text-[11px] text-slate-700 py-2 border-y border-slate-200 bg-slate-50 px-2">
+              <div class="truncate"><span class="text-slate-500 font-medium">Uso:</span> <span class="font-bold text-slate-900">${v.mileageOrHours}</span></div>
+              <div class="truncate"><span class="text-slate-500 font-medium">Trans:</span> <span class="font-bold text-slate-900">${v.transmission.split(" ")[0]}</span></div>
+              <div class="truncate"><span class="text-slate-500 font-medium">Comb:</span> <span class="font-bold text-slate-900">${v.fuelType}</span></div>
+              <div class="truncate"><span class="text-slate-500 font-medium">Año:</span> <span class="font-bold text-slate-900">${v.year}</span></div>
             </div>
 
-            <div class="mt-3 flex items-center justify-between text-xs text-slate-400">
-              <span class="text-slate-300 font-medium truncate text-[11px]">${v.seller.name}</span>
-              <span class="text-[9px] text-emerald-400 font-bold uppercase">${v.seller.dealerType}</span>
+            <div class="mt-3 flex items-center justify-between text-xs text-slate-500">
+              <span class="text-slate-800 font-medium truncate text-[11px]">${v.seller.name}</span>
+              <span class="text-[9px] text-emerald-700 font-bold uppercase">${v.seller.dealerType}</span>
             </div>
           </div>
         </div>
@@ -297,14 +297,14 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
             href="https://wa.me/${v.seller.whatsapp}?text=${encodeURIComponent("Hola, estoy interesado en el anuncio: " + v.title + " ($" + v.price + " USD) en TuCarroYMás.")}"
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center"
+            class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center"
           >
             WhatsApp
           </a>
           <button 
             type="button"
             data-id="${v.id}"
-            class="quick-view-btn bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center cursor-pointer"
+            class="quick-view-btn bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs uppercase py-2 px-2 flex items-center justify-center transition-all text-center cursor-pointer"
           >
             Detalles
           </button>
@@ -328,33 +328,33 @@ import { DEMO_VEHICLES_SEED } from "../lib/carDealerSeed";
     modalContent.innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-64 object-cover border border-white/10" />
+          <img src="${v.imageUrl}" alt="${v.title}" class="w-full h-64 object-cover border border-slate-200" />
           <div class="mt-4 flex flex-wrap gap-1.5">
-            ${v.features.map(f => `<span class="text-[10px] bg-white/5 border border-white/10 px-2 py-1 text-slate-300">${f}</span>`).join("")}
+            ${v.features.map(f => `<span class="text-[10px] bg-slate-100 border border-slate-200 px-2 py-1 text-slate-700 font-medium">${f}</span>`).join("")}
           </div>
         </div>
         <div class="flex flex-col justify-between">
           <div>
-            <span class="text-xs uppercase font-bold text-blue-400">${v.transportType.replace("-", " ")}</span>
-            <h2 class="text-xl font-black text-white mt-1">${v.title}</h2>
-            <div class="text-2xl font-black text-white mt-2">$${Number(v.price).toLocaleString()} ${v.currency}</div>
+            <span class="text-xs uppercase font-bold text-blue-600">${v.transportType.replace("-", " ")}</span>
+            <h2 class="text-xl font-black text-slate-900 mt-1">${v.title}</h2>
+            <div class="text-2xl font-black text-slate-900 mt-2">$${Number(v.price).toLocaleString()} ${v.currency}</div>
             
-            <p class="text-xs text-slate-300 mt-3 leading-relaxed">${v.description}</p>
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">${v.description}</p>
 
-            <div class="mt-4 space-y-1.5 text-xs text-slate-300 border-t border-white/10 pt-3">
-              <div><strong class="text-white">Motor:</strong> ${v.engine}</div>
-              <div><strong class="text-white">Uso / Horas:</strong> ${v.mileageOrHours}</div>
-              <div><strong class="text-white">Tracción:</strong> ${v.drivetrain}</div>
-              <div><strong class="text-white">Color:</strong> ${v.color}</div>
-              <div><strong class="text-white">Ubicación:</strong> ${v.location}, Rep. Dom.</div>
+            <div class="mt-4 space-y-1.5 text-xs text-slate-700 border-t border-slate-200 pt-3">
+              <div><strong class="text-slate-900">Motor:</strong> ${v.engine}</div>
+              <div><strong class="text-slate-900">Uso / Horas:</strong> ${v.mileageOrHours}</div>
+              <div><strong class="text-slate-900">Tracción:</strong> ${v.drivetrain}</div>
+              <div><strong class="text-slate-900">Color:</strong> ${v.color}</div>
+              <div><strong class="text-slate-900">Ubicación:</strong> ${v.location}, Rep. Dom.</div>
             </div>
           </div>
 
-          <div class="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2">
+          <div class="mt-6 pt-4 border-t border-slate-200 flex flex-col gap-2">
             <a 
               href="https://wa.me/${v.seller.whatsapp}?text=${encodeURIComponent("Hola, quiero cotizar: " + v.title)}"
               target="_blank"
-              class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase py-3 text-center transition-all"
+              class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase py-3 text-center transition-all"
             >
               Contactar al Vendedor por WhatsApp (${v.seller.phone})
             </a>

@@ -2,28 +2,28 @@
 import { TRANSPORT_TYPES } from "../lib/carDealerData";
 ---
 
-<footer class="bg-[#040711] border-t border-white/10 text-white pt-14 pb-8 px-4 sm:px-8">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
+<footer class="bg-white border-t border-slate-200 text-slate-700 pt-14 pb-8 px-4 sm:px-8 shadow-inner">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-200">
     
     <!-- Col 1 & 2: Brand Information -->
     <div class="lg:col-span-2 space-y-4">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center font-black text-lg text-white shadow-lg">
+        <div class="w-9 h-9 bg-blue-600 flex items-center justify-center font-black text-lg text-white shadow-md">
           TC
         </div>
         <div class="flex flex-col">
-          <span class="text-lg font-black tracking-wider uppercase text-white">
-            TuCarro<span class="text-blue-500">YMás</span>
+          <span class="text-lg font-black tracking-wider uppercase text-slate-900">
+            TuCarro<span class="text-blue-600">YMás</span>
           </span>
-          <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold -mt-1">
+          <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold -mt-1">
             Car Dealer & Marketplace
           </span>
         </div>
       </div>
-      <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+      <p class="text-xs text-slate-600 max-w-sm leading-relaxed">
         Plataforma automotriz y de transporte en República Dominicana inspirada en la arquitectura digital de Crocoblock Car Dealer New. Conectamos compradores con vendedores particulares y concesionarios autorizados en todo el país.
       </p>
-      <div class="pt-2 text-xs text-slate-400 flex flex-col gap-1.5 font-mono">
+      <div class="pt-2 text-xs text-slate-600 flex flex-col gap-1.5 font-mono">
         <div>📞 Contacto: +1 (829) 555-0199</div>
         <div>📍 Cobertura: Santo Domingo, Santiago, Punta Cana y las 32 provincias</div>
       </div>
@@ -31,13 +31,13 @@ import { TRANSPORT_TYPES } from "../lib/carDealerData";
 
     <!-- Col 3: Tipos de Transporte -->
     <div>
-      <h3 class="text-xs font-black uppercase tracking-wider text-blue-400 mb-3.5">
+      <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 mb-3.5">
         Tipos de Transporte
       </h3>
-      <ul class="space-y-2 text-xs text-slate-400">
+      <ul class="space-y-2 text-xs text-slate-600">
         {TRANSPORT_TYPES.map(cat => (
           <li>
-            <a href={`/vehiculos?type=${cat.id}`} class="hover:text-white transition-colors">
+            <a href={`/vehiculos?type=${cat.id}`} class="hover:text-blue-600 transition-colors">
               {cat.nameEs}
             </a>
           </li>
@@ -47,29 +47,29 @@ import { TRANSPORT_TYPES } from "../lib/carDealerData";
 
     <!-- Col 4: Enlaces Rápidos -->
     <div>
-      <h3 class="text-xs font-black uppercase tracking-wider text-blue-400 mb-3.5">
+      <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 mb-3.5">
         Navegación
       </h3>
-      <ul class="space-y-2 text-xs text-slate-400">
-        <li><a href="/" class="hover:text-white transition-colors">Inicio</a></li>
-        <li><a href="/vehiculos" class="hover:text-white transition-colors">Inventario General</a></li>
-        <li><a href="/publicar" class="hover:text-white transition-colors">Publicar Anuncio (Gratis)</a></li>
-        <li><a href="/nosotros" class="hover:text-white transition-colors">Acerca de TuCarroYMás</a></li>
-        <li><a href="/contacto" class="hover:text-white transition-colors">Atención al Cliente</a></li>
-        <li><a href="/auth" class="hover:text-white transition-colors">Acceso Concesionarios</a></li>
+      <ul class="space-y-2 text-xs text-slate-600">
+        <li><a href="/" class="hover:text-blue-600 transition-colors">Inicio</a></li>
+        <li><a href="/vehiculos" class="hover:text-blue-600 transition-colors">Inventario General</a></li>
+        <li><a href="/publicar" class="hover:text-blue-600 transition-colors">Publicar Anuncio (Gratis)</a></li>
+        <li><a href="/nosotros" class="hover:text-blue-600 transition-colors">Acerca de TuCarroYMás</a></li>
+        <li><a href="/contacto" class="hover:text-blue-600 transition-colors">Atención al Cliente</a></li>
+        <li><a href="/auth" class="hover:text-blue-600 transition-colors">Acceso Concesionarios</a></li>
       </ul>
     </div>
 
     <!-- Col 5: Garantía y Seguridad -->
     <div>
-      <h3 class="text-xs font-black uppercase tracking-wider text-blue-400 mb-3.5">
+      <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 mb-3.5">
         Seguridad Dealer
       </h3>
-      <p class="text-xs text-slate-400 leading-relaxed">
+      <p class="text-xs text-slate-600 leading-relaxed">
         Todas las publicaciones son revisadas para garantizar la legitimidad de las unidades y evitar duplicados o fraudes.
       </p>
-      <div class="mt-4 p-3 bg-white/5 border border-white/5 text-[11px] text-slate-300">
-        <span class="text-emerald-400 font-bold block mb-1">✓ Trato Directo 100%</span>
+      <div class="mt-4 p-3 bg-slate-50 border border-slate-200 text-[11px] text-slate-700">
+        <span class="text-emerald-700 font-bold block mb-1">✓ Trato Directo 100%</span>
         Negociación sin intermediarios mediante WhatsApp o llamada telefónica.
       </div>
     </div>
@@ -81,7 +81,7 @@ import { TRANSPORT_TYPES } from "../lib/carDealerData";
       &copy; {new Date().getFullYear()} TuCarroYMás.com — Todos los derechos reservados.
     </div>
     <div class="flex items-center gap-4">
-      <span class="text-slate-400 font-medium">Inspirado en Crocoblock Car Dealer New</span>
+      <span class="text-slate-600 font-medium">Inspirado en Crocoblock Car Dealer New</span>
     </div>
   </div>
 </footer>
