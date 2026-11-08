@@ -1,347 +1,457 @@
-// Comprehensive Database of Vehicle & Equipment Brands sold in Dominican Republic with reliable SVG logos
+// Comprehensive Database of Vehicle & Equipment Brands sold in Dominican Republic
+// All logos are stored locally in /brands/*.svg to ensure 100% availability with 0 broken images.
 
 export interface BrandItem {
   id: string;
   name: string;
   country: string;
-  category: "autos" | "pesados" | "maquinaria" | "motos" | "marino";
+  category: "autos" | "pesados" | "maquinaria" | "motos" | "chinas";
   logo: string;
 }
 
 export const ALL_DOMINICAN_BRANDS: BrandItem[] = [
-  // 1. Japonesas (Líderes en RD)
+  // ==========================================
+  // 1. MARCAS CHINAS LÍDERES EN REP. DOMINICANA (Gran auge actual)
+  // ==========================================
+  {
+    id: "byd",
+    name: "BYD",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/byd.svg"
+  },
+  {
+    id: "changan",
+    name: "Changan",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/changan.svg"
+  },
+  {
+    id: "geely",
+    name: "Geely",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/geely.svg"
+  },
+  {
+    id: "chery",
+    name: "Chery",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/chery.svg"
+  },
+  {
+    id: "haval",
+    name: "Haval",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/haval.svg"
+  },
+  {
+    id: "gwm",
+    name: "GWM (Great Wall)",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/gwm.svg"
+  },
+  {
+    id: "jetour",
+    name: "Jetour",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/jetour.svg"
+  },
+  {
+    id: "jac",
+    name: "JAC Motors",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/jac.svg"
+  },
+  {
+    id: "foton",
+    name: "Foton",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/foton.svg"
+  },
+  {
+    id: "dongfeng",
+    name: "Dongfeng",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/dongfeng.svg"
+  },
+  {
+    id: "baic",
+    name: "BAIC",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/baic.svg"
+  },
+  {
+    id: "gac",
+    name: "GAC Motor",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/gac.svg"
+  },
+  {
+    id: "forthing",
+    name: "Forthing",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/forthing.svg"
+  },
+  {
+    id: "shineray",
+    name: "Shineray",
+    country: "China",
+    category: "chinas",
+    logo: "/brands/shineray.svg"
+  },
+
+  // ==========================================
+  // 2. JAPONESAS (Líderes de Mercado en RD)
+  // ==========================================
   {
     id: "toyota",
     name: "Toyota",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/toyota.svg"
+    logo: "/brands/toyota.svg"
   },
   {
     id: "honda",
     name: "Honda",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/honda.svg"
+    logo: "/brands/honda.svg"
   },
   {
     id: "nissan",
     name: "Nissan",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/nissan.svg"
+    logo: "/brands/nissan.svg"
   },
   {
     id: "lexus",
     name: "Lexus",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/lexus.svg"
+    logo: "/brands/lexus.svg"
   },
   {
     id: "mazda",
     name: "Mazda",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/mazda.svg"
+    logo: "/brands/mazda.svg"
   },
   {
     id: "mitsubishi",
     name: "Mitsubishi",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/mitsubishi.svg"
+    logo: "/brands/mitsubishi.svg"
   },
   {
     id: "subaru",
     name: "Subaru",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/subaru.svg"
+    logo: "/brands/subaru.svg"
   },
   {
     id: "suzuki",
     name: "Suzuki",
     country: "Japón",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/suzuki.svg"
+    logo: "/brands/suzuki.svg"
   },
   {
     id: "isuzu",
     name: "Isuzu",
     country: "Japón",
-    category: "pesados",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/isuzu.svg"
+    category: "autos",
+    logo: "/brands/isuzu.svg"
   },
 
-  // 2. Coreanas (Gran cuota en RD)
+  // ==========================================
+  // 3. COREANAS
+  // ==========================================
   {
     id: "hyundai",
     name: "Hyundai",
     country: "Corea del Sur",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/hyundai.svg"
+    logo: "/brands/hyundai.svg"
   },
   {
     id: "kia",
     name: "Kia",
     country: "Corea del Sur",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/kia.svg"
+    logo: "/brands/kia.svg"
   },
 
-  // 3. Americanas
+  // ==========================================
+  // 4. AMERICANAS
+  // ==========================================
   {
     id: "ford",
     name: "Ford",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/ford.svg"
+    logo: "/brands/ford.svg"
   },
   {
     id: "chevrolet",
     name: "Chevrolet",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/chevrolet.svg"
+    logo: "/brands/chevrolet.svg"
   },
   {
     id: "jeep",
     name: "Jeep",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/jeep.svg"
+    logo: "/brands/jeep.svg"
   },
   {
     id: "dodge",
     name: "Dodge",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/dodge.svg"
+    logo: "/brands/dodge.svg"
   },
   {
     id: "ram",
     name: "RAM",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/ram.svg"
+    logo: "/brands/ram.svg"
   },
   {
     id: "cadillac",
     name: "Cadillac",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/cadillac.svg"
+    logo: "/brands/cadillac.svg"
   },
   {
     id: "gmc",
     name: "GMC",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/gmc.svg"
+    logo: "/brands/gmc.svg"
   },
   {
     id: "tesla",
     name: "Tesla",
     country: "Estados Unidos",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/tesla.svg"
+    logo: "/brands/tesla.svg"
   },
 
-  // 4. Europeas (Alemanas, Inglesas, Italianas)
+  // ==========================================
+  // 5. EUROPEAS (Alemania, Suecia, Reino Unido, Francia, Italia)
+  // ==========================================
   {
     id: "mercedes-benz",
     name: "Mercedes-Benz",
     country: "Alemania",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/mercedes.svg"
+    logo: "/brands/mercedes.svg"
   },
   {
     id: "bmw",
     name: "BMW",
     country: "Alemania",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/bmw.svg"
+    logo: "/brands/bmw.svg"
   },
   {
     id: "audi",
     name: "Audi",
     country: "Alemania",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/audi.svg"
+    logo: "/brands/audi.svg"
   },
   {
     id: "volkswagen",
     name: "Volkswagen",
     country: "Alemania",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/volkswagen.svg"
+    logo: "/brands/volkswagen.svg"
   },
   {
     id: "porsche",
     name: "Porsche",
     country: "Alemania",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/porsche.svg"
+    logo: "/brands/porsche.svg"
   },
   {
     id: "land-rover",
     name: "Land Rover",
     country: "Reino Unido",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/landrover.svg"
+    logo: "/brands/landrover.svg"
   },
   {
     id: "jaguar",
     name: "Jaguar",
     country: "Reino Unido",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/jaguar.svg"
+    logo: "/brands/jaguar.svg"
   },
   {
     id: "volvo",
     name: "Volvo",
     country: "Suecia",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/volvo.svg"
+    logo: "/brands/volvo.svg"
   },
   {
     id: "peugeot",
     name: "Peugeot",
     country: "Francia",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/peugeot.svg"
+    logo: "/brands/peugeot.svg"
   },
   {
     id: "renault",
     name: "Renault",
     country: "Francia",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/renault.svg"
+    logo: "/brands/renault.svg"
   },
   {
     id: "ferrari",
     name: "Ferrari",
     country: "Italia",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/ferrari.svg"
+    logo: "/brands/ferrari.svg"
   },
   {
     id: "lamborghini",
     name: "Lamborghini",
     country: "Italia",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/lamborghini.svg"
+    logo: "/brands/lamborghini.svg"
   },
   {
     id: "maserati",
     name: "Maserati",
     country: "Italia",
     category: "autos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/maserati.svg"
+    logo: "/brands/maserati.svg"
   },
 
-  // 5. Camiones Pesados & 18-Wheelers
+  // ==========================================
+  // 6. CAMIONES PESADOS & 18-WHEELERS
+  // ==========================================
   {
     id: "freightliner",
     name: "Freightliner",
     country: "Estados Unidos",
     category: "pesados",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/mercedes.svg" // Daimler Truck Group
+    logo: "/brands/mercedes.svg"
   },
   {
     id: "mack",
     name: "Mack",
     country: "Estados Unidos",
     category: "pesados",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/volvo.svg" // Volvo Group
-  },
-  {
-    id: "international",
-    name: "International",
-    country: "Estados Unidos",
-    category: "pesados",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/scania.svg" // Navistar
+    logo: "/brands/volvo.svg"
   },
   {
     id: "scania",
     name: "Scania",
     country: "Suecia",
     category: "pesados",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/scania.svg"
+    logo: "/brands/scania.svg"
   },
   {
     id: "man",
     name: "MAN",
     country: "Alemania",
     category: "pesados",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/man.svg"
+    logo: "/brands/man.svg"
   },
 
-  // 6. Maquinaria Especial y Agrícola
+  // ==========================================
+  // 7. MAQUINARIA PESADA Y AGRÍCOLA
+  // ==========================================
   {
     id: "caterpillar",
     name: "Caterpillar",
     country: "Estados Unidos",
     category: "maquinaria",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/caterpillar.svg"
+    logo: "/brands/caterpillar.svg"
   },
   {
     id: "john-deere",
     name: "John Deere",
     country: "Estados Unidos",
     category: "maquinaria",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/johndeere.svg"
+    logo: "/brands/johndeere.svg"
   },
   {
     id: "komatsu",
     name: "Komatsu",
     country: "Japón",
     category: "maquinaria",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/komatsu.svg"
+    logo: "/brands/komatsu.svg"
   },
 
-  // 7. Motocicletas
+  // ==========================================
+  // 8. MOTOCICLETAS
+  // ==========================================
   {
     id: "yamaha",
     name: "Yamaha",
     country: "Japón",
     category: "motos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/yamaha.svg"
+    logo: "/brands/yamaha.svg"
   },
   {
     id: "kawasaki",
     name: "Kawasaki",
     country: "Japón",
     category: "motos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/kawasaki.svg"
+    logo: "/brands/kawasaki.svg"
   },
   {
     id: "ducati",
     name: "Ducati",
     country: "Italia",
     category: "motos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/ducati.svg"
+    logo: "/brands/ducati.svg"
   },
   {
     id: "ktm",
     name: "KTM",
     country: "Austria",
     category: "motos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/ktm.svg"
+    logo: "/brands/ktm.svg"
   },
   {
     id: "harley-davidson",
     name: "Harley-Davidson",
     country: "Estados Unidos",
     category: "motos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/harleydavidson.svg"
+    logo: "/brands/harley-davidson.svg"
   },
   {
     id: "bmw-motorrad",
     name: "BMW Motorrad",
     country: "Alemania",
     category: "motos",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/bmw.svg"
+    logo: "/brands/bmw.svg"
   }
 ];

@@ -18,43 +18,46 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
           Marcas Disponibles en República Dominicana
         </h1>
         <p class="text-sm text-slate-500 mt-1 max-w-2xl">
-          Explora todas las marcas de vehículos, camionetas, camiones pesados 18-wheelers, motocicletas y maquinaria comercializadas en el país. Haz clic en cualquier marca para ver los modelos disponibles.
+          Explora todas las marcas líderes de vehículos, marcas chinas en auge, camionetas, camiones 18-wheelers, motocicletas y maquinaria pesada comercializadas en el país. Haz clic en cualquier marca para ver los modelos disponibles.
         </p>
       </div>
 
-      <!-- Quick Filter Pills -->
+      <!-- Quick Filter Pills: Incluye filtro especial para Marcas Chinas -->
       <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-xs font-bold">
-        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-[#00c982] text-white" data-filter="all">
+        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-[#00c982] text-white shadow-sm" data-filter="all">
           Todas ({ALL_DOMINICAN_BRANDS.length})
         </button>
-        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="autos">
+        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="chinas">
+          Marcas Chinas (BYD, Changan, Geely, etc.)
+        </button>
+        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="autos">
           Autos & SUVs
         </button>
-        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="pesados">
-          Camiones & Pesados
+        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="pesados">
+          Camiones & 18-Wheelers
         </button>
-        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="maquinaria">
-          Maquinaria Especial
+        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="maquinaria">
+          Maquinaria Pesada
         </button>
-        <button type="button" class="brand-filter-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="motos">
+        <button type="button" class="brand-filter-btn px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="motos">
           Motocicletas
         </button>
       </div>
 
-      <!-- Grid of all Dominican Brands -->
+      <!-- Grid of all Dominican Brands (100% SVG locales sin fallos) -->
       <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
         {ALL_DOMINICAN_BRANDS.map(brand => (
           <a 
             href={`/vehiculos?make=${encodeURIComponent(brand.name)}`}
             data-category={brand.category}
-            class="brand-card flex flex-col items-center justify-center p-4 border border-slate-200 rounded-sm hover:border-[#00c982] hover:shadow-lg transition-all group bg-white text-center"
+            class="brand-card flex flex-col items-center justify-center p-4 border border-slate-200 rounded-sm hover:border-[#00c982] hover:shadow-lg transition-all group bg-white text-center cursor-pointer"
           >
-            <!-- SVG Logo Container -->
+            <!-- SVG Logo Container (Cargado localmente desde /brands/*.svg) -->
             <div class="w-12 h-12 flex items-center justify-center mb-3">
               <img 
                 src={brand.logo} 
                 alt={`Logo ${brand.name}`} 
-                class="max-w-[36px] max-h-[36px] object-contain opacity-75 group-hover:opacity-100 transition-opacity" 
+                class="max-w-[42px] max-h-[42px] object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
                 loading="lazy"
               />
             </div>
