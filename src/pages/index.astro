@@ -348,22 +348,22 @@ const loopedVehicleStyles = [...VEHICLE_STYLES, ...VEHICLE_STYLES];
         </a>
       </div>
 
-      <!-- 2 filas de 8 logos SVG nítidos locales -->
-      <div class="grid grid-cols-4 sm:grid-cols-8 gap-4 sm:gap-6 text-center">
+      <!-- 2 filas de 8 logos SVG nítidos locales (Aumentados al doble de tamaño) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 sm:gap-6 text-center">
         {popularBrandsHomepage.map(b => (
           <a 
             href={`/vehiculos?make=${encodeURIComponent(b.name)}`} 
-            class="flex flex-col items-center p-3 border border-slate-200 hover:border-[#D54000] hover:shadow-md rounded-sm transition-all group bg-white"
+            class="flex flex-col items-center justify-center p-4 sm:p-5 border border-slate-200 hover:border-[#D54000] hover:shadow-lg rounded-sm transition-all group bg-white"
           >
-            <div class="w-10 h-10 flex items-center justify-center mb-2">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center mb-3">
               <img 
                 src={b.logo} 
                 alt={b.name} 
-                class="max-w-[28px] max-h-[28px] object-contain opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
+                class="max-w-[56px] max-h-[56px] sm:max-w-[64px] sm:max-h-[64px] object-contain opacity-85 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
                 loading="lazy"
               />
             </div>
-            <span class="text-[11px] font-semibold text-slate-700 group-hover:text-[#D54000] transition-colors leading-tight">
+            <span class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-[#D54000] transition-colors leading-tight">
               {b.name}
             </span>
           </a>

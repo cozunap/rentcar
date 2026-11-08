@@ -53,11 +53,11 @@ import { ALL_DOMINICAN_BRANDS } from "../lib/brandsData";
             class="brand-card flex flex-col items-center justify-center p-4 border border-slate-200 rounded-sm hover:border-[#D54000] hover:shadow-lg transition-all group bg-white text-center cursor-pointer"
           >
             <!-- SVG Logo Container (Cargado localmente desde /brands/*.svg) -->
-            <div class="w-12 h-12 flex items-center justify-center mb-3">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center mb-3">
               <img 
                 src={brand.logo} 
                 alt={`Logo ${brand.name}`} 
-                class="max-w-[42px] max-h-[42px] object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
+                class="max-w-[56px] max-h-[56px] sm:max-w-[64px] sm:max-h-[64px] object-contain opacity-85 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200" 
                 loading="lazy"
               />
             </div>
